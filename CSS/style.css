@@ -19,7 +19,7 @@
 .login_wrapper{
 	text-align:center;
 	width:70%;
-	margin-left: auto ;
+	margin-left: 10% ;
     margin-right: auto ;
 	
 	/*for the login form */
@@ -98,6 +98,19 @@
 	margin-left: 1%;
 	
 	
+}
+
+
+.search-results{
+	
+	padding-bottom:20px;
+	
+	
+}
+
+.label-info{
+	
+	width:200px;
 }
 
 
