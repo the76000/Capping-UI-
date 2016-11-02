@@ -1,7 +1,10 @@
+
+/* for login page */
+
 .CPCA_navbar{
 	
-	padding:10px;
-	
+	padding:10px;	
+	/* makes the navbar look more like the wireframe */
 }
 
 .login_panel{
@@ -9,7 +12,7 @@
 	width: 60% ;
     margin-left: auto ;
     margin-right: auto ;
-	
+	/*for the jumbotron container */
 	
 }
 
@@ -19,5 +22,54 @@
 	margin-left: auto ;
     margin-right: auto ;
 	
+	/*for the login form */
+}
+
+
+
+/* for homepage */
+.launcher{
+	height:300px;
+	margin-right: 5%;
+	text-align:center;
+	
 	
 }
+
+
+
+.launcher-links{
+	
+	width:70%;
+	
+	height:70px;
+}
+
+
+
+.homepage-links{
+	padding-bottom:5%;
+	
+	
+}
+
+.courses-launcher{
+	height:400px;
+	margin-right: 5%;
+	text-align:center;
+	padding-top:0px;
+	
+}
+
+
+
+.course-launcher-links{
+	
+	width:70%;
+	
+	
+	height:70px;
+}
+
+
+
