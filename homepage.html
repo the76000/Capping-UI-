@@ -10,6 +10,7 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		
 		
+		<link rel='stylesheet' media='screen and (min-width: 701px) and (max-width: 900px)' href='css/mobile.css' />
 		
 		<link rel="stylesheet" href="CSS/style.css">
 		
@@ -21,7 +22,7 @@
   
   <!-- Top left Logo -->
 	<div class="page-header">
-  <h1>CPCA</h1>
+  <h1><a href="homepage.html">CPCA</a></h1>
 	</div>
 	
 	
@@ -44,14 +45,14 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Courses</a></li>
         <li><a href="#">Reports</a></li>
-		<li><a href="#">Search</a></li>
+		<li><a href="participant-search.html">Search</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav> <!-- end of navbar-->
 
 
-	<div class = "row"> <!-- row one -->
+	<div class = "row homepage-row-1"> <!-- row one -->
 		
 		
 		<!-- display CPCA logo -->
@@ -68,25 +69,25 @@
 			
 			<div class = "row homepage-links">
 				<div class = "col-md-4">
-					<button class="btn btn-default launcher-links" type="submit">Participant Search</button>
+					<button class="btn btn-default launcher-links" type="submit"><a href="participant-search.html"> Participant Search</a></button>
 				</div>
 				<div class = "col-md-4">
-					<button class="btn btn-default launcher-links" type="submit">Take Attendance</button>
+					<button class="btn btn-default launcher-links" type="submit"><a href="#">Take Attendance</a></button>
 				</div>
 				<div class = "col-md-4">
-					<button class="btn btn-default launcher-links" type="submit">Monthly Reports</button>
+					<button class="btn btn-default launcher-links" type="submit"><a href="#">Monthly Reports</a></button>
 				</div>
 			</div>
 			
 			<div class = "row homepage-links">
 				<div class = "col-md-4">
-					<button class="btn btn-default launcher-links" type="submit">Report Cards</button>
+					<button class="btn btn-default launcher-links" type="submit"><a href="#">Report Cards</a></button>
 				</div>
 				<div class = "col-md-4">
-					<button class="btn btn-default launcher-links" type="submit">Intake Packet</button>
+					<button class="btn btn-default launcher-links" type="submit"><a href="#">Intake Packet</a></button>
 				</div>
 				<div class = "col-md-4">
-					<button class="btn btn-default launcher-links" type="submit">Account Settings</button>
+					<button class="btn btn-default launcher-links" type="submit"><a href="#">Account Settings</a></button>
 				</div>	
 			</div>
 			
@@ -122,32 +123,33 @@
 			<h3> Courses </h2>
 			</div>
 			
+			
 			<div class = "row homepage-links">
 				<div class = "col-md-6">
-					<button class="btn btn-default course-launcher-links" type="submit">Participant Search</button>
-				</div>
+					<button class="btn btn-default course-launcher-links" type="submit"><a href="#">Women's In-House</a></button>
+				</div>													<!-- will need to link up to the database -->
 				<div class = "col-md-6">
-					<button class="btn btn-default course-launcher-links" type="submit">Take Attendance</button>
+					<button class="btn btn-default course-launcher-links" type="submit"><a href="#">Cornerstone</a></button>
 				</div>
 			
 			</div>
 			
 			<div class = "row homepage-links">
 				<div class = "col-md-6">
-					<button class="btn btn-default course-launcher-links" type="submit">Report Cards</button>
+					<button class="btn btn-default course-launcher-links" type="submit"><a href="#">Spanish Speaking Women In-House</a></button>
 				</div>
 				<div class = "col-md-6">
-					<button class="btn btn-default course-launcher-links" type="submit">Intake Packet</button>
+					<button class="btn btn-default course-launcher-links" type="submit"><a href="#">Men's In-house</a></button>
 				</div>
 				
 			</div>
 			
 			<div class = "row homepage-links">
 				<div class = "col-md-6">
-					<button class="btn btn-default course-launcher-links" type="submit">Report Cards</button>
+					<button class="btn btn-default course-launcher-links" type="submit"><a href="#">Men's DC Jail</a></button>
 				</div>
 				<div class = "col-md-6">
-					<button class="btn btn-default course-launcher-links" type="submit">Intake Packet</button>
+					<button class="btn btn-default course-launcher-links" type="submit"><a href="#">Meadow Run</a></button>
 				</div>
 				
 			</div>
@@ -158,7 +160,7 @@
 		
 		<div class = "col-md-4">
 		
-		<div id='calendar'>
+		<div class='calendar'>
 		
 		<script type="text/javascript" src="http://100widgets.com/js_data.php?id=105">
 		</script>
