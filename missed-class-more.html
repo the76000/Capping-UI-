@@ -91,11 +91,21 @@
 				
 				
 				<div class = "col-md-4">
-					<p><a href = " "> Reason </a></p>
+					<button class="btn btn-default " type="submit" onclick="reasonBox()">Reason  </button>
+					
+					
 				
 				</div>
 			
 		</div> <!-- end row two -->
+		
+		<div class = "row" id = "reasonBox" style="visibility: hidden;"> 
+			<div class = "col-md-8"> 
+			<p> This is the reason </p>
+			</div>
+			
+		
+		</div>
 		
 		
 		<div class = "row"> <!-- start row three -->
@@ -106,11 +116,19 @@
 				
 				
 				<div class = "col-md-4">
-					<p><a href = " "> Reason </a></p>
+					<button class="btn btn-default " type="submit" onclick="">Reason  </button>
 				
 				</div>
 			
 		</div> <!-- end row three -->
+		
+		<div class = "row" id = "reasonBox2" style="visibility: hidden;"> 
+			<div class = "col-md-8"> 
+			<p> This is the reason </p>
+			</div>
+			
+		
+		</div>
 		
 		
 		<div class = "row">
@@ -141,5 +159,23 @@
 	</div>
 
 
+	
+	<script>
+	
+	
+	function reasonBox(){
+			
+			var which = document.getElementById("reasonBox");
+
+			if (which.style.visibility == "hidden")
+				which.style.visibility = "visible"
+			else
+			which.style.visibility = "hidden"
+	
+	}
+	
+	
+	</script>
+	
   </body>
 </html>
