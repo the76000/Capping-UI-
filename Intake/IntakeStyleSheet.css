@@ -1,0 +1,63 @@
+body{
+	overflow:auto;
+}
+#header{
+text-align:center;
+font-weight:bold;
+width:max;
+height:50%;	
+margin-top:-20px;
+padding: 50px;
+position:relative;
+background-image: linear-gradient(#3bf9bd,#59ffd0);
+}
+#header:after{
+content: '';
+position: absolute;
+top: 2px;
+left: 2px;
+width: calc(100% - 4px);
+height: 50%;
+background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.2));
+	
+}
+#titleImage{
+width: 300px;
+height:200px;
+position:absolute;
+left:5px;
+top:0%;
+}
+#footer{
+font-size: 12px;
+color: grey;
+text-align: center;	
+}
+#container{
+width:max;
+height: auto;
+text-align:left;	
+}
+
+input{
+	color:black;
+	margin: max;
+	position:relative;
+	margin-right: 3%;
+}
+label{
+	width:8%;
+}
+
+.glyphicon-minus{
+	margin-left: 10px;
+	
+}
+.glyphicon-plus:hover{
+	color:lightgreen;
+	cursor: pointer;
+}	
+.glyphicon-minus:hover{
+	color:red;
+	cursor: pointer;
+}
