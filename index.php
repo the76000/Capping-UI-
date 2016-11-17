@@ -27,15 +27,7 @@
     
 
 
-    if($_SERVER[ 'REQUEST_METHOD' ] == 'GET') {
-      if(isset($_GET['id']))
-        show_record($dbc, $_GET['id']) ;
-    }
-  
-    show_records($dbc) ;
     
-    # Close the connection
-    mysqli_close( $dbc ) ;
 
 ?>
   

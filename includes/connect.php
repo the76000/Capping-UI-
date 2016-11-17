@@ -1,10 +1,10 @@
 <?php
 // Connecting, selecting database
-$dbconn = pg_connect("host=localhost dbname=cappingdb user=postgres password=")
+$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
     or die('Could not connect: ' . pg_last_error());
 
 // Performing SQL query
-$query = 'SELECT * FROM *';
+$query = 'SELECT * FROM referrals';
 $result = pg_query($query) or die('Query failed: ' . pg_last_error());
 
 // Printing results in HTML
