@@ -107,7 +107,7 @@ function isPhoneOffFocus(id){ // validates for correct phone number placement
 		document.getElementById(id).value = "";
 	}
 	else{
-		if(numOfDashes.length != 3){
+		if(numOfDashes.length != 3 && numOfDashes.length != 1){
 			alert("The phone number you've entered is incorrect! \n Please enter a valid one with an area code.");
 			document.getElementById(id).value = "";
 		}
@@ -224,6 +224,7 @@ function enableRefAgencyOtherBox(){
 							<option value="none">-- select one --</option>\
 							<option>Asian</option>\
 							<option>Caucasian</option>\
+							<option>Hispanaic</option>\
 							<option>Indian</option>\
 							<option>Middle Eastern</option>\
 							<option>African American</option>\
@@ -324,6 +325,7 @@ function isNumber(evt) {
 							<option value="none">-- select one --</option>\
 							<option>Asian</option>\
 							<option>Caucasian</option>\
+							<option>Hispanaic</option>\
 							<option>Indian</option>\
 							<option>Middle Eastern</option>\
 							<option>African American</option>\

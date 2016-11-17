@@ -136,12 +136,18 @@ This Web Application was developed to replace the paper copy of the Intake form 
 
 <label for="RefAgencyName"> Referring Party </label>
 <select name="RefAgencyName" id="RefAgencyName" class="form-control" style="margin-right:4%; width:265px;" onChange="enableRefAgencyOtherBox();">
-	<option value="none">-- select one --</option>
-	<option value="family"> Family Member </option>
-	<option value="ThePoPos"> The Fuzz </option>
-	<option value="CPS"> CPS </option>
-	<option value="Judge"> The Judge Man </option>
-	<option value="Other"> Other </option>
+	<option value="none"> 						-- select one --				</option>
+	<option value="cps"> 						CPS 							</option>	
+	<option value="dutchessCountySheriff">		Dutchess County Sheriff			</option>
+	<option value="family">						Family 							</option>	
+	<option value="friend">						Friend							</option>
+	<option value="self">						Self							</option>
+	<option value="lawyer">						Lawyer							</option>
+	<option value="police">						Local Police					</option>
+	<option value="statePolice">				State Police					</option>
+	<option value="localCourt">					Local Court 					</option>
+	<option value="stateCourt">					State Court						</option>
+	<option value="otherCourt">					Other Court						</option>
 </select>
 
 <label for="RefAgencyNameOther" style="width:10%;"> If other, name here: </label>
@@ -208,6 +214,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 				<option value="none">-- select one --</option>
 				<option>Asian</option>
 				<option>Caucasian</option>
+				<option>Hispanaic</option>
 				<option>Indian</option>
 				<option>Middle Eastern</option>
 				<option>African American</option>
@@ -285,7 +292,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <label for="dateOfContact" style= "width:16%"> Date of 1st Contact: </label> 
 <input type="text" name= "dateOfContact" maxlength="10" size="30" id="dateOfContact" class="form-control" onkeypress="isDate('dateOfContact',event);" onblur="isDateOffFocus('dateOfContact');" placeholder="mm/dd/yyyy">
 
-<label for="meansOfContact"style= "width:16%" > Means of Contact: </label> 
+<label for="meansOfContact" style="width:16%"> Means of Contact: </label> 
 <input type="text" name= "meansOfContact" maxlength="75" size="30" oninput="validateAlpha('meansOfContact');" id="meansOfContact" class="form-control"> 
 
 <br>

@@ -183,6 +183,29 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
 <br>
 
+<label for="ethnicity">Ethnicity:</label> 
+<select for="ethnicity" class="form-control">
+	<option>-- select one --</option>
+	<option>Asian</option>
+	<option>Caucasian</option>
+	<option>Hispanaic</option>
+	<option>Indian</option>
+	<option>Middle Eastern</option>
+	<option>African American</option>
+	<option>Native American</option>
+	<option>Alaskan Native</option>
+	<option>Other Race</option>
+</select>
+
+<br>
+<br>
+
+<label for="occupation">Occupation:</label> 
+<input type="text" name= "occupation" id="occupation" maxlength="35" class="form-control">
+
+<br>
+<br>
+
 <label for="languages" style="width:13%;">What languages do you speak?:</label> 
 <table width="100%" id="languages" name="languages">
 	<tr>
@@ -327,6 +350,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 				<option value="none">-- select one --</option>
 				<option>Asian</option>
 				<option>Caucasian</option>
+				<option>Hispanaic</option>
 				<option>Indian</option>
 				<option>Middle Eastern</option>
 				<option>African American</option>
@@ -424,7 +448,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
 <br>
 
-<label for="whyTake" style="width:40%;">If you were not mandated please explain why in deatail why you would like to attend parent classes:</label>
+<label for="whyTake" style="width:40%;">If you were not mandated please explain why in detail why you would like to attend parent classes:</label>
 <textarea style="width:100%;height:100px;" name="whyTake" class="form-control" maxlength="300">
 </textarea>
 
@@ -511,7 +535,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
 <br>
 
-<label for="importantLearning" style="width:30%;">What do you see as the most importanct thing you would like to learn from this class?:</label> 
+<label for="importantLearning" style="width:30%;">What do you see as the most important thing you would like to learn from this class?:</label> 
 <textarea style="width:100%;height:100px;" name="importantLearning" class="form-control" maxlength="500">
 </textarea>
 
