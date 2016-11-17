@@ -17,7 +17,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <form class="form-inline">
 <br>
 <!-- About Applicant group -->
-<h4> Participant Information </h4>
+<h4 style="text-align:center;"> Participant Information </h4>
 <br>
 
 <label for="fName"> First Name: </label> 
@@ -33,7 +33,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
 
 <label for="DOB"> Date of Birth: </label> 
-<input type="text" name= "DOB" maxlength="10" size="30" id="DOB" class="form-control" onkeypress="isDateOfBirth('DOB',event);" placeholder="mm/dd/yyyy">
+<input type="text" name= "DOB" maxlength="10" size="30" id="DOB" class="form-control" onkeypress="isDate('DOB',event);" onblur="isDateOffFocus('DOB');" placeholder="mm/dd/yyyy">
 
 <br>
 <br>
@@ -59,6 +59,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 
 <label for="state"> State: </label> 
 <select name="state" id="state" class="form-control" style="margin-right:9%;" >
+	<option value="none">-- select one --</option>
 	<option value="AL">Alabama</option>
 	<option value="AK">Alaska</option>
 	<option value="AZ">Arizona</option>
@@ -119,22 +120,23 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
 
 <label for="HPhone"> Home Phone: </label>
-<input type="text" name="HPhone" maxlength="12" size="30" id="HPhone" class="form-control" onkeypress="isPhoneNumber('HPhone',event);" placeholder="999-999-9999">
+<input type="text" name="HPhone" maxlength="12" size="30" id="HPhone" class="form-control" onkeypress="isPhoneNumber('HPhone',event);" onblur="isPhoneOffFocus('HPhone');" placeholder="999-999-9999">
 
 <label for="CPhone"> Cell Phone: </label>
-<input type="text" name= "CPhone" maxlength="12" size="30" id="CPhone" class="form-control" onkeypress="isPhoneNumber('CPhone',event);" placeholder="999-999-9999">
+<input type="text" name= "CPhone" maxlength="12" size="30" id="CPhone" class="form-control" onkeypress="isPhoneNumber('CPhone',event);" onblur="isPhoneOffFocus('CPhone');" placeholder="999-999-9999">
 
 <br>
 <br>
 <hr>
 <!-- Referring Agency group -->
-<h4> Referring Party Information </h4>
+<h4 style="text-align:center;"> Referring Party Information </h4>
 
 <br>
 <br>
 
 <label for="RefAgencyName"> Referring Party </label>
 <select name="RefAgencyName" id="RefAgencyName" class="form-control" style="margin-right:4%; width:265px;" onChange="enableRefAgencyOtherBox();">
+	<option value="none">-- select one --</option>
 	<option value="family"> Family Member </option>
 	<option value="ThePoPos"> The Fuzz </option>
 	<option value="CPS"> CPS </option>
@@ -164,10 +166,10 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
  
 <label for="refContactPersonPhone"> Contact Phone: </label>
-<input type="text" name= "refContactPersonPhone" maxlength="12" size="30" id="refContactPersonPhone" class="form-control" onkeypress="isPhoneNumber('refContactPersonPhone',event);" placeholder="999-999-9999">
+<input type="text" name= "refContactPersonPhone" maxlength="12" size="30" id="refContactPersonPhone" class="form-control" onkeypress="isPhoneNumber('refContactPersonPhone',event);" onblur="isPhoneOffFocus('refContactPersonPhone');" placeholder="999-999-9999">
 
 <label for="refContactPersonEmail"> Contact Email: </label>
-<input type="text" name= "refContactPersonEmail" maxlength="10" size="30" id="refContactPersonEmail" class="form-control">
+<input type="text" name= "refContactPersonEmail" maxlength="30" size="30" id="refContactPersonEmail" class="form-control" onblur="isEmailOffFocus('refContactPersonEmail');">
 
 <br>
 <br>
@@ -178,7 +180,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
 <label for="HouseHoldInfoTable" style="width:32%"> Referred Individual's Family/Household Information: </label>
 
-<table width="100%" style="border:1px solid black;" id="houseHoldTable">
+<table width="100%" id="houseHoldTable">
 	<tr>
 		<th> First Name </th>
 		<th> Last Name </th>
@@ -193,27 +195,30 @@ This Web Application was developed to replace the paper copy of the Intake form 
 		<td> <input type="text" name= "hFName" maxlength="20" size="20" oninput="validateAlpha('hFName');" id="hFName" class="form-control" style="margin:3px;"> </td>
 		<td> <input type="text" name= "hSName" maxlength="20" size="20" oninput="validateAlpha('hSName');" id="hSName" class="form-control" style="margin:3px;"> </td>
 		<td> <input type="text" name= "hMName" maxlength="1" size="1" oninput="validateAlpha('hMName');" id="fName" class="form-control" style="margin:3px;"> </td>
-		<td> <input type="text" name= "hDOB" maxlength="10" size="10" id="hDOB" class="form-control" onkeypress="isDateOfBirth('hDOB',event);" style="margin:3px;" placeholder="mm/dd/yyyy"> </td>
+		<td> <input type="text" name= "hDOB" maxlength="10" size="10" id="hDOB" class="form-control" onkeypress="isDate('hDOB',event);" onblur="isDateOffFocus('hDOB');" style="margin:3px;" placeholder="mm/dd/yyyy"> </td>
 		<td> 
-			<select style="margin:3px;"> 
+			<select style="margin:3px;" name="hGender" id="hGender" class="form-control"> 
+				<option value="none">-- select one --</option>
 				<option value="male"> Male </option>
 				<option value="female">Female </option>
 			</select> 
 		</td>
 		<td> 
-			<select style="margin:3px;">
-				<option>Arctic</option>
+			<select style="margin:3px;" name="hRace" id="hRace" class="form-control">
+				<option value="none">-- select one --</option>
+				<option>Asian</option>
 				<option>Caucasian</option>
 				<option>Indian</option>
 				<option>Middle Eastern</option>
 				<option>African American</option>
 				<option>Native American</option>
-				<option>Asian</option>
+				<option>Alaskan Native</option>
 				<option>Other Race</option>
 			</select>
 		</td>
 		<td> 
-			<select style="margin:3px;">
+			<select style="margin:3px;" name="hRelation" id="hRelation" class="form-control">
+				<option value="none">-- select one --</option>
 				<option>Brother</option>
 				<option>Sister</option>
 				<option>Daughter</option>
@@ -226,7 +231,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 				<option> Other </option>
 			</select>
 		</td>
-		<td><input type="text" size="20" maxlength="75" id="hComment"><span class="glyphicon glyphicon-plus" onclick="houseHoldTableEvent();"></span><span class="glyphicon glyphicon-minus" onclick="removeRow(this,'houseHoldTable')"></span></td>
+		<td><input type="text" size="20" maxlength="75" id="hComment" class="form-control"><span class="glyphicon glyphicon-plus" onclick="houseHoldTableEvent();"></span><span class="glyphicon glyphicon-minus" onclick="removeRow(this,'houseHoldTable');"></span></td>
 	</tr>	
 </table>
 
@@ -239,21 +244,20 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
 <br>
 
-<h4 style="text-align:center;"> Other Agencies Working With the Referred Individual or Family </h4>
-<br>
-<br>
-
-<table width="100%" style="border:1px solid black;" id="OthAgenciesWorkingWith">
-	<tr style="border:1px solid black;text-align:center;">
+<label for="HouseHoldInfoTable" style="width:32%"> Other Agencies Involved: </label>
+<table width="100%" id="OthAgenciesWorkingWith">
+	<tr>
 		<th> Agency Name </th>
 		<th> Working With </th>
 		<th> Relationship </th>
 	</tr>
-	<tr style="border:1px solid black;">
+	<tr>
 		<td> <input type="text" name= "otherAgency" maxlength="20" size="20" oninput="validateAlpha('otherAgency');" id="otherAgency" class="form-control" style="margin:3px;"> </td>
 		<td> <input type="text" name= "otherWorkingWith" maxlength="41" size="41" oninput="validateAlpha('otherWorkingWith');" id="otherWorkingWith" class="form-control" style="margin:3px;"> </td>
 		<td> 
-			<select style="margin:3px;">
+			<select style="margin:3px;" name="OthRelation" id="OthRelation" class="form-control">
+				<option value="none">-- select one --</option>
+				<option>Self </option>
 				<option>Brother</option>
 				<option>Sister</option>
 				<option>Daughter</option>
@@ -265,7 +269,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 				<option>Grand Child</option>
 				<option> Other </option>
 			</select>
-			<span class="glyphicon glyphicon-plus" onclick="houseHoldTableEvent();"></span><span class="glyphicon glyphicon-minus"></span>
+			<span class="glyphicon glyphicon-plus" onclick="OthAgenciesWorkingWithEvent();"></span><span class="glyphicon glyphicon-minus" onclick="removeRow(this,'OthAgenciesWorkingWith');"></span>
 		</td>
 	</tr>	
 </table>
@@ -279,7 +283,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
 
 <label for="dateOfContact" style= "width:16%"> Date of 1st Contact: </label> 
-<input type="text" name= "dateOfContact" maxlength="10" size="30" id="dateOfContact" class="form-control" onkeypress="isDateOfBirth('dateOfContact',event);" placeholder="mm/dd/yyyy">
+<input type="text" name= "dateOfContact" maxlength="10" size="30" id="dateOfContact" class="form-control" onkeypress="isDate('dateOfContact',event);" onblur="isDateOffFocus('dateOfContact');" placeholder="mm/dd/yyyy">
 
 <label for="meansOfContact"style= "width:16%" > Means of Contact: </label> 
 <input type="text" name= "meansOfContact" maxlength="75" size="30" oninput="validateAlpha('meansOfContact');" id="meansOfContact" class="form-control"> 
@@ -288,13 +292,19 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
 
 <label for="dateOfInitMeeting" style= "width:16%"> Date of Initial Meeting: </label> 
-<input type="text" name= "dateOfInitMeeting" maxlength="10" size="30" id="dateOfInitMeeting" class="form-control" onkeypress="isDateOfBirth('dateOfInitMeeting',event);"placeholder="mm/dd/yyyy">
+<input type="text" name= "dateOfInitMeeting" maxlength="10" size="30" id="dateOfInitMeeting" class="form-control" onkeypress="isDate('dateOfInitMeeting',event);" onblur="isDateOffFocus('dateOfInitMeeting');" placeholder="mm/dd/yyyy">
 
 <label for="timeOfInitMeeting"> Time: </label> 
-<input type="time" name= "timeOfInitMeeting" size="30" oninput="isNumberKey('timeOfInitMeeting');" id="timeOfInitMeeting" class="form-control"> 
+<input type="text" name= "timeOfInitMeeting" size="10" maxlength="5" onkeypress="isTime('timeOfInitMeeting',event);" id="timeOfInitMeeting" class="form-control" placeholder="hh:mm" onblur="isTimeOffFocus('timeOfInitMeeting');"> 
+
+<select name="timeOFInitMeeting2" id="timeOFInitMeeting2" class="form-control" style="margin-left:-40px; margin-right:40px;">
+	<option value="none">-- select one --</option>
+	<option value="AM"> AM </option>
+	<option value="PM"> PM </option>
+</select>
 
 <label for="locationOfInitMeeting"> Location: </label> 
-<input type="text" name= "locationOfInitMeeting maxlength="30" size="30" oninput="validateAlpha('locationOfInitMeeting');" id="locationOfInitMeeting" class="form-control"> 
+<input type="text" name= "locationOfInitMeeting" maxlength="30" size="30" oninput="validateAlpha('locationOfInitMeeting');" id="locationOfInitMeeting" class="form-control"> 
 
 <br>
 <br>
@@ -337,7 +347,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <!-- Style Sheet -->
-<link rel="stylesheet" href="IntakeStyleSheet.css">
+<link rel="stylesheet" href="FormAppStyleSheet.css">
 
 <!-- JS Functions  -->
 <script src="FormAppFunctions.js"></script>

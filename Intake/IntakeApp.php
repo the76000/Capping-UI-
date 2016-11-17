@@ -33,7 +33,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
 
 <label for="date"> Date: </label> 
-<input type="date" name= "date" maxlength="8" size="30" oninput="isNumberKey('DOB');" id="date" class="form-control">
+<input type="text" name= "date" maxlength="10" size="30" onkeypress="isDate('date',event);" onblur="isDateOffFocus('date');" placeholder="mm/dd/yyyy" id="date" class="form-control">
 
 <br>
 <br>
@@ -119,7 +119,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
 
 <label for="dayPhone"> Daytime Phone: </label> 
-<input type="text" name= "dayphone" maxlength="30" size="30" onkeypress="return isNumber(event)" oninput="isNumberKey('dayPhone');" id="dayPhone" class="form-control">
+<input type="text" name= "dayphone" id="dayPhone" maxlength="12" size="30" onkeypress="isPhoneNumber('dayPhone',event);" onblur="isPhoneOffFocus('dayPhone');" placeholder="999-999-9999" class="form-control">
 
 <label for="dayPhone" style="width:9%;"> May message be left?: </label> 
 <select name="dayMessage" class="form-control">
@@ -132,7 +132,8 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
 
 <label for="nightPhone"> Evening Phone: </label> 
-<input type="text" name= "nightphone" maxlength="30" size="30" onkeypress="return isNumber(event)" oninput="isNumberKey('dayPhone');" id="nightPhone" class="form-control">
+<input type="text" name= "nightPhone" id="nightPhone" maxlength="12" size="30" onkeypress="isPhoneNumber('nightPhone',event);" onblur="isPhoneOffFocus('nightPhone');" placeholder="999-999-9999" class="form-control">
+
 <label for="nightPhone" style="width:9%;"> May message be left?: </label> 
 <select name="nightMessage" class="form-control">
 <option value="">-- select one --</option>
@@ -144,7 +145,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
 
 <label for="DOB"> Date of Birth: </label> 
-<input type="text" name= "DOB" maxlength="10" size="30" id="DOB" class="form-control" oninput="isDateOfBirth('DOB', event);" placeholder="mm/dd/yyyy">
+<input type="text" name= "DOB" maxlength="10" size="30" id="DOB" class="form-control" onkeypress="isDate('DOB',event);" onblur="isDateOffFocus('DOB');" placeholder="mm/dd/yyyy">
 
 <br>
 <br>
@@ -182,82 +183,91 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
 <br>
 
-<label for="language" style="width:13%;">What languages do you speak?:</label> 
-<select name="language" class="form-control">
-<option value="">-- select one --</option>
-<option value="Afrikanns">Afrikanns</option>
-<option value="Albanian">Albanian</option>
-<option value="Arabic">Arabic</option>
-<option value="Armenian">Armenian</option>
-<option value="Basque">Basque</option>
-<option value="Bengali">Bengali</option>
-<option value="Bulgarian">Bulgarian</option>
-<option value="Catalan">Catalan</option>
-<option value="Cambodian">Cambodian</option>
-<option value="Chinese (Mandarin)">Chinese (Mandarin)</option>
-<option value="Croation">Croation</option>
-<option value="Czech">Czech</option>
-<option value="Danish">Danish</option>
-<option value="Dutch">Dutch</option>
-<option value="English">English</option>
-<option value="Estonian">Estonian</option>
-<option value="Fiji">Fiji</option>
-<option value="Finnish">Finnish</option>
-<option value="French">French</option>
-<option value="Georgian">Georgian</option>
-<option value="German">German</option>
-<option value="Greek">Greek</option>
-<option value="Gujarati">Gujarati</option>
-<option value="Hebrew">Hebrew</option>
-<option value="Hindi">Hindi</option>
-<option value="Hungarian">Hungarian</option>
-<option value="Icelandic">Icelandic</option>
-<option value="Indonesian">Indonesian</option>
-<option value="Irish">Irish</option>
-<option value="Italian">Italian</option>
-<option value="Japanese">Japanese</option>
-<option value="Javanese">Javanese</option>
-<option value="Korean">Korean</option>
-<option value="Latin">Latin</option>
-<option value="Latvian">Latvian</option>
-<option value="Lithuanian">Lithuanian</option>
-<option value="Macedonian">Macedonian</option>
-<option value="Malay">Malay</option>
-<option value="Malayalam">Malayalam</option>
-<option value="Maltese">Maltese</option>
-<option value="Maori">Maori</option>
-<option value="Marathi">Marathi</option>
-<option value="Mongolian">Mongolian</option>
-<option value="Nepali">Nepali</option>
-<option value="Norwegian">Norwegian</option>
-<option value="Persian">Persian</option>
-<option value="Polish">Polish</option>
-<option value="Portuguese">Portuguese</option>
-<option value="Punjabi">Punjabi</option>
-<option value="Quechua">Quechua</option>
-<option value="Romanian">Romanian</option>
-<option value="Russian">Russian</option>
-<option value="Samoan">Samoan</option>
-<option value="Serbian">Serbian</option>
-<option value="Slovak">Slovak</option>
-<option value="Slovenian">Slovenian</option>
-<option value="Spanish">Spanish</option>
-<option value="Swahili">Swahili</option>
-<option value="Swedish ">Swedish </option>
-<option value="Tamil">Tamil</option>
-<option value="Tatar">Tatar</option>
-<option value="Telugu">Telugu</option>
-<option value="Thai">Thai</option>
-<option value="Tibetan">Tibetan</option>
-<option value="Tonga">Tonga</option>
-<option value="Turkish">Turkish</option>
-<option value="Ukranian">Ukranian</option>
-<option value="Urdu">Urdu</option>
-<option value="Uzbek">Uzbek</option>
-<option value="Vietnamese">Vietnamese</option>
-<option value="Welsh">Welsh</option>
-<option value="Xhosa">Xhosa</option>
-</select>
+<label for="languages" style="width:13%;">What languages do you speak?:</label> 
+<table width="100%" id="languages" name="languages">
+	<tr>
+		<th> Language: </th>
+	</tr>
+	<tr>
+		<td> 
+			<select style="margin:3px;" name="lLanguage" id="lLanguage" class="form-control">
+			 	<option value="">-- select one --</option>
+				<option value="Afrikanns">Afrikanns</option>
+				<option value="Albanian">Albanian</option>
+				<option value="Arabic">Arabic</option>
+				<option value="Armenian">Armenian</option>
+				<option value="Basque">Basque</option>
+				<option value="Bengali">Bengali</option>
+				<option value="Bulgarian">Bulgarian</option>
+				<option value="Catalan">Catalan</option>
+				<option value="Cambodian">Cambodian</option>
+				<option value="Chinese (Mandarin)">Chinese (Mandarin)</option>
+				<option value="Croation">Croation</option>
+				<option value="Czech">Czech</option>
+				<option value="Danish">Danish</option>
+				<option value="Dutch">Dutch</option>
+				<option value="English">English</option>
+				<option value="Estonian">Estonian</option>
+				<option value="Fiji">Fiji</option>
+				<option value="Finnish">Finnish</option>
+				<option value="French">French</option>
+				<option value="Georgian">Georgian</option>
+				<option value="German">German</option>
+				<option value="Greek">Greek</option>
+				<option value="Gujarati">Gujarati</option>
+				<option value="Hebrew">Hebrew</option>
+				<option value="Hindi">Hindi</option>
+				<option value="Hungarian">Hungarian</option>
+				<option value="Icelandic">Icelandic</option>
+				<option value="Indonesian">Indonesian</option>
+				<option value="Irish">Irish</option>
+				<option value="Italian">Italian</option>
+				<option value="Japanese">Japanese</option>
+				<option value="Javanese">Javanese</option>
+				<option value="Korean">Korean</option>
+				<option value="Latin">Latin</option>
+				<option value="Latvian">Latvian</option>
+				<option value="Lithuanian">Lithuanian</option>
+				<option value="Macedonian">Macedonian</option>
+				<option value="Malay">Malay</option>
+				<option value="Malayalam">Malayalam</option>
+				<option value="Maltese">Maltese</option>
+				<option value="Maori">Maori</option>
+				<option value="Marathi">Marathi</option>
+				<option value="Mongolian">Mongolian</option>
+				<option value="Nepali">Nepali</option>
+				<option value="Norwegian">Norwegian</option>
+				<option value="Persian">Persian</option>
+				<option value="Polish">Polish</option>
+				<option value="Portuguese">Portuguese</option>
+				<option value="Punjabi">Punjabi</option>
+				<option value="Quechua">Quechua</option>
+				<option value="Romanian">Romanian</option>
+				<option value="Russian">Russian</option>
+				<option value="Samoan">Samoan</option>
+				<option value="Serbian">Serbian</option>
+				<option value="Slovak">Slovak</option>
+				<option value="Slovenian">Slovenian</option>
+				<option value="Spanish">Spanish</option>
+				<option value="Swahili">Swahili</option>
+				<option value="Swedish ">Swedish </option>
+				<option value="Tamil">Tamil</option>
+				<option value="Tatar">Tatar</option>
+				<option value="Telugu">Telugu</option>
+				<option value="Thai">Thai</option>
+				<option value="Tibetan">Tibetan</option>
+				<option value="Tonga">Tonga</option>
+				<option value="Turkish">Turkish</option>
+				<option value="Ukranian">Ukranian</option>
+				<option value="Urdu">Urdu</option>
+				<option value="Uzbek">Uzbek</option>
+				<option value="Vietnamese">Vietnamese</option>
+				<option value="Welsh">Welsh</option>
+				<option value="Xhosa">Xhosa</option>
+			</select>
+	<span class="glyphicon glyphicon-plus" onclick="languagesEvent();"></span><span class="glyphicon glyphicon-minus" onclick="removeRow(this,'languages');"></span></td>
+	</tr>	
+</table>
 
 <br>
 <br>
@@ -287,24 +297,79 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
 <br>
 
+<label for="intakeTable" style="width:13%;">Children's Information:</label> 
+<table width="100%" id="intakeTable" name="intakeTable">
+	<tr>
+		<th> First Name </th>
+		<th> Last Name </th>
+		<th> Middle Intial</th>
+		<th> Sex </th>
+		<th> DOB </th>
+		<th> Race </th>
+		<th> Where do they live? </th>
+		<th> Who has custody? </th>
+	</tr>
+	<tr>
+		<td> <input type="text" name= "iFName" maxlength="20" size="20" oninput="validateAlpha('iFName');" id="iFName" class="form-control" style="margin:3px;"> </td>
+		<td> <input type="text" name= "iSName" maxlength="20" size="20" oninput="validateAlpha('iSName');" id="iSName" class="form-control" style="margin:3px;"> </td>
+		<td> <input type="text" name= "iMName" maxlength="1" size="1" oninput="validateAlpha('iMName');" id="iMName" class="form-control" style="margin:3px;"> </td>
+		<td> 
+			<select style="margin:3px;" name="iGender" id="iGender" class="form-control"> 
+				<option value="none">-- select one --</option>
+				<option value="male"> Male </option>
+				<option value="female">Female </option>
+			</select> 
+		</td>
+		<td> <input type="text" name= "iDOB" maxlength="10" size="10" id="iDOB" class="form-control" onkeypress="isDate('iDOB',event);" onblur="isDateOffFocus('iDOB');" style="margin:3px;" placeholder="mm/dd/yyyy"> 
+		</td>
+		<td> 
+			<select style="margin:3px;" name="iRace" id="iRace" class="form-control">
+				<option value="none">-- select one --</option>
+				<option>Asian</option>
+				<option>Caucasian</option>
+				<option>Indian</option>
+				<option>Middle Eastern</option>
+				<option>African American</option>
+				<option>Native American</option>
+				<option>Alaskan Native</option>
+				<option>Other Race</option>
+			</select>
+		</td>
+		<td> 
+			<input type="text" size="20" maxlength="75" id="iWhere" class="form-control">
+		</td>
+		<td><input type="text" size="20" maxlength="75" id="iComment" class="form-control"><span class="glyphicon glyphicon-plus" onclick="intakeTableEvent();"></span><span class="glyphicon glyphicon-minus" onclick="removeRow(this,'intakeTable');"></span></td>
+	</tr>	
+</table>
+
+<br>
+<br>
+
 <label for="drugs" style="width:28%;">Do you now, or have you ever had, a problem with drug/alcohol abuse?:</label> 
-<select name="drugs" id="drugs" class="form-control" onChange="enableDrugExplan();">
+<select name="drugs" id="drugs" class="form-control" onChange="ifYes(drugs, drugsExplan);">
 <option value="">-- select one --</option>
-<option value="drugsYes">Yes</option>
-<option value="drugsNo">No</option>
+<option value="Yes">Yes</option>
+<option value="No">No</option>
 </select>
 
 <br>
 <br>
 
 <label for="drugsExplan" style="width:100%;">If you answered yes to the previous questions, please explain:</label>
-<textarea style="width:100%;height:100px;" name="drugsExplan" id="drugsExplan" class="form-control" maxlength="250" oninput="validateAlpha('drugsExplan');" disabled>
+<textarea style="width:100%;height:100px;" name="drugsExplan" id="drugsExplan" class="form-control" maxlength="250" disabled>
 </textarea>
 
 <br>
 <br>
-<label for="childSeperationTime" style="width:35%;">If you are not living with your child(ren), for what length of time have you been separated?:</label>
+
+<label for="childSeperationTime" style="width:38%;">If you are not living with your child(ren), for what length of time have you been separated?:</label>
 <input type="text" name="childSeperationTime" maxlength="100" size="50" class="form-control">
+
+<br>
+<br>
+
+<label for="parentSeperationTime" style="width:38%;">If you have been seperated from your child(ren)'s other parent, how long have you been seperated?:</label>
+<input type="text" name="parentSeperationTime" maxlength="100" size="50" class="form-control">
 
 <br>
 <br>
@@ -323,14 +388,14 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
 
 <label for="cps" style="width:20%;">Are you involved with Child Protective Services?:</label> 
-<select name="cps" class="form-control">
+<select name="cps" id="cps" class="form-control" onChange="ifYes(cps, pastCPS);">
 <option value="">-- select one --</option>
-<option value="cpsYes">Yes</option>
-<option value="cpsNo">No</option>
+<option value="Yes">Yes</option>
+<option value="No">No</option>
 </select>
 
 <label for="pastCPS" style="width:26%;">If yes, were you previously involved with Child Protective Services?:</label>
-<select name="pastCPS" class="form-control">
+<select name="pastCPS" id="pastCPS" class="form-control" disabled>
 <option value="">-- select one --</option>
 <option value="pastCpsYes">Yes</option>
 <option value="pastCpsNo">No</option>
@@ -340,20 +405,20 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
 
 <label for="mandated"  style="width:18%;">Have you been mandated to take this class?:</label>
-<select name="mandated" class="form-control" onChange="enableWhoMandated();">
+<select name="mandated" id="mandated" class="form-control" onChange="ifYes(mandated, whoMandated); ifYes(mandated, whyMandated);">
 <option value="">-- select one --</option>
-<option value="mandatedYes">Yes</option>
-<option value="mandatedNo">No</option>
+<option value="Yes">Yes</option>
+<option value="No">No</option>
 </select>
 
 <label for="whoMandated" style="width:13%;">If yes, who mandated you?:</label> 
-<input type="text" name="whoMandated" size="50" maxlength="50" class="form-control" disabled>
+<input type="text" id="whoMandated" name="whoMandated" size="50" maxlength="50" class="form-control" disabled>
 
 <br>
 <br>
 
 <label for="whyMandated" style="width:18%;">Why did they mandate you? (Be specific):</label>
-<textarea style="width:13%;" maxlength="300" name="whyMandated" class="form-control" disabled>
+<textarea  style="width:100%;height:100px;" maxlength="300" id="whyMandated" name="whyMandated" class="form-control" disabled>
 </textarea>
 
 <br>
@@ -381,23 +446,40 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br> 
 
 <label for="otherClasses" style="width:20%;">Have you atttended any other parenting classes?:</label>
-<select name="otherClasses" class="form-control">
+<select name="otherClasses" id="otherClasses" onChange="ifYes(otherClasses, classDuration)" class="form-control">
 <option value="">-- select one --</option>
-<option value="otherClassesYes">Yes</option>
-<option value="otherClassesNo">No</option>
+<option value="Yes">Yes</option>
+<option value="No">No</option>
 </select>
 
 <label for="classDuration" style="width:13%;">If yes, where and how long ago?:</label>
-<input type="text" name="classDurations" size="50" class="form-control" disabled>
+<input type="text" name="classDuration" id="classDurations" size="50" class="form-control" disabled>
 
 <br>
 <br>
 
-<label for="therapy" style="width:18%;">Did you ever deal with your abuse in therapy?:</label>
-<select name="therapy" class="form-control">
+<label for="abuse" style="width:18%;">Were you the victim of abuse or neglect in your own childhood?:</label>
+<select name="abuse" id="abuse" class="form-control" onChange="ifYes(abuse, abuseForm); ifYes(abuse, abuseTherapy)">
 <option value="">-- select one --</option>
-<option value="therapyYes">Yes</option>
-<option value="therapysNo">No</option>
+<option value="Yes">Yes</option>
+<option value="No">No</option>
+</select>
+
+<br>
+<br>
+
+<label for="abuseForm" style="width:35%;">If yes, what form did the abuse take?:</label>
+<textarea style="width:100%;height:100px;" name="abuseForm" id="abuseForm" class="form-control" maxlength="175" disabled>
+</textarea>
+
+<br>
+<br>
+
+<label for="abuseTherapy" style="width:18%;">Did you ever deal with your abuse in therapy?:</label>
+<select name="abuseTherapy" id="abuseTherapy" class="form-control" disabled>
+<option value="">-- select one --</option>
+<option value="Yes">Yes</option>
+<option value="No">No</option>
 </select>
 
 <br>
@@ -424,7 +506,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <input type="text" name= "eRelationship" maxlength="20" size="30" oninput="validateAlpha('eRelationship');" id="eRelationship" class="form-control">
 
 <label for="emergencyPhone">Thier phone number:</label>
-<input type="text" name="emergencyContactPhone" onkeypress="return isNumber(event)" maxlength="10" size="10" class="form-control">
+<input type="text" name="emergencyContactPhone" id="emergencyContactPhone" onkeypress="return isPhoneNumber('emergencyContactPhone',event);" onblur="isPhoneOffFocus('emergencyContactPhone');" maxlength="12" size="30" class="form-control" placeholder="999-999-9999">
 
 <br>
 <br>
@@ -437,17 +519,17 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br> 
 
 <label for="domesticViolence" style="width:24%;">Have you ever had any involvement with domestic violence?:</label>
-<select name="domesticViolence" class="form-control">
+<select name="domesticViolence" id="domesticViolence" class="form-control" onChange="ifYes(domesticViolence, domesticViolenceTalk)">
 <option value="">-- select one --</option>
-<option value="domesticViolenceYes">Yes</option>
-<option value="domesticViolenceNo">No</option>
+<option value="Yes">Yes</option>
+<option value="No">No</option>
 </select>
 
 <label for="domesticViolenceTalk" style="width:20%;">If yes, have you discussed it with someone?:</label>
-<select name="domesticViolenceTalk" class="form-control">
+<select name="domesticViolenceTalk" id="domesticViolenceTalk" class="form-control" disabled>
 <option value="">-- select one --</option>
-<option value="domesticViolenceTalkYes">Yes</option>
-<option value="domesticViolenceTalkNo">No</option>
+<option value="Yes">Yes</option>
+<option value="No">No</option>
 </select>
 
 <br>
@@ -474,17 +556,17 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
 
 <label for="ordersOfProtection" style="width:20%;">Are there any orders of protection involved?:</label>
-<select name="ordersOfProtection" class="form-control">
+<select name="ordersOfProtection" id="ordersOfProtection" class="form-control" onChange="ifYes(ordersOfProtection, ordersOfProtectionWhyWho)">
 <option value="">-- select one --</option>
-<option value="ordersOfProtectionYes">Yes</option>
-<option value="ordersOfProtectionNo">No</option>
+<option value="Yes">Yes</option>
+<option value="No">No</option>
 </select>
 
 <br>
 <br>
 
 <label for="ordersOfProtectionWhyWho" style="width:35%;">If yes, why are they in place and who are they against?:</label>
-<textarea style="width:100%;height:100px;" name="ordersOfProtectionWhyWho" class="form-control" maxlength="175" disabled>
+<textarea style="width:100%;height:100px;" name="ordersOfProtectionWhyWho" id="ordersOfProtectionWhyWho" class="form-control" maxlength="175" disabled>
 </textarea>
 
 <br>
@@ -501,68 +583,68 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
 
 <label for="convicted" style="width:18%;">Have you ever been convicted of a crime?:</label>
-<select name="convicted" class="form-control">
+<select name="convicted" id="convicted" class="form-control" onChange="ifYes(convicted, convictedExplan)">
 <option value="">-- select one --</option>
-<option value="convictedYes">Yes</option>
-<option value="convictedNo">No</option>
+<option value="Yes">Yes</option>
+<option value="No">No</option>
 </select>
 
 <br>
 <br>
 
 <label for="convictedExplan">If yes, explain:</label>
-<textarea style="width:100%;height:100px;" name="convictedExplan" class="form-control" maxlength="200" disabled>
+<textarea style="width:100%;height:100px;" name="convictedExplan" id="convictedExplan" class="form-control" maxlength="200" disabled>
 </textarea>
 
 <br>
 <br>
 
 <label for="record" style="width:20%;">Do you have a jail and/or prison record?:</label>
-<select name="record" class="form-control">
+<select name="record" id="record" class="form-control" onChange="ifYes(record, recordExplan)">
 <option value="">-- select one --</option>
-<option value="recordYes">Yes</option>
-<option value="recordNo">No</option>
+<option value="Yes">Yes</option>
+<option value="No">No</option>
 </select>
 
 <br>
 <br>
 
 <label for="recordExplan" style="width:35%;">If you answered yes to the last question, when were you in jail/prison, and for what offense?:</label>
-<textarea style="width:100%;height:100px;" name="recordExplan" class="form-control" maxlength="100" disabled>
+<textarea style="width:100%;height:100px;" name="recordExplan" id="recordExplan" class="form-control" maxlength="100" disabled>
 </textarea>
 
 <br>
 <br>
 
 <label for="probation" style="width:18%;">Are you currently on parole or probation?</label>
-<select name="probation" class="form-control">
+<select name="probation" id="probation" class="form-control" onChange="ifYes(probation, probationExplan)">
 <option value="">-- select one --</option>
-<option value="probationYes">Yes</option>
-<option value="probationNo">No</option>
+<option value="Yes">Yes</option>
+<option value="No">No</option>
 </select>
 
 <br>
 <br>
 
 <label for="probationExplan" style="width:13%;">If yes, for what offense?:</label>
-<textarea style="width:100%;height:100px;" name="convictedExplan" class="form-control" maxlength="100" disabled>
+<textarea style="width:100%;height:100px;" name="probationExplan" id="probationExplan" class="form-control" maxlength="100" disabled>
 </textarea>
 
 <br>
 <br>
 
 <label for="familyClasses" style="width:40%;">Are there any other members of your family, that you know of, taking a parenting class with this agency?:</label>
-<select name="familyClasses" class="form-control">
+<select name="familyClasses" id="familyClasses" class="form-control" onChange="ifYes(familyClasses, familyClassesName)">
 <option value="">-- select one --</option>
-<option value="familyClassesYes">Yes</option>
-<option value="familyClassesNo">No</option>
+<option value="Yes">Yes</option>
+<option value="No">No</option>
 </select>
 
 <br>
 <br>
 
 <label for="familyClassesName" style="width:20%;">If yes, please list their name/names:</label>
-<textarea style="width:100%;height:100px;" name="familyClassesName" class="form-control" maxlength="200" disabled>
+<textarea style="width:100%;height:100px;" name="familyClassesName" id="familyClassesName" class="form-control" maxlength="200" disabled>
 </textarea>
 
 <br>
@@ -570,21 +652,17 @@ This Web Application was developed to replace the paper copy of the Intake form 
   
 <label for="clientSig">Client Signature:</label>
 <input type="text" name="clientSig" size="50"> 
-<label for="clientStaffDate"> Date: </label> 
-<input type="date" name= "clientSigDate" maxlength="8" size="30" oninput="isNumberKey('DOB');" id="clientSigDate" class="form-control">
 
 <br>
 <br>
 
 <label for="staffSig">Staff Witness:</label>
 <input type="text" name="staffSig" size="50"> 
-<label for="staffSigDate"> Date: </label> 
-<input type="date" name= "staffSigDate" maxlength="8" size="30" oninput="isNumberKey('DOB');" id="staffSigDate" class="form-control">
 
 <br>
 <br>
 
-<input type="submit" class="form-control" value="Submit">
+<button class="btn btn-success btn-lg" style="text-align:center;"> Submit </button>
   
 </form>
 
@@ -609,7 +687,7 @@ Important discosure information will go here
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <!-- Intake Style Sheet -->
-<link rel="stylesheet" href="IntakeStyleSheet.css">
+<link rel="stylesheet" href="FormAppStyleSheet.css">
 
 <!-- JS Functions  -->
 <script src="FormAppFunctions.js"></script>
