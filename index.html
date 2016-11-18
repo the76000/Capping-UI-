@@ -21,9 +21,8 @@
 
   <?php
     
-    # Connect to MySQL server and the database
-    require( 'includes/connect.php' ) ;
-    
+    # Connect to pgDB
+    require( 'includes/connect.php' ) ;   
     
 
 
@@ -33,9 +32,6 @@
     }
   
     show_records($dbc) ;
-    
-    # Close the connection
-    mysqli_close( $dbc ) ;
 
 ?>
   
