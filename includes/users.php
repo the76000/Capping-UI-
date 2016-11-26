@@ -27,7 +27,7 @@
 		// Check to see if the credentials are right
 		if($email == $emailDB && $password == $passwordDB){
 			// Now let's check the permission level
-			header('Location: https://localhost:8888/homepage.html');
+			header('Location: https://localhost:8080/homepage.html');
 		}else{
 			echo "<h1>Error: User not found.</h1>";
 		}				
