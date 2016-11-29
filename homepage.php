@@ -20,7 +20,7 @@
   
   <body>
   
-  <?php>
+  <?php
   session_start();
 	
 	if (!isset($_SESSION["username"]) ){
@@ -28,7 +28,8 @@
 		echo "hello";
 	}
 	
-	echo "Username = " . $_SESSION["username"]; //for testing
+	echo "Username = " . $_SESSION["username"]; 
+	//for testing
   ?>
   
   <!-- Top left Logo -->
