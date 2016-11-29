@@ -21,6 +21,9 @@
   <body>
   
   <?php
+  
+  # Connect to Postgres server and the database
+    require( 'includes/connect.php' ) ;
   session_start();
 	
 	if (!isset($_SESSION["username"]) ){
@@ -82,7 +85,7 @@
 			
 			<div class = "row homepage-links">
 				<div class = "col-md-4">
-					<a href="participant-search.html"><button class="btn btn-default launcher-links" type="submit"> Participant Search</button></a>
+					<a href="participant-search.php"><button class="btn btn-default launcher-links" type="submit"> Participant Search</button></a>
 				</div>
 				<div class = "col-md-4">
 					<a href="attendance.html"><button class="btn btn-default launcher-links" type="submit">Attendance Records</button></a>
