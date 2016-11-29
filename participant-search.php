@@ -19,6 +19,10 @@
   <body>
   
   <?php
+  
+  # Connect to Postgres server and the database
+    require( 'includes/connect.php' ) ;
+  
   session_start();
 	
 	if (!isset($_SESSION["username"]) ){
@@ -28,6 +32,13 @@
 	
 	echo "Username = " . $_SESSION["username"]; 
 	//for testing
+	
+	
+	
+	
+	
+	
+	
   ?>
   
   <!-- Top left Logo -->
@@ -63,9 +74,9 @@
 
 <div class = "row search">
 
-	<form class="navbar-form" role="search">
+	<form class="navbar-form" role="search" action="includes/searchp.php" method="post" >
 			<div class="input-group">
-				<input type="text" class="form-control input-lg" placeholder="Search" name="srch-term" id="srch-term">
+				<input type="text" class="form-control input-lg" placeholder="Search" name="p_num" id="srch-term">
 				<div class="input-group-btn ">
 					<button class="btn btn-lg" type="submit"><i class="glyphicon glyphicon-search"></i></button>
 				</div>

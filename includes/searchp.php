@@ -8,12 +8,12 @@
 	
 	$msg = '';
 	
-	$email = pg_escape_string($_POST['email']);
-	
-	$password = pg_escape_string($_POST['password']);
+	$p_num = pg_escape_string($_POST['p_num']);
 	
 	
-	$query = "Select * from employees where email = '$email'";
+	
+	
+	$query = "Select * from participants where p_num = '$p_num'";
 	
 	$results = pg_query($query) or die('Query failed: ' . pg_last_error());
 	
@@ -21,19 +21,14 @@
 	
 	$row = pg_fetch_array($results, null, PGSQL_ASSOC);
 								
-	$emailDB = $row['email'];
-	$passwordDB = $row['password'];
-	$userStatus = $row['permission_lvl'];
+	$p_numDB = $row['p_num'];
+	
 		// Check to see if the credentials are right
-		if($email == $emailDB && $password == $passwordDB){
+		if($p_num == $p_numDB){
 			// Now let's check the permission level
-			header('Location: http://localhost:8080/homepage.php');
-			session_start();
-			$_SESSION["username"] = $email;
+			echo $p_num;
 		}else{
 			echo "<h1>Error: User not found.</h1>";
 		}				
 			
 	?>
-
-		
