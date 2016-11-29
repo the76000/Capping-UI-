@@ -4,6 +4,7 @@
 .CPCA_navbar{
 	background-color: #3c948b;
 	padding:10px;	
+	font-size: 20px;
 	/* makes the navbar look more like the wireframe */
 }
 
@@ -23,6 +24,7 @@
 
 	.navbar-brand{
 		font-weight: 700;
+		font-size: 22px;
 	}
 
 	.navbar-brand:hover{
@@ -33,6 +35,12 @@
 	.btn{
 		font
 	}
+
+.page-header h1{
+	margin-top: -22px;
+	font-size: 55px;
+
+}
 
 .home-button{
 	letter-spacing: 5px;
@@ -207,6 +215,45 @@
 	
 	
 }
+
+/* Admin Tools page css*/
+.course-launcher-links{
+	border-color: #3c948b; 
+	margin-bottom: 10px;
+}
+
+	.course-launcher-links a{
+		font-weight: 700;
+		text-decoration: none !important;
+		color: #333 !important;
+	}
+
+	.course-launcher-links button{
+		border-color: #3c948b; 
+	}
+
+/* Row that holds tool options */
+.row{
+	text-align: center;
+}
+
+/* Buttons on bottom of participant search page*/
+.participant-result-names{
+	text-align: center;
+}
+
+.participant-result-names a{
+	font-weight: 700;
+	text-decoration: none !important;
+	color: #333 !important;
+}
+
+.participant-result-names button{
+	border-color: #3c948b; 
+}
+
+
+
 
 
 
