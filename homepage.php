@@ -25,7 +25,14 @@
     # Connect to Postgres server and the database
     require( 'includes/connect.php' ) ;
     
+	session_start();
 	
+	if (!isset($_SESSION["username"]) ){
+		header('Location: index.php');
+		echo "hello";
+	}
+	
+	echo "Username = " . $_SESSION["username"];
 	
 	
 
