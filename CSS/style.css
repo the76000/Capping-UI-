@@ -11,7 +11,7 @@
 		color: white !important;
 	}
 
-	.CPCA_navbar a:hover{
+	.CPCA_navbar ul li a:hover{
 		color: #ff8400 !important;
 		-webkit-transition-duration: 0.4s;
     	transition-duration: 0.4s;
@@ -23,6 +23,11 @@
 
 	.navbar-brand{
 		font-weight: 700;
+	}
+
+	.navbar-brand:hover{
+		color: white !important;
+		cursor: default; !important;
 	}
 
 	.btn{
