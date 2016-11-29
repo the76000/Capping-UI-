@@ -122,10 +122,23 @@
 	
 	/*for the login form */
 }
-	
+
+#checkbox1 {
+		margin-right: 5px;
+	}
+
+#checkbox2 {
+		margin-left: 11px;
+	}
+#checkbox3 {
+	}
+
+
 	.checkbox a{
 		font-weight: 700;
 	}
+	
+	
 
 
 /* for homepage */
