@@ -244,6 +244,10 @@
 	.course-launcher-links button{
 		border-color: #3c948b; 
 	}
+	
+#adminChangeCourseButton{
+	margin-right: 700px;
+}
 
 /* Row that holds tool options */
 .row{
