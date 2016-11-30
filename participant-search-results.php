@@ -14,9 +14,12 @@
 		
 		<title> CPCA search </title>
   </head>
-  
-  
   <body>
+  
+ 
+  
+  
+  
   
   <!-- Top left Logo -->
 	<div class="page-header">
@@ -49,125 +52,165 @@
   </div><!-- /.container-fluid -->
 </nav> <!-- end of navbar-->
 
+	 <?php
+  
+	
+  
+  session_start();
+	
+	if (!isset($_SESSION["username"]) ){
+		header('Location: index.php');
+		echo "hello";
+	}
+	
+	echo "p_num = " . $_SESSION["searchp"]; 
+	
+	
+	$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
+    or die('Could not connect: ' . pg_last_error());
+	
+	//for testing
+	
+	$p_num = $_SESSION["searchp"];
+	
+	$query = "Select * from participants where p_num = '$p_num'";
+	
+	$results = pg_query($query) or die('Query failed: ' . pg_last_error());
+	
+	$row = pg_fetch_array($results, null, PGSQL_ASSOC);
+	
+	$p_numDB = $row['p_num'];
+	
+	$raceDB = $row['race'];
+	
+	echo " $p_numDB ";
+  
+  
+  
+  
+  
 
 
-	<div class="container">
-		<!--- ALL OF THIS INFORMATION IS PLACEHOLDER THIS ALL NEEDS TO COME FROM THE DATABASE!!!! -->
+
+echo	'<div class="container">';
+echo		'<!--- ALL OF THIS INFORMATION IS PLACEHOLDER THIS ALL NEEDS TO COME FROM THE DATABASE!!!! -->';
 		
-		<div class = "col-md-8">
+echo		'<div class = "col-md-8">';
 		
-		<div class = "jumbotron">
-			<div class = "row search-results">
+echo		'<div class = "jumbotron">';
+echo			'<div class = "row search-results">';
 			
-			<div class = "col-md-4">
-			<p> Participant </p>
-			</div>
+echo			'<div class = "col-md-4">';
+echo			'<p> Participant </p>';
+echo			'</div>';
 			
-			<div class = "col-md-4">
-			<p class="label label-info">Filler Name</p> 
-			</div>
-			</div>
+echo			'<div class = "col-md-4">';
+echo			'<p class="label label-info">';
+echo			" $p_numDB ";
+echo 				'</p>'; 
+echo			'</div>';
+echo			'</div>';
 			
-			<div class = "row search-results">
+echo			'<div class = "row search-results">';
 			
-			<div class = "col-md-4">
-			<p> Age </p>
-			</div>
+echo			'<div class = "col-md-4">';
+echo			'<p> Age </p>';
+echo			'</div>';
 			
-			<div class = "col-md-4">
-			<p class="label label-info">101</p> 
-			</div>
-			</div>
-			
-			
-			<div class = "row search-results">
-			
-			<div class = "col-md-4">
-			<p> Group </p>
-			</div>
-			
-			<div class = "col-md-4">
-			<p class="label label-info">Wednesday 4:30</p> 
-			</div>
-			</div>
+echo			'<div class = "col-md-4">';
+echo			'<p class="label label-info">101</p> ';
+echo			'</div>';
+echo			'</div>';
 			
 			
-			<hr> </hr>
+echo			'<div class = "row search-results">';
+			
+echo			'<div class = "col-md-4">';
+echo			'<p> Group </p>';
+echo			'</div>';
+			
+echo			'<div class = "col-md-4">';
+echo			'<p class="label label-info">Wednesday 4:30</p>'; 
+echo			'</div>';
+echo			'</div>';
+			
+			
+echo			'<hr> </hr>';
 			
 			
 			
-			<div class = "row search-results">
-				<div class = "col-md-4">
-				<p> Classes Completed </p>
-				</div>
+echo			'<div class = "row search-results">';
+echo				'<div class = "col-md-4">';
+echo				'<p> Classes Completed </p>';
+echo				'</div>';
 			
-				<div class = "col-md-2">
-				<p> 20 </p>
-				</div>
+echo				'<div class = "col-md-2">';
+echo				'<p> 20 </p>';
+echo				'</div>';
 				
-				<div class = "col-md-6">
-				<p> <a href="classes-completed-more.php"> <!--- for demo purposes --> Click for more information </a> </p>
-				</div>
+echo				'<div class = "col-md-6">';
+echo				'<p> <a href="classes-completed-more.php"> <!--- for demo purposes --> Click for more information </a> </p>';
+echo				'</div>';
 			
 			
-			</div>
+echo			'</div>';
 			
-			<div class = "row search-results">
-				<div class = "col-md-4">
-				<p> Classes Missing/Not Completed </p>
-				</div>
+echo			'<div class = "row search-results">';
+echo				'<div class = "col-md-4">';
+echo				'<p> Classes Missing/Not Completed </p>';
+echo				'</div>';
 				
 				
-				<div class = "col-md-2">
-				<p> 8 </p>
-				</div>
+echo				'<div class = "col-md-2">';
+echo				'<p> 8 </p>';
+echo				'</div>';
 				
-				<div class = "col-md-6">
-				<p> <a href="missed-class-more.php"> <!--- for demo purposes --> Click for more information </a> </p>
-				</div>
+echo				'<div class = "col-md-6">';
+echo				'<p> <a href="missed-class-more.php"> <!--- for demo purposes --> Click for more information </a> </p>';
+echo				'</div>';
 			
 				
 			
 			
-			</div>
+echo			'</div>';
 			
 		
 		
-		</div>
+echo		'</div>';
 		
 		
-		</div>
+echo		'</div>';
 		
 		
-		<div class = "col-md-4">
+echo		'<div class = "col-md-4">';
 		
-		<div class = "jumbotron">
+echo		'<div class = "jumbotron">';
 			
-			<p> User created on : 01/01/2016 </p>
+echo			'<p> User created on : 01/01/2016 </p>';
+		
+echo			'<p> Notes from instructors: </p>';
 			
-			<p> Notes from instructors: </p>
+echo			'<p> <a href="#"> Gwen 02/01/2016 </a> </p>';
 			
-			<p> <a href="#"> Gwen 02/01/2016 </a> </p>
-			
-			<p> <a href="#"> Click to see more </a> </p>
+echo			'<p> <a href="#"> Click to see more </a> </p>';
 
-			<p> <a href="#"> Link to Participant Intake Form </a> </p>
+echo			'<p> <a href="#"> Link to Participant Intake Form </a> </p>';
 
-			<p> <a href="#"> Link to Participant Referral Form </a> </p>
+echo			'<p> <a href="#"> Link to Participant Referral Form </a> </p>';
 
-			<p> <a href="#"> Link to Participant Report Card </a></p>
+echo			'<p> <a href="#"> Link to Participant Report Card </a></p>';
 		
 		
 		
 		
-		</div>
+echo		'</div>';
 		
 		
-		</div>
+echo		'</div>';
 
 
-	</div>
-
+echo 	'</div>';
+?>
 
 
   </body>

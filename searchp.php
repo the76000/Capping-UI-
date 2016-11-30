@@ -56,8 +56,8 @@ session_start();
 		// Check to see if the credentials are right
 		if($p_num == $p_numDB){
 			
-			
-			echo $p_num;
+			$_SESSION["searchp"] = $p_num;
+			echo "<a href='participant-search-results.php'> $p_num </a>";
 			//header('Location: http://localhost:8080/participant-search.php');
 			
 			// Crawling in my skin here
