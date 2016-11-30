@@ -33,7 +33,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Admin Tools</a>
+				<a class="navbar-brand" href="#">Generate Reports</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -51,20 +51,24 @@
 	
 	<div class = "row">		
 		
+		<div class="col-md-4">	
+		
 			<input type="text" class="form-control input-lg" placeholder="Participant 1" id="reportParticipant1">
 			<select multiple class="form-control" id="reportSelect1">
 				<option>Attendance</option>
 				<option>Birthday</option>
 				<option>Courses to complete</option>
 			</select>		
-			
+		</div>
+		<div class="col-md-4">	
 			<input type="text" class="form-control input-lg" placeholder="Participant 2" id="reportParticipant2">
 			<select multiple class="form-control" id="reportSelect1">
 				<option>Attendance</option>
 				<option>Birthday</option>
 				<option>Courses to complete</option>
 			</select>		
-			
+		</div>	
+		<div class="col-md-4">	
 			<input type="text" class="form-control input-lg" placeholder="Participant 3" id="reportParticipant3">
 			<select multiple class="form-control" id="reportSelect1">
 				<option>Attendance</option>
@@ -72,7 +76,7 @@
 				<option>Courses to complete</option>
 			</select>		
 		
-	
+		</div>
 	
 	
 	
