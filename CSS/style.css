@@ -124,7 +124,7 @@
 }
 
 #checkbox1 {
-		margin-right: 5px;
+		margin-right: 4px;
 	}
 
 #checkbox2 {
@@ -263,6 +263,11 @@
 
 .participant-result-names button{
 	border-color: #3c948b; 
+}
+
+/* For Attendance */
+#attendanceRow {
+	padding-bottom: 50px;
 }
 
 
