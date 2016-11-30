@@ -23,3 +23,5 @@ participant-search-results:
 report-card:
 	-Is this the same as attendance submition?
 	-Add a text box for participant name, and select for group
+
+General javascript things, such as programatically generating HTML when we get php results back on pages
