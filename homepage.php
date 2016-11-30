@@ -37,7 +37,7 @@
   
   <!-- Top left Logo -->
 	<div class="page-header">
-  <h1><a class="home-button" href="homepage.html">CPCA</a></h1>
+  <h1><a class="home-button" href="homepage.php">CPCA</a></h1>
 	</div>
 	
 	
@@ -58,10 +58,10 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
      
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="admin-tools-course.html">Courses</a></li>
-        <li><a href="attendance-reports.html">Reports</a></li>
-	<li><a href="participant-search.html">Search</a></li>
-	<li><a href="index.html">Log out</a></li>      
+        <li><a href="admin-tools.php">Admin Tools</a></li>
+					<li><a href="attendance-reports.php">Reports</a></li>
+					<li><a href="participant-search.php">Search</a></li>
+					<li><a href="index.php">Log out</a></li>   
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -88,22 +88,26 @@
 					<a href="participant-search.php"><button class="btn btn-default launcher-links" type="submit"> Participant Search</button></a>
 				</div>
 				<div class = "col-md-4">
-					<a href="attendance.html"><button class="btn btn-default launcher-links" type="submit">Attendance Records</button></a>
+					<a href="attendance.php"><button class="btn btn-default launcher-links" type="submit">Attendance Records</button></a>
 				</div>
+				
 				<div class = "col-md-4">
-					<a href="student-report.html"><button class="btn btn-default launcher-links" type="submit">Monthly Reports</button></a>
+					<a href="report-card-search.php"><button class="btn btn-default launcher-links" type="submit">Report Cards</button></a>
 				</div>
+				
 			</div>
 			
 			<div class = "row homepage-links">
+			
 				<div class = "col-md-4">
-					<a href="report-card-search.html"><button class="btn btn-default launcher-links" type="submit">Report Cards</button></a>
+					<a href="ReferralApp.php"><button class="btn btn-default launcher-links" type="submit">Referral Form</button></a>
 				</div>
+				
 				<div class = "col-md-4">
 					<a href="Intake/IntakeApp.php"><button class="btn btn-default launcher-links" type="submit">Intake Packet</button></a>
 				</div>
 				<div class = "col-md-4">
-					<a href="admin-tools.html"><button class="btn btn-default launcher-links" type="submit">Admin Tools</button></a>
+					<a href="admin-tools.php"><button class="btn btn-default launcher-links" type="submit">Admin Tools</button></a>
 				</div>	
 			</div>
 			
