@@ -1,0 +1,25 @@
+admin-tools-course:
+	-Line up courses
+	-Add functionality to add a course
+
+admin-tools-course-selected:
+	-Add submit all changes button
+
+attendance:
+	-Line up check boxes with text area
+
+homepage: 
+	-Remove php text at top of screen
+
+individual-attendance:
+	-Line up individual attendance bar with search bar
+
+individual-attendance-more:
+	-??? What is this page for
+
+participant-search-results:
+	-We're going to need to display a ton more information on this page
+
+report-card:
+	-Is this the same as attendance submition?
+	-Add a text box for participant name, and select for group
