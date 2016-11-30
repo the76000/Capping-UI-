@@ -43,7 +43,7 @@
   
   <!-- Top left Logo -->
 	<div class="page-header">
-  <h1><a class="home-button" href="homepage.html">CPCA</a></h1>
+  <h1><a class="home-button" href="homepage.php">CPCA</a></h1>
 	</div>
 	
 	<nav class="navbar navbar-default CPCA_navbar">
@@ -63,10 +63,10 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
      
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Courses</a></li>
-        <li><a href="attendance-reports.html">Reports</a></li>
-	<li><a href="participant-search.html">Search</a></li>
-	<li><a href="index.html">Log out</a></li>
+        <li><a href="admin-tools.php">Admin Tools</a></li>
+					<li><a href="attendance-reports.php">Reports</a></li>
+					<li><a href="participant-search.php">Search</a></li>
+					<li><a href="index.php">Log out</a></li>   
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -99,7 +99,7 @@
 		<div class ="participant-result-names col-md-8">
 		
 				<div class = "col-md-2">
-				<button class="btn btn-lg" type="submit"><a href="participant-search-results.html" <!-- this is for demo purposes -->Filler Name</a></button>
+				<button class="btn btn-lg" type="submit"><a href="participant-search-results.php" <!-- this is for demo purposes -->Filler Name</a></button>
 														<!-- needs to be generated from the database -->
 				</div>
 		

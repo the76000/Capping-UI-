@@ -12,7 +12,7 @@
 	<link rel='stylesheet' media='screen and (min-width: 701px) and (max-width: 900px)' href='css/mobile.css' />
 	<link rel="stylesheet" href="CSS/style.css">
 
-	<title> CPCA Admin Tools </title>
+	<title> CPCA attendance </title>
 </head>
 
 
@@ -20,7 +20,7 @@
 
 	<!-- Top left Logo -->
 	<div class="page-header">
-		<h1><a class="home-button" href="homepage.html">CPCA</a></h1>
+		<h1><a class="home-button" href="homepage.php">CPCA</a></h1>
 	</div>
 	
 	<nav class="navbar navbar-default CPCA_navbar">
@@ -33,66 +33,34 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Admin Tools</a>
+				<a class="navbar-brand" href="#">Attendance</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="admin-tools-course.html">Courses</a></li>
-					<li><a href="attendance-reports.html">Reports</a></li>
-					<li><a href="participant-search.html">Search</a></li>
-					<li><a href="index.html">Log out</a></li>
+					<li><a href="admin-tools.php">Admin Tools</a></li>
+					<li><a href="attendance-reports.php">Reports</a></li>
+					<li><a href="participant-search.php">Search</a></li>
+					<li><a href="index.php">Log out</a></li>
 				</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav> <!-- end of navbar-->
-	
-	<div class = "row">
-		
-		
-		
-		<div class = "container">
 
-			<div class = "row">
-
-				<button class="btn btn-default course-launcher-links" type="submit"><a href="admin-tools-course.html">Change a Curriculum/Schedule</a></button>
-
-				<button class="btn btn-default course-launcher-links" type="submit"><a href="#">Change Particpant Info</a></button>
-
-				<button class="btn btn-default course-launcher-links" type="submit"><a href="#">Change Attendance Record</a></button>
-
-			</div>
-			
-		
-		
-		
-		</div>
-	
-	
-	
-	
+	<div  class="text-center">
+		<a href="individual-attendance.php" type="button" class="btn btn-default btn-lg">Individual Attendance</a>
+		<a href="class-attendance.php" type="button" class="btn btn-default btn-lg">Class Attendance</a>
+		<a href="#" type="button" class="btn btn-default btn-lg">Location Attendance</a>
 	</div>
 	
-	
-	
-	
-	
 
 	
+
+
+
+
+
 </body>
-
-
 </html>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	

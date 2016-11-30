@@ -20,7 +20,7 @@
 
 	<!-- Top left Logo -->
 	<div class="page-header">
-		<h1><a class="home-button" href="homepage.html">CPCA</a></h1>
+		<h1><a class="home-button" href="homepage.php">CPCA</a></h1>
 	</div>
 	
 	<nav class="navbar navbar-default CPCA_navbar">
@@ -33,34 +33,106 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Attendance</a>
+				<a class="navbar-brand" href="#">Attendance Reports</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="admin-tools-course.html">Courses</a></li>
-					<li><a href="attendance-reports.html">Reports</a></li>
-					<li><a href="participant-search.html">Search</a></li>
-					<li><a href="index.html">Log out</a></li>
+					<li><a href="admin-tools.php">Admin Tools</a></li>
+					<li><a href="attendance-reports.php">Reports</a></li>
+					<li><a href="participant-search.php">Search</a></li>
+					<li><a href="index.php">Log out</a></li>   
 				</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav> <!-- end of navbar-->
+	
+	
+	
+	
+	<div class = "container">	
+		<div class = "row">
+		
+		
+		
+		<div class = "jumbotron">
+		<div class = "col-md-4"> 
+			<p class="label label-info"> Individual Attendance  </p>
+			
+		</div>
+		
+		<div class = "col-md-4"> 
+			<p> Name: _______ </p>
+		</div>
+		
+		<div class = "col-md-4"> 
+			<p> Curriculum: _______ </p>
+		</div>
+		
+			<table class="table">
+    <thead>
+      <tr>
+        
+       
+        <th>Class</th>
+		<th>Attended?</th>
+		<th>Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Class #1</td>
+        <td>Yes</td>
+        <td>None</td>
+       
+      </tr>
+      <tr>
+        <td>Class #2</td>
+        <td>No</td>
+        <td>Participant gave no excuse, did not show</td>
+    
+      </tr>
+      <tr>
+        <td>CLass #3</td>
+        <td>Yes</td>
+        <td>None</td>
+   
+      </tr>
+    </tbody>
+  </table>
+		
+		
+		
+			</div>
+		
 
-	<div  class="text-center">
-		<a href="individual-attendance.html" type="button" class="btn btn-default btn-lg">Individual Attendance</a>
-		<a href="class-attendance.html" type="button" class="btn btn-default btn-lg">Class Attendance</a>
-		<a href="#" type="button" class="btn btn-default btn-lg">Location Attendance</a>
+		
+		
+			
+		<div class = "col-md-6"> 
+		
+		
+		
+		</div>
+	
+	
 	</div>
+		
 	
+	
+</div>		
 
 	
-
-
-
-
-
+	
+	
+	
+	
+	
+	
+	
 </body>
+
+
 </html>

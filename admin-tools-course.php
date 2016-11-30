@@ -20,7 +20,7 @@
 
 	<!-- Top left Logo -->
 	<div class="page-header">
-		<h1><a class="home-button" href="homepage.html">CPCA</a></h1>
+		<h1><a class="home-button" href="homepage.php">CPCA</a></h1>
 	</div>
 	
 	<nav class="navbar navbar-default CPCA_navbar">
@@ -40,10 +40,10 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="admin-tools-course.html">Courses</a></li>
-					<li><a href="attendance-reports.html">Reports</a></li>
-					<li><a href="participant-search.html">Search</a></li>
-					<li><a href="index.html">Log out</a></li>
+					<li><a href="admin-tools.php">Admin Tools</a></li>
+					<li><a href="attendance-reports.php">Reports</a></li>
+					<li><a href="participant-search.php">Search</a></li>
+					<li><a href="index.php">Log out</a></li>
 				</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
@@ -62,13 +62,13 @@
 				<div class = "col-md-6">
 			
 					<p class="label label-info">Women's in-house</p> 
-					<a href="admin-tools-course-selected.html"> Edit </a>
+					<a href="admin-tools-course-selected.php"> Edit </a>
 				</div>
 				
 				<div class = "col-md-6">
 			
 					<p class="label label-info">Spanish Speaking Women In- House</p> 
-					<a href="admin-tools-course-selected.html"> Edit </a>
+					<a href="admin-tools-course-selected.php"> Edit </a>
 				</div>
 			
 			</div>
@@ -79,14 +79,14 @@
 				<div class = "col-md-6">
 			
 					<p class="label label-info">Men's DC Jail</p> 
-					<a href="admin-tools-course-selected.html"> Edit </a>
+					<a href="admin-tools-course-selected.php"> Edit </a>
 				
 				</div>
 				
 				<div class = "col-md-6">
 			
 					<p class="label label-info">Cornerstone</p> 
-					<a href="admin-tools-course-selected.html"> Edit </a>
+					<a href="admin-tools-course-selected.php"> Edit </a>
 				
 				</div>
 			
@@ -98,7 +98,7 @@
 				<div class = "col-md-6">
 			
 					<p class="label label-info">Men's in-house</p> 
-					<a href="admin-tools-course-selected.html"> Edit </a>
+					<a href="admin-tools-course-selected.php"> Edit </a>
 					
 				</div>
 				
@@ -106,7 +106,7 @@
 				<div class = "col-md-6">
 			
 					<p class="label label-info">Meadow Run</p> 
-					<a href="admin-tools-course-selected.html"> Edit </a>
+					<a href="admin-tools-course-selected.php"> Edit </a>
 				
 				</div>
 				

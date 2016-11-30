@@ -12,27 +12,15 @@
 		<link rel='stylesheet' media='screen and (min-width: 701px) and (max-width: 900px)' href='css/mobile.css' />
 		<link rel="stylesheet" href="CSS/style.css">
 		
-		<title> CPCA search </title>
+		<title> CPCA Report Card </title>
   </head>
   
   
   <body>
   
-  <?php
-  session_start();
-	
-	if (!isset($_SESSION["username"]) ){
-		header('Location: index.php');
-		echo "hello";
-	}
-	
-	echo "Username = " . $_SESSION["username"]; 
-	//for testing
-  ?>
-  
   <!-- Top left Logo -->
 	<div class="page-header">
-  <h1><a class="home-button" href="homepage.html">CPCA</a></h1>
+  <h1><a class="home-button" href="homepage.php">CPCA</a></h1>
 	</div>
 	
 	<nav class="navbar navbar-default CPCA_navbar">
@@ -52,10 +40,10 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
      
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Courses</a></li>
-        <li><a href="attendance-reports.html">Reports</a></li>
-	<li><a href="participant-search.html">Search</a></li>
-	<li><a href="index.html">Log out</a></li>
+       <li><a href="admin-tools.php">Admin Tools</a></li>
+					<li><a href="attendance-reports.php">Reports</a></li>
+					<li><a href="participant-search.php">Search</a></li>
+					<li><a href="index.php">Log out</a></li>   
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -76,34 +64,72 @@
 			
 </div>	<!-- end of row search -->		
 
+<hr> </hr>
 
+<div class = "container">
 
-
-
-<div class = "row search-links">
-<div class="page-header">
-  <h2>Recently Viewed</h2>
-	</div>
-
-		<div class ="participant-result-names col-md-8">
-		
-				<div class = "col-md-2">
-				<button class="btn btn-lg" type="submit"><a href="participant-search-results.html" <!-- this is for demo purposes -->Filler Name</a></button>
-														<!-- needs to be generated from the database -->
+	<div class="form-group ">
+				  <label for="sel1">Select A Curriculum:</label> <!-- this is for the 28 indivual classes, not for the course/groups. data mismatch -->
+				  <select class="form-control" id="sel1">
+					<option>1.   Women's in-house</option>
+					<option>2.   Spanish speaking women in-house</option>
+					<option>3.   Florence Manor</option>
+					<option>4.   Women's DC Jail</option>
+					<option>5.   Women's New Vision Church</option>
+					<option>6.   ITAP</option>
+					<option>7.   Men's DC jail</option>
+					<option>8.   Cornerstone</option>
+					<option>9.   Meadow Run</option>
+					<option>10.   Men's in-house</option>
+					<option>11.    Spanish Speaking Men's in-house</option>
+					<option>12.    Fox Run</option>
+					<option>12.    Men's New Vision Church</option>
+				
+				  </select>
 				</div>
-		
-				<div class = "col-md-2">
-				<button class="btn btn-lg" type="submit"><a href="#">Filler Name</a></button>
-				</div>
-		
-				<div class = "col-md-2">
-				<button class="btn btn-lg" type="submit"><a href="#">Filler Name</a></button>
-				</div>
-		</div>	
 
 
 
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+        <th>Curriculum</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Filler</td>
+        <td>Name</td>
+        <td>fillerName@example.com</td>
+        <td>Women's in-house </td>
+        <th> <a href="report-card.php">Go to report card</a></th>
+      </tr>
+      <tr>
+        <td>Filler</td>
+        <td>Name</td>
+        <td>fillerName@example.com</td>
+        <td> Women's in-house</td>
+        <th> <a href="report-card.php">Go to report card</a></th>
+      </tr>
+      <tr>
+        <td>Filler</td>
+        <td>Name</td>
+        <td>fillerName@example.com</td>
+        <td> Women's in-house</td>
+        <th> <a href="report-card.php">Go to report card</a></th>
+      </tr>
+    </tbody>
+  </table>
 </div>
+
+
+
+
 
 
 
