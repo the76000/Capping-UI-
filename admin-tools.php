@@ -59,7 +59,7 @@
 
 				<button class="btn btn-default course-launcher-links" type="submit"><a href="admin-tools-course.php">Change a Curriculum/Schedule</a></button>
 
-				<button class="btn btn-default course-launcher-links" type="submit"><a href="#">Change Particpant Info</a></button>
+				<button class="btn btn-default course-launcher-links" type="submit"><a href="Intake/IntakeApp.php">Change Particpant Info</a></button>
 
 				<button class="btn btn-default course-launcher-links" type="submit"><a href="#">Change Attendance Record</a></button>
 

@@ -83,7 +83,7 @@
 	
 	
 	</div>
-	
+	
 	
 	<div class = "container">
 	
@@ -94,39 +94,17 @@
 			
 			
 				<div class = "col-md-4"> 
-					<button class="btn btn-lg" type="submit"><a href="#">Filler Name</a></button>
+					<button class="btn btn-lg" type="submit"><a href="individual-attendance-more.php">Filler Name</a></button>
 				</div>
 				
 				
 				<div class = "col-md-4"> 
-					<button class="btn btn-lg" type="submit"><a href="#">Filler Name</a></button>
+					<button class="btn btn-lg" type="submit"><a href="individual-attendance-more.php">Filler Name</a></button>
 				</div>
 				
 				
 				<div class = "col-md-4"> 
-					<button class="btn btn-lg" type="submit"><a href="#">Filler Name</a></button>
-				</div>
-			
-			
-			
-			
-			</div>
-			
-			<div class = "row attendance-reports">
-			
-			
-				<div class = "col-md-4"> 
-					<button class="btn btn-lg" type="submit"><a href="#">Filler Name</a></button>
-				</div>
-				
-				
-				<div class = "col-md-4"> 
-					<button class="btn btn-lg" type="submit"><a href="#">Filler Name</a></button>
-				</div>
-				
-				
-				<div class = "col-md-4"> 
-					<button class="btn btn-lg" type="submit"><a href="#">Filler Name</a></button>
+					<button class="btn btn-lg" type="submit"><a href="individual-attendance-more.php">Filler Name</a></button>
 				</div>
 			
 			
@@ -138,17 +116,39 @@
 			
 			
 				<div class = "col-md-4"> 
-					<button class="btn btn-lg" type="submit"><a href="#">Filler Name</a></button>
+					<button class="btn btn-lg" type="submit"><a href="individual-attendance-more.php">Filler Name</a></button>
 				</div>
 				
 				
 				<div class = "col-md-4"> 
-					<button class="btn btn-lg" type="submit"><a href="#">Filler Name</a></button>
+					<button class="btn btn-lg" type="submit"><a href="individual-attendance-more.php">Filler Name</a></button>
 				</div>
 				
 				
 				<div class = "col-md-4"> 
-					<button class="btn btn-lg" type="submit"><a href="#">Filler Name</a></button>
+					<button class="btn btn-lg" type="submit"><a href="individual-attendance-more.php">Filler Name</a></button>
+				</div>
+			
+			
+			
+			
+			</div>
+			
+			<div class = "row attendance-reports">
+			
+			
+				<div class = "col-md-4"> 
+					<button class="btn btn-lg" type="submit"><a href="individual-attendance-more.php">Filler Name</a></button>
+				</div>
+				
+				
+				<div class = "col-md-4"> 
+					<button class="btn btn-lg" type="submit"><a href="individual-attendance-more.php">Filler Name</a></button>
+				</div>
+				
+				
+				<div class = "col-md-4"> 
+					<button class="btn btn-lg" type="submit"><a href="individual-attendance-more.php">Filler Name</a></button>
 				</div>
 			
 			
@@ -161,17 +161,17 @@
 			
 			
 				<div class = "col-md-4"> 
-					<button class="btn btn-lg" type="submit"><a href="#">Filler Name</a></button>
+					<button class="btn btn-lg" type="submit"><a href="individual-attendance-more.php">Filler Name</a></button>
 				</div>
 				
 				
 				<div class = "col-md-4"> 
-					<button class="btn btn-lg" type="submit"><a href="#">Filler Name</a></button>
+					<button class="btn btn-lg" type="submit"><a href="individual-attendance-more.php">Filler Name</a></button>
 				</div>
 				
 				
 				<div class = "col-md-4"> 
-					<button class="btn btn-lg" type="submit"><a href="#">Filler Name</a></button>
+					<button class="btn btn-lg" type="submit"><a href="individual-attendance-more.php">Filler Name</a></button>
 				</div>
 			
 			

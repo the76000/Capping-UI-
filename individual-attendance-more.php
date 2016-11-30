@@ -56,143 +56,63 @@
 		<div class = "row">
 		
 		
-		<div class = "col-md-6"> 
+		
 		<div class = "jumbotron">
+		<div class = "col-md-4"> 
+			<p class="label label-info"> Individual Attendance  </p>
+			
+		</div>
 		
-			<div class = "row">
-	
-			<div class = "col-md-4"> 
-				<p> Class 1 </p>
-			</div>
-			
-			
-			<div class = "col-md-4"> 
-				<div class="radio">
-					<label><input type="radio" name="optradio">Attended</label>
-				</div>
-			<div class="radio">
-					<label><input type="radio" name="optradio">Missed</label>
-				</div>
-				
-			</div>
-			
-			
-			
+		<div class = "col-md-4"> 
+			<p> Name: _______ </p>
+		</div>
 		
-			</div>
-			
-			<div class = "row">
-	
-			<div class = "col-md-4"> 
-				<p> Class 1 </p>
-			</div>
-			
-			
-			<div class = "col-md-4"> 
-				<div class="radio">
-					<label><input type="radio" name="optradio">Attended</label>
-				</div>
-			<div class="radio">
-					<label><input type="radio" name="optradio">Missed</label>
-				</div>
-			</div>
-			
+		<div class = "col-md-4"> 
+			<p> Curriculum: _______ </p>
+		</div>
 		
-			</div>
-			
-			<div class = "row">
-	
-			<div class = "col-md-4"> 
-				<p> Class 1 </p>
-			</div>
-			
-			
-			<div class = "col-md-4"> 
-				<div class="radio">
-					<label><input type="radio" name="optradio">Attended</label>
-				</div>
-			<div class="radio">
-					<label><input type="radio" name="optradio">Missed</label>
-				</div>
-			</div>
-		
-			</div>
+			<table class="table">
+    <thead>
+      <tr>
+        
+       
+        <th>Class</th>
+		<th>Attended?</th>
+		<th>Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Class #1</td>
+        <td>Yes</td>
+        <td>None</td>
+       
+      </tr>
+      <tr>
+        <td>Class #2</td>
+        <td>No</td>
+        <td>Participant gave no excuse, did not show</td>
+    
+      </tr>
+      <tr>
+        <td>CLass #3</td>
+        <td>Yes</td>
+        <td>None</td>
+   
+      </tr>
+    </tbody>
+  </table>
 		
 		
 		
 			</div>
 		
 
-		</div>
+		
 		
 			
 		<div class = "col-md-6"> 
-		<div class = "jumbotron">	
-			
-			<div class = "row">
-			
-			
-			<div class = "col-md-2"> 
-				<p> Name: </p>
-				
-			</div>
-			
-			<div class = "col-md-2"> 
-				<p class="label label-info"> Filler Name  </p>
-			</div>
 		
-			</div>
-			
-			
-			
-			<div class = "row">
-			
-			
-			<div class = "col-md-2"> 
-				<p> Age: </p>
-				
-			</div>
-			
-			<div class = "col-md-2"> 
-				<p class="label label-info"> 101 </p>
-			</div>
-		
-			</div>
-			
-			
-			<div class = "row">
-			
-			
-			<div class = "col-md-2"> 
-				<p> Race: </p>
-				
-			</div>
-			
-			<div class = "col-md-2"> 
-				<p class="label label-info"> Purple </p>
-			</div>
-		
-			</div>
-			
-			
-			<div class = "row">
-			
-			
-			<div class = "col-md-2"> 
-				<p> Phone Number: </p>
-				
-			</div>
-			
-			<div class = "col-md-2"> 
-				<p class="label label-info"> 555-555-555 </p>
-			</div>
-		
-			</div>
-			
-			
-			
-			
-			</div>
 		
 		
 		</div>
