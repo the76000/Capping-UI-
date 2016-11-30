@@ -83,6 +83,8 @@
 	
 	$raceDB = $row['race'];
 	
+	$cidDB = $row['cid'];
+	
 	echo " $p_numDB ";
   
   
@@ -114,11 +116,13 @@ echo			'</div>';
 echo			'<div class = "row search-results">';
 			
 echo			'<div class = "col-md-4">';
-echo			'<p> Age </p>';
+echo			'<p> Race </p>';
 echo			'</div>';
 			
 echo			'<div class = "col-md-4">';
-echo			'<p class="label label-info">101</p> ';
+echo			'<p class="label label-info">';
+echo            " $raceDB ";
+echo            '</p> ';
 echo			'</div>';
 echo			'</div>';
 			
@@ -130,7 +134,10 @@ echo			'<p> Group </p>';
 echo			'</div>';
 			
 echo			'<div class = "col-md-4">';
-echo			'<p class="label label-info">Wednesday 4:30</p>'; 
+echo			'<p class="label label-info">';
+echo             "$cidDB ";
+echo            '</p>'; 
+
 echo			'</div>';
 echo			'</div>';
 			
