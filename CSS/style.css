@@ -274,6 +274,34 @@
 	padding-bottom: 50px;
 }
 
+/*For Generated Reports*/
+#reportSelect1{
+	width: 20%;
+	margin-top: 10px;
+}
+
+#reportSelect2{
+	width: 20%;
+	margin-top: 10px;
+}
+
+#reportSelect3{
+	width: 20%;
+	margin-top: 10px;
+}
+
+#reportParticipant1{
+	width: 20%;	
+}
+
+#reportParticipant2{
+	width: 20%;	
+}
+
+#reportParticipant3{
+	width: 20%;	
+}
+
 
 
 

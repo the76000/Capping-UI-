@@ -52,7 +52,10 @@
 	<div class = "container">
 		<div class = "jumbotron">
 
-			<form>
+			<form class="navbar-form">
+				<div class="input-group">
+					<input type="text" class="form-control input-lg" placeholder="Participant Name" name="p_num" id="srch-term">
+				</div>
 				<div class="row" id="attendanceRow">
 
 					<div class="col-md-4 input-lg">

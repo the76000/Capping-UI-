@@ -107,21 +107,21 @@
         <td>Name</td>
         <td>fillerName@example.com</td>
         <td>Women's in-house </td>
-        <th> <a href="report-card.php">Go to report card</a></th>
+        <th> <a href="attendance.php">Go to report card</a></th>
       </tr>
       <tr>
         <td>Filler</td>
         <td>Name</td>
         <td>fillerName@example.com</td>
         <td> Women's in-house</td>
-        <th> <a href="report-card.php">Go to report card</a></th>
+        <th> <a href="attendance.php">Go to report card</a></th>
       </tr>
       <tr>
         <td>Filler</td>
         <td>Name</td>
         <td>fillerName@example.com</td>
         <td> Women's in-house</td>
-        <th> <a href="report-card.php">Go to report card</a></th>
+        <th> <a href="attendance.php">Go to report card</a></th>
       </tr>
     </tbody>
   </table>
