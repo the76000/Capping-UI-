@@ -61,13 +61,13 @@
 			
 				<div class = "col-md-6">
 			
-					<a href="admin-tools-course-selected.php"> Edit </a>
+					<a href="admin-tools-course-selected.php"> [Edit] </a>
 					<p class="label label-info">Women's in-house</p>
 				</div>
 				
 				<div class = "col-md-6">
 			
-					<a href="admin-tools-course-selected.php"> Edit </a>
+					<a href="admin-tools-course-selected.php"> [Edit] </a>
 					<p class="label label-info">Spanish Speaking Women In- House</p>
 				</div>
 			
@@ -78,14 +78,14 @@
 			
 				<div class = "col-md-6">
 			
-					<a href="admin-tools-course-selected.php"> Edit </a>
+					<a href="admin-tools-course-selected.php"> [Edit] </a>
 					<p class="label label-info">Men's DC Jail</p>
 				
 				</div>
 				
 				<div class = "col-md-6">
 			
-					<a href="admin-tools-course-selected.php"> Edit </a>
+					<a href="admin-tools-course-selected.php"> [Edit] </a>
 					<p class="label label-info">Cornerstone</p>
 				
 				</div>
@@ -97,7 +97,7 @@
 			
 				<div class = "col-md-6">
 			
-					<a href="admin-tools-course-selected.php"> Edit </a>
+					<a href="admin-tools-course-selected.php"> [Edit] </a>
 					<p class="label label-info">Men's in-house</p>
 					
 				</div>
@@ -105,7 +105,7 @@
 				
 				<div class = "col-md-6">
 			
-					<a href="admin-tools-course-selected.php"> Edit </a>
+					<a href="admin-tools-course-selected.php"> [Edit] </a>
 					<p class="label label-info">Meadow Run</p>
 				
 				</div>

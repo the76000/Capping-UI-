@@ -1,14 +1,9 @@
 admin-tools-course:
-	-Line up courses
 	-Add functionality to add a course
 	- pre filled packet for change participant info (not our scope possibly?)
 
 admin-tools-course-selected:
-	-Add submit all changes button
 	-Add a class dropdown.
-
-attendance:
-	-Line up check boxes with text area
 
 homepage: 
 	-Remove php text at top of screen

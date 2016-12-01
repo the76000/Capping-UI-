@@ -104,13 +104,6 @@
 				</div>
 				<div class="row">
 					<div class="col-sm-5">
-					<label>
-						Instructor Comments
-						<textarea rows="10" cols="50"></textarea>						
-					</label>
-						<!-- this needs to become an input -->
-					</div>
-					<div class="col-sm-3">
 						<div id="checkbox1">
 							<label>
 								<input type="checkbox" value="">
@@ -129,7 +122,16 @@
 								Left early
 							</label>
 						</div>
+						
+					<!--<div class="col-sm-3">-->
+					<label style="text-align:left">
+						Instructor Comments
+						<textarea rows="10" cols="50"></textarea>						
+					</label>
+						<!-- this needs to become an input -->
 					</div>
+					<!--</div>-->
+					
 				</div>
 				<button type="submit" class="btn btn-default ">Submit</button>    
 			</form>
