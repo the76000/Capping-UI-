@@ -57,56 +57,56 @@
 			<h1> Courses Edit </h1>
 			<div class = "jumbotron">
 			
-			<div class = "row admin-courses">
+			<div class = "row admin-courses" style= "text-align: left;">
 			
 				<div class = "col-md-6">
 			
-					<p class="label label-info">Women's in-house</p> 
 					<a href="admin-tools-course-selected.php"> Edit </a>
+					<p class="label label-info">Women's in-house</p>
 				</div>
 				
 				<div class = "col-md-6">
 			
-					<p class="label label-info">Spanish Speaking Women In- House</p> 
 					<a href="admin-tools-course-selected.php"> Edit </a>
-				</div>
-			
-			</div>
-			
-			
-			<div class = "row admin-courses">
-			
-				<div class = "col-md-6">
-			
-					<p class="label label-info">Men's DC Jail</p> 
-					<a href="admin-tools-course-selected.php"> Edit </a>
-				
-				</div>
-				
-				<div class = "col-md-6">
-			
-					<p class="label label-info">Cornerstone</p> 
-					<a href="admin-tools-course-selected.php"> Edit </a>
-				
+					<p class="label label-info">Spanish Speaking Women In- House</p>
 				</div>
 			
 			</div>
 			
 			
-			<div class = "row admin-courses">
+			<div class = "row admin-courses" style= "text-align: left;">
 			
 				<div class = "col-md-6">
 			
-					<p class="label label-info">Men's in-house</p> 
 					<a href="admin-tools-course-selected.php"> Edit </a>
+					<p class="label label-info">Men's DC Jail</p>
+				
+				</div>
+				
+				<div class = "col-md-6">
+			
+					<a href="admin-tools-course-selected.php"> Edit </a>
+					<p class="label label-info">Cornerstone</p>
+				
+				</div>
+			
+			</div>
+			
+			
+			<div class = "row admin-courses" style= "text-align: left;">
+			
+				<div class = "col-md-6">
+			
+					<a href="admin-tools-course-selected.php"> Edit </a>
+					<p class="label label-info">Men's in-house</p>
 					
 				</div>
 				
 				
 				<div class = "col-md-6">
 			
-					<p class="label label-info">Meadow Run</p> 
 					<a href="admin-tools-course-selected.php"> Edit </a>
+					<p class="label label-info">Meadow Run</p>
 				
 				</div>
 				
