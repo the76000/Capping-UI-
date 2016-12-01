@@ -11,6 +11,10 @@ This Web Application was developed to replace the paper copy of the Intake form 
 
 </head>
 <body>
+<!-- Php Functions -->
+<?php require 'FormAppPHPFunctions.php';?>
+
+
 <header id = "header"> <h1 style="font-weight:bold;"><img id = "titleImage" src="Images\CPCALogo.png"/> Parent Empowerment Referral Form </h1> </header>
 <div class="container-fluid" id= "container">
 
@@ -157,7 +161,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
 
 <label for="refDate"> Date Referred </label>
-<input type="text" name= "refDate" id="refDate" maxlength="8" size="30" id="DOB" class="form-control" oninput="isNumberKey('refDate');">
+<input type="text" name= "refDate" id="refDate" maxlength="10" size="30" id="DOB" class="form-control" onkeypress="isDate('refDate',event);" onblur="isDateOffFocus('refDate');" placeholder="mm/dd/yyyy">
 
 <br>
 <br>
@@ -335,6 +339,9 @@ This Web Application was developed to replace the paper copy of the Intake form 
 
 <hr/>
 <footer id="footer">
+<?php
+databaser();
+?>
 <br>
 <br>
 <p> important info here </p>
@@ -358,6 +365,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 
 <!-- JS Functions  -->
 <script src="FormAppFunctions.js"></script>
+
 
 
 </body>

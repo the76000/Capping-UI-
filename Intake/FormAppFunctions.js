@@ -291,12 +291,29 @@ function isNumber(evt) {
 }
 
  function ifYes(id,id2){
-	if (id.value === "Yes") {
+	if (id.value == "Yes") {
         id2.disabled='';
     } else {
         id2.disabled='true';
     }
  }
+ 
+  function ifNo(id,id2){
+	if (id.value == "No") {
+        id2.disabled='';
+    } else {
+        id2.disabled='true';
+    }
+ }
+ 
+   function ifNone(id,id2){
+	if (id.value > 0) {
+        id2.disabled='';
+    } else {
+        id2.disabled='true';
+    }
+ }
+ 
 
  function intakeTableEvent(){
 	 var table = document.getElementById("intakeTable");

@@ -11,10 +11,14 @@ This Web Application was developed to replace the paper copy of the Intake form 
 
 </head>
 <body>
+
+<?php require 'FormAppPHPFunctions.php';?>
+
+
 <header id = "header"> <h1 style="font-weight:bold;"><img id = "titleImage" src="Images\CPCALogo.png"/> Parent Empowerment Intake Form </h1> </header>
 <div class="container-fluid" id= "container-fluid" style="text-align:left">
 
-<form class="form-inline">
+<form action="intakeInsertRecord.php" method="post" class="form-inline">
   <br>
   <!--Name for now, dont wanna change the intake form just yet. Can easily be altered in the future. -->
   <br>
@@ -41,7 +45,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <label for="street"> Street: </label> 
 <input type="text" name= "street" maxlength="30" size="30"  id="street" class="form-control">
 <label for="city"> City: </label> 
-<input type="text" name= "city" maxlength="30" size="30" id="city" class="form-control">
+<input type="text" name= "city" maxlength="30" size="30" id="city" oninput="validateAlpha('city')" class="form-control">
 
 <br>
 <br>
@@ -110,22 +114,22 @@ This Web Application was developed to replace the paper copy of the Intake form 
 
 
 <label for="numPeople" style="width:24%;"> Number of people living in the household with you or at home: </label> 
-<input type="number" name= "numPeople" min="0" max="99" id="numPeople" class="form-control">
+<input type="number" name= "numPeople" id = "numPeople" min="0" max="99" id="numPeople" class="form-control" onkeypress="ifNone(numPeople, peopleRelationship); isNumberKey('numPeople')" onclick="ifNone(numPeople, peopleRelationship);" onblur="ifNone(numPeople, peopleRelationship);" > 
 
 <label for="peopleRelationship" style="width:13%;">  What is their relationship to you?: </label> 
-<input type="text" name= "peopleRelationship" maxlength="30" size="30"  id="peopleRelationship" class="form-control">
+<input type="text" name= "peopleRelationship" id = "peopleRelationship" maxlength="30" size="30"  id="peopleRelationship" class="form-control" disabled>
 
 <br>
 <br>
 
 <label for="dayPhone"> Daytime Phone: </label> 
-<input type="text" name= "dayphone" id="dayPhone" maxlength="12" size="30" onkeypress="isPhoneNumber('dayPhone',event);" onblur="isPhoneOffFocus('dayPhone');" placeholder="999-999-9999" class="form-control">
+<input type="text" name= "dayPhone" id="dayPhone" maxlength="12" size="30" onkeypress="isPhoneNumber('dayPhone',event);" onblur="isPhoneOffFocus('dayPhone');" placeholder="999-999-9999" class="form-control">
 
-<label for="dayPhone" style="width:9%;"> May message be left?: </label> 
+<label for="dayMessage" style="width:9%;"> May message be left?: </label> 
 <select name="dayMessage" class="form-control">
 <option value="">-- select one --</option>
-<option value="dayYes">Yes</option>
-<option value="dayNo">No</option>
+<option value="Yes">Yes</option>
+<option value="false">No</option>
 </select>
 
 <br>
@@ -184,18 +188,21 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
 
 <label for="ethnicity">Ethnicity:</label> 
-<select for="ethnicity" class="form-control">
+<select name="ethnicity" id="ethnicity" class="form-control" onChange="ifYes(ethnicity, ethOther);" style="margin-right:9%;">
 	<option>-- select one --</option>
-	<option>Asian</option>
-	<option>Caucasian</option>
-	<option>Hispanaic</option>
-	<option>Indian</option>
-	<option>Middle Eastern</option>
-	<option>African American</option>
-	<option>Native American</option>
-	<option>Alaskan Native</option>
-	<option>Other Race</option>
+	<option value="Asian">Asian</option>
+	<option value="Caucasian">Caucasian</option>
+	<option value="Hispanaic">Hispanaic</option>
+	<option value="Indian">Indian</option>
+	<option value="Middle Eastern">Middle Eastern</option>
+	<option value="African American">African American</option>
+	<option value="Native American">Native American</option>
+	<option value="Alaskan Native">Alaskan Native</option>
+	<option value="Yes">Other</option>
 </select>
+
+<label for="ethOther">If Other:</label> 
+<input type="text" name="ethOther" id="ethOther" maxlength="35" class="form-control" disabled >
 
 <br>
 <br>
@@ -373,7 +380,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <select name="drugs" id="drugs" class="form-control" onChange="ifYes(drugs, drugsExplan);">
 <option value="">-- select one --</option>
 <option value="Yes">Yes</option>
-<option value="No">No</option>
+<option value="false">No</option>
 </select>
 
 <br>
@@ -415,21 +422,21 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <select name="cps" id="cps" class="form-control" onChange="ifYes(cps, pastCPS);">
 <option value="">-- select one --</option>
 <option value="Yes">Yes</option>
-<option value="No">No</option>
+<option value="false">No</option>
 </select>
 
 <label for="pastCPS" style="width:26%;">If yes, were you previously involved with Child Protective Services?:</label>
 <select name="pastCPS" id="pastCPS" class="form-control" disabled>
 <option value="">-- select one --</option>
-<option value="pastCpsYes">Yes</option>
-<option value="pastCpsNo">No</option>
+<option value="Yes">Yes</option>
+<option value="false">No</option>
 </select>
 
 <br>
 <br>
 
 <label for="mandated"  style="width:18%;">Have you been mandated to take this class?:</label>
-<select name="mandated" id="mandated" class="form-control" onChange="ifYes(mandated, whoMandated); ifYes(mandated, whyMandated);">
+<select name="mandated" id="mandated" class="form-control" onChange="ifYes(mandated, whoMandated); ifYes(mandated, whyMandated); ifNo(mandated, whyTake);">
 <option value="">-- select one --</option>
 <option value="Yes">Yes</option>
 <option value="No">No</option>
@@ -449,7 +456,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
 
 <label for="whyTake" style="width:40%;">If you were not mandated please explain why in detail why you would like to attend parent classes:</label>
-<textarea style="width:100%;height:100px;" name="whyTake" class="form-control" maxlength="300">
+<textarea style="width:100%;height:100px;" name="whyTake" id="whyTake" class="form-control" maxlength="300" disabled>
 </textarea>
 
 <br>
@@ -473,7 +480,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <select name="otherClasses" id="otherClasses" onChange="ifYes(otherClasses, classDuration)" class="form-control">
 <option value="">-- select one --</option>
 <option value="Yes">Yes</option>
-<option value="No">No</option>
+<option value="false">No</option>
 </select>
 
 <label for="classDuration" style="width:13%;">If yes, where and how long ago?:</label>
@@ -486,7 +493,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <select name="abuse" id="abuse" class="form-control" onChange="ifYes(abuse, abuseForm); ifYes(abuse, abuseTherapy)">
 <option value="">-- select one --</option>
 <option value="Yes">Yes</option>
-<option value="No">No</option>
+<option value="false">No</option>
 </select>
 
 <br>
@@ -503,7 +510,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <select name="abuseTherapy" id="abuseTherapy" class="form-control" disabled>
 <option value="">-- select one --</option>
 <option value="Yes">Yes</option>
-<option value="No">No</option>
+<option value="false">No</option>
 </select>
 
 <br>
@@ -546,14 +553,14 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <select name="domesticViolence" id="domesticViolence" class="form-control" onChange="ifYes(domesticViolence, domesticViolenceTalk)">
 <option value="">-- select one --</option>
 <option value="Yes">Yes</option>
-<option value="No">No</option>
+<option value="false">No</option>
 </select>
 
 <label for="domesticViolenceTalk" style="width:20%;">If yes, have you discussed it with someone?:</label>
 <select name="domesticViolenceTalk" id="domesticViolenceTalk" class="form-control" disabled>
 <option value="">-- select one --</option>
 <option value="Yes">Yes</option>
-<option value="No">No</option>
+<option value="false">No</option>
 </select>
 
 <br>
@@ -562,8 +569,8 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <label for="domesticViolenceOriginFamily" style="width:24%;">Is there any history of violence in your family of origin?:</label>
 <select name="domesticViolenceOriginFamily" class="form-control">
 <option value="">-- select one --</option>
-<option value="domesticViolenceOriginFamilyYes">Yes</option>
-<option value="domesticViolenceOriginFamilyNo">No</option>
+<option value="Yes">Yes</option>
+<option value="false">No</option>
 </select>
 
 <br>
@@ -572,8 +579,8 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <label for="domesticViolenceNuclearFamily" style="width:24%;">Is there any history of violence in your nuclear family?:</label> 
 <select name="domesticViolenceNuclearFamily" class="form-control">
 <option value="">-- select one --</option>
-<option value="domesticViolenceNuclearFamilyYes">Yes</option>
-<option value="domesticViolenceNuclearFamilyNo">No</option>
+<option value="Yes">Yes</option>
+<option value="false">No</option>
 </select>
 
 <br>
@@ -583,7 +590,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <select name="ordersOfProtection" id="ordersOfProtection" class="form-control" onChange="ifYes(ordersOfProtection, ordersOfProtectionWhyWho)">
 <option value="">-- select one --</option>
 <option value="Yes">Yes</option>
-<option value="No">No</option>
+<option value="false">No</option>
 </select>
 
 <br>
@@ -599,8 +606,8 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <label for="arrested" style="width:18%;">Have you ever been arrested for a crime?:</label>
 <select name="arrested" class="form-control">
 <option value="">-- select one --</option>
-<option value="arrestedYes">Yes</option>
-<option value="arrestedNo">No</option>
+<option value="Yes">Yes</option>
+<option value="false">No</option>
 </select>
 
 <br>
@@ -610,7 +617,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <select name="convicted" id="convicted" class="form-control" onChange="ifYes(convicted, convictedExplan)">
 <option value="">-- select one --</option>
 <option value="Yes">Yes</option>
-<option value="No">No</option>
+<option value="false">No</option>
 </select>
 
 <br>
@@ -627,7 +634,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <select name="record" id="record" class="form-control" onChange="ifYes(record, recordExplan)">
 <option value="">-- select one --</option>
 <option value="Yes">Yes</option>
-<option value="No">No</option>
+<option value="false">No</option>
 </select>
 
 <br>
@@ -644,7 +651,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <select name="probation" id="probation" class="form-control" onChange="ifYes(probation, probationExplan)">
 <option value="">-- select one --</option>
 <option value="Yes">Yes</option>
-<option value="No">No</option>
+<option value="false">No</option>
 </select>
 
 <br>
@@ -661,7 +668,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <select name="familyClasses" id="familyClasses" class="form-control" onChange="ifYes(familyClasses, familyClassesName)">
 <option value="">-- select one --</option>
 <option value="Yes">Yes</option>
-<option value="No">No</option>
+<option value="false">No</option>
 </select>
 
 <br>
@@ -686,7 +693,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
 <br>
 
-<button class="btn btn-success btn-lg" style="text-align:center;"> Submit </button>
+<input class="btn btn-success btn-lg" style="text-align:center;" type="submit">
   
 </form>
 
@@ -694,6 +701,11 @@ This Web Application was developed to replace the paper copy of the Intake form 
 
 <hr/>
 <footer id="footer">
+<?php
+databaser();
+?>
+<br>
+<br>
 
 Important discosure information will go here
 
