@@ -57,11 +57,14 @@
 	
 	<div class = "jumbotron">
 	<div class = "row search">
-		<div class = "col-md-4"> 
+		
+		<div class = "col-md-4" style="padding-top: 15px;"> 
 			<p class="label label-info"> Individual Attendance  </p>
 		</div>
 		
-		<!-- i have no idea why this looks wonky, need to come back to thise -->
+		<!-- i have no idea why this looks wonky, need to come back to thise 
+		//Added a 15px padding as a fix.  Looks fine, shouldn't have issues.  If there's any other solution feel free to change it -Kevin
+		-->
 		
 		<div class = "col-md-8">
 		

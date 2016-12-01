@@ -9,7 +9,6 @@ homepage:
 	-Remove php text at top of screen
 
 individual-attendance:
-	-Line up individual attendance bar with search bar
 	-Radio buttons, yes no, late, left early, leave blank if class has not occured, show all classes
 
 individual-attendance-more:
