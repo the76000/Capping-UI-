@@ -1,9 +1,11 @@
 admin-tools-course:
 	-Line up courses
 	-Add functionality to add a course
+	- pre filled packet for change participant info (not our scope possibly?)
 
 admin-tools-course-selected:
 	-Add submit all changes button
+	-Add a class dropdown.
 
 attendance:
 	-Line up check boxes with text area
@@ -13,12 +15,14 @@ homepage:
 
 individual-attendance:
 	-Line up individual attendance bar with search bar
+	-Radio buttons, yes no, late, left early, leave blank if class has not occured, show all classes
 
 individual-attendance-more:
 	-??? What is this page for
 
 participant-search-results:
 	-We're going to need to display a ton more information on this page
+	-Change group to say curriculum, link to packet will be the same page but prefilled
 
 report-card:
 	-Is this the same as attendance submition?
