@@ -42,22 +42,48 @@ session_start();
 	
 	$f_name = pg_escape_string($_POST['f_name']);
 	
-	/*
-	$query = "Select * from participants where p_num = '$p_num'";
+	$p_num = pg_escape_string($_POST['p_num']);
+	
+	
+	
+	if($p_num == null){
+		$p_num = 0; //dummy value
+		echo "im null";
+		
+	} else{
+		echo "im set testing";
+	}
+	
+	
+	$query = "Select * from participants inner join referrals on participants.p_num = referrals.p_num  where participants.p_num = '$p_num'";
 	
 	$results = pg_query($query) or die('Query failed: ' . pg_last_error());
 	
 	$numrows = 'SELECT count(*) AS exact_count FROM employees'; #this will not scale well
 	
 	$row = pg_fetch_array($results, null, PGSQL_ASSOC);
+	
+	
+	
+	
 								
 	$p_numDB = $row['p_num'];
+	
+	
+	$l_nameDB2 = $row['l_name'];
+	
+	$f_nameDB2 = $row['f_name'];
 	
 		// Check to see if the credentials are right
 		if($p_num == $p_numDB){
 			
-			$_SESSION["searchp"] = $p_num;
-			echo "<a href='participant-search-results.php'> $p_num </a>";
+			$_SESSION["searchp"] = $p_numDB;
+			
+			$_SESSION['l_name'] =  $l_nameDB2 ;
+
+			$_SESSION['f_name'] =  $f_nameDB2 ;
+			
+			echo "<a href='participant-search-results.php'> $p_numDB  $f_name   $l_name</a>";
 			//header('Location: http://localhost:8080/participant-search.php');
 			
 			// Crawling in my skin here
@@ -72,7 +98,7 @@ session_start();
 			echo "<h1>Error: User not found.</h1>";
 		}				
 			
-			*/
+	
 			
 	$ref_query = "Select * from referrals where ref_l_name = '$l_name' and ref_f_name = '$f_name'";
 	
@@ -88,25 +114,16 @@ session_start();
 	$p_numDB = $ref_row['p_num'];
 	
 	
-	/* i will get to this  ---COLIN
 	
-	if ($num_rows > 1 ){
-		
-		if($l_name == $l_nameDB){
-			
-			echo  str_repeat("<a href='participant-search-results.php?add=clicked'> $p_numDB $l_name </a>", $num_rows);
-		}
-		
-		
-	}
-	*/
 	
 	
 	$l_nameDB = $ref_row['ref_l_name'];
 	
 	$f_nameDB = $ref_row['ref_f_name'];
 	
-	$dupliate_name = 0;
+	
+	
+	//$dupliate_name = 0;
 	
 		// Check to see if the credentials are right
 		if($l_name == $l_nameDB && $f_name == $f_nameDB){
@@ -115,14 +132,21 @@ session_start();
 			
 			$num_rows = pg_num_rows($ref_results);
 			
-			echo " $num_rows ";
+		
+		
+			
+			
 			
 			$_SESSION['l_name'] =  $l_nameDB ;
 
-	$_SESSION['f_name'] =  $f_nameDB ;
+			$_SESSION['f_name'] =  $f_nameDB ;
+			
+			$_SESSION['searchp'] =  $ref_row['p_num'] ;
+			
+			
 	
 			
-			echo  "<a href='participant-search-results.php?add=clicked'>$f_name $l_name </a>";
+			echo  "<a href='participant-search-results.php?add=clicked'>$f_nameDB $l_nameDB </a>";
 			//header('Location: http://localhost:8080/participant-search.php');
 			
 			// Crawling in my skin here
@@ -135,7 +159,8 @@ session_start();
 			
 		}else{
 			echo "<h1>Error: User not found.</h1>";
-		}		
+		}	
+		
 
 /* i will get to this -- COLIN
 if ($_GET['add'] == 'clicked'){
@@ -188,17 +213,17 @@ if ($_GET['add'] == 'clicked'){
 </nav> <!-- end of navbar-->
 
 <div class = "row search">
-
+<!--
 	<form class="navbar-form" role="search" action="includes/searchp.php" method="post" >
 			<div class="input-group">
 				<input type="text" class="form-control input-lg" placeholder="Search" name="p_num" id="srch-term">
 				<div class="input-group-btn ">
 					<button class="btn btn-lg" type="submit"><i class="glyphicon glyphicon-search"></i></button>
 				</div>
-				<!-- CERTAINLY needs a link to the database for search capabilities -->
+				
 			</div>
 			</form>
-
+-->
 			
 </div>	<!-- end of row search -->		
 

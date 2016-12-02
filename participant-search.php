@@ -111,6 +111,12 @@ echo "</table>\n";
 			<div class="input-group">
 				<input type="text" class="form-control input-lg" placeholder="last name" name="l_name" id="srch-term">
 				<div class="input-group-btn ">
+				
+			<div class="input-group">
+				<input type="text" class="form-control input-lg" placeholder="particpant number" name="p_num" id="srch-term">
+				<div class="input-group-btn ">
+				
+			
 					<button class="btn btn-lg" type="submit"><i class="glyphicon glyphicon-search"></i></button>
 				</div>
 				<!-- CERTAINLY needs a link to the database for search capabilities -->
