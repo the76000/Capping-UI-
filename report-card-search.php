@@ -33,7 +33,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Particpant Search</a>
+      <a class="navbar-brand" href="#">Report Card Search</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -107,21 +107,21 @@
         <td>Name</td>
         <td>fillerName@example.com</td>
         <td>Women's in-house </td>
-        <th> <a href="attendance.php">Go to report card</a></th>
+        <th> <a href="report-card.php">Go to report card</a></th>
       </tr>
       <tr>
         <td>Filler</td>
         <td>Name</td>
         <td>fillerName@example.com</td>
         <td> Women's in-house</td>
-        <th> <a href="attendance.php">Go to report card</a></th>
+        <th> <a href="report-card.php">Go to report card</a></th>
       </tr>
       <tr>
         <td>Filler</td>
         <td>Name</td>
         <td>fillerName@example.com</td>
         <td> Women's in-house</td>
-        <th> <a href="attendance.php">Go to report card</a></th>
+        <th> <a href="report-card.php">Go to report card</a></th>
       </tr>
     </tbody>
   </table>

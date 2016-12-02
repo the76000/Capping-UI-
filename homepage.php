@@ -88,11 +88,11 @@
 					<a href="participant-search.php"><button class="btn btn-default launcher-links" type="submit"> Participant Search</button></a>
 				</div>
 				<div class = "col-md-4">
-					<a href="attendance.php"><button class="btn btn-default launcher-links" type="submit">Attendance Reports</button></a>
+					<a href=" generated-reports.php"><button class="btn btn-default launcher-links" type="submit">Attendance Reports</button></a>
 				</div>
 				
 				<div class = "col-md-4">
-					<a href="generated-reports.php"><button class="btn btn-default launcher-links" type="submit">Report Cards</button></a>
+					<a href=" report-card-search.php "><button class="btn btn-default launcher-links" type="submit">Report Cards</button></a>
 				</div>
 				
 			</div>
