@@ -81,13 +81,37 @@ session_start();
 
 	
 	$ref_row = pg_fetch_array($ref_results, null, PGSQL_ASSOC);
+	// if number of rows is more than one
+	
+	$num_rows = pg_num_rows($ref_results) - 1;
+	
+	$p_numDB = ref_row['p_num'];
+	
+	
+	
+	
+	if ($num_rows > 1 ){
+		
+		if($l_name == $l_nameDB){
+			
+			echo  str_repeat("<a href='participant-search-results.php?add=clicked'> $p_numDB $l_name </a>", $num_rows);
+		}
+		
+		
+	}
+	
+	
 	
 	$l_nameDB = $ref_row['ref_l_name'];
+	$m_nameDB = $ref_row['ref_m_name'];
+	$f_nameDB = $ref_row['ref_f_name'];
+	
+	$dupliate_name = 0;
 	
 		// Check to see if the credentials are right
 		if($l_name == $l_nameDB){
 			
-			$_SESSION["searchp"] = $l_name;
+			
 			
 			$num_rows = pg_num_rows($ref_results);
 			
@@ -95,7 +119,7 @@ session_start();
 			
 			
 			
-			echo  str_repeat("<a href='participant-search-results.php'> $l_name </a>", $num_rows);
+			echo  "<a href='participant-search-results.php?add=clicked'> $l_name </a>";
 			//header('Location: http://localhost:8080/participant-search.php');
 			
 			// Crawling in my skin here
@@ -108,7 +132,17 @@ session_start();
 			
 		}else{
 			echo "<h1>Error: User not found.</h1>";
-		}				
+		}		
+
+
+if ($_GET['add'] == 'clicked'){
+	$_SESSION['l_name'] =  $l_nameDB ;
+	$_SESSION['m_name'] =  $m_nameDB ;
+	$_SESSION['f_name'] =  $f_nameDB ;
+	S_SESSION['p_num'] = 
+
+
+}	
 			
 	
 	

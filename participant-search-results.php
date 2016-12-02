@@ -71,7 +71,7 @@
 	
 	//for testing
 	
-	$l_name = $_SESSION["searchp"];
+	$l_name = $_SESSION["l_name"];
 	
 	$query = "Select * from referrals where ref_l_name = '$l_name'";
 	
