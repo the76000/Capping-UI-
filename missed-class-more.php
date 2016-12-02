@@ -18,6 +18,9 @@
   
   <body>
   
+  
+  
+  
   <!-- Top left Logo -->
 	<div class="page-header">
   <h1><a class="home-button" href="homepage.php">CPCA</a></h1>
@@ -33,7 +36,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Particpant Search</a>
+      <a class="navbar-brand" href="#">Participant Search</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -43,132 +46,221 @@
         <li><a href="admin-tools.php">Admin Tools</a></li>
 					<li><a href="attendance-reports.php">Reports</a></li>
 					<li><a href="participant-search.php">Search</a></li>
-					<li><a href="index.php">Log out</a></li>   
+					<li><a href="index.php">Log out</a></li>      
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav> <!-- end of navbar-->
 
 
-	<!--- main info goes in this div -->
-	<div class="container">
 
-		<div class = "jumbotron">
-		
-			<div class = "row"> <!-- start row one -->
-				<div class = "col-md-4"> 
-					
-					<p> Filler Name </p>
-					
-					
-				
-				</div>
-				
-				<div class = "col-md-4">
-					
-					<p> Missed Classes </p>
-					
-					
-				
-				</div>
-				
-				<div class = "col-md-4">
-					
-					<p> 8</p>
-					
-					
-				
-				</div>
-				
-				
-			</div> <!-- end row one -->
-			
-			
-		<div class = "row"> <!-- start row two -->
-				
-				<div class = "col-md-8"> 
-					<p class="label label-info" style="white-space: pre;">Problem Solving                    01/01/2016       </p> 
-				</div>
-				
-				
-				
-			
-		</div> <!-- end row two -->
-		
-		<div class = "row" > 
-			<div class = "col-md-8"> 
-			<p> This is the reason </p>
-			</div>
-			
-		
-		</div>
-		
-		
-		<div class = "row"> <!-- start row three -->
-				
-				<div class = "col-md-8"> 
-					<p class="label label-info" style="white-space: pre;">Health & Nutrition                  01/01/2016       </p> 
-				</div>
-				
-				
-				
-			
-		</div> <!-- end row three -->
-		
-		<div class = "row" > 
-			<div class = "col-md-8"> 
-			<p> This is the reason </p>
-			</div>
-			
-		
-		</div>
-		
-		
-		<div class = "row">
-		
-			<div class = "col-md-4">
-				
-				<p><button class="btn btn-default " type="submit"><a href="participant-search-results.php"> <!--- for demo purposes only -->Go back to results</a></button></p>
-			</div>
-			<div class = "col-md-4">
-				
-				<!-- filler for whitespace -->
-			</div>
-		
-			<div class = "col-md-4">
-				
-				<button class="btn btn-default " type="submit"><a href="#">Download As Excel Sheet</a></button>
-				
-			</div>
-		
-		</div>
-		
-		
-		</div>
-
-
-
+<?php
+  
+  
+  // Connecting, selecting database
+$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
+    or die('Could not connect: ' . pg_last_error());
+  
+  session_start();
 	
-	</div>
-
-
-	
-	<script>
-	
-	
-	function reasonBox(){
-			
-			var which = document.getElementById("reasonBox");
-
-			if (which.style.visibility == "hidden")
-				which.style.visibility = "visible"
-			else
-			which.style.visibility = "hidden"
-	
+	if (!isset($_SESSION["username"]) ){
+		header('Location: index.php');
+		echo "hello";
 	}
 	
+	echo "Username = " . $_SESSION["username"]; 
+	//for testing
 	
-	</script>
+	// Performing SQL query
+	echo $_SESSION["searchp"];
+$p_num = $_SESSION["searchp"];
+echo $p_num;
+$c_a_query = "Select * from class_attendence where p_num = '$p_num'"; // query for all info related to searched participant
+
+//$c_a_query = "Select * from class_attendence ";
+
+
+
+$c_a_results = pg_query($c_a_query) or die('Query failed: ' . pg_last_error());
+	
+	$c_a_row = pg_fetch_array($c_a_results, null, PGSQL_ASSOC); // create array of result 
+	
+	$p_numDB = $c_a_row['p_num']; // set variable correct row and column of db
+	
+	echo "$p_numDB";
+	
+	$class_idDB = $c_a_row['class_id'];
+	echo "$class_idDB";
+	
+	$participant_commentDB = $c_a_row['participant_comment'];
+	
+	
+	$num_of_classes = pg_num_rows($c_a_results) - 1; //bug? idk
+	
+// Printing results in HTML
+
+// get the class name
+
+$c_s_query = "Select * from classes_scheduled where class_id = '$class_idDB'"; //query classes scheduled table
+
+	$c_s_results = pg_query($c_s_query) or die('Query failed: ' . pg_last_error());
+	
+	$c_s_row = pg_fetch_array($c_s_results, null, PGSQL_ASSOC); // create array of result
+	
+	 $c_s_c_subjectDB = $c_s_row['c_subject']; // get the c_subject
+	 
+	 $classTime = $c_s_row['date_time_schedules'];
+	 
+
+$cur_query = "Select * from curriculum_subjects where c_subject = '$c_s_c_subjectDB'"; //query the curriculum table
+
+	$cur_results = pg_query($cur_query) or die('Query failed: ' . pg_last_error());
+	
+	$cur_row = pg_fetch_array($cur_results, null, PGSQL_ASSOC); // create array of result
+	
+	$cur_c_subjectDB = $cur_row['c_subject'];
+	
+	
+	
+
+$sub_query = "Select * from class_subjects where c_subject = '$cur_c_subjectDB'"; //query the class subjects  table
+
+	$sub_results = pg_query($sub_query) or die('Query failed: ' . pg_last_error());
+	
+	$sub_row = pg_fetch_array($sub_results, null, PGSQL_ASSOC); // create array of result
+	
+	
+$className = $sub_row['class_subject']; //hopefully the name of the god damn class
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+echo	'<!--- main info goes in this div -->';
+echo 	'<div class="container">';
+
+echo		'<div class = "jumbotron">';
+		
+echo			'<div class = "row"> <!-- start row one -->';
+echo				'<div class = "col-md-4"> ';
+
+				
+echo					'<p> ';
+echo					'Participant Name:';
+echo				" $p_numDB ";
+
+echo               '</p>';
+					
+					
+				
+echo				'</div>';
+				
+echo				'<div class = "col-md-4">';
+					
+echo					'<p> Not Completed Classes </p>';
+					
+					
+				
+echo				'</div>';
+				
+echo				'<div class = "col-md-4">';
+					
+echo					'<p>';
+
+echo                  " $num_of_classes";
+echo                  '   </p>';
+					
+					
+				
+echo				'</div>';
+				
+				
+echo			'</div> <!-- end row one -->';
+			
+	# for each row, generate a class table
+while   	($c_a_row = pg_fetch_array($c_a_results, null, PGSQL_ASSOC) )
+	
+	{
+echo		'<div class = "row"> <!-- start row two -->';
+				
+echo				'<div class = "col-md-12"> 											<!-- six tabs (band aid solution) -->';
+echo					'<p class="label label-info" style="white-space: pre;">';
+echo                 "	$className ";					
+
+echo                     " $classTime";      
+
+echo                '</p> ';
+echo				'</div>';
+				
+				
+				
+echo		'</div> <!-- end row two -->';
+		
+echo		'<div class = "row" > ';
+echo			'<div class = "col-md-8"> ';
+echo			'<p> ';
+
+echo              " $participant_commentDB";
+
+echo               '</p>';
+echo			'</div>';
+			
+		
+echo		'</div>';
+	}		
+		
+
+		
+echo		'<div class = "row">';
+		
+echo		'<div class = "col-md-4">';
+		
+echo		'</div>';
+		
+echo		'<div class = "col-md-4">';
+echo				'<!-- placeholder link -->';
+echo				'<p><button class="btn btn-default" type="submit"><a href="#">Click for more</a></button></p>';
+echo			'</div>';
+		
+echo		'</div>';
+		
+		
+echo		'<div class = "row">';
+		
+echo			'<div class = "col-md-4">';
+				
+echo				'<p><button class="btn btn-default" type="submit"><a href="participant-search-results.php"> <!--- for demo purposes only -->Go back to results</a></button></p>';
+echo			'</div>';
+echo			'<div class = "col-md-4">';
+				
+echo				'<!-- filler for whitespace -->';
+echo			'</div>';
+		
+echo			'<div class = "col-md-4">';
+				
+echo				'<button class="btn btn-default " type="submit"><a href="#">Download As Excel Sheet</a></button>';
+				
+echo			'</div>';
+		
+echo		'</div>';
+		
+		
+echo		'</div>';
+
+
+
+	
+echo	'</div>';
+	
+	?>
+
 	
   </body>
 </html>

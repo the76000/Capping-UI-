@@ -86,7 +86,57 @@
 	$cidDB = $row['cid'];
 	
 	echo " $p_numDB ";
-  
+	
+	
+ $c_a_query = "Select * from class_attendence where p_num = '$p_numDB'"; // query for all info related to searched participant
+
+//$c_a_query = "Select * from class_attendence ";
+
+
+
+$c_a_results = pg_query($c_a_query) or die('Query failed: ' . pg_last_error());
+	
+	$c_a_row = pg_fetch_array($c_a_results, null, PGSQL_ASSOC); // create array of result 
+	
+	$p_numDB = $c_a_row['p_num']; // set variable correct row and column of db
+	
+	echo "$p_numDB";
+	
+	$class_idDB = $c_a_row['class_id'];
+	echo "$class_idDB";
+	
+	$participant_commentDB = $c_a_row['participant_comment'];
+	
+	if  (pg_num_rows($c_a_results) == 0){
+		$num_of_classes_attended = pg_num_rows($c_a_results) ;
+	}
+	
+	else{
+		$num_of_classes_attended = pg_num_rows($c_a_results) - 1; //bug? idk
+	}
+	
+	
+	
+	
+	$cur_query = "Select classes_total from curriculum where cid  = '$cidDB'"; // query curriculum table for number of classes
+
+//$c_a_query = "Select * from class_attendence ";
+
+
+
+$cur_results = pg_query($cur_query) or die('Query failed: ' . pg_last_error());
+	
+	$cur_row = pg_fetch_array($cur_results, null, PGSQL_ASSOC); // create array of result 
+	
+	
+	
+
+	
+	
+	
+	
+	$num_of_classes_not_attended= pg_num_rows($cur_results) - $num_of_classes_attended ;
+	
   
   
   
@@ -152,7 +202,11 @@ echo				'<p> Classes Completed </p>';
 echo				'</div>';
 			
 echo				'<div class = "col-md-2">';
-echo				'<p> 20 </p>';
+echo				'<p>';
+
+ echo               "$num_of_classes_attended";
+ 
+ echo             '</p>';
 echo				'</div>';
 				
 echo				'<div class = "col-md-6">';
@@ -169,7 +223,11 @@ echo				'</div>';
 				
 				
 echo				'<div class = "col-md-2">';
-echo				'<p> 8 </p>';
+echo				'<p>';
+
+ echo               "$num_of_classes_not_attended";
+ echo              '</p>';
+ 
 echo				'</div>';
 				
 echo				'<div class = "col-md-6">';
