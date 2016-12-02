@@ -71,21 +71,36 @@
 	
 	//for testing
 	
-	$p_num = $_SESSION["searchp"];
+	$l_name = $_SESSION["searchp"];
 	
-	$query = "Select * from participants where p_num = '$p_num'";
+	$query = "Select * from referrals where ref_l_name = '$l_name'";
 	
 	$results = pg_query($query) or die('Query failed: ' . pg_last_error());
 	
 	$row = pg_fetch_array($results, null, PGSQL_ASSOC);
 	
-	$p_numDB = $row['p_num'];
+	$ref_p_num = $row['p_num'];
 	
-	$raceDB = $row['race'];
 	
-	$cidDB = $row['cid'];
+	$p_query = "Select * from participants where p_num = '$ref_p_num '";
 	
-	echo " $p_numDB ";
+	$p_results = pg_query($p_query) or die('Query failed: ' . pg_last_error());
+	
+	$p_row = pg_fetch_array($p_results, null, PGSQL_ASSOC);
+	
+	
+	
+	
+	
+	$p_numDB = $p_row['p_num'];
+	
+	$raceDB = $p_row['race'];
+	
+	$cidDB = $p_row['cid'];
+	
+	//echo " $p_numDB ";
+	
+	
 	
 	
  $c_a_query = "Select * from class_attendence where p_num = '$p_numDB'"; // query for all info related to searched participant

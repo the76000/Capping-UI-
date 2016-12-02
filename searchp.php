@@ -38,11 +38,11 @@ session_start();
 	
 	$msg = '';
 	
-	$p_num = pg_escape_string($_POST['p_num']);
+	$l_name = pg_escape_string($_POST['l_name']);
 	
 	
 	
-	
+	/*
 	$query = "Select * from participants where p_num = '$p_num'";
 	
 	$results = pg_query($query) or die('Query failed: ' . pg_last_error());
@@ -72,6 +72,48 @@ session_start();
 			echo "<h1>Error: User not found.</h1>";
 		}				
 			
+			*/
+			
+	$ref_query = "Select * from referrals where ref_l_name = '$l_name'";
+	
+	$ref_results = pg_query($ref_query) or die('Query failed: ' . pg_last_error());
+	
+
+	
+	$ref_row = pg_fetch_array($ref_results, null, PGSQL_ASSOC);
+	
+	$l_nameDB = $ref_row['ref_l_name'];
+	
+		// Check to see if the credentials are right
+		if($l_name == $l_nameDB){
+			
+			$_SESSION["searchp"] = $l_name;
+			
+			$num_rows = pg_num_rows($ref_results);
+			
+			echo " $num_rows ";
+			
+			
+			
+			echo  str_repeat("<a href='participant-search-results.php'> $l_name </a>", $num_rows);
+			//header('Location: http://localhost:8080/participant-search.php');
+			
+			// Crawling in my skin here
+			
+			
+			
+
+			
+			
+			
+		}else{
+			echo "<h1>Error: User not found.</h1>";
+		}				
+			
+	
+	
+								
+	
 	?>
 	
 	
