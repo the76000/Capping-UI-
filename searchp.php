@@ -40,7 +40,7 @@ session_start();
 	
 	$l_name = pg_escape_string($_POST['l_name']);
 	
-	
+	$f_name = pg_escape_string($_POST['f_name']);
 	
 	/*
 	$query = "Select * from participants where p_num = '$p_num'";
@@ -74,7 +74,7 @@ session_start();
 			
 			*/
 			
-	$ref_query = "Select * from referrals where ref_l_name = '$l_name'";
+	$ref_query = "Select * from referrals where ref_l_name = '$l_name' and ref_f_name = '$f_name'";
 	
 	$ref_results = pg_query($ref_query) or die('Query failed: ' . pg_last_error());
 	
@@ -85,10 +85,10 @@ session_start();
 	
 	$num_rows = pg_num_rows($ref_results) - 1;
 	
-	$p_numDB = ref_row['p_num'];
+	$p_numDB = $ref_row['p_num'];
 	
 	
-	
+	/* i will get to this  ---COLIN
 	
 	if ($num_rows > 1 ){
 		
@@ -99,17 +99,17 @@ session_start();
 		
 		
 	}
-	
+	*/
 	
 	
 	$l_nameDB = $ref_row['ref_l_name'];
-	$m_nameDB = $ref_row['ref_m_name'];
+	
 	$f_nameDB = $ref_row['ref_f_name'];
 	
 	$dupliate_name = 0;
 	
 		// Check to see if the credentials are right
-		if($l_name == $l_nameDB){
+		if($l_name == $l_nameDB && $f_name == $f_nameDB){
 			
 			
 			
@@ -117,9 +117,12 @@ session_start();
 			
 			echo " $num_rows ";
 			
+			$_SESSION['l_name'] =  $l_nameDB ;
+
+	$_SESSION['f_name'] =  $f_nameDB ;
+	
 			
-			
-			echo  "<a href='participant-search-results.php?add=clicked'> $l_name </a>";
+			echo  "<a href='participant-search-results.php?add=clicked'>$f_name $l_name </a>";
 			//header('Location: http://localhost:8080/participant-search.php');
 			
 			// Crawling in my skin here
@@ -134,16 +137,16 @@ session_start();
 			echo "<h1>Error: User not found.</h1>";
 		}		
 
-
+/* i will get to this -- COLIN
 if ($_GET['add'] == 'clicked'){
 	$_SESSION['l_name'] =  $l_nameDB ;
-	$_SESSION['m_name'] =  $m_nameDB ;
+
 	$_SESSION['f_name'] =  $f_nameDB ;
-	S_SESSION['p_num'] = 
+	
 
 
 }	
-			
+*/			
 	
 	
 								

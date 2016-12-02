@@ -28,7 +28,7 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
     or die('Could not connect: ' . pg_last_error());
 
 // Performing SQL query
-$query = 'SELECT ref_l_name FROM referrals';
+$query = 'SELECT ref_f_name, ref_l_name FROM referrals';
 $result = pg_query($query) or die('Query failed: ' . pg_last_error());
 
 // Printing results in HTML
@@ -105,7 +105,11 @@ echo "</table>\n";
 
 	<form class="navbar-form" role="search" action="searchp.php" method="post" >
 			<div class="input-group">
-				<input type="text" class="form-control input-lg" placeholder="Search" name="l_name" id="srch-term">
+				<input type="text" class="form-control input-lg" placeholder="first name" name="f_name" id="srch-term">
+				<div class="input-group-btn ">
+			
+			<div class="input-group">
+				<input type="text" class="form-control input-lg" placeholder="last name" name="l_name" id="srch-term">
 				<div class="input-group-btn ">
 					<button class="btn btn-lg" type="submit"><i class="glyphicon glyphicon-search"></i></button>
 				</div>

@@ -73,6 +73,8 @@
 	
 	$l_name = $_SESSION["l_name"];
 	
+	$f_name = $_SESSION["f_name"];
+	
 	$query = "Select * from referrals where ref_l_name = '$l_name'";
 	
 	$results = pg_query($query) or die('Query failed: ' . pg_last_error());
@@ -173,7 +175,7 @@ echo			'</div>';
 			
 echo			'<div class = "col-md-4">';
 echo			'<p class="label label-info">';
-echo			" $p_numDB ";
+echo			" $f_name $l_name ";
 echo 				'</p>'; 
 echo			'</div>';
 echo			'</div>';
