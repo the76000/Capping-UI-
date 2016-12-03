@@ -61,7 +61,7 @@ session_start();
 	
 	$numrows = 'SELECT count(*) AS exact_count FROM employees'; #this will not scale well
 	
-	$row = pg_fetch_array($results, null, PGSQL_ASSOC);
+	$row = pg_fetch_array($results, 0, PGSQL_ASSOC);
 	
 	
 	
@@ -106,7 +106,7 @@ session_start();
 	
 
 	
-	$ref_row = pg_fetch_array($ref_results, null, PGSQL_ASSOC);
+	$ref_row = pg_fetch_array($ref_results, 0, PGSQL_ASSOC);
 	// if number of rows is more than one
 	
 	$num_rows = pg_num_rows($ref_results) - 1;

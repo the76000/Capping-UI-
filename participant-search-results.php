@@ -81,7 +81,7 @@
 	
 	$results = pg_query($query) or die('Query failed: ' . pg_last_error());
 	
-	$row = pg_fetch_array($results, null, PGSQL_ASSOC);
+	$row = pg_fetch_array($results, 0, PGSQL_ASSOC);
 	
 	$ref_p_num = $row['p_num'];
 	
@@ -117,7 +117,7 @@
 
 $c_a_results = pg_query($c_a_query) or die('Query failed: ' . pg_last_error());
 	
-	$c_a_row = pg_fetch_array($c_a_results, null, PGSQL_ASSOC); // create array of result 
+	$c_a_row = pg_fetch_array($c_a_results, 0, PGSQL_ASSOC); // create array of result 
 	
 	$p_numDB = $c_a_row['p_num']; // set variable correct row and column of db
 	
@@ -147,7 +147,7 @@ $c_a_results = pg_query($c_a_query) or die('Query failed: ' . pg_last_error());
 
 $cur_results = pg_query($cur_query) or die('Query failed: ' . pg_last_error());
 	
-	$cur_row = pg_fetch_array($cur_results, null, PGSQL_ASSOC); // create array of result 
+	$cur_row = pg_fetch_array($cur_results, 0, PGSQL_ASSOC); // create array of result 
 	
 	
 	

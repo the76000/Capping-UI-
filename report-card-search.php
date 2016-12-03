@@ -151,39 +151,59 @@ if ((isset($_POST['submit'])) == 1){
  
  $curr_query2 = "SELECT CID FROM curriculum where curriculum_name = '$curr_picked'";
  $curr_result2 = pg_query($curr_query2) or die('Query failed: ' . pg_last_error());
- $curr2_row = pg_fetch_array($curr_result2, null, PGSQL_ASSOC);
+ $curr2_row = pg_fetch_array($curr_result2, 0, PGSQL_ASSOC);
  
   $cidDB = $curr2_row['cid'];
  
  echo "$cidDB";
+  $pvaluequery = "SELECT p.p_num FROM participants p inner join curriculum c on c.cid = p.cid inner join referrals r on r.p_num =p.p_num where p.cid = '$cidDB' ";
+ $pvalueresult = pg_query($pvaluequery) or die('Query failed: ' . pg_last_error());
+ $pvaluerow = pg_fetch_array($pvalueresult , 0, PGSQL_ASSOC);
  
- $part_query = 'SELECT p.p_num FROM participants p inner join curriculum c on c.cid = p.cid inner join referrals r on r.p_num =p.p_num where p.cid = c.cid ';
+ 
+ 
+ $part_query = "SELECT r.ref_f_name FROM referrals r inner join participants p on p.p_num = r.p_num inner join curriculum c on c.cid = p.cid where c.cid = '$cidDB'";
  $part_result = pg_query($part_query) or die('Query failed: ' . pg_last_error());
- $part_row = pg_fetch_array($part_result, null, PGSQL_ASSOC);
+ $part_row = pg_fetch_array($part_result, 0, PGSQL_ASSOC);
  
- $part_query2 = 'SELECT c.cid FROM participants p inner join curriculum c on c.cid = p.cid inner join referrals r on r.p_num =p.p_num where p.cid = c.cid ';
+ //$part_query = 'SELECT r.ref_f_name FROM referrals r inner join participants p on p.p_num = r.p_num inner join curriculum c on c.cid = p.pid where c.cid = "$cidDB"';
+ 
+ 
+ $part_query2 = "SELECT p.cid FROM participants p inner join curriculum c on c.cid = p.cid inner join referrals r on r.p_num =p.p_num where p.cid = '$cidDB' ";
  $part_result2 = pg_query($part_query2) or die('Query failed: ' . pg_last_error());
- $part_row2 = pg_fetch_array($part_result2, null, PGSQL_ASSOC);
+ $part_row2 = pg_fetch_array($part_result2 , 0, PGSQL_ASSOC);
  
+  $part_query3 = "SELECT r.ref_l_name FROM referrals r inner join participants p on p.p_num = r.p_num inner join curriculum c on c.cid = p.cid where c.cid = '$cidDB'";
+ $part_result3 = pg_query($part_query3) or die('Query failed: ' . pg_last_error());
+ $part_row3 = pg_fetch_array($part_result3, 0, PGSQL_ASSOC);
+
+// $num_of_classes = pg_num_rows($c_a_results) - 1
  
- while (($line = pg_fetch_array($part_result, null, PGSQL_ASSOC)) and ($line2  = pg_fetch_array($part_result2, null, PGSQL_ASSOC))) {
+ while (($line = pg_fetch_array($part_result, null, PGSQL_ASSOC)) and ($line2  = pg_fetch_array($part_result2, null, PGSQL_ASSOC)) and ($line3  = pg_fetch_array($part_result3, null, PGSQL_ASSOC)) and  ($line4  = pg_fetch_array($pvalueresult, null, PGSQL_ASSOC))                   ) {
 					
 					
 echo 				'<table class = "table">';
 						echo "<thead>";
 						echo "<tr>";
-						echo "<th> PNUM </th>";
+						echo "<th> First Name </th>";
+						echo "<th> Last Name </th>";
 						echo "<th> CID </th>";
 						
 						
 
-						foreach ($line as $pnumvalue ) {
+						foreach ($line as $fnamevalue ) {
 						
 							foreach ($line2 as $cidvalue){
+								
+								foreach ($line3 as $lnamevalue){
+									foreach ($line4 as $pnumvalue){
 							
 							echo "<tr>";
 							echo "<td>";
-							echo "$pnumvalue";
+							echo "$fnamevalue";
+							echo "</td>";
+							echo "<td>";
+							echo "$lnamevalue";
 							echo "</td>";
 							echo "<td>";
 							echo "$cidvalue";
@@ -192,6 +212,9 @@ echo 				'<table class = "table">';
 							echo "<form action = 'report-card.php' method='post'>";
 							 
 							#echo "<option name = 'participant_selected' value = '$pnumvalue'> Go to report card  </option>";
+							echo "<label>";
+							echo "Click the number to go to the report card";
+							echo "</label>";
 							echo "<input type = 'submit' name = 'participant_name'  value = '$pnumvalue'/>";
 							echo "</form>";
 							
@@ -200,6 +223,8 @@ echo 				'<table class = "table">';
 							echo "</td>";
 							
 							echo "</tr>";
+									}
+								}
 							}
 						}
 							echo "</table>";
