@@ -18,6 +18,24 @@
 
 <body>
 
+<?php
+session_start();
+	
+	if (!isset($_SESSION["username"]) ){
+		header('Location: index.php');
+		echo "hello";
+	}
+
+
+ $participant = $_POST['participant_name'];
+ 
+ echo "$participant";
+
+
+
+
+?>
+
 	<!-- Top left Logo -->
 	<div class="page-header">
 		<h1><a class="home-button" href="homepage.php">CPCA</a></h1>

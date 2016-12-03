@@ -190,10 +190,12 @@ echo 				'<table class = "table">';
 							echo "</td>";
 							echo "<td>";
 							echo "<form action = 'report-card.php' method='post'>";
-							
-							echo "<option name = 'participant_selected' value = '$pnumvalue'> <a href='report-card.php'> Go to report card </a> </option>";
-							echo "<input type = 'submit' name = 'participant_name' />";
+							 
+							#echo "<option name = 'participant_selected' value = '$pnumvalue'> Go to report card  </option>";
+							echo "<input type = 'submit' name = 'participant_name'  value = '$pnumvalue'/>";
 							echo "</form>";
+							
+							#$_SESSION['report_card_part'] = $_POST['participant_name'];
 							
 							echo "</td>";
 							
@@ -202,6 +204,8 @@ echo 				'<table class = "table">';
 						}
 							echo "</table>";
 							}
+							
+							
  
  
  
