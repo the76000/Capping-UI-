@@ -157,23 +157,39 @@ if ((isset($_POST['submit'])) == 1){
  
  echo "$cidDB";
  
- $part_query = 'SELECT p.p_num, p.cid FROM participants p inner join curriculum c on c.cid = p.cid inner join referrals r on r.p_num =p.p_num where p.cid = c.cid ';
+ $part_query = 'SELECT p.p_num FROM participants p inner join curriculum c on c.cid = p.cid inner join referrals r on r.p_num =p.p_num where p.cid = c.cid ';
  $part_result = pg_query($part_query) or die('Query failed: ' . pg_last_error());
  $part_row = pg_fetch_array($part_result, null, PGSQL_ASSOC);
  
+ $part_query2 = 'SELECT c.cid FROM participants p inner join curriculum c on c.cid = p.cid inner join referrals r on r.p_num =p.p_num where p.cid = c.cid ';
+ $part_result2 = pg_query($part_query2) or die('Query failed: ' . pg_last_error());
+ $part_row2 = pg_fetch_array($part_result2, null, PGSQL_ASSOC);
  
- while ($line = pg_fetch_array($part_result, null, PGSQL_ASSOC)) {
+ 
+ while (($line = pg_fetch_array($part_result, null, PGSQL_ASSOC)) and ($line2  = pg_fetch_array($part_result2, null, PGSQL_ASSOC))) {
 					
 					
 echo 				'<table class = "table">';
-						foreach ($line as $col_value2) {
-							echo "<thead>";
+						echo "<thead>";
+						echo "<tr>";
+						echo "<th> PNUM </th>";
+						echo "<th> CID </th>";
+
+
+						foreach ($line as $pnumvalue ) {
+						
+							foreach ($line2 as $cidvalue){
+							
 							echo "<tr>";
-							echo "<th>";
-							echo "$col_value2";
-							echo "</th>";
+							echo "<td>";
+							echo "$pnumvalue";
+							echo "</td>";
+							echo "<td>";
+							echo "$cidvalue";
+							echo "</td>";
+							
 							echo "</tr>";
-							echo "</thead>";
+							}
 						}
 							echo "</table>";
 							}
