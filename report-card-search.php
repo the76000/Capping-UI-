@@ -18,48 +18,7 @@
   
   <body>
   
-  <?php
   
-  
-  // Connecting, selecting database
-$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
-    or die('Could not connect: ' . pg_last_error());
-
-// Performing SQL query
-$query = 'SELECT * FROM participants';
-$result = pg_query($query) or die('Query failed: ' . pg_last_error());
-
-// Printing results in HTML
-
-
-
-
-echo "<table>\n";
-while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
-    echo "\t<tr>\n";
-    foreach ($line as $col_value) {
-        echo "\t\t<td>$col_value</td>\n";
-    }
-    echo "\t</tr>\n";
-}
-echo "</table>\n";
-  
-  session_start();
-	
-	if (!isset($_SESSION["username"]) ){
-		header('Location: index.php');
-		echo "hello";
-	}
-	
-	echo "Username = " . $_SESSION["username"]; 
-	//for testing
-	
-  
-  
-  
-  
-  
-  ?>
   
   <!-- Top left Logo -->
 	<div class="page-header">
@@ -109,71 +68,125 @@ echo "</table>\n";
 
 <hr> </hr>
 
-<div class = "container">
+<?php
 
-	<div class="form-group ">
-				  <label for="sel1">Select A Curriculum:</label> <!-- this is for the 28 indivual classes, not for the course/groups. data mismatch -->
-				  <select class="form-control" id="sel1">
-					<option>1.   Women's in-house</option>
-					<option>2.   Spanish speaking women in-house</option>
-					<option>3.   Florence Manor</option>
-					<option>4.   Women's DC Jail</option>
-					<option>5.   Women's New Vision Church</option>
-					<option>6.   ITAP</option>
-					<option>7.   Men's DC jail</option>
-					<option>8.   Cornerstone</option>
-					<option>9.   Meadow Run</option>
-					<option>10.   Men's in-house</option>
-					<option>11.    Spanish Speaking Men's in-house</option>
-					<option>12.    Fox Run</option>
-					<option>12.    Men's New Vision Church</option>
-				
-				  </select>
-				</div>
+session_start();
+	
+	if (!isset($_SESSION["username"]) ){
+		header('Location: index.php');
+		echo "hello";
+	}
+  
+  
+  // Connecting, selecting database
+$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
+    or die('Could not connect: ' . pg_last_error());
 
+// Performing SQL query
+$query = 'SELECT * FROM participants';
+$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+
+// Printing results in HTML
+
+
+ $curr_query3 = 'SELECT curriculum_name FROM curriculum';
+ $curr_result3 = pg_query($curr_query3) or die('Query failed: ' . pg_last_error());
 
 
   
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
-        <th>Curriculum</th>
+  
+  
+  
 
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Filler</td>
-        <td>Name</td>
-        <td>fillerName@example.com</td>
-        <td>Women's in-house </td>
-        <th> <a href="report-card.php">Go to report card</a></th>
-      </tr>
-      <tr>
-        <td>Filler</td>
-        <td>Name</td>
-        <td>fillerName@example.com</td>
-        <td> Women's in-house</td>
-        <th> <a href="report-card.php">Go to report card</a></th>
-      </tr>
-      <tr>
-        <td>Filler</td>
-        <td>Name</td>
-        <td>fillerName@example.com</td>
-        <td> Women's in-house</td>
-        <th> <a href="report-card.php">Go to report card</a></th>
-      </tr>
-    </tbody>
-  </table>
-</div>
+echo '<div class = "container">';
+
+echo	'<div class="form-group ">';
+echo			'<form action="report-card-search.php" method="post">';
+echo				  '<label for="sel1">Select A Curriculum:</label> <!-- this is for the 28 indivual classes, not for the course/groups. data mismatch -->';
+echo				  '<select name="CURRICULUM" class="form-control" id="sel1">';
+				  
+				  
+					while ($line = pg_fetch_array($curr_result3, null, PGSQL_ASSOC)) {
+						
+						foreach ($line as $col_value) {
+							echo "<option value= '$col_value'>";
+							echo "$col_value";
+						}
+							echo "</option>";
+							}
+							
+							
+					
+					
+					
+echo				  '</select>';
+echo				'<button class="btn btn-lg" type="submit" name="submit"> Submit </button>';
+echo				'</div>';
+echo				'</form>';
 
 
+if ((isset($_POST['submit'])) == 1){
+	echo "test";
+	$value_select = $_POST['CURRICULUM'];
+	
+	$_SESSION['curr_name'] = $value_select;
+	echo "$value_select";
 
 
 
+
+	$curr_picked = $value_select;
+  
+  
+	
+	echo "Username = " . $_SESSION["username"]; 
+	//for testing
+	
+ 
+ $curr_query = 'SELECT curriculum_name FROM curriculum';
+ $curr_result = pg_query($curr_query) or die('Query failed: ' . pg_last_error());
+ //$row = pg_fetch_array($result, null, PGSQL_ASSOC);
+ 
+
+ 
+ $curr_query2 = "SELECT CID FROM curriculum where curriculum_name = '$curr_picked'";
+ $curr_result2 = pg_query($curr_query2) or die('Query failed: ' . pg_last_error());
+ $curr2_row = pg_fetch_array($curr_result2, null, PGSQL_ASSOC);
+ 
+  $cidDB = $curr2_row['cid'];
+ 
+ echo "$cidDB";
+ 
+ $part_query = 'SELECT p.p_num, p.cid FROM participants p inner join curriculum c on c.cid = p.cid inner join referrals r on r.p_num =p.p_num where p.cid = c.cid ';
+ $part_result = pg_query($part_query) or die('Query failed: ' . pg_last_error());
+ $part_row = pg_fetch_array($part_result, null, PGSQL_ASSOC);
+ 
+ 
+ while ($line = pg_fetch_array($part_result, null, PGSQL_ASSOC)) {
+					
+					
+echo 				'<table class = "table">';
+						foreach ($line as $col_value2) {
+							echo "<thead>";
+							echo "<tr>";
+							echo "<th>";
+							echo "$col_value2";
+							echo "</th>";
+							echo "</tr>";
+							echo "</thead>";
+						}
+							echo "</table>";
+							}
+ 
+ 
+ 
+}
+  
+
+
+
+
+?>
 
 
 		
