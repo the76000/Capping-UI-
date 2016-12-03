@@ -28,7 +28,7 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
     or die('Could not connect: ' . pg_last_error());
 
 // Performing SQL query
-$query = 'SELECT ref_f_name, ref_l_name FROM referrals';
+$query = 'SELECT referrals.ref_f_name, referrals.ref_l_name, participants.* FROM referrals inner join participants on participants.p_num = referrals.p_num';
 $result = pg_query($query) or die('Query failed: ' . pg_last_error());
 
 // Printing results in HTML

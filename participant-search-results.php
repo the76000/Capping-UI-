@@ -75,7 +75,9 @@
 	
 	$f_name = $_SESSION["f_name"];
 	
-	$query = "Select * from referrals where ref_l_name = '$l_name'";
+	$p_num = $_SESSION["searchp"];
+	
+	$query = "Select r.*, p.* from referrals r inner join participants p  on p.p_num = r.p_num  where r.p_num = '$p_num' ";
 	
 	$results = pg_query($query) or die('Query failed: ' . pg_last_error());
 	
@@ -84,23 +86,25 @@
 	$ref_p_num = $row['p_num'];
 	
 	
-	$p_query = "Select * from participants where p_num = '$ref_p_num '";
-	
-	$p_results = pg_query($p_query) or die('Query failed: ' . pg_last_error());
-	
-	$p_row = pg_fetch_array($p_results, null, PGSQL_ASSOC);
 	
 	
 	
 	
+	$p_numDB = $row['p_num'];
 	
-	$p_numDB = $p_row['p_num'];
+	$raceDB = $row['race'];
 	
-	$raceDB = $p_row['race'];
+	$l_nameDB = $row['ref_l_name'];
 	
-	$cidDB = $p_row['cid'];
+	echo "$l_nameDB";
+	
+	$f_nameDB = $row['ref_f_name'];
+	
+	$cidDB = $row['cid'];
 	
 	//echo " $p_numDB ";
+	
+	
 	
 	
 	
@@ -175,7 +179,7 @@ echo			'</div>';
 			
 echo			'<div class = "col-md-4">';
 echo			'<p class="label label-info">';
-echo			" $f_name $l_name ";
+echo			" $f_nameDB $l_nameDB ";
 echo 				'</p>'; 
 echo			'</div>';
 echo			'</div>';
