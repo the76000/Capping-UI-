@@ -18,23 +18,7 @@
 
 <body>
 
-<?php
-session_start();
-	
-	if (!isset($_SESSION["username"]) ){
-		header('Location: index.php');
-		echo "hello";
-	}
 
-
- $participant = $_POST['participant_name'];
- 
- echo "$participant";
-
-
-
-
-?>
 
 	<!-- Top left Logo -->
 	<div class="page-header">
@@ -66,65 +50,83 @@ session_start();
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav> <!-- end of navbar-->
+	
+	
+	<?php
+session_start();
+	
+	if (!isset($_SESSION["username"]) ){
+		header('Location: index.php');
+		echo "hello";
+	}
 
-	<div class = "container">
-		<div class = "jumbotron">
 
-			<form class="navbar-form">
-				<div class="input-group">
-					<input type="text" class="form-control input-lg" placeholder="Participant Name" name="p_num" id="srch-term">
-				</div>
-				<div class="row" id="attendanceRow">
+ $participantnumber = $_POST['participant_name'];
+ 
 
-					<div class="col-md-4 input-lg">
-						<label>Curriculum Name:</label>
+ 
+   
+  // Connecting, selecting database
+$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
+    or die('Could not connect: ' . pg_last_error());
+
+// Performing SQL query
+$fnamequery = "SELECT r.ref_f_name FROM referrals r inner join participants p on p.p_num = r.p_num where p.p_num =  '$participantnumber'";
+$fnameresult = pg_query($fnamequery) or die('Query failed: ' . pg_last_error());
+$fnamerow = pg_fetch_array($fnameresult, null, PGSQL_ASSOC);
+
+$participantfname = $fnamerow['ref_f_name'];
+
+$lnamequery = "SELECT r.ref_l_name FROM referrals r inner join participants p on p.p_num = r.p_num where p.p_num =  '$participantnumber'";
+$lnameresult = pg_query($lnamequery) or die('Query failed: ' . pg_last_error());
+$lnamerow = pg_fetch_array($lnameresult, null, PGSQL_ASSOC);
+
+$participantlname = lfnamerow['ref_l_name'];
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+
+echo	'<div class = "container">';
+echo		'<div class = "jumbotron">';
+
+echo			'<form class="navbar-form">';
+echo				'<div class="input-group">';
+echo					"<h1>  $participantfname    $participantlname              </h1>";
+echo				'</div>';
+echo				'<div class="row" id="attendanceRow">';
+
+echo					'<div class="col-md-4 input-lg">';
+echo					'<label>Curriculum Name:</label>';
 						
-					</div>
-					<div class="col-md-4 input-lg">
-						<label>Select class</label>
-						<select class="form-control">
-							<option>1.   Devloping Empathy</option>
-								<option>2.   Getting your needs met</option>
-								<option>3.   Recognizing & Understanding Feelings</option>
-								<option>4.   Problem Solving</option>
-								<option>5.   Crticism, Confrontation Fair Fighting</option>
-								<option>6.   Handling Stress</option>
-								<option>7.   Undestranding Anger </option>
-								<option>8.   Effects of Drugs </option>
-								<option>9.   Communication: Listening </option>
-								<option>10.  Communication </option>
-								<option>11.  Children's Brain Dev </option>
-								<option>12.  Ages & Stages, Routine </option>
-								<option>13.  Appropriate Expectations </option>
-								<option>14.  A & S Young Children </option>
-								<option>15.  Ages & Stages, Adolescent </option>
-								<option>16.  Health & Nutrition </option>
-								<option>17.  Improving Self-Worth </option>
-								<option>18.  Developing Personal Power </option>
-								<option>19.  Children's Safety </option>
-								<option>20.  Child Abuse & Neglect I, II, & III </option>
-								<option>21.  Managing Behavior </option>
-								<option>22.  Relationships, Pers. Space </option>
-								<option>23.  Understanding Discipline </option>
-								<option>24.  Rewards/Punishment </option>
-								<option>25.  Using Praise </option>
-								<option>26.  Alt. to Physical Punishment</option>
-								<option>27.  Guest Speaker</option>
-						</select>  
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-5">
-						<div id="checkbox1">
-							<label>
-								<input type="checkbox" value="">
-								Attended
-							</label>
-						</div>
-						<div id="checkbox2">
-							<label>
-								<input type="checkbox" value="">
-								Arrived late
+echo					'</div>';
+echo					'<div class="col-md-4 input-lg">';
+echo					'<label>Select class</label>';
+echo						'<select class="form-control">';
+echo						'<option>1.   Devloping Empathy</option>';
+							
+echo						'</select>  ';
+echo					'</div>';
+echo			'</div>';
+echo				'<div class="row">';
+echo					'<div class="col-sm-5">';
+echo						'<div id="checkbox1">';
+echo						'<label>';
+echo								'<input type="checkbox" value="">';
+echo								'Attended';
+echo							'</label>';
+echo						'</div>';
+echo						'<div id="checkbox2">';
+echo							'<label>';
+echo								'<input type="checkbox" value="">';
+echo								'Arrived late'
 							</label>
 						</div>
 						<div id="checkbox3">
@@ -150,7 +152,7 @@ session_start();
 		</div>
 	</div>
 
-
+?>
 
 
 </body>
