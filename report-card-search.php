@@ -174,7 +174,8 @@ echo 				'<table class = "table">';
 						echo "<tr>";
 						echo "<th> PNUM </th>";
 						echo "<th> CID </th>";
-
+						
+						
 
 						foreach ($line as $pnumvalue ) {
 						
@@ -186,6 +187,14 @@ echo 				'<table class = "table">';
 							echo "</td>";
 							echo "<td>";
 							echo "$cidvalue";
+							echo "</td>";
+							echo "<td>";
+							echo "<form action = 'report-card.php' method='post'>";
+							
+							echo "<option name = 'participant_selected' value = '$pnumvalue'> <a href='report-card.php'> Go to report card </a> </option>";
+							echo "<input type = 'submit' name = 'participant_name' />";
+							echo "</form>";
+							
 							echo "</td>";
 							
 							echo "</tr>";
