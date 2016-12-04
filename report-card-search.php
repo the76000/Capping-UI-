@@ -55,7 +55,7 @@
 
 	<form class="navbar-form" role="search" action="report-card-searchp.php" method="post" >
 			<div class="input-group">
-				<input type="text" class="form-control input-lg" placeholder="Search" name="p_num" id="srch-term">
+				<input type="text" class="form-control input-lg" placeholder="Search" name="p_num" id="srch-term" oninput="validateAlpha('srch-term');">
 				<div class="input-group-btn ">
 					<button class="btn btn-lg" type="submit"><i class="glyphicon glyphicon-search"></i></button>
 				</div>
@@ -244,7 +244,8 @@ echo 				'<table class = "table">';
 
 ?>
 
-
+<!-- JS Functions  -->
+<script src="intake/FormAppFunctions.js"></script>
 		
   </body>
 </html>
