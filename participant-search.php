@@ -115,7 +115,7 @@ echo "</table>\n";
 				<div class="input-group-btn ">
 				
 			<div class="input-group">
-				<input type="text" class="form-control input-lg" placeholder="particpant number" name="p_num" id="srch-term">
+				<input type="text" class="form-control input-lg" placeholder="particpant number(optional)" name="p_num" id="srch-term">
 				<div class="input-group-btn ">
 				
 			

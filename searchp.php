@@ -46,16 +46,14 @@ session_start();
 	
 	
 	//if number isnt entered
-	if($p_num == null){
-		$p_num = 0; //dummy value
-		echo "im null";
+	
+	if($p_num != null){
 		
-	} else{
-		echo "im set testing";
-	}
+		echo "im set";
+		
 	
 	
-	$query = "Select * from participants inner join referrals on participants.p_num = referrals.p_num  where participants.p_num = '$p_num'"; //select all rows from participants where
+	$query = "Select * from referrals inner join participants on participants.p_num = referrals.p_num  where participants.p_num = '$p_num'"; //select all rows from participants where
 	
 	$results = pg_query($query) or die('Query failed: ' . pg_last_error());
 	
@@ -68,20 +66,27 @@ session_start();
 	
 								
 	$p_numDB = $row['p_num'];
+	echo "pnumdb";
+	echo "$p_numDB";
 	
 	
-	$l_nameDB2 = $row['l_name'];
+	$l_nameDB2 = $row['ref_l_name'];
 	
-	$f_nameDB2 = $row['f_name'];
+	$f_nameDB2 = $row['ref_f_name'];
 	
 		// Check to see if the credentials are right
 		if($p_num == $p_numDB){
 			
-			$_SESSION["searchp"] = $p_numDB;
+			$_SESSION['searchp'] = $p_numDB;
 			
 			$_SESSION['l_name'] =  $l_nameDB2 ;
 
 			$_SESSION['f_name'] =  $f_nameDB2 ;
+			
+			$testvar = $_SESSION['searchp'];
+			
+			echo "pnumsession";
+			echo "$testvar";
 			
 			echo "<a href='participant-search-results.php'> $p_numDB  $f_name   $l_name</a>";
 			//header('Location: http://localhost:8080/participant-search.php');
@@ -99,7 +104,7 @@ session_start();
 		}				
 			
 	
-			
+	}else{		
 	$ref_query = "Select * from referrals where ref_l_name = '$l_name' and ref_f_name = '$f_name'";
 	
 	$ref_results = pg_query($ref_query) or die('Query failed: ' . pg_last_error());
@@ -161,7 +166,7 @@ session_start();
 			echo "<h1>Error: User not found.</h1>";
 		}	
 		
-
+	}
 /* i will get to this -- COLIN
 if ($_GET['add'] == 'clicked'){
 	$_SESSION['l_name'] =  $l_nameDB ;

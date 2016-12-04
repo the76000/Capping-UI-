@@ -71,11 +71,13 @@
 	
 	//for testing
 	
-	$l_name = $_SESSION["l_name"];
+	$l_name = $_SESSION['l_name'];
 	
-	$f_name = $_SESSION["f_name"];
+	$f_name = $_SESSION['f_name'];
 	
-	$p_num = $_SESSION["searchp"];
+	$p_num = $_SESSION['searchp'];
+	
+	echo "$p_num";
 	
 	$query = "Select r.*, p.* from referrals r inner join participants p  on p.p_num = r.p_num  where r.p_num = '$p_num' ";
 	
