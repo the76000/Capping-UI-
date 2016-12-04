@@ -154,6 +154,8 @@ if ((isset($_POST['submit'])) == 1){
  $curr2_row = pg_fetch_array($curr_result2, 0, PGSQL_ASSOC);
  
   $cidDB = $curr2_row['cid'];
+  
+  $_SESSION['report_card_curr'] = $cidDB ;
  
  echo "$cidDB";
   $pvaluequery = "SELECT p.p_num FROM participants p inner join curriculum c on c.cid = p.cid inner join referrals r on r.p_num =p.p_num where p.cid = '$cidDB' ";

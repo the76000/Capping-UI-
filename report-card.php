@@ -63,6 +63,8 @@ session_start();
 
  $participantnumber = $_POST['participant_name'];
  
+ $cidSession = $_SESSION['report_card_curr'] ;
+ 
 
  
    
@@ -81,15 +83,25 @@ $lnamequery = "SELECT r.ref_l_name FROM referrals r inner join participants p on
 $lnameresult = pg_query($lnamequery) or die('Query failed: ' . pg_last_error());
 $lnamerow = pg_fetch_array($lnameresult, null, PGSQL_ASSOC);
 
-$participantlname = lfnamerow['ref_l_name'];
+$participantlname = $lnamerow['ref_l_name'];
 
 
+$currnamequery = "SELECT curriculum_name FROM curriculum where cid = '$cidSession' ";
+$currnameresult = pg_query($currnamequery) or die('Query failed: ' . pg_last_error());
+$currnamerow = pg_fetch_array($currnameresult, null, PGSQL_ASSOC);
+
+$currname = $currnamerow['curriculum_name'];
 
 
+$classesquery = "SELECT classsub.class_subject FROM class_subjects classsub inner join curriculum_subjects currsub on currsub.c_subject = classsub.c_subject inner join curriculum curr on curr.cid = currsub.cid where curr.cid = ' $cidSession ' ";      
+$classesresult = pg_query($classesquery) or die('Query failed: ' . pg_last_error());
+$classesrow = pg_fetch_array($classesresult, 0, PGSQL_ASSOC);
 	
+$employeequery = "SELECT e.eid FROM employees e	inner join classes_scheduled csch on csch.eid = e.eid inner join class_attendence ca on ca.eid = csch.eid where ca.p_num = '$participantnumber'";
+$employeeresult = pg_query($employeequery) or die('Query failed: ' . pg_last_error());
+$employeerow = pg_fetch_array($employeeresult, null, PGSQL_ASSOC);	
 	
-	
-	
+$employeeID = 	$employeerow['eid'];
 	
 	
 	
@@ -97,60 +109,84 @@ $participantlname = lfnamerow['ref_l_name'];
 echo	'<div class = "container">';
 echo		'<div class = "jumbotron">';
 
-echo			'<form class="navbar-form">';
+echo			'<form action = "post-report-card.php" method="post" class="navbar-form>';
 echo				'<div class="input-group">';
 echo					"<h1>  $participantfname    $participantlname              </h1>";
 echo				'</div>';
 echo				'<div class="row" id="attendanceRow">';
 
 echo					'<div class="col-md-4 input-lg">';
-echo					'<label>Curriculum Name:</label>';
+echo					'<label>Curriculum Name:';
+echo                    " $currname ";
+
+echo                 '</label>';
 						
 echo					'</div>';
 echo					'<div class="col-md-4 input-lg">';
 echo					'<label>Select class</label>';
 echo						'<select class="form-control">';
-echo						'<option>1.   Devloping Empathy</option>';
+
+					while ($line = pg_fetch_array($classesresult, null, PGSQL_ASSOC)){
+						foreach($line as $col_value){
+echo						"<option>   '$col_value'</option>";
+
+						}
+
+
+					}
 							
 echo						'</select>  ';
+
+
+
+
+
+
 echo					'</div>';
 echo			'</div>';
 echo				'<div class="row">';
 echo					'<div class="col-sm-5">';
+				
+					
 echo						'<div id="checkbox1">';
 echo						'<label>';
-echo								'<input type="checkbox" value="">';
+echo								'<input type="radio" value="submit_attended" name="radio">';
 echo								'Attended';
 echo							'</label>';
 echo						'</div>';
 echo						'<div id="checkbox2">';
 echo							'<label>';
-echo								'<input type="checkbox" value="">';
-echo								'Arrived late'
-							</label>
-						</div>
-						<div id="checkbox3">
-							<label>
-								<input type="checkbox" value="">
-								Left early
-							</label>
-						</div>
-						
-					<!--<div class="col-sm-3">-->
-					<label style="text-align:left">
-						Instructor Comments
-						<textarea rows="10" cols="50"></textarea>						
-					</label>
-						<!-- this needs to become an input -->
-					</div>
-					<!--</div>-->
+echo								'<input type="radio" value="submit_not_attended" name"radio">';
+echo								'Not attended';
+echo							'</label>';
+echo                          '</select>';
+echo						'</div>';
 					
-				</div>
-				<button type="submit" class="btn btn-default ">Submit</button>    
-			</form>
+						
+echo					'<!--<div class="col-sm-3">-->';
+echo					'<label style="text-align:left">';
+echo						'Instructor Comments';
+echo						'<textarea rows="10" cols="50"></textarea>	';					
+echo					'</label>';
+echo						'<!-- this needs to become an input -->';
+echo					'</div>';
+echo					'<!--</div>-->';
 
-		</div>
-	</div>
+echo				'</div>';
+echo				'<button type="submit" name="submitAttendance" class="btn btn-default ">Submit</button> ';   
+echo			'</form>';
+
+echo		'</div>';
+echo 	'</div>';
+
+
+//if form is submitted(attended clicked, insert record into db
+
+	
+
+
+					
+
 
 ?>
 

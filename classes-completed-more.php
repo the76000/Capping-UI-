@@ -18,6 +18,9 @@
   
   <body>
   
+  
+  
+  
   <!-- Top left Logo -->
 	<div class="page-header">
   <h1><a class="home-button" href="homepage.php">CPCA</a></h1>
@@ -51,157 +54,229 @@
 
 
 
-	<!--- main info goes in this div -->
-	<div class="container">
+<?php
+  
+  
+  // Connecting, selecting database
+$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
+    or die('Could not connect: ' . pg_last_error());
+  
+  session_start();
+	
+	if (!isset($_SESSION["username"]) ){
+		header('Location: index.php');
+		echo "hello";
+	}
+	
+	echo "Username = " . $_SESSION["username"]; 
+	//for testing
+	
+	// Performing SQL query
+	echo $_SESSION["searchp"];
+$p_num = $_SESSION["searchp"];
 
-		<div class = "jumbotron">
+$f_name = $_SESSION["f_name"];
+$l_name = $_SESSION["l_name"];
+echo $p_num;
+$c_a_query = "Select * from class_attendence where p_num = '$p_num'"; // query for all info related to searched participant
+
+//$c_a_query = "Select * from class_attendence ";
+
+
+
+$c_a_results = pg_query($c_a_query) or die('Query failed: ' . pg_last_error());
+	
+	$c_a_row = pg_fetch_array($c_a_results, null, PGSQL_ASSOC); // create array of result 
+	
+	$p_numDB = $c_a_row['p_num']; // set variable correct row and column of db
+	
+	//$cidDB = $c_a_row['cid'];
+	
+	echo "$p_numDB";
+	
+	$class_idDB = $c_a_row['class_id'];
+	echo "$class_idDB";
+	
+	$participant_commentDB = $c_a_row['participant_comment'];
+	
+	
+	$num_of_classes = pg_num_rows($c_a_results) - 1; //bug? idk
+	
+// Printing results in HTML
+
+// get the class name
+//joined
+/*
+$classnamequery = "Select classsub.class_subject from class_subjects classsub inner join curriculum_subjects currsub on classsub.c_subject = currsub.c_subject inner join classes_scheduled csch on csch.cid = currsub.cid inner join class_attendence ca on ca.class_id = csch.class_id where ca.p_num = '$p_num '   ";     
+	
+	$classnameresults = pg_query($classnamequery) or die('Query failed: ' . pg_last_error());
+	
+	$classnamerow = pg_fetch_array($classnameresults, null, PGSQL_ASSOC);
+	
+	$className = $classnamerow['class_subject'];
+
+*/
+
+
+$c_s_query = "Select * from classes_scheduled where class_id = '$class_idDB'"; //query classes scheduled table
+
+	$c_s_results = pg_query($c_s_query) or die('Query failed: ' . pg_last_error());
+	
+	$c_s_row = pg_fetch_array($c_s_results, null, PGSQL_ASSOC); // create array of result
+	
+	 $c_s_c_subjectDB = $c_s_row['c_subject']; // get the c_subject
+	 
+	 $classTime = $c_s_row['date_time_schedules'];
+	 
+
+$cur_query = "Select * from curriculum_subjects where c_subject = '$c_s_c_subjectDB'"; //query the curriculum table
+
+	$cur_results = pg_query($cur_query) or die('Query failed: ' . pg_last_error());
+	
+	$cur_row = pg_fetch_array($cur_results, null, PGSQL_ASSOC); // create array of result
+	
+	$cur_c_subjectDB = $cur_row['c_subject'];
+	
+	
+	
+
+$sub_query = "Select * from class_subjects where c_subject = '$cur_c_subjectDB'"; //query the class subjects  table
+
+	$sub_results = pg_query($sub_query) or die('Query failed: ' . pg_last_error());
+	
+	$sub_row = pg_fetch_array($sub_results, null, PGSQL_ASSOC); // create array of result
+	
+	
+$className = $sub_row['class_subject']; //hopefully the name of the god damn class
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+echo	'<!--- main info goes in this div -->';
+echo 	'<div class="container">';
+
+echo		'<div class = "jumbotron">';
 		
-			<div class = "row"> <!-- start row one -->
-				<div class = "col-md-4"> 
+echo			'<div class = "row"> <!-- start row one -->';
+echo				'<div class = "col-md-6"> ';
+
+				
+echo					'<p> ';
+echo					'Participant Name:';
+echo				" $f_name  $l_name ";
+
+echo               '</p>';
 					
-					<p> Filler Name </p>
+					
+				
+echo				'</div>';
+				
+echo				'<div class = "col-md-4">';
+					
+echo					'<p> Completed Classes: </p>';
 					
 					
 				
-				</div>
+echo				'</div>';
 				
-				<div class = "col-md-4">
+echo				'<div class = "col-md-2">';
 					
-					<p> Completed Classes </p>
-					
-					
-				
-				</div>
-				
-				<div class = "col-md-4">
-					
-					<p> 20</p>
+echo					'<p>';
+
+echo                  " $num_of_classes";
+echo                  '   </p>';
 					
 					
 				
-				</div>
+echo				'</div>';
 				
 				
-			</div> <!-- end row one -->
+echo			'</div> <!-- end row one -->';
 			
-			
-		<div class = "row"> <!-- start row two -->
+	# for each row, generate a class table
+while   	($c_a_row = pg_fetch_array($c_a_results, null, PGSQL_ASSOC) )
+	
+	{
+echo		'<div class = "row"> <!-- start row two -->';
 				
-				<div class = "col-md-12"> 											<!-- six tabs (band aid solution) -->
-					<p class="label label-info" style="white-space: pre;">Developing Empathy						01/01/2016       </p> 
-				</div>
+echo				'<div class = "col-md-12"> 											<!-- six tabs (band aid solution) -->';
+echo					'<p class="label label-info" style="white-space: pre;">';
+echo                 "	$className ";					
+
+#echo                     " $classTime";      
+
+echo                '</p> ';
+echo				'</div>';
 				
 				
 				
-		</div> <!-- end row two -->
+echo		'</div> <!-- end row two -->';
 		
-		<div class = "row" > 
-			<div class = "col-md-8"> 
-			<p> This is the reason </p>
-			</div>
-			
-		
-		</div>
-		
-		
-		<div class = "row"> <!-- start row three -->
-				
-				<div class = "col-md-12"> 
-					<p class="label label-info" style="white-space: pre;">Getting your needs met						01/01/2016       </p> 
-				</div>
-				
-				
-			
-			
-		</div> <!-- end row three -->
-		
-		<div class = "row" > 
-			<div class = "col-md-8"> 
-			<p> This is the reason </p>
-			</div>
+echo		'<div class = "row" > ';
+echo			'<div class = "col-md-8"> ';
+echo			'<p> ';
+
+echo              " $participant_commentDB";
+
+echo               '</p>';
+echo			'</div>';
 			
 		
-		</div>
+echo		'</div>';
+	}		
+		
+
+		
+echo		'<div class = "row">';
+		
+echo		'<div class = "col-md-4">';
+		
+echo		'</div>';
+		
+echo		'<div class = "col-md-4">';
+echo				'<!-- placeholder link -->';
+echo				'<p><button class="btn btn-default" type="submit"><a href="#">Click for more</a></button></p>';
+echo			'</div>';
+		
+echo		'</div>';
 		
 		
-		<div class = "row"> 
+echo		'<div class = "row">';
+		
+echo			'<div class = "col-md-4">';
 				
-				<div class = "col-md-12"> 																				<!-- three tabs -->
-					<p class="label label-info" style="white-space: pre;">Criticism, Confrontation, Fair Fighting			01/01/2016       </p> 
-				</div>
+echo				'<p><button class="btn btn-default" type="submit"><a href="participant-search-results.php"> Go back to results</a></button></p>';
+echo			'</div>';
+echo			'<div class = "col-md-4">';
 				
+echo				'<!-- filler for whitespace -->';
+echo			'</div>';
+		
+echo			'<div class = "col-md-4">';
 				
-			
-			
-		</div> 
-		
-		<div class = "row" > 
-			<div class = "col-md-8"> 
-			<p> This is the reason </p>
-			</div>
-			
-		
-		</div>
-		
-		<div class = "row"> 
+echo				'<button class="btn btn-default " type="submit"><a href="#">Download As Excel Sheet</a></button>';
 				
-				<div class = "col-md-12"> 																				<!-- six tabs -->
-					<p class="label label-info" style="white-space: pre;">Handling Stress							01/01/2016       </p> 
-				</div>
-				
-				
-			
-			
-		</div> 
+echo			'</div>';
 		
-		<div class = "row" > 
-			<div class = "col-md-8"> 
-			<p> This is the reason </p>
-			</div>
-			
-		
-		</div>
-		
-		<div class = "row">
-		
-		<div class = "col-md-4">
-		
-		</div>
-		
-		<div class = "col-md-4">
-				<!-- placeholder link -->
-				<p><button class="btn btn-default" type="submit"><a href="#">Click for more</a></button></p>
-			</div>
-		
-		</div>
+echo		'</div>';
 		
 		
-		<div class = "row">
-		
-			<div class = "col-md-4">
-				
-				<p><button class="btn btn-default" type="submit"><a href="participant-search-results.php"> <!--- for demo purposes only -->Go back to results</a></button></p>
-			</div>
-			<div class = "col-md-4">
-				
-				<!-- filler for whitespace -->
-			</div>
-		
-			<div class = "col-md-4">
-				
-				<button class="btn btn-default " type="submit"><a href="#">Download As Excel Sheet</a></button>
-				
-			</div>
-		
-		</div>
-		
-		
-		</div>
+echo		'</div>';
 
 
 
 	
-	</div>
+echo	'</div>';
+	
+	?>
 
 	
   </body>
