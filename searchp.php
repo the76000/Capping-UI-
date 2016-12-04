@@ -23,12 +23,12 @@
 
 <?php
 session_start();
-	
+	#checks if user is logged in
 	if (!isset($_SESSION["username"]) ){
 		header('Location: index.php');
 		echo "hello";
 	}
-	
+	#connect to database
 	$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
     or die('Could not connect: ' . pg_last_error());
 	
@@ -38,14 +38,14 @@ session_start();
 	
 	$msg = '';
 	
-	$l_name = pg_escape_string($_POST['l_name']);
+	$l_name = pg_escape_string($_POST['l_name']); #last name entered on participant-search
 	
-	$f_name = pg_escape_string($_POST['f_name']);
+	$f_name = pg_escape_string($_POST['f_name']); #first name entered on participant-search
 	
-	$p_num = pg_escape_string($_POST['p_num']);
+	$p_num = pg_escape_string($_POST['p_num']); # participant number entered
 	
 	
-	
+	//if number isnt entered
 	if($p_num == null){
 		$p_num = 0; //dummy value
 		echo "im null";
@@ -55,7 +55,7 @@ session_start();
 	}
 	
 	
-	$query = "Select * from participants inner join referrals on participants.p_num = referrals.p_num  where participants.p_num = '$p_num'";
+	$query = "Select * from participants inner join referrals on participants.p_num = referrals.p_num  where participants.p_num = '$p_num'"; //select all rows from participants where
 	
 	$results = pg_query($query) or die('Query failed: ' . pg_last_error());
 	

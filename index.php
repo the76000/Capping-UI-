@@ -61,7 +61,7 @@
 <div class="jumbotron login_panel">
 <div class= "login_wrapper">
 
-
+<!-- this launches another php file --->
   <form class="form-horizontal" action="includes/users.php" method="post">
   
   <div class="form-group">

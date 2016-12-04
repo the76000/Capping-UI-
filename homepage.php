@@ -25,7 +25,7 @@
   # Connect to Postgres server and the database
     require( 'includes/connect.php' ) ;
   session_start();
-	
+	#check to see if the browser session has logged in.
 	if (!isset($_SESSION["username"]) ){
 		header('Location: index.php');
 		echo "hello";

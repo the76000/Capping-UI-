@@ -35,7 +35,7 @@ $result = pg_query($query) or die('Query failed: ' . pg_last_error());
 
 
 
-
+#returns referral info for testing
 echo "<table>\n";
 while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
     echo "\t<tr>\n";
@@ -47,7 +47,7 @@ while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
 echo "</table>\n";
   
   session_start();
-	
+	#checks if user is logged in
 	if (!isset($_SESSION["username"]) ){
 		header('Location: index.php');
 		echo "hello";
@@ -103,6 +103,8 @@ echo "</table>\n";
 
 <div class = "row search">
 
+
+	<!-- launches a different php file -->
 	<form class="navbar-form" role="search" action="searchp.php" method="post" >
 			<div class="input-group">
 				<input type="text" class="form-control input-lg" placeholder="first name" name="f_name" id="srch-term">
