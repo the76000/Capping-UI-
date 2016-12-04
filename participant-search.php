@@ -107,15 +107,15 @@ echo "</table>\n";
 	<!-- launches a different php file -->
 	<form class="navbar-form" role="search" action="searchp.php" method="post" >
 			<div class="input-group">
-				<input type="text" class="form-control input-lg" placeholder="first name" name="f_name" id="srch-term">
+				<input type="text" class="form-control input-lg" placeholder="first name" name="f_name" id="srch-term" oninput="validateAlpha('srch-term');">
 				<div class="input-group-btn ">
 			
 			<div class="input-group">
-				<input type="text" class="form-control input-lg" placeholder="last name" name="l_name" id="srch-term">
+				<input type="text" class="form-control input-lg" placeholder="last name" name="l_name" id="srch-term" oninput="validateAlpha('srch-term');">
 				<div class="input-group-btn ">
 				
 			<div class="input-group">
-				<input type="text" class="form-control input-lg" placeholder="particpant number(optional)" name="p_num" id="srch-term">
+				<input type="text" class="form-control input-lg" placeholder="particpant number(optional)" name="p_num" id="srch-term" oninput="isNumberKey('srch-term');">
 				<div class="input-group-btn ">
 				
 			
@@ -158,7 +158,8 @@ echo "</table>\n";
 </div>
 
 
-
+<!-- JS Functions  -->
+<script src="intake/FormAppFunctions.js"></script>
 		
   </body>
 </html>

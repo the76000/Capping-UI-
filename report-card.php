@@ -52,7 +52,7 @@
 	</nav> <!-- end of navbar-->
 	
 	
-	<?php
+	<?php 
 session_start();
 	
 	if (!isset($_SESSION["username"]) ){
@@ -148,7 +148,7 @@ echo						'</select>  ';
 
 /*
 <td><input type="radio" name="id" value="<?php echo $row['id']; ?>" <?php if($row['selected'] == 1) echo "checked"; ?> /></td>
-*/
+*/ 
 echo					'</div>';
 echo			'</div>';
 echo				'<div class="row">';

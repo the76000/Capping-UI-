@@ -70,7 +70,7 @@
 		
 		<form class="form" role="search">
 			<div class="input-group">
-				<input type="text" class="form-control input-lg" placeholder="Search" name="srch-term" id="srch-term">
+				<input type="text" class="form-control input-lg" placeholder="Search" name="srch-term" id="srch-term" oninput="validateAlpha('srch-term');" >
 				<div class="input-group-btn ">
 					<button class="btn btn-lg" type="submit"><i class="glyphicon glyphicon-search"></i></button>
 				</div>
@@ -86,7 +86,7 @@
 	
 	
 	</div>
-	
+
 	
 	<div class = "container">
 	
@@ -192,8 +192,8 @@
 	
 	</div>
 	
-	
-	
+	<!-- JS Functions  -->
+<script src="intake/FormAppFunctions.js"></script>
 	
 	
 	

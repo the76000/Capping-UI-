@@ -57,7 +57,7 @@
 			<div class = "row"> <!-- start row one -->
 				<form class="navbar-form" role="search">
 					<div class="input-group">
-						<input type="text" class="form-control input-lg" placeholder="Search" name="srch-term" id="srch-term">
+						<input type="text" class="form-control input-lg" placeholder="Search" name="srch-term" id="srch-term" oninput="validateAlpha('srch-term');">
 						<div class="input-group-btn ">
 							<button class="btn btn-lg" type="submit"><i class="glyphicon glyphicon-search"></i></button>
 						</div>
@@ -68,7 +68,7 @@
 			<div class="row">
 				<div class="col-md-4 input-lg">
 					<label>Select option</label>
-					<!--Per the template on lucid, this is supposed to be a drop down of different options -->
+					<!--Per the template on lucid, this is supposed to be a drop down of different options, but I'm not sure what the options are supposed to be -->
 					<select id = "myList">
 						<option value = "1">one</option>
 						<option value = "2">two</option>
@@ -99,6 +99,8 @@
 
 	</div>
 
+<!-- JS Functions  -->
+<script src="intake/FormAppFunctions.js"></script>
 	
 </body>
 </html>
