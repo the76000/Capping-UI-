@@ -124,11 +124,11 @@ echo                 '</label>';
 echo					'</div>';
 echo					'<div class="col-md-4 input-lg">';
 echo					'<label>Select class</label>';
-echo						'<select class="form-control">';
+echo						'<select class="form-control" name="class_selected">';
 
 					while ($line = pg_fetch_array($classesresult, null, PGSQL_ASSOC)){
 						foreach($line as $col_value){
-echo						"<option>   '$col_value'</option>";
+echo						"<option value='$col_value'>   '$col_value'</option>";
 
 						}
 
