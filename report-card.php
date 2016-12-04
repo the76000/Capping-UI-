@@ -138,10 +138,11 @@ echo						"<option value='$col_value'>   '$col_value'</option>";
 echo						'</select>  ';
 
 
+//if 
 
-
-
-
+/*
+<td><input type="radio" name="id" value="<?php echo $row['id']; ?>" <?php if($row['selected'] == 1) echo "checked"; ?> /></td>
+*/
 echo					'</div>';
 echo			'</div>';
 echo				'<div class="row">';
