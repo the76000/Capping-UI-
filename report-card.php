@@ -102,7 +102,13 @@ $employeeresult = pg_query($employeequery) or die('Query failed: ' . pg_last_err
 $employeerow = pg_fetch_array($employeeresult, null, PGSQL_ASSOC);	
 	
 $employeeID = 	$employeerow['eid'];
-	
+
+
+$attendedclassquery = "SELECT ca.* FROM class_attendence ca inner join participants p on ca.p_num = p.p_num where ca.p_num = '$participantnumber'";
+$attendedclassresult = pg_query($attendedclassquery) or die('Query failed: ' . pg_last_error());
+//$attendedclassrow = pg_fetch_array($attendedclassresult, null, PGSQL_ASSOC);		
+
+
 	
 	
 
@@ -150,20 +156,38 @@ echo					'<div class="col-sm-5">';
 				
 					
 echo						'<div id="checkbox1">';
-echo						'<label>';
-echo								'<input type="radio" value="submit_attended" name="radio">';
-echo								'Attended';
-echo							'</label>';
-echo						'</div>';
-echo						'<div id="checkbox2">';
-echo							'<label>';
-echo								'<input type="radio" value="submit_not_attended" name"radio">';
-echo								'Not attended';
-echo							'</label>';
-echo                          '</select>';
-echo						'</div>';
+
+
+			if(pg_num_rows($attendedclassresult) > 0){
+				echo						'<label>';
+				echo								'<input type="radio" value="submit_attended" name="radio" checked = "checked">';
+				echo								'Attended';
+				echo							'</label>';
+				echo						'<div id="checkbox2">';
+				echo							'<label>';
+				echo								'<input type="radio" value="submit_not_attended" name"radio">';
+				echo								'Not attended';
+				echo							'</label>';
+				echo                          '</select>';
+				echo						'</div>';
+
+
+			} else{
+
+
+				echo						'<label>';
+				echo								'<input type="radio" value="submit_attended" name="radio" >';
+				echo								'Attended';
+				echo							'</label>';
+				echo						'<div id="checkbox2">';
+				echo							'<label>';
+				echo								'<input type="radio" value="submit_not_attended" name"radio" checked = "checked">';
+				echo								'Not attended';
+				echo							'</label>';
+				echo                          '</select>';
+				echo						'</div>';
 					
-						
+			}						
 echo					'<!--<div class="col-sm-3">-->';
 echo					'<label style="text-align:left">';
 echo						'Instructor Comments';
