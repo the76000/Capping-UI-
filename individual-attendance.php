@@ -69,15 +69,23 @@
 		<div class = "col-md-8">
 		
 		<form class="form" role="search">
-			<div class="input-group">
-				<input type="text" class="form-control input-lg" placeholder="Search" name="srch-term" id="srch-term" oninput="validateAlpha('srch-term');" >
+			<div class = "col-md-3"> 
+		
+				<div class="input-group">
+						<input type="text" class="form-control input-lg" placeholder="first name" name="f_name" id="attendance-f_name" oninput="validateAlpha('attendance-f_name');">
+				</div>
+			</div>
+			<div class = "col-md-3"> 
+				<div class="input-group">
+					<input type="text" class="form-control input-lg" placeholder="last name" name="l_name" id="attendance-l_name" oninput="validateAlpha('attendance-l_name');">
+				</div>
+			</div>
+			<div class = "col-md-3"> 
 				<div class="input-group-btn ">
 					<button class="btn btn-lg" type="submit"><i class="glyphicon glyphicon-search"></i></button>
 				</div>
-				<!-- CERTAINLY needs a link to the database for search capabilities -->
 			</div>
 			</form>
-	
 		</div>
 	
 	</div>

@@ -53,7 +53,14 @@
 		
 		<div class="col-md-4">	
 		
-			<input type="text" class="form-control input-lg" placeholder="Participant 1" id="reportParticipant1">
+			<div class="input-group">
+				<input type="text" class="form-control input-lg" placeholder="first name" name="f_name" id="srch-f_name1" oninput="validateAlpha('srch-f_name1');">
+			</div >
+			
+			<div class="input-group">
+				<input type="text" class="form-control input-lg" placeholder="last name" name="l_name" id="srch-l_name1" oninput="validateAlpha('srch-l_name1');">
+			</div>
+
 			<select multiple class="form-control" id="reportSelect1">
 				<option>Attendance</option>
 				<option>Birthday</option>
@@ -61,16 +68,28 @@
 			</select>		
 		</div>
 		<div class="col-md-4">	
-			<input type="text" class="form-control input-lg" placeholder="Participant 2" id="reportParticipant2">
-			<select multiple class="form-control" id="reportSelect1">
+			<div class="input-group">
+				<input type="text" class="form-control input-lg" placeholder="first name" name="f_name" id="srch-f_name2" oninput="validateAlpha('srch-f_name2');">
+			</div >
+			
+			<div class="input-group">
+				<input type="text" class="form-control input-lg" placeholder="last name" name="l_name" id="srch-l_name2" oninput="validateAlpha('srch-l_name2');">
+			</div>
+			<select multiple class="form-control" id="reportSelect2">
 				<option>Attendance</option>
 				<option>Birthday</option>
 				<option>Courses to complete</option>
 			</select>		
 		</div>	
 		<div class="col-md-4">	
-			<input type="text" class="form-control input-lg" placeholder="Participant 3" id="reportParticipant3">
-			<select multiple class="form-control" id="reportSelect1">
+			<div class="input-group">
+				<input type="text" class="form-control input-lg" placeholder="first name" name="f_name" id="srch-f_name3" oninput="validateAlpha('srch-f_name3');">
+			</div >
+			
+			<div class="input-group">
+				<input type="text" class="form-control input-lg" placeholder="last name" name="l_name" id="srch-l_name3" oninput="validateAlpha('srch-l_name3');">
+			</div>
+			<select multiple class="form-control" id="reportSelect3">
 				<option>Attendance</option>
 				<option>Birthday</option>
 				<option>Courses to complete</option>
@@ -86,7 +105,8 @@
 	
 	
 	
-
+<!-- JS Functions  -->
+<script src="intake/FormAppFunctions.js"></script>
 	
 </body>
 

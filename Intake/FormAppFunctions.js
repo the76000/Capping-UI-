@@ -24,6 +24,23 @@ function isDate(id, event){ // validates that what is added is ONLY date (adds s
 	document.getElementById(id).value = textInput;
 }
 
+function validateAlphaWithSpace(id){ //validates that what is added is ONLY alphabetical with whitespace
+debugger;
+    var textInput = document.getElementById(id).value;
+    textInput = textInput.replace(/[^A-Za-z" "]/g, "");
+    document.getElementById(id).value = textInput;
+}
+
+function capitalizeFirstLetter(id){ //Capitalizes the first letter of input fields for names
+	var tempChar = "";
+	var textInput = "";
+	textInput = document.getElementById(id).value;
+	tempChar = textInput.slice(0,1)
+	tempChar.toUppercase();
+	textInput = tempChar + textInput;
+	return textInput;
+}
+
 function isDateOffFocus(id){ // makes sure bad data is not passed from a date field 
 	var textInput = document.getElementById(id).value;
 	var numOfSlashes = (textInput.split("/").length) - 1;

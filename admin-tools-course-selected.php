@@ -76,7 +76,7 @@
 					<div class="form-group">
     				<label for="curriculumTitle" class="col-sm-4 control-label">Change Curriculum Title </label>
    						 <div class="col-sm-8">
-      						<input  class="form-control" id="curriculumTitle" placeholder="Title">
+      						<input  class="form-control" id="curriculumTitle" placeholder="Title" oninput="validateAlphaWithSpace('curriculumTitle');">
     					</div>
  					 </div>
 
@@ -91,7 +91,7 @@
  					 <div class="form-group">
     				<label for="curriculumTime" class="col-sm-4 control-label">Change Meeting time for all classes </label>
    						 <div class="col-sm-8">
-      						<input  class="form-control" id="curriculumTime" placeholder="Time">
+      						<input  class="form-control" id="curriculumTime" placeholder="Time" oninput="validateAlphaWithSpace('curriculumTime');">
     					</div>
  					 </div>
 
@@ -106,7 +106,7 @@
  					  <div class="form-group">
     				<label for="curriculumLocation" class="col-sm-4 control-label">Change Location for all classes </label>
    						 <div class="col-sm-8">
-      						<input  class="form-control" id="curriculumLocation" placeholder="Time">
+      						<input  class="form-control" id="curriculumLocation" placeholder="Time" oninput="validateAlphaWithSpace('curriculumLocation');">
     					</div>
  					 </div>
 
@@ -121,7 +121,7 @@
  					 <div class="form-group">
     				<label for="curriculumTeacher" class="col-sm-4 control-label">Change Teacher for all classes </label>
    						 <div class="col-sm-8">
-      						<input  class="form-control" id="curriculumTeacher" placeholder="Time">
+      						<input  class="form-control" id="curriculumTeacher" placeholder="Time" oninput="validateAlphaWithSpace('curriculumTeacher');">
     					</div>
  					 </div>
 
@@ -155,7 +155,8 @@
 	
 	
 	
-
+<!-- JS Functions  -->
+<script src="intake/FormAppFunctions.js"></script>
 	
 </body>
 

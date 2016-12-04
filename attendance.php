@@ -54,8 +54,13 @@
 
 			<form class="navbar-form">
 				<div class="input-group">
-					<input type="text" class="form-control input-lg" placeholder="Participant Name" name="p_num" id="srch-term">
-				</div>
+					<input type="text" class="form-control input-lg" placeholder="first name" name="f_name" id="attendance-f_name" oninput="validateAlpha('attendance-f_name');">
+				</div class="input-group-btn ">
+			
+				<div class="input-group">
+					<input type="text" class="form-control input-lg" placeholder="last name" name="l_name" id="attendance-l_name" oninput="validateAlpha('attendance-l_name');">
+				</div class="input-group-btn ">
+
 				<div class="row" id="attendanceRow">
 
 					<div class="col-md-4 input-lg">
@@ -106,19 +111,19 @@
 					<div class="col-sm-5">
 						<div id="checkbox1">
 							<label>
-								<input type="checkbox" value="">
+								<input type="radio" value="" name="attendanceRadio">
 								Attended
 							</label>
 						</div>
 						<div id="checkbox2">
 							<label>
-								<input type="checkbox" value="">
+								<input type="radio" value="" name="attendanceRadio">
 								Arrived late
 							</label>
 						</div>
 						<div id="checkbox3">
 							<label>
-								<input type="checkbox" value="">
+								<input type="radio" value="" name="attendanceRadio">
 								Left early
 							</label>
 						</div>

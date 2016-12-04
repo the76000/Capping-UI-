@@ -124,13 +124,17 @@
 }
 
 #checkbox1 {
-		margin-right: 4px;
+		float: left;
+		padding-right: 7px;
 	}
 
 #checkbox2 {
-		margin-left: 11px;
+		float: left;
+		padding-right: 7px;
 	}
 #checkbox3 {
+		float: left;
+		padding-right: 7px;
 	}
 
 
@@ -275,36 +279,21 @@
 
 /*For Generated Reports*/
 #reportSelect1{
-	width: 35%;
+	width: 59%;
 	margin-top: 10px;
-	margin-left: 20px;
+	margin-right: 20px;
 }
 
 #reportSelect2{
-	width: 35%;
+	width: 59%;
 	margin-top: 10px;
-	margin-left: 20px;
+	margin-right: 20px;
 }
 
 #reportSelect3{
-	width: 35%;
+	width: 59%;
 	margin-top: 10px;
-	margin-left: 20px;
-}
-
-#reportParticipant1{
-	width: 35%;	
-	margin-left: 20px;
-}
-
-#reportParticipant2{
-	width: 35%;	
-	margin-left: 20px;
-}
-
-#reportParticipant3{
-	width: 35%;	
-	margin-left: 20px;
+	margin-right: 20px;
 }
 
 
