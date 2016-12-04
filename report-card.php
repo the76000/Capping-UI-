@@ -65,7 +65,7 @@ session_start();
  
  $cidSession = $_SESSION['report_card_curr'] ;
  
-
+ $_SESSION['pnumreportcard'] = $participantnumber;
  
    
   // Connecting, selecting database
