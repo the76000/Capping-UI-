@@ -61,9 +61,7 @@ session_start();
 	}
 
 
- $participantnumber = $_POST['participant_name'];
- 
- $_SESSION['report-card-pnum'] = $participantnumber ;
+ $participantnumber = $_SESSION['report-card-pnum'] ;
  
  $cidSession = $_SESSION['report_card_curr'] ;
  
@@ -81,15 +79,11 @@ $fnamerow = pg_fetch_array($fnameresult, null, PGSQL_ASSOC);
 
 $participantfname = $fnamerow['ref_f_name'];
 
-$_SESSION['report-card-fname'] = $participantfname;
-
 $lnamequery = "SELECT r.ref_l_name FROM referrals r inner join participants p on p.p_num = r.p_num where p.p_num =  '$participantnumber'";
 $lnameresult = pg_query($lnamequery) or die('Query failed: ' . pg_last_error());
 $lnamerow = pg_fetch_array($lnameresult, null, PGSQL_ASSOC);
 
 $participantlname = $lnamerow['ref_l_name'];
-
-$_SESSION['report-card-lname'] = $participantlname;
 
 
 $currnamequery = "SELECT curriculum_name FROM curriculum where cid = '$cidSession' ";
@@ -110,10 +104,15 @@ $employeerow = pg_fetch_array($employeeresult, null, PGSQL_ASSOC);
 $employeeID = 	$employeerow['eid'];
 
 
-$attendedclassquery = "SELECT ca.* FROM class_attendence ca inner join participants p on ca.p_num = p.p_num where ca.p_num = '$participantnumber'";
+$class_selected = $_POST['class_selected'];
+
+
+$attendedclassquery = "SELECT ca.* FROM class_attendence ca inner join classes_scheduled csch on ca.class_id = csch.class_id inner join curriculum_subjects currsub on currsub.cid = csch.cid inner join class_subjects csub on csub.c_subject = currsub.c_subject where ca.p_num = '$participantnumber' AND csub.class_subject = '$class_selected' ";
 $attendedclassresult = pg_query($attendedclassquery) or die('Query failed: ' . pg_last_error());
 //$attendedclassrow = pg_fetch_array($attendedclassresult, null, PGSQL_ASSOC);		
 
+
+	
 
 	
 	
@@ -157,6 +156,66 @@ echo			'</form>';
 
 
 
+//if 
+
+/*
+<td><input type="radio" name="id" value="<?php echo $row['id']; ?>" <?php if($row['selected'] == 1) echo "checked"; ?> /></td>
+*/
+echo			'<form action = "post-report-card.php" method="post" >';
+echo				'<div class="row">';
+echo					'<div class="col-sm-5">';
+				
+					
+echo						'<div id="checkbox1">';
+
+
+			if(pg_num_rows($attendedclassresult) > 0){
+				echo						'<label>';
+				echo								'<input type="radio" value="submit_attended" name="radio" checked = "checked">';
+				echo								'Attended';
+				echo							'</label>';
+				echo						'<div id="checkbox2">';
+				echo							'<label>';
+				echo								'<input type="radio" value="submit_not_attended" name"radio">';
+				echo								'Not attended';
+				echo							'</label>';
+				echo                          '</select>';
+				echo						'</div>';
+
+
+			} else{
+
+
+				echo						'<label>';
+				echo								'<input type="radio" value="submit_attended" name="radio" >';
+				echo								'Attended';
+				echo							'</label>';
+				echo						'<div id="checkbox2">';
+				echo							'<label>';
+				echo								'<input type="radio" value="submit_not_attended" name"radio" checked = "checked">';
+				echo								'Not attended';
+				echo							'</label>';
+				echo                          '</select>';
+				echo						'</div>';
+					
+			}						
+echo					'<!--<div class="col-sm-3">-->';
+echo					'<label style="text-align:left">';
+echo						'Instructor Comments';
+echo						'<textarea rows="10" cols="50"></textarea>	';					
+echo					'</label>';
+echo						'<!-- this needs to become an input -->';
+echo					'</div>';
+echo					'<!--</div>-->';
+
+
+
+echo		'</div>';
+echo				'</div>';
+echo				'<button type="submit" name="submitAttendance" class="btn btn-default ">Submit</button> ';   
+echo           '</form>';
+
+echo 	'</div>';
 
 
 //if form is submitted(attended clicked, insert record into db

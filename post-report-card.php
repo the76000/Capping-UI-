@@ -21,16 +21,16 @@ session_start();
 	
 	echo "$attendence";
 	
-	$class_selected = $_POST['class_selected'];
+	//$class_selected = $_POST['class_selected'];
 	
-	echo "$class_selected";
+	//echo "$class_selected";
 	
 	$cidselect = $_SESSION['report_card_curr'] ;
 	echo "hey";
 	echo "$cidselect";
 	$pnum = $_SESSION['pnumreportcard'];
 	
-	$query = "SELECT ca.class_id FROM class_attendence ca inner join participants p on p.p_num = ca.p_num where p.cid = '$cidselect' ";
+	$query = "SELECT ca.class_id FROM class_attendence ca inner join classes_scheduled csch on ca.class_id = csch.class_id where csch.cid = '$cidselect' ";
 	$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 	$row = pg_fetch_array($result, null, PGSQL_ASSOC);
 	
