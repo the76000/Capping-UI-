@@ -60,17 +60,34 @@
 			<div class = "row admin-courses" style= "text-align: center;">
 			
 				<div class = "col-md-6">
-			
-					<a href="admin-tools-course-selected.php"><button id="edit" class="btn btn-default">Edit</button></a>
-					<select>
-						<option value="womensinhouse">Women's in-house</option>
-						<option value="spanishspeakingwomeninhouse">Spanish Speaking Women In-House</option>
-						<option value="mensdcjail">Men's DC Jail</option>
-						<option value="cornerstone">Cornerstone</option>
-						<option value="mensinhouse">Men's in-house</option>
-						<option value="meadowrun">Meadow Run</option>
+					<form class="navbar-form" role="search" action="admin-tools-course-selected.php" method="post">
+					<select class="form-control" name = "selected" id="curriculumName">
+					<?php
+						session_start();
+	
+						if (!isset($_SESSION["username"]) ){
+							header('Location: index.php');
+							echo "hello";
+						}
+					  
+					  
+						// Connecting, selecting database
+						$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
+							or die('Could not connect: ' . pg_last_error());
+
+						// Performing SQL query
+						$query = 'SELECT * FROM public.curriculum ORDER BY cid ASC ';
+						
+						$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+						
+					while($row = pg_fetch_array($result)){
+						echo "<option value='".$row['curriculum_name']."'>".$row['curriculum_name']."</option>";
+					}
+					?>
 					</select> 
+					<input type="submit" value="Edit" id="edit" class="btn btn-default" style="width:20%; font-weight:bold;"></input>
 					<!--<p class="label label-info">Women's in-house</p>-->
+					</form>
 				</div>
 			</div>
 			

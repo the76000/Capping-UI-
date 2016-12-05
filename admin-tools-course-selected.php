@@ -58,13 +58,12 @@
 
 		
 
-
 			<div class = "row ">
 				<div class = "col-md-6">
-					<h1> Curriculum: </h1>
+					<h1> <?php echo $_POST['selected'];?> </h1>
 					<select>
 					<?php
-						/*session_start();
+						session_start();
 	
 						if (!isset($_SESSION["username"]) ){
 							header('Location: index.php');
@@ -77,13 +76,13 @@
 							or die('Could not connect: ' . pg_last_error());
 
 						// Performing SQL query
-						$query = 'SELECT * FROM classes';
-						$result = pg_query($query) or die('Query failed: ' . pg_last_error());
-						$resultArr = pg_fetch_array($result);
-						*/
-					for($i = 0; $i<10; $i++){
-						echo "<option value='womensinhouse'".$i.">Women's in-house ".$i."</option>";
-					}
+						//$query = 'SELECT * FROM class_subjects WHERE class_subjects.c_subject =  ';
+						
+						//$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+						
+					//while($row = pg_fetch_array($result)){
+					//	echo "<option value='".$row['curriculum_name']."'>".$row['curriculum_name']."</option>";
+					//}
 					?>
 					</select> 
 					<h1> Meets at 0:00 at Filler Location</h1>
