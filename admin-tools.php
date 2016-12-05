@@ -57,11 +57,11 @@
 
 			<div class = "row">
 
-				<a href="admin-tools-course.php"><button class="btn btn-default course-launcher-links" type="submit">Change a Curriculum/Schedule</button></a>
+				<a href="admin-tools-course.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Change a Curriculum/Schedule</button></a>
 
-				<a href="Intake/IntakeApp.php"><button class="btn btn-default course-launcher-links" type="submit">Change Particpant Info</button></a>
+				<a href="Intake/IntakeApp.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Change Particpant Info</b></button></a>
 
-				<a href="#"><button class="btn btn-default course-launcher-links" type="submit">Change Attendance Record</button></a>
+				<a href="#"><button class="btn btn-default course-launcher-links" type="submit"><b>Change Attendance Record</b></button></a>
 
 			</div>
 			
