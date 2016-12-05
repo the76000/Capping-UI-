@@ -28,11 +28,13 @@
 		// Check to see if the credentials are right
 		if($email == $emailDB && $password == $passwordDB){ //if the email entered equals the email from the query, take the user to the homepage
 			// Now let's check the permission level
-			header('Location: http://localhost:8080/homepage.php');
+			header('Location: /homepage.php');
 			session_start();
 			$_SESSION["username"] = $email; //create a session user to check on all other pages if the user has logged in.
 		}else{
 			echo "<h1>Error: User not found.</h1>";
+			
+			echo "<a href='/index.php'> click here to go back </a> ";
 		}				
 			
 	?>

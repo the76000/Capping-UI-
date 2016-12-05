@@ -113,11 +113,11 @@ echo "</table>\n";
 			<div class="input-group">
 				<input type="text" class="form-control input-lg" placeholder="last name" name="l_name" id="srch-l_name" oninput="validateAlpha('srch-l_name');">
 				<div class="input-group-btn ">
-				
+				<!--
 			<div class="input-group">
 				<input type="text" class="form-control input-lg" placeholder="participant number(optional)" name="p_num" id="srch-p_num" oninput="isNumberKey('srch-p_num');">
 				<div class="input-group-btn ">
-				
+				-->
 			
 					<button class="btn btn-lg" type="submit"><i class="glyphicon glyphicon-search"></i></button>
 				</div>
@@ -131,31 +131,6 @@ echo "</table>\n";
 
 
 
-
-<div class = "row search-links">
-<div class="page-header">
-  <h2>Recently Viewed</h2>
-	</div>
-
-		<div class ="participant-result-names col-md-8">
-		
-				<div class = "col-md-2">
-				<button class="btn btn-lg" type="submit"><a href="participant-search-results.php" <!-- this is for demo purposes -->Filler Name</a></button>
-														<!-- needs to be generated from the database -->
-				</div>
-		
-				<div class = "col-md-2">
-				<button class="btn btn-lg" type="submit"><a href="#">Filler Name</a></button>
-				</div>
-		
-				<div class = "col-md-2">
-				<button class="btn btn-lg" type="submit"><a href="#">Filler Name</a></button>
-				</div>
-		</div>	
-
-
-
-</div>
 
 
 <!-- JS Functions  -->

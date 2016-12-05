@@ -71,11 +71,13 @@
 	
 	//for testing
 	
-	$l_name = $_SESSION['l_name'];
+	//$l_name = $_SESSION['l_name'];
 	
-	$f_name = $_SESSION['f_name'];
+	//$f_name = $_SESSION['f_name'];
 	
 	$p_num =$_POST['participant_num'];
+	
+	$_SESSION['searchp_num'] = $p_num; //for report card
 	
 	echo "$p_num";
 	
@@ -102,7 +104,15 @@
 	
 	$f_nameDB = $row['ref_f_name'];
 	
+	$dobDB = $row['dob'];
+	
+	
+	
+	
+	
 	$cidDB = $row['cid'];
+	
+	$_SESSION['searchp_cid'] = $cidDB; //for report card
 	
 	//echo " $p_numDB ";
 	
@@ -203,14 +213,27 @@ echo			'</div>';
 echo			'<div class = "row search-results">';
 			
 echo			'<div class = "col-md-4">';
-echo			'<p> Group </p>';
+echo			'<p> Curriculum </p>';
 echo			'</div>';
 			
 echo			'<div class = "col-md-4">';
 echo			'<p class="label label-info">';
 echo             "$cidDB ";
 echo            '</p>'; 
+echo			'</div>';
+echo			'</div>';
 
+
+echo			'<div class = "row search-results">';
+echo			'<div class = "col-md-4">';
+echo			'<p> Date of Birth </p>';
+echo			'</div>';
+
+			
+echo			'<div class = "col-md-4">';
+echo			'<p class="label label-info">';
+echo             "$dobDB";
+echo            '</p>'; 
 echo			'</div>';
 echo			'</div>';
 			
@@ -232,9 +255,7 @@ echo				'<p>';
  echo             '</p>';
 echo				'</div>';
 				
-echo				'<div class = "col-md-6">';
-echo				'<p> <a href="classes-completed-more.php"> <!--- for demo purposes --> Click for more information </a> </p>';
-echo				'</div>';
+
 			
 			
 echo			'</div>';
@@ -253,10 +274,7 @@ echo				'<p>';
  
 echo				'</div>';
 				
-echo				'<div class = "col-md-6">';
-echo				'<p> <a href="missed-class-more.php"> <!--- for demo purposes --> Click for more information </a> </p>';
-echo				'</div>';
-			
+
 				
 			
 			
@@ -286,7 +304,29 @@ echo			'<p> <a href="#"> Link to Participant Intake Form </a> </p>';
 
 echo			'<p> <a href="#"> Link to Participant Referral Form </a> </p>';
 
-echo			'<p> <a href="#"> Link to Participant Report Card </a></p>';
+
+/*
+
+ideas for linking to report card, make the link a form to send the cid and pnum thru post to report card
+ $participantnumber = $_POST['participant_name'];
+ 
+ $_SESSION['report-card-pnum'] = $participantnumber ;
+ 
+ 
+
+ $cidSession = $_SESSION['report_card_curr'] ;
+ 
+ 
+		echo "<form action = 'participant-search-results.php' method='post'>";
+		echo "$f_name";
+		//echo "$dob_col_value";
+		echo "<input type = 'submit' name = 'participant_num'  value = ' $p_col_value  '/>";
+		//echo  "<a href='participant-search-results.php?add=clicked'>$f_col_value   $l_col_value $p_col_value </a>";
+		echo "</form>";
+
+*/
+
+echo			'<p> <a href="report-card"> Link to Participant Report Card </a></p>';
 		
 		
 		

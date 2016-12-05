@@ -42,7 +42,7 @@ session_start();
 	
 	$f_name = pg_escape_string($_POST['f_name']); #first name entered on participant-search
 	
-	$p_num = pg_escape_string($_POST['p_num']); # participant number entered
+	//$p_num = pg_escape_string($_POST['p_num']); # participant number entered
 	
 	
 	//if number isnt entered
@@ -110,7 +110,7 @@ session_start();
 	}else{	
 
 */	
-
+	//if only first name is given
 	if($f_name != null && $l_name == null){
 		$ref_f_query = "Select ref_f_name from referrals where ref_f_name = '$f_name'";
 	
@@ -175,10 +175,10 @@ session_start();
 			
 	
 		
-		//make this a form
+		
 		echo "<form action = 'participant-search-results.php' method='post'>";
-		echo "$f_name";
-		echo "$dob_col_value";
+		echo "$f_col_value";
+		//echo "$dob_col_value";
 		echo "<input type = 'submit' name = 'participant_num'  value = ' $p_col_value  '/>";
 		//echo  "<a href='participant-search-results.php?add=clicked'>$f_col_value   $l_col_value $p_col_value </a>";
 		echo "</form>";
@@ -195,9 +195,11 @@ session_start();
 	
 	}
 	
+	//if only last name is given
+	
 	if($f_name == null && $l_name != null){
 		
-		$ref_f_query = "Select ref_l_name from referrals where ref_l_name = '$l_name'";
+			$ref_f_query = "Select ref_l_name from referrals where ref_l_name = '$l_name'";
 	
 		$ref_f_results = pg_query($ref_f_query) or die('Query failed: ' . pg_last_error());
 	
@@ -213,17 +215,17 @@ session_start();
 		
 		//$first_names = array_column($ref_f_row, 'ref_f_name');
 		
-		$ref_l_query = "Select dob from referrals where referrals.ref_l_name = '$l_name'";
+		$ref_dob_query = "Select dob from referrals where referrals.ref_l_name = '$l_name'";
 	
-		$ref_l_results = pg_query($ref_l_query) or die('Query failed: ' . pg_last_error());
+		$ref_dob_results = pg_query($ref_dob_query) or die('Query failed: ' . pg_last_error());
 	
 
 	
-		$ref_l_row = pg_fetch_array($ref_l_results, 0, PGSQL_ASSOC);
+		$ref_dob_row = pg_fetch_array($ref_dob_results, 0, PGSQL_ASSOC);
 		
 		
 		
-		$ref_p_query = "Select dob from referrals where  referrals.ref_l_name= '$f_name'";
+		$ref_p_query = "Select p_num from referrals where referrals.ref_l_name= '$l_name'";
 	
 		$ref_p_results = pg_query($ref_p_query) or die('Query failed: ' . pg_last_error());
 	
@@ -247,37 +249,40 @@ session_start();
 		
 		//$p_numDB = $ref_row['p_num'];
 		
-		while ($l_line = pg_fetch_array($ref_l_results, null, PGSQL_ASSOC)){
-    
-		foreach ($l_line as $l_col_value) {
+		
 			
-			/*
+			
 			while ($p_line = pg_fetch_array($ref_p_results, null, PGSQL_ASSOC)){
     
 		foreach ($p_line as $p_col_value) {
-			*/
+			
+			
+			
 			
 			
 	
 		
-		//make this a form
-		echo  "<a href='participant-search-results.php?add=clicked'>$f_col_value   $l_col_value </a>";
 		
-		/*
-		}
-	
-		}
-		*/
+		echo "<form action = 'participant-search-results.php' method='post'>";
+		echo "$f_col_value";
+		//echo "$dob_col_value";
+		echo "<input type = 'submit' name = 'participant_num'  value = ' $p_col_value  '/>";
+		//echo  "<a href='participant-search-results.php?add=clicked'>$f_col_value   $l_col_value $p_col_value </a>";
+		echo "</form>";
+		
+		
+			
+		
 				}
 			}
 		}
 	}
 	
-		
-		
+	
+	
 	}
 	
-	
+	//if both first and last name are entered
 	if($f_name != null && $l_name != null){
 		
 		
@@ -363,7 +368,7 @@ if ($_GET['add'] == 'clicked'){
 	
 	
   
-  <!-- Top left Logo -->
+   <!-- Top left Logo -->
 	<div class="page-header">
   <h1><a class="home-button" href="homepage.php">CPCA</a></h1>
 	</div>
@@ -396,13 +401,25 @@ if ($_GET['add'] == 'clicked'){
 
 <div class = "row search">
 
-	<form class="navbar-form" role="search" action="includes/searchp.php" method="post" >
+
+	<!-- launches a different php file -->
+	<form class="navbar-form" role="search" action="searchp.php" method="post" >
 			<div class="input-group">
-				<input type="text" class="form-control input-lg" placeholder="Search" name="p_num" id="srch-term" oninput="validateAlpha('srch-term');">
+				<input type="text" class="form-control input-lg" placeholder="first name" name="f_name" id="srch-f_name" oninput="validateAlpha('srch-f_name');">
 				<div class="input-group-btn ">
+			
+			<div class="input-group">
+				<input type="text" class="form-control input-lg" placeholder="last name" name="l_name" id="srch-l_name" oninput="validateAlpha('srch-l_name');">
+				<div class="input-group-btn ">
+				<!--
+			<div class="input-group">
+				<input type="text" class="form-control input-lg" placeholder="participant number(optional)" name="p_num" id="srch-p_num" oninput="isNumberKey('srch-p_num');">
+				<div class="input-group-btn ">
+				-->
+			
 					<button class="btn btn-lg" type="submit"><i class="glyphicon glyphicon-search"></i></button>
 				</div>
-				
+				<!-- CERTAINLY needs a link to the database for search capabilities -->
 			</div>
 			</form>
 
@@ -413,37 +430,9 @@ if ($_GET['add'] == 'clicked'){
 
 
 
-<div class = "row search-links">
-<div class="page-header">
-  <h2>Recently Viewed</h2>
-	</div>
-
-		<div class ="participant-result-names col-md-8">
-		
-				<div class = "col-md-2">
-				<button class="btn btn-lg" type="submit"><a href="participant-search-results.php" <!-- this is for demo purposes -->Filler Name</a></button>
-														<!-- needs to be generated from the database -->
-				</div>
-		
-				<div class = "col-md-2">
-				<button class="btn btn-lg" type="submit"><a href="#">Filler Name</a></button>
-				</div>
-		
-				<div class = "col-md-2">
-				<button class="btn btn-lg" type="submit"><a href="#">Filler Name</a></button>
-				</div>
-		</div>	
-
-
-
-</div>
 
 <!-- JS Functions  -->
 <script src="intake/FormAppFunctions.js"></script>
-
 		
   </body>
-  
-  
-  </html>
-	
+</html>
