@@ -47,6 +47,9 @@ session_start();
 	
 	//if number isnt entered
 	
+	
+	/*
+	
 	if($p_num != null){
 		
 		echo "im set";
@@ -104,18 +107,107 @@ session_start();
 		}				
 			
 	
-	}else{		
-	$ref_query = "Select * from referrals where ref_l_name = '$l_name' and ref_f_name = '$f_name'";
+	}else{	
+
+*/	
+
+	if($f_name != null && $l_name == null){
+		$ref_f_query = "Select ref_f_name from referrals where ref_f_name = '$f_name'";
 	
-	$ref_results = pg_query($ref_query) or die('Query failed: ' . pg_last_error());
+		$ref_f_results = pg_query($ref_f_query) or die('Query failed: ' . pg_last_error());
 	
 
 	
-	$ref_row = pg_fetch_array($ref_results, 0, PGSQL_ASSOC);
-	// if number of rows is more than one
+		$ref_f_row = pg_fetch_array($ref_f_results, 0, PGSQL_ASSOC);
+		// if number of rows is more than one
 	
-	$num_rows = pg_num_rows($ref_results) - 1;
+		$num_rows = pg_num_rows($ref_f_results) ;
 	
+		echo "this is number of results";
+		echo "$num_rows";
+		
+		//$first_names = array_column($ref_f_row, 'ref_f_name');
+		
+		$ref_l_query = "Select ref_l_name from referrals where referrals.ref_f_name = '$f_name'";
+	
+		$ref_l_results = pg_query($ref_l_query) or die('Query failed: ' . pg_last_error());
+	
+
+	
+		$ref_l_row = pg_fetch_array($ref_l_results, 0, PGSQL_ASSOC);
+		
+		
+		
+		$ref_p_query = "Select dob from referrals where  referrals.ref_f_name= '$f_name'";
+	
+		$ref_p_results = pg_query($ref_p_query) or die('Query failed: ' . pg_last_error());
+	
+
+	
+		$ref_p_row = pg_fetch_array($ref_p_results, 0, PGSQL_ASSOC);
+		
+	
+		
+		
+		
+		//echo "$first_names";
+	
+		
+		
+		while ($f_line = pg_fetch_array($ref_f_results, null, PGSQL_ASSOC)){
+    
+		foreach ($f_line as $f_col_value) {
+			
+		
+		
+		//$p_numDB = $ref_row['p_num'];
+		
+		while ($l_line = pg_fetch_array($ref_l_results, null, PGSQL_ASSOC)){
+    
+		foreach ($l_line as $l_col_value) {
+			
+			/*
+			while ($p_line = pg_fetch_array($ref_p_results, null, PGSQL_ASSOC)){
+    
+		foreach ($p_line as $p_col_value) {
+			*/
+			
+			
+	
+		
+		//make this a form
+		echo  "<a href='participant-search-results.php?add=clicked'>$f_col_value   $l_col_value $p_col_value </a>";
+		
+		/*
+		}
+	
+		}
+		*/
+				}
+			}
+		}
+	}
+	
+	
+	
+	}
+	
+	if($f_name == null && $l_name != null){
+		
+		
+	}
+	
+	if($f_name != null && $l_name != null){
+		
+		
+	}
+
+
+	
+	
+	
+	
+	/*
 	$p_numDB = $ref_row['p_num'];
 	
 	
@@ -127,10 +219,14 @@ session_start();
 	$f_nameDB = $ref_row['ref_f_name'];
 	
 	
+	*/
+	
 	
 	//$dupliate_name = 0;
 	
 		// Check to see if the credentials are right
+		
+		/*
 		if($l_name == $l_nameDB && $f_name == $f_nameDB){
 			
 			
@@ -165,8 +261,8 @@ session_start();
 		}else{
 			echo "<h1>Error: User not found.</h1>";
 		}	
-		
-	}
+		*/
+	
 /* i will get to this -- COLIN
 if ($_GET['add'] == 'clicked'){
 	$_SESSION['l_name'] =  $l_nameDB ;
