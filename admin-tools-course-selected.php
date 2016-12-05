@@ -61,8 +61,31 @@
 
 			<div class = "row ">
 				<div class = "col-md-6">
-					<h1> Curriculum Title: </h1>
+					<h1> Curriculum: </h1>
+					<select>
+					<?php
+						/*session_start();
+	
+						if (!isset($_SESSION["username"]) ){
+							header('Location: index.php');
+							echo "hello";
+						}
+					  
+					  
+						// Connecting, selecting database
+						$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
+							or die('Could not connect: ' . pg_last_error());
 
+						// Performing SQL query
+						$query = 'SELECT * FROM classes';
+						$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+						$resultArr = pg_fetch_array($result);
+						*/
+					for($i = 0; $i<10; $i++){
+						echo "<option value='womensinhouse'".$i.">Women's in-house ".$i."</option>";
+					}
+					?>
+					</select> 
 					<h1> Meets at 0:00 at Filler Location</h1>
 					
 				</div>
