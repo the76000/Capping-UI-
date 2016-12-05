@@ -76,13 +76,14 @@
 							or die('Could not connect: ' . pg_last_error());
 
 						// Performing SQL query
-						//$query = 'SELECT * FROM class_subjects WHERE class_subjects.c_subject =  ';
+						$query = "SELECT DISTINCT Class_Subjects.Class_Subject FROM Class_Subjects, Curriculum_Subjects, Curriculum WHERE (Class_Subjects.C_Subject = 
+						Curriculum_Subjects.C_Subject) AND (Curriculum_Subjects.CID = Curriculum.CID) AND (Curriculum.Curriculum_Name = '".$_POST['selected']."');";
 						
-						//$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+						$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 						
-					//while($row = pg_fetch_array($result)){
-					//	echo "<option value='".$row['curriculum_name']."'>".$row['curriculum_name']."</option>";
-					//}
+					while($row = pg_fetch_array($result)){
+						echo "<option value='".$row['class_subject']."'>".$row['class_subject']."</option>";
+					}
 					?>
 					</select> 
 					<h1> Meets at 0:00 at Filler Location</h1>
