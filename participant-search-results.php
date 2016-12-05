@@ -112,7 +112,7 @@
 	
 	$cidDB = $row['cid'];
 	
-	$_SESSION['searchp_cid'] = $cidDB; //for report card
+	$_SESSION['report_card_curr'] = $cidDB; //for report card
 	
 	//echo " $p_numDB ";
 	
@@ -325,8 +325,11 @@ ideas for linking to report card, make the link a form to send the cid and pnum 
 		echo "</form>";
 
 */
+echo            "<form action = 'report-card.php'  method ='post'>";
+echo             "<p> Link to Participant Report Card click the number </p>";
+echo			"<input type = 'submit' name = 'participant_name' value = ' $p_num ' />";
 
-echo			'<p> <a href="report-card"> Link to Participant Report Card </a></p>';
+echo            "</form>";
 		
 		
 		

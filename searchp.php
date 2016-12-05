@@ -284,14 +284,88 @@ session_start();
 	
 	//if both first and last name are entered
 	if($f_name != null && $l_name != null){
+		$ref_f_query = "Select ref_l_name from referrals where ref_f_name = '$f_name' and ref_l_name = '$l_name'";
+	
+		$ref_f_results = pg_query($ref_f_query) or die('Query failed: ' . pg_last_error());
+	
+
+	
+		$ref_f_row = pg_fetch_array($ref_f_results, 0, PGSQL_ASSOC);
+		// if number of rows is more than one
+	
+		$num_rows = pg_num_rows($ref_f_results) ;
+	
+		echo "this is number of results";
+		echo "$num_rows";
+		
+		//$first_names = array_column($ref_f_row, 'ref_f_name');
+		
+		$ref_dob_query = "Select dob from referrals where referrals.ref_f_name = '$f_name' and referrals.ref_l_name = '$l_name'";
+	
+		$ref_dob_results = pg_query($ref_dob_query) or die('Query failed: ' . pg_last_error());
+	
+
+	
+		$ref_dob_row = pg_fetch_array($ref_dob_results, 0, PGSQL_ASSOC);
 		
 		
+		
+		$ref_p_query = "Select p_num from referrals where referrals.ref_f_name = '$f_name' and referrals.ref_l_name = '$l_name'";
+	
+		$ref_p_results = pg_query($ref_p_query) or die('Query failed: ' . pg_last_error());
+	
+
+	
+		$ref_p_row = pg_fetch_array($ref_p_results, 0, PGSQL_ASSOC);
+		
+	
+		
+		
+		
+		//echo "$first_names";
+	
+		
+		
+		while ($f_line = pg_fetch_array($ref_f_results, null, PGSQL_ASSOC)){
+    
+		foreach ($f_line as $f_col_value) {
+			
+		
+		
+		//$p_numDB = $ref_row['p_num'];
+		
+		
+			
+			
+			while ($p_line = pg_fetch_array($ref_p_results, null, PGSQL_ASSOC)){
+    
+		foreach ($p_line as $p_col_value) {
+			
+			
+			
+			
+			
+	
+		
+		
+		echo "<form action = 'participant-search-results.php' method='post'>";
+		echo "$f_col_value";
+		//echo "$dob_col_value";
+		echo "<input type = 'submit' name = 'participant_num'  value = ' $p_col_value  '/>";
+		//echo  "<a href='participant-search-results.php?add=clicked'>$f_col_value   $l_col_value $p_col_value </a>";
+		echo "</form>";
+		
+		
+			
+		
+				}
+			}
+		}
 	}
 
-
 	
 	
-	
+	}
 	
 	/*
 	$p_numDB = $ref_row['p_num'];
