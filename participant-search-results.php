@@ -63,7 +63,7 @@
 		echo "hello";
 	}
 	
-	echo "p_num = " . $_SESSION["searchp"]; 
+	//echo "p_num = " $_post['participant_num']; 
 	
 	
 	$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
@@ -75,7 +75,7 @@
 	
 	$f_name = $_SESSION['f_name'];
 	
-	$p_num = $_SESSION['searchp'];
+	$p_num =$_POST['participant_num'];
 	
 	echo "$p_num";
 	
