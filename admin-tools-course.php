@@ -54,21 +54,30 @@
 		
 		
 		<div class = "container">
-			<h1> Courses Edit </h1>
+			<h1> Curriculum Edit </h1>
 			<div class = "jumbotron">
-			
-			<div class = "row admin-courses" style= "text-align: left;">
+						
+			<div class = "row admin-courses" style= "text-align: center;">
 			
 				<div class = "col-md-6">
 			
-					<a href="admin-tools-course-selected.php"> [Edit] </a>
-					<p class="label label-info">Women's in-house</p>
+					<a href="admin-tools-course-selected.php"><button id="edit" class="btn btn-default">Edit</button></a>
+					<select>
+						<option value="womensinhouse">Women's in-house</option>
+						<option value="spanishspeakingwomeninhouse">Spanish Speaking Women In-House</option>
+						<option value="mensdcjail">Men's DC Jail</option>
+						<option value="cornerstone">Cornerstone</option>
+						<option value="mensinhouse">Men's in-house</option>
+						<option value="meadowrun">Meadow Run</option>
+					</select> 
+					<!--<p class="label label-info">Women's in-house</p>-->
 				</div>
-				
-				<div class = "col-md-6">
+			</div>
+			
+			<!--	<div class = "col-md-6">
 			
 					<a href="admin-tools-course-selected.php"> [Edit] </a>
-					<p class="label label-info">Spanish Speaking Women In- House</p>
+					<p class="label label-info">Spanish Speaking Women In-House</p>
 				</div>
 			
 			</div>
@@ -110,7 +119,7 @@
 				
 				</div>
 				
-			</div>	
+			</div>-->	
 			
 			<hr> </hr>
 			
