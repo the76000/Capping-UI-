@@ -326,7 +326,8 @@ ideas for linking to report card, make the link a form to send the cid and pnum 
 
 */
 echo            "<form action = 'report-card.php'  method ='post'>";
-echo             "<p> Link to Participant Report Card click the number </p>";
+echo            "<form action = 'Assign-Curriculum.php'  method ='post'>";
+echo            "<p> Link to Participant Report Card click the number </p>";
 echo			"<input type = 'submit' name = 'participant_name' value = ' $p_num ' />";
 
 echo            "</form>";

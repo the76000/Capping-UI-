@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!Doctype html>
 <head>
 	<meta charset="utf-8"> 
 
@@ -12,18 +11,15 @@
 	<link rel='stylesheet' media='screen and (min-width: 701px) and (max-width: 900px)' href='css/mobile.css' />
 	<link rel="stylesheet" href="CSS/style.css">
 
-	<title> CPCA Admin Tools </title>
+	<title>CPCA Reset Password</title>
 </head>
-
-
 <body>
-
-	<!-- Top left Logo -->
+<!-- Top left Logo -->
 	<div class="page-header">
 		<h1><a class="home-button" href="homepage.php">CPCA</a></h1>
 	</div>
 	
-	<nav class="navbar navbar-default CPCA_navbar">
+<nav class="navbar navbar-default CPCA_navbar">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
@@ -33,7 +29,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Admin Tools</a>
+				<a class="navbar-brand" href="#">Report Card</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -48,51 +44,38 @@
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav> <!-- end of navbar-->
-	
-	<div class = "row">
-		
-		
-		
-		<div class = "container">
-
-			<div class = "row">
-
-				<a href="admin-tools-course.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Change a Curriculum/Schedule</button></a>
-
-				<a href="Intake/IntakeApp.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Change Particpant Info</b></button></a>
-
-				<a href="#"><button class="btn btn-default course-launcher-links" type="submit"><b>Change Attendance Record</b></button></a>
-				
-			</div>
-			
-		
-		
-		
+<div class = "container">
+<div class="Lizard">
+<div class= "login_wrapper">		
+<form class="form-horizontal" action="includes/users.php" method="post">
+<div class="row">
+	<div class="col-sm-4">
+		<div class="form-group">
+			<label for="sel1">Select A Curriculum:</label> 
+				<select class="form-control" id="sel1">
+					<option>1.   Women's In-House</option>
+					<option>2.   Spanish Speaking Women's In-House</option>
+					<option>3.   Men's DC Jail</option>
+					<option>4.   Cornerstone</option>
+					<option>5.   Men's In-House</option>
+					<option>6.   Meadow Run</option>
+				</select>
 		</div>
-	
-	
-	
-	
 	</div>
-	
-	
-	
-	
-	
-
-	
+</div>  
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Submit</button>
+	  <!-- needs apache/php link to database -->
+	  <!-- needs to send user back to login once new password is created -->
+	  <!-- style is messed up will fix tomorrow --> 
+    </div>
+  </div>
+  </form>
+ </div>
+</div> 
+</div>
 </body>
-
-
 </html>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+

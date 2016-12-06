@@ -180,12 +180,6 @@
 		
 		<div class = "col-md-4">
 		
-		<div class='calendar'>
-		
-		<script type="text/javascript" src="http://100widgets.com/js_data.php?id=105">
-		</script>
-		<p> PlaceHolder Calendar <p>
-		</div>
 		
 		
 		</div>
