@@ -61,10 +61,14 @@ session_start();
 	}
 
 
+	
+	
  $participantnumber = $_POST['participant_name'];
  
  $_SESSION['report-card-pnum'] = $participantnumber ;
  
+ 
+
  $cidSession = $_SESSION['report_card_curr'] ;
  
  $_SESSION['pnumreportcard'] = $participantnumber;
@@ -99,11 +103,45 @@ $currnamerow = pg_fetch_array($currnameresult, null, PGSQL_ASSOC);
 $currname = $currnamerow['curriculum_name'];
 
 
-$classesquery = "SELECT classsub.class_subject FROM class_subjects classsub inner join curriculum_subjects currsub on currsub.c_subject = classsub.c_subject inner join curriculum curr on curr.cid = currsub.cid where curr.cid = ' $cidSession ' ";      
+/*
+Referrals.Ref_F_Name,
+Referrals.Ref_L_Name,
+Curriculum.Curriculum_Name,
+Class_Subjects.Class_Subject
+*/
+
+
+$classesquery = "SELECT DISTINCT
+Classes_Scheduled.Class_ID
+
+
+FROM 
+Referrals,
+Curriculum,
+Participants,
+Classes_Scheduled,
+Curriculum_Subjects,
+Class_Subjects
+
+WHERE
+
+Referrals.P_Num = '$participantnumber'
+
+AND Referrals.P_Num = Participants.P_Num
+
+AND Participants.CID = Curriculum.CID
+
+AND Curriculum.CID = Curriculum_Subjects.CID
+
+AND Curriculum_Subjects.C_Subject = Class_Subjects.C_Subject "; 
+//make a teacher dropdown, and location dropdown   possibly
 $classesresult = pg_query($classesquery) or die('Query failed: ' . pg_last_error());
 $classesrow = pg_fetch_array($classesresult, 0, PGSQL_ASSOC);
 	
-$employeequery = "SELECT e.eid FROM employees e	inner join classes_scheduled csch on csch.eid = e.eid inner join class_attendence ca on ca.eid = csch.eid where ca.p_num = '$participantnumber'";
+$employeequery = "SELECT e.eid FROM employees e	
+inner join classes_scheduled csch on csch.eid = e.eid 
+inner join class_attendence ca on ca.eid = csch.eid 
+where ca.p_num = '$participantnumber'";
 $employeeresult = pg_query($employeequery) or die('Query failed: ' . pg_last_error());
 $employeerow = pg_fetch_array($employeeresult, null, PGSQL_ASSOC);	
 	
@@ -140,7 +178,13 @@ echo						'<select class="form-control" name="class_selected">';
 
 					while ($line = pg_fetch_array($classesresult, null, PGSQL_ASSOC)){
 						foreach($line as $col_value){
-echo						"<option value='$col_value'>   '$col_value'</option>"; //this needs to be a seperate php form so that the correct attendence value can be used
+							
+							
+							
+							
+							
+echo						"<option value='$col_value'>   '$col_value'</option>"; 
+						
 
 						}
 

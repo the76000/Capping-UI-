@@ -67,6 +67,8 @@ session_start();
  
  $_SESSION['pnumreportcard'] = $participantnumber;
  
+
+ 
    
   // Connecting, selecting database
 $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
@@ -106,10 +108,50 @@ $employeeID = 	$employeerow['eid'];
 
 $class_selected = $_POST['class_selected'];
 
+ $_SESSION['report_card_class_selected'] = $class_selected;
 
-$attendedclassquery = "SELECT ca.* FROM class_attendence ca inner join classes_scheduled csch on ca.class_id = csch.class_id inner join curriculum_subjects currsub on currsub.cid = csch.cid inner join class_subjects csub on csub.c_subject = currsub.c_subject where ca.p_num = '$participantnumber' AND csub.class_subject = '$class_selected' ";
+
+
+//need the specific class id
+
+//$attendedclassquery = "SELECT ca.class_id from class_attendence ca inner join classes_scheduled csch on ca.class_id = csch.class_id inner join curriculum_subjects curr_sub on csch.cid = curr_sub.cid inner join class_subjects c_sub on c_sub.c_subject = curr_sub.c_subject where c_sub.class_subject = '$class_selected' and ca.p_num = '$participantnumber' ";
+
+
+// Gets the id and names of all the classes a specific participant has already taken
+
+$attendedclassquery = "
+
+SELECT DISTINCT
+Class_Subjects.C_Subject,
+Class_Subjects.Class_Subject
+FROM 
+Referrals,
+Participants,
+Class_Attendence,
+Classes_Scheduled,
+Curriculum_Subjects,
+Class_Subjects
+WHERE
+
+Referrals.P_Num = '$participantnumber'
+AND Referrals.P_Num = Participants.P_Num
+AND Participants.P_Num = Class_Attendence.P_Num
+AND Class_Attendence.Class_ID = Classes_Scheduled.Class_ID
+AND Classes_Scheduled.C_Subject = Curriculum_Subjects.C_Subject
+AND Curriculum_Subjects.C_Subject = Class_Subjects.C_Subject
+AND class_subjects.class_subject = '$class_selected'";
+
+
+
+
+
+
+//$attendedclassquery = "SELECT c_sub.c_subject from class_subjects c_sub inner join curriculum_subjects curr_sub on c_sub.c_subject = curr_sub.c_subject inner join classes_scheduled csch on csch.cid = curr_sub.cid inner join class_attendence ca on ca.class_id = csch.class_id where ca.p_num = '$participantnumber' and c_sub.class_subject = '$class_selected'";
+
+
+//$attendedclassquery = "SELECT ca.* FROM class_attendence ca inner join classes_scheduled csch on ca.class_id = csch.class_id inner join curriculum_subjects currsub on currsub.cid = csch.cid inner join class_subjects csub on csub.c_subject = currsub.c_subject where ca.p_num = '$participantnumber' AND csub.class_subject = '$class_selected' ";
 $attendedclassresult = pg_query($attendedclassquery) or die('Query failed: ' . pg_last_error());
-//$attendedclassrow = pg_fetch_array($attendedclassresult, null, PGSQL_ASSOC);		
+$attendedclassrow = pg_fetch_array($attendedclassresult, null, PGSQL_ASSOC);		
 
 
 	
@@ -170,35 +212,26 @@ echo						'<div id="checkbox1">';
 
 
 			if(pg_num_rows($attendedclassresult) > 0){
+				echo  '<h2>  CLASS WAS ATTENDED </h2>';
+			} 
+			else{
+				echo  '<h2>  CLASS WAS NOT ATTENDED </h2>';
+			}
+			
+
 				echo						'<label>';
-				echo								'<input type="radio" value="submit_attended" name="radio" checked = "checked">';
+				echo								'<input type="radio" value="submit_attended" name="radio1" >';
 				echo								'Attended';
 				echo							'</label>';
 				echo						'<div id="checkbox2">';
 				echo							'<label>';
-				echo								'<input type="radio" value="submit_not_attended" name"radio">';
-				echo								'Not attended';
-				echo							'</label>';
-				echo                          '</select>';
-				echo						'</div>';
-
-
-			} else{
-
-
-				echo						'<label>';
-				echo								'<input type="radio" value="submit_attended" name="radio" >';
-				echo								'Attended';
-				echo							'</label>';
-				echo						'<div id="checkbox2">';
-				echo							'<label>';
-				echo								'<input type="radio" value="submit_not_attended" name"radio" checked = "checked">';
+				echo								'<input type="radio" value="submit_not_attended" name"radio1">';
 				echo								'Not attended';
 				echo							'</label>';
 				echo                          '</select>';
 				echo						'</div>';
 					
-			}						
+									
 echo					'<!--<div class="col-sm-3">-->';
 echo					'<label style="text-align:left">';
 echo						'Instructor Comments';

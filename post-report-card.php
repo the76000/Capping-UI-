@@ -17,7 +17,7 @@ session_start();
     or die('Could not connect: ' . pg_last_error());
 	
 	
-	$attendence = $_POST['radio'];
+	$attendence = $_POST['radio1'];
 	
 	echo "$attendence";
 	
@@ -30,14 +30,22 @@ session_start();
 	echo "$cidselect";
 	$pnum = $_SESSION['pnumreportcard'];
 	
-	$query = "SELECT ca.class_id FROM class_attendence ca inner join classes_scheduled csch on ca.class_id = csch.class_id where csch.cid = '$cidselect' ";
+	$classpicked = $_SESSION['report_card_class_selected'];
+	
+	$query = "SELECT ca.class_id FROM class_attendence ca 
+	inner join classes_scheduled csch on ca.class_id = csch.class_id 
+	inner join curriculum_subjects curr_sub on curr_sub.cid = csch.cid 
+	inner join class_subjects class_sub on curr_sub.c_subject = class_sub.c_subject  
+	where csch.cid = '$cidselect' and class_sub.class_subject = '$classpicked  '  ";
 	$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 	$row = pg_fetch_array($result, null, PGSQL_ASSOC);
 	
 	
-	$cidattendence = $row['class_id'];
+	
+	
+	$classidattendence = $row['class_id'];
 	echo"hello";
-	echo "$cidattendence ";
+	echo "$classidattendence ";
 	
 	
 	$employeeselectquery = "SELECT e.eid FROM employees e inner join classes_scheduled csch on csch.eid = e.eid where csch.cid = '$cidselect'";
@@ -52,7 +60,7 @@ if ((isset($_POST['submitAttendance'])) == 1){
 	
 		
 		
-		$submitattendance = "INSERT INTO class_attendence (eid,class_id,p_num,participant_comment) VALUES('$eidattendence', '$cidattendence','$pnum', 'THIS IS A TEST FROM REPORT CARD HI')";
+		$submitattendance = "INSERT INTO class_attendence (eid,class_id,p_num,participant_comment) VALUES('$eidattendence', '$classidattendence','$pnum', 'THIS IS A TEST FROM REPORT CARD HI')";
 		
 		$result = pg_query($submitattendance);
 		
@@ -60,6 +68,9 @@ if ((isset($_POST['submitAttendance'])) == 1){
 			
 		
 	}
+	
+	
+	
 	
 ?>
 
