@@ -45,11 +45,14 @@
 		</div><!-- /.container-fluid -->
 	</nav> <!-- end of navbar-->
 <div class = "container">
-<div class="Lizard">
-<div class= "login_wrapper">		
-<form class="form-horizontal" action="includes/users.php" method="post">
-<div class="row">
-	<div class="col-sm-4">
+<div class="jumbotron login_panel">
+<div class= "login_wrapper">
+<!-- css div's for jumbotron work best --> 
+<!-- I never wanted a problem with lining up a dropdown.... i'm sad -->
+<!-- this launches another php file --->
+  <form class="form-horizontal" action="includes/users.php" method="post">
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
 		<div class="form-group">
 			<label for="sel1">Select A Curriculum:</label> 
 				<select class="form-control" id="sel1">
@@ -62,7 +65,8 @@
 				</select>
 		</div>
 	</div>
-</div>  
+  </div>
+
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <button type="submit" class="btn btn-default">Submit</button>
@@ -73,7 +77,6 @@
   </div>
   </form>
  </div>
-</div> 
 </div>
 </body>
 </html>
