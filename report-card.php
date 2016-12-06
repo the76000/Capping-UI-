@@ -137,6 +137,35 @@ AND Curriculum_Subjects.C_Subject = Class_Subjects.C_Subject ";
 //make a teacher dropdown, and location dropdown   possibly
 $classesresult = pg_query($classesquery) or die('Query failed: ' . pg_last_error());
 $classesrow = pg_fetch_array($classesresult, 0, PGSQL_ASSOC);
+
+$classesnamequery = "SELECT DISTINCT
+Class_Subjects.Class_Subject
+
+
+FROM 
+Referrals,
+Curriculum,
+Participants,
+Classes_Scheduled,
+Curriculum_Subjects,
+Class_Subjects
+
+WHERE
+
+Referrals.P_Num = '$participantnumber'
+
+AND Referrals.P_Num = Participants.P_Num
+
+AND Participants.CID = Curriculum.CID
+
+AND Curriculum.CID = Curriculum_Subjects.CID
+
+AND Curriculum_Subjects.C_Subject = Class_Subjects.C_Subject "; 
+//make a teacher dropdown, and location dropdown   possibly
+$classesnameresult = pg_query($classesnamequery) or die('Query failed: ' . pg_last_error());
+$classesnamerow = pg_fetch_array($classesnameresult, 0, PGSQL_ASSOC);
+
+
 	
 $employeequery = "SELECT e.eid FROM employees e	
 inner join classes_scheduled csch on csch.eid = e.eid 
@@ -176,16 +205,21 @@ echo					'<div class="col-md-4 input-lg">';
 echo					'<label>Select class</label>';
 echo						'<select class="form-control" name="class_selected">';
 
-					while ($line = pg_fetch_array($classesresult, null, PGSQL_ASSOC)){
+//$nameline = pg_fetch_array($classesnameresult, null, PGSQL_ASSOC);
+
+					while (($line = pg_fetch_array($classesresult, null, PGSQL_ASSOC)) and ($nameline = pg_fetch_array($classesnameresult, null, PGSQL_ASSOC))){
 						foreach($line as $col_value){
 							
 							
+							foreach($nameline as $name_col_value){
 							
 							
+echo						"<option value='$col_value'>   '$name_col_value'</option>"; 
 							
-echo						"<option value='$col_value'>   '$col_value'</option>"; 
+								
+						}
 						
-
+						
 						}
 
 
