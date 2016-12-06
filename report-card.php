@@ -117,7 +117,7 @@ Curriculum.Curriculum_Name,
 Class_Subjects.Class_Subject
 */
 
-//this is only getting the classes the participant has attended, it needs to get classes they have and havent attended in a curriculum
+
 $classesquery = "SELECT DISTINCT
 Classes_Scheduled.Class_ID
 
@@ -186,7 +186,64 @@ $employeeresult = pg_query($employeequery) or die('Query failed: ' . pg_last_err
 $employeerow = pg_fetch_array($employeeresult, null, PGSQL_ASSOC);	
 	
 $employeeID = 	$employeerow['eid'];
+
 */
+
+
+# Gets the id and names of all the classes a specific participant has already taken
+
+
+
+$classesattendedquery = "
+SELECT DISTINCT
+Classes_Scheduled.Class_ID
+
+FROM 
+Referrals,
+Participants,
+Class_Attendence,
+Classes_Scheduled,
+Curriculum_Subjects,
+Class_Subjects
+
+WHERE
+
+Referrals.P_Num = '$participantnumber'
+And Referrals.P_Num = Participants.P_Num
+AND Participants.P_Num = Class_Attendence.P_Num
+AND Class_Attendence.Class_ID = Classes_Scheduled.Class_ID
+AND Classes_Scheduled.CID = Curriculum_Subjects.CID
+AND Curriculum_Subjects.C_Subject = Class_Subjects.C_Subject";
+
+
+$classesattendedresult = pg_query($classesattendedquery) or die('Query failed: ' . pg_last_error());
+$classesattendedrow = pg_fetch_array($classesattendedresult, 0, PGSQL_ASSOC);
+
+
+$classesnotattendedquery =
+"SELECT DISTINCT
+Class_Subjects.C_Subject,
+Curriculum_Subjects.C_Subject
+
+FROM 
+Referrals,
+Participants,
+Curriculum,
+Curriculum_Subjects,
+Class_Subjects
+
+WHERE
+Referrals.P_Num = 1
+AND Referrals.P_Num = Participants.P_Num
+AND Participants.CID = Curriculum.CID
+AND Curriculum.CID = Curriculum_Subjects.CID
+AND Curriculum_Subjects.C_Subject = Class_Subjects.C_Subject
+AND Curriculum_Subjects.C_Subject NOT IN (SELECT DISTINCT Curriculum_Subjects.C_Subject";
+
+
+
+
+
 
 
 $attendedclassquery = "SELECT ca.* FROM class_attendence ca 
@@ -255,6 +312,47 @@ echo			'</div>';
 echo				'<button type="submit" name="submitClass" class="btn btn-default ">Submit Class</button> ';   
 echo			'</form>';
 
+
+
+echo					'<div class="col-md-4 input-lg">';
+echo					'<label>Classes attended</label>';
+echo						'<select class="form-control" name="class_selected">';
+
+//$nameline = pg_fetch_array($classesnameresult, null, PGSQL_ASSOC);
+
+					while ($attended_line = pg_fetch_array($classesattendedresult, null, PGSQL_ASSOC) ){
+						foreach($attended_line as $attended_col_value){
+							
+							
+							
+							
+							
+echo						"<option value='$attended_col_value'>   '$attended_col_value'</option>"; 
+							
+								
+						
+						
+						
+						}
+
+
+					}
+							
+echo						'</select>  ';
+
+
+
+//if 
+
+/*
+<td><input type="radio" name="id" value="<?php echo $row['id']; ?>" <?php if($row['selected'] == 1) echo "checked"; ?> /></td>
+*/ 
+
+echo					'</div>';
+echo			'</div>';
+
+echo				'<button type="submit" name="submitClass" class="btn btn-default ">Submit Class</button> ';   
+echo			'</form>';
 
 
 
