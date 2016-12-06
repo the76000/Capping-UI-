@@ -89,7 +89,7 @@ $result = pg_query($query) or die('Query failed: ' . pg_last_error());
 // Printing results in HTML
 
 
- $curr_query3 = 'SELECT curriculum_name FROM curriculum';
+ $curr_query3 = 'SELECT curriculum_name FROM curriculum'; //get all curriculum in the system
  $curr_result3 = pg_query($curr_query3) or die('Query failed: ' . pg_last_error());
 
 
@@ -106,9 +106,9 @@ echo				  '<label for="sel1">Select A Curriculum:</label> <!-- this is for the 2
 echo				  '<select name="CURRICULUM" class="form-control" id="sel1">';
 				  
 				  
-					while ($line = pg_fetch_array($curr_result3, null, PGSQL_ASSOC)) {
+					while ($line = pg_fetch_array($curr_result3, null, PGSQL_ASSOC)) { 
 						
-						foreach ($line as $col_value) {
+						foreach ($line as $col_value) { //iterate through all the curriculum and display them
 							echo "<option value= '$col_value'>";
 							echo "$col_value";
 						}
@@ -125,9 +125,9 @@ echo				'</div>';
 echo				'</form>';
 
 
-if ((isset($_POST['submit'])) == 1){
+if ((isset($_POST['submit'])) == 1){ //if the submit button for curriculum is clicked
 	echo "test";
-	$value_select = $_POST['CURRICULUM'];
+	$value_select = $_POST['CURRICULUM']; //get the curriculum picked by the user
 	
 	$_SESSION['curr_name'] = $value_select;
 	echo "$value_select";
@@ -135,7 +135,7 @@ if ((isset($_POST['submit'])) == 1){
 
 
 
-	$curr_picked = $value_select;
+	$curr_picked = $value_select; //assign curriculum to curr_picked
   
   
 	
@@ -149,33 +149,45 @@ if ((isset($_POST['submit'])) == 1){
  
 
  
- $curr_query2 = "SELECT CID FROM curriculum where curriculum_name = '$curr_picked'";
+ $curr_query2 = "SELECT CID FROM curriculum where curriculum_name = '$curr_picked'"; //get the cid that equals the name of the curriculum picked
  $curr_result2 = pg_query($curr_query2) or die('Query failed: ' . pg_last_error());
  $curr2_row = pg_fetch_array($curr_result2, 0, PGSQL_ASSOC);
  
-  $cidDB = $curr2_row['cid'];
+  $cidDB = $curr2_row['cid']; //the cid of the curriculum
   
-  $_SESSION['report_card_curr'] = $cidDB ;
+  $_SESSION['report_card_curr'] = $cidDB ; //used in report-card to confrim curriculum
  
  echo "$cidDB";
-  $pvaluequery = "SELECT p.p_num FROM participants p inner join curriculum c on c.cid = p.cid inner join referrals r on r.p_num =p.p_num where p.cid = '$cidDB' ";
+  $pvaluequery = "SELECT p.p_num FROM participants p 
+  inner join curriculum c on c.cid = p.cid 
+  inner join referrals r on r.p_num =p.p_num 
+  where p.cid = '$cidDB' "; //gets all the pnums assigned to the curriculum picked
  $pvalueresult = pg_query($pvaluequery) or die('Query failed: ' . pg_last_error());
  $pvaluerow = pg_fetch_array($pvalueresult , 0, PGSQL_ASSOC);
  
  
  
- $part_query = "SELECT r.ref_f_name FROM referrals r inner join participants p on p.p_num = r.p_num inner join curriculum c on c.cid = p.cid where c.cid = '$cidDB'";
+ $part_query = "SELECT r.ref_f_name FROM referrals r 
+ inner join participants p on p.p_num = r.p_num 
+ inner join curriculum c on c.cid = p.cid 
+ where c.cid = '$cidDB'"; //gets all the first names of those enrolles
  $part_result = pg_query($part_query) or die('Query failed: ' . pg_last_error());
  $part_row = pg_fetch_array($part_result, 0, PGSQL_ASSOC);
  
  //$part_query = 'SELECT r.ref_f_name FROM referrals r inner join participants p on p.p_num = r.p_num inner join curriculum c on c.cid = p.pid where c.cid = "$cidDB"';
  
  
- $part_query2 = "SELECT p.cid FROM participants p inner join curriculum c on c.cid = p.cid inner join referrals r on r.p_num =p.p_num where p.cid = '$cidDB' ";
+ $part_query2 = "SELECT p.cid FROM participants p 
+ inner join curriculum c on c.cid = p.cid 
+ inner join referrals r on r.p_num =p.p_num 
+ where p.cid = '$cidDB' "; //this is for testing
  $part_result2 = pg_query($part_query2) or die('Query failed: ' . pg_last_error());
  $part_row2 = pg_fetch_array($part_result2 , 0, PGSQL_ASSOC);
  
-  $part_query3 = "SELECT r.ref_l_name FROM referrals r inner join participants p on p.p_num = r.p_num inner join curriculum c on c.cid = p.cid where c.cid = '$cidDB'";
+  $part_query3 = "SELECT r.ref_l_name FROM referrals r 
+  inner join participants p on p.p_num = r.p_num 
+  inner join curriculum c on c.cid = p.cid 
+  where c.cid = '$cidDB'"; //gets the last name of those enrolled
  $part_result3 = pg_query($part_query3) or die('Query failed: ' . pg_last_error());
  $part_row3 = pg_fetch_array($part_result3, 0, PGSQL_ASSOC);
 
@@ -193,7 +205,7 @@ echo 				'<table class = "table">';
 						
 						
 
-						foreach ($line as $fnamevalue ) {
+						foreach ($line as $fnamevalue ) { //display all of the arrays
 						
 							foreach ($line2 as $cidvalue){
 								
@@ -219,6 +231,7 @@ echo 				'<table class = "table">';
 							echo "</label>";
 							echo "<input type = 'submit' name = 'participant_name'  value = '$pnumvalue'/>";
 							echo "</form>";
+							// send the pnum selected thru POST
 							
 							#$_SESSION['report_card_part'] = $_POST['participant_name'];
 							

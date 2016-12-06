@@ -59,51 +59,49 @@ session_start();
 		header('Location: index.php');
 		echo "hello";
 	}
-
-
- $participantnumber = $_SESSION['report-card-pnum'] ;
- 
- $cidSession = $_SESSION['report_card_curr'] ;
- 
- $_SESSION['pnumreportcard'] = $participantnumber;
- 
-
- 
-   
-  // Connecting, selecting database
+	  // Connecting, selecting database
 $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
     or die('Could not connect: ' . pg_last_error());
 
 // Performing SQL query
-$fnamequery = "SELECT r.ref_f_name FROM referrals r inner join participants p on p.p_num = r.p_num where p.p_num =  '$participantnumber'";
-$fnameresult = pg_query($fnamequery) or die('Query failed: ' . pg_last_error());
-$fnamerow = pg_fetch_array($fnameresult, null, PGSQL_ASSOC);
-
-$participantfname = $fnamerow['ref_f_name'];
-
-$lnamequery = "SELECT r.ref_l_name FROM referrals r inner join participants p on p.p_num = r.p_num where p.p_num =  '$participantnumber'";
-$lnameresult = pg_query($lnamequery) or die('Query failed: ' . pg_last_error());
-$lnamerow = pg_fetch_array($lnameresult, null, PGSQL_ASSOC);
-
-$participantlname = $lnamerow['ref_l_name'];
-
-
-$currnamequery = "SELECT curriculum_name FROM curriculum where cid = '$cidSession' ";
-$currnameresult = pg_query($currnamequery) or die('Query failed: ' . pg_last_error());
-$currnamerow = pg_fetch_array($currnameresult, null, PGSQL_ASSOC);
-
-$currname = $currnamerow['curriculum_name'];
-
-
-$classesquery = "SELECT classsub.class_subject FROM class_subjects classsub inner join curriculum_subjects currsub on currsub.c_subject = classsub.c_subject inner join curriculum curr on curr.cid = currsub.cid where curr.cid = ' $cidSession ' ";      
-$classesresult = pg_query($classesquery) or die('Query failed: ' . pg_last_error());
-$classesrow = pg_fetch_array($classesresult, 0, PGSQL_ASSOC);
 	
-$employeequery = "SELECT e.eid FROM employees e	inner join classes_scheduled csch on csch.eid = e.eid inner join class_attendence ca on ca.eid = csch.eid where ca.p_num = '$participantnumber'";
-$employeeresult = pg_query($employeequery) or die('Query failed: ' . pg_last_error());
-$employeerow = pg_fetch_array($employeeresult, null, PGSQL_ASSOC);	
+
+
+ $participantnumber = $_SESSION['report-card-pnum'] ; //gets pnum 
+ 
+ $cidSession = $_SESSION['report_card_curr'] ;
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ $_SESSION['classidreport'] = $_POST['submitClass'];
+ 
+ $classidfromreport =  $_POST['class_selected']; //not working?
+ 
+ 
+ 
+ 
+ echo " $classidfromreport";
+ 
+
+ 
+
+
+$participantfname =  $_SESSION['report-card-fname']; //part first name
+
+
+$participantlname = $_SESSION['report-card-lname']; //part last name
+
+
+
+$currname = $_SESSION['curr_name_report_card'] ;
 	
-$employeeID = 	$employeerow['eid'];
+	
+
 
 
 $class_selected = $_POST['class_selected'];
@@ -179,21 +177,21 @@ echo					'<div class="col-md-4 input-lg">';
 echo					'<label>Select class</label>';
 echo						'<select class="form-control" name="class_selected">';
 
-					while ($line = pg_fetch_array($classesresult, null, PGSQL_ASSOC)){
-						foreach($line as $col_value){
-echo						"<option value='$col_value'>   '$col_value'</option>"; //this needs to be a seperate php form so that the correct attendence value can be used
+					
+						
+echo						"<option value='$classidfromreport'>   '$classidfromreport'</option>"; //this needs to be a seperate php form so that the correct attendence value can be used
 
-						}
+						
 
 
-					}
+					
 							
 echo						'</select>  ';
 
 echo					'</div>';
 echo			'</div>';
 
-echo				'<button type="submit" name="submitClass" class="btn btn-default ">Submit Class</button> ';   
+#echo				'<button type="submit" name="submitClass" class="btn btn-default ">Submit Class</button> ';   
 echo			'</form>';
 
 

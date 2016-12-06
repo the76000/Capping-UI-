@@ -63,13 +63,13 @@ session_start();
 
 	
 	
- $participantnumber = $_POST['participant_name'];
+ $participantnumber = $_POST['participant_name']; //from report-card-search selector
  
- $_SESSION['report-card-pnum'] = $participantnumber ;
+ $_SESSION['report-card-pnum'] = $participantnumber ; //add pnum to the session
  
  
 
- $cidSession = $_SESSION['report_card_curr'] ;
+ $cidSession = $_SESSION['report_card_curr'] ; //from report-card-search 
  
  $_SESSION['pnumreportcard'] = $participantnumber;
  
@@ -79,19 +79,25 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
     or die('Could not connect: ' . pg_last_error());
 
 // Performing SQL query
-$fnamequery = "SELECT r.ref_f_name FROM referrals r inner join participants p on p.p_num = r.p_num where p.p_num =  '$participantnumber'";
+$fnamequery = "SELECT r.ref_f_name FROM referrals r 
+inner join participants p on p.p_num = r.p_num 
+where p.p_num =  '$participantnumber'";
 $fnameresult = pg_query($fnamequery) or die('Query failed: ' . pg_last_error());
 $fnamerow = pg_fetch_array($fnameresult, null, PGSQL_ASSOC);
 
-$participantfname = $fnamerow['ref_f_name'];
+$participantfname = $fnamerow['ref_f_name']; //get the first name of the pnum selected
 
 $_SESSION['report-card-fname'] = $participantfname;
 
-$lnamequery = "SELECT r.ref_l_name FROM referrals r inner join participants p on p.p_num = r.p_num where p.p_num =  '$participantnumber'";
+
+
+$lnamequery = "SELECT r.ref_l_name FROM referrals r 
+inner join participants p on p.p_num = r.p_num 
+where p.p_num =  '$participantnumber'";
 $lnameresult = pg_query($lnamequery) or die('Query failed: ' . pg_last_error());
 $lnamerow = pg_fetch_array($lnameresult, null, PGSQL_ASSOC);
 
-$participantlname = $lnamerow['ref_l_name'];
+$participantlname = $lnamerow['ref_l_name']; //get the last name of the pnum selected
 
 $_SESSION['report-card-lname'] = $participantlname;
 
@@ -100,8 +106,9 @@ $currnamequery = "SELECT curriculum_name FROM curriculum where cid = '$cidSessio
 $currnameresult = pg_query($currnamequery) or die('Query failed: ' . pg_last_error());
 $currnamerow = pg_fetch_array($currnameresult, null, PGSQL_ASSOC);
 
-$currname = $currnamerow['curriculum_name'];
+$currname = $currnamerow['curriculum_name']; //get the correct curriculum name
 
+$_SESSION['curr_name_report_card'] = $currnamerow['curriculum_name'];
 
 /*
 Referrals.Ref_F_Name,
@@ -110,7 +117,7 @@ Curriculum.Curriculum_Name,
 Class_Subjects.Class_Subject
 */
 
-
+//this is only getting the classes the participant has attended, it needs to get classes they have and havent attended in a curriculum
 $classesquery = "SELECT DISTINCT
 Classes_Scheduled.Class_ID
 
@@ -134,9 +141,12 @@ AND Participants.CID = Curriculum.CID
 AND Curriculum.CID = Curriculum_Subjects.CID
 
 AND Curriculum_Subjects.C_Subject = Class_Subjects.C_Subject "; 
+
+
+
 //make a teacher dropdown, and location dropdown   possibly
 $classesresult = pg_query($classesquery) or die('Query failed: ' . pg_last_error());
-$classesrow = pg_fetch_array($classesresult, 0, PGSQL_ASSOC);
+$classesrow = pg_fetch_array($classesresult, 0, PGSQL_ASSOC); //get the class id from schedules
 
 $classesnamequery = "SELECT DISTINCT
 Class_Subjects.Class_Subject
@@ -164,9 +174,10 @@ AND Curriculum_Subjects.C_Subject = Class_Subjects.C_Subject ";
 //make a teacher dropdown, and location dropdown   possibly
 $classesnameresult = pg_query($classesnamequery) or die('Query failed: ' . pg_last_error());
 $classesnamerow = pg_fetch_array($classesnameresult, 0, PGSQL_ASSOC);
+//get the class name from schedule
 
 
-	
+	/*
 $employeequery = "SELECT e.eid FROM employees e	
 inner join classes_scheduled csch on csch.eid = e.eid 
 inner join class_attendence ca on ca.eid = csch.eid 
@@ -175,9 +186,12 @@ $employeeresult = pg_query($employeequery) or die('Query failed: ' . pg_last_err
 $employeerow = pg_fetch_array($employeeresult, null, PGSQL_ASSOC);	
 	
 $employeeID = 	$employeerow['eid'];
+*/
 
 
-$attendedclassquery = "SELECT ca.* FROM class_attendence ca inner join participants p on ca.p_num = p.p_num where ca.p_num = '$participantnumber'";
+$attendedclassquery = "SELECT ca.* FROM class_attendence ca 
+inner join participants p on ca.p_num = p.p_num 
+where ca.p_num = '$participantnumber'";
 $attendedclassresult = pg_query($attendedclassquery) or die('Query failed: ' . pg_last_error());
 //$attendedclassrow = pg_fetch_array($attendedclassresult, null, PGSQL_ASSOC);		
 
