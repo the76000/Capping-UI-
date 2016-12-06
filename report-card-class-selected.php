@@ -78,9 +78,9 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
  
  
  
- $_SESSION['classidreport'] = $_POST['submitClass'];
+ $_SESSION['classidreport'] = $_POST['class_selected_attended'];
  
- $classidfromreport =  $_POST['class_selected']; //not working?
+ $classidfromreport =  $_POST['class_selected_attended']; //working fine using the wrong $post value
  
  
  
@@ -99,14 +99,24 @@ $participantlname = $_SESSION['report-card-lname']; //part last name
 
 
 $currname = $_SESSION['curr_name_report_card'] ;
+
+
+//with the class id from report-card(classidreport), we now need the class name
+$classnamequery =  "SELECT class_subjects.class_subject FROM class_subjects 
+inner join curriculum_subjects on curriculum_subjects.c_subject = class_subjects.c_subject
+inner join classes_scheduled on classes_scheduled.c_subject = curriculum_subjects.c_subject
+where classes_scheduled.class_id =  '$classidfromreport'";
+
+
+
+$classnameresult = pg_query($classnamequery) or die('Query failed: ' . pg_last_error());
+$classnamerow = pg_fetch_array($classnameresult, 0, PGSQL_ASSOC);
+
 	
-	
+$classdisplayname = $classnamerow['class_subject'];	
 
 
 
-$class_selected = $_POST['class_selected'];
-
- $_SESSION['report_card_class_selected'] = $class_selected;
 
 
 
@@ -114,42 +124,7 @@ $class_selected = $_POST['class_selected'];
 
 //$attendedclassquery = "SELECT ca.class_id from class_attendence ca inner join classes_scheduled csch on ca.class_id = csch.class_id inner join curriculum_subjects curr_sub on csch.cid = curr_sub.cid inner join class_subjects c_sub on c_sub.c_subject = curr_sub.c_subject where c_sub.class_subject = '$class_selected' and ca.p_num = '$participantnumber' ";
 
-
-// Gets the id and names of all the classes a specific participant has already taken
-
-$attendedclassquery = "
-
-SELECT DISTINCT
-Class_Subjects.C_Subject,
-Class_Subjects.Class_Subject
-FROM 
-Referrals,
-Participants,
-Class_Attendence,
-Classes_Scheduled,
-Curriculum_Subjects,
-Class_Subjects
-WHERE
-
-Referrals.P_Num = '$participantnumber'
-AND Referrals.P_Num = Participants.P_Num
-AND Participants.P_Num = Class_Attendence.P_Num
-AND Class_Attendence.Class_ID = Classes_Scheduled.Class_ID
-AND Classes_Scheduled.C_Subject = Curriculum_Subjects.C_Subject
-AND Curriculum_Subjects.C_Subject = Class_Subjects.C_Subject
-AND class_subjects.class_subject = '$class_selected'";
-
-
-
-
-
-
-//$attendedclassquery = "SELECT c_sub.c_subject from class_subjects c_sub inner join curriculum_subjects curr_sub on c_sub.c_subject = curr_sub.c_subject inner join classes_scheduled csch on csch.cid = curr_sub.cid inner join class_attendence ca on ca.class_id = csch.class_id where ca.p_num = '$participantnumber' and c_sub.class_subject = '$class_selected'";
-
-
-//$attendedclassquery = "SELECT ca.* FROM class_attendence ca inner join classes_scheduled csch on ca.class_id = csch.class_id inner join curriculum_subjects currsub on currsub.cid = csch.cid inner join class_subjects csub on csub.c_subject = currsub.c_subject where ca.p_num = '$participantnumber' AND csub.class_subject = '$class_selected' ";
-$attendedclassresult = pg_query($attendedclassquery) or die('Query failed: ' . pg_last_error());
-$attendedclassrow = pg_fetch_array($attendedclassresult, null, PGSQL_ASSOC);		
+		
 
 
 	
@@ -160,7 +135,7 @@ $attendedclassrow = pg_fetch_array($attendedclassresult, null, PGSQL_ASSOC);
 echo	'<div class = "container">';
 echo		'<div class = "jumbotron">';
 
-echo			'<form action = "report-card-class-selected.php" method="post" class="navbar-form">';
+echo			'<form action = "" method="post" class="navbar-form">';
 echo				'<div class="input-group">';
 echo					"<h1>  $participantfname    $participantlname              </h1>";
 echo				'</div>';
@@ -174,19 +149,19 @@ echo                 '</label>';
 						
 echo					'</div>';
 echo					'<div class="col-md-4 input-lg">';
-echo					'<label>Select class</label>';
-echo						'<select class="form-control" name="class_selected">';
+
+
 
 					
 						
-echo						"<option value='$classidfromreport'>   '$classidfromreport'</option>"; //this needs to be a seperate php form so that the correct attendence value can be used
+echo						"<option value='$classidfromreport'> Class Picked:  '$classdisplayname'</option>"; //this needs to be a seperate php form so that the correct attendence value can be used
 
 						
 
 
 					
 							
-echo						'</select>  ';
+
 
 echo					'</div>';
 echo			'</div>';
@@ -201,15 +176,15 @@ echo			'</form>';
 /*
 <td><input type="radio" name="id" value="<?php echo $row['id']; ?>" <?php if($row['selected'] == 1) echo "checked"; ?> /></td>
 */
-echo			'<form action = "post-report-card.php" method="post" >';
+echo			'<form action = "post-report-card.php" method="post" >'; //posting attendance to the db
 echo				'<div class="row">';
 echo					'<div class="col-sm-5">';
 				
 					
 echo						'<div id="checkbox1">';
 
-
-			if(pg_num_rows($attendedclassresult) > 0){
+//$_SESSION['submit_attended_yes'] 
+			if(($_SESSION['submit_attended_yes'])  == 1){
 				echo  '<h2>  CLASS WAS ATTENDED </h2>';
 			} 
 			else{
