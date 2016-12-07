@@ -337,7 +337,13 @@ echo			"<input type = 'submit' name = 'participant_name' value = ' $p_num ' />";
 echo            "</form>";
 
 
-//echo            "<form action = 'Assign-Curriculum.php'  method ='post'>";
+echo            "<form action = 'Assign-Curriculum.php'  method ='post'>";
+
+echo            "<p> Assign Curriculum </p>";
+echo			"<input type = 'submit' name = 'participant_num_assign' value = ' $p_num ' />";
+
+echo            "</form>";
+
 		
 		
 		

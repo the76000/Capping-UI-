@@ -12,51 +12,7 @@
 	<link rel="stylesheet" href="CSS/style.css">
 
 	<title>CPCA Enroll Participant</title>
-	<?php
-		
-		session_start();
 	
-		if (!isset($_SESSION["username"]) ){
-			header('Location: index.php');
-			echo "hello";
-		}
-	  
-	  
-		// Connecting, selecting database
-		$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
-			or die('Could not connect: ' . pg_last_error());
-			
-			echo "<h1> THIS DOES NOT WORK </h1>";
-		
-		if( isset($_POST['curriculum_select']) && isset($_POST['f_name']) && isset($_POST['l_name'])){
-			
-			$first_name = $_POST['f_name'];
-			$last_name = $_POST['l_name'];
-			$select_value = $_POST['curriculum_select'];
-			
-			$query1 = 'SELECT * FROM referrals WHERE ref_f_name = "'.$first_name.'" AND ref_l_name = '.$last_name;
-			$query2 = 'SELECT cid FROM curriculum WHERE curriculum_name = '.$select_value;
-			
-			echo $query1;
-			
-			$p_num_result = pg_query($query1) or die('Query failed: ' . pg_last_error());
-			$cid_result = pg_query($query2) or die('Query failed: ' . pg_last_error());
-			
-			echo $p_num_result;
-			echo $cid_result;
-			
-			$p_num = pg_fetch_array($p_num_result);
-			$cid = pg_fetch_array($cid_result);
-			
-			echo $p_num;
-			echo $cid;
-			
-			$query = 'UPDATE participants SET cid = '.$cid.' WHERE p_num = '.$p_num;
-			
-			pg_query($query) or die('Query failed: ' . pg_last_error());
-			
-		}
-	?>
 </head>
 <body>
 <!-- Top left Logo -->
@@ -74,7 +30,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Report Card</a>
+				<a class="navbar-brand" href="#">Enroll Participant In Curriculum</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -99,12 +55,90 @@
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
 		<div class="form-group">
-				<div class="input-group">
-					<input type="text" class="form-control input-lg" placeholder="first name" name="f_name" id="attendance-f_name" oninput="validateAlpha('attendance-f_name');">
-				</div>
-				<div class="input-group">
-					<input type="text" class="form-control input-lg" placeholder="last name" name="l_name" id="attendance-l_name" oninput="validateAlpha('attendance-l_name');">
-				</div>
+				 <?php
+		
+		session_start();
+	
+		if (!isset($_SESSION["username"]) ){
+			header('Location: index.php');
+			echo "hello";
+		}
+	  
+	  
+		// Connecting, selecting database
+		$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
+			or die('Could not connect: ' . pg_last_error());
+		
+		
+		
+		
+		
+			if( isset($_POST['curriculum_select']) ){
+				$select_value = $_POST['curriculum_select'];
+				
+				$curquery = "SELECT cid FROM curriculum WHERE curriculum_name = '$select_value'";
+				
+				$cid_result = pg_query($curquery) or die('Query failed: ' . pg_last_error());
+						$cidrow = pg_fetch_array($cid_result);
+						
+						$cid = $cidrow['cid'];
+						
+						$p_num = $_SESSION['pnumassign'] ;
+				
+			$query = "UPDATE participants SET cid = '$cid' WHERE p_num = '$p_num'";
+			
+			pg_query($query) or die('Query failed: ' . pg_last_error());
+			
+			echo "<h1>";
+			echo "Assigned new curriculum ";
+			
+			echo "<a href='homepage.php'> Go To Homepage </a>";
+			
+			
+		}
+		else{
+		
+			
+			$p_num = $_POST['participant_num_assign'];
+			
+			$_SESSION['pnumassign'] = $p_num;
+			
+			
+			
+			
+			$refquery = "SELECT * FROM referrals WHERE p_num = '$p_num'";
+			
+			
+			
+			
+			$p_num_result = pg_query($refquery) or die('Query failed: ' . pg_last_error());
+			
+			
+			
+		
+			
+			
+		
+	
+			
+			$p_num_row = pg_fetch_array($p_num_result );
+			
+			$_SESSION['fnameassign'] = $p_num_row['ref_f_name'];
+			$_SESSION['lnameassign'] = $p_num_row['ref_l_name'];
+			
+			
+			
+	
+		$fname = $_SESSION['fnameassign'];
+		$lname = $_SESSION['lnameassign'];
+	
+				echo '<h1>';
+				echo  $fname; 
+				echo ' ';
+				echo  $lname; 
+				
+		}?> 
+				</h1>
 			<label for="sel1">Select A Curriculum:</label> 
 				<select class="form-control" id="sel1" name="curriculum_select">
 					<?php
