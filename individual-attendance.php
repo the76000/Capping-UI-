@@ -190,8 +190,7 @@ session_start();
 	
 	}else{	
 
-*/	
-	//if only first name is given
+*/	//if only first name is given
 	if($f_name != null && $l_name == null){
 		$ref_f_query = "Select * from referrals where ref_f_name = '$f_name'";
 	
@@ -236,12 +235,11 @@ session_start();
 	
 		
 		
-			
 		echo "<form action = 'individual-attendance-more.php' method='post'>";
 		echo "$f_col_value ";
 		echo "$l_col_value ";
 		echo "$dob_col_value";
-		echo "<input type = 'submit' name = 'participant_num_attended'  value = ' $p_col_value  '/>";
+		echo "<input type = 'submit' name = 'participant_num'  value = ' $p_col_value  '/>";
 		//echo  "<a href='participant-search-results.php?add=clicked'>$f_col_value   $l_col_value $p_col_value </a>";
 		echo "</form>";
 		
@@ -303,12 +301,12 @@ session_start();
 			
 	
 		
-			
+		
 		echo "<form action = 'individual-attendance-more.php' method='post'>";
 		echo "$f_col_value ";
 		echo "$l_col_value ";
 		echo "$dob_col_value";
-		echo "<input type = 'submit' name = 'participant_num_attended'  value = ' $p_col_value  '/>";
+		echo "<input type = 'submit' name = 'participant_num'  value = ' $p_col_value  '/>";
 		//echo  "<a href='participant-search-results.php?add=clicked'>$f_col_value   $l_col_value $p_col_value </a>";
 		echo "</form>";
 		
@@ -323,7 +321,6 @@ session_start();
 	
 	
 	}
-	
 	
 	//if both first and last name are entered
 	if($f_name != null && $l_name != null){
@@ -374,7 +371,7 @@ session_start();
 		echo "$f_col_value ";
 		echo "$l_col_value ";
 		echo "$dob_col_value";
-		echo "<input type = 'submit' name = 'participant_num_attended'  value = ' $p_col_value  '/>";
+		echo "<input type = 'submit' name = 'participant_num'  value = ' $p_col_value  '/>";
 		//echo  "<a href='participant-search-results.php?add=clicked'>$f_col_value   $l_col_value $p_col_value </a>";
 		echo "</form>";
 		
@@ -390,7 +387,8 @@ session_start();
 	
 	}
 	
-	//}
+	
+	
 	
 	?>
 	<!-- JS Functions  -->

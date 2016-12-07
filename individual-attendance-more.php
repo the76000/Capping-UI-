@@ -69,7 +69,7 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
 	
 	
 	
-	$pnum = $_POST['participant_num_attended']; //from individual-attendance
+	$pnum = $_POST['participant_num']; //from individual-attendance
 	echo "$pnum";
 	
 	
@@ -78,11 +78,19 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
 	$participantinfoquery = "
 	SELECT DISTINCT referrals.ref_f_name, referrals.ref_l_name, participants.cid 
 	FROM referrals, participants 
-	WHERE participants.p_num = '$pnum '";
+	
+	WHERE referrals.p_num = '$pnum '
+	AND referrals.p_num = participants.p_num";
 	
 	
 	$participantinforesult = pg_query($participantinfoquery) or die('Query failed: ' . pg_last_error());
 	$participantinforow = pg_fetch_array($participantinforesult, 0, PGSQL_ASSOC);
+	
+	$firsName = $participantinforow['ref_f_name'];
+	
+	$lastName = $participantinforow['ref_l_name'];
+	
+	$cidDB = $participantinforow['cid'];
 	
 	
 	
@@ -98,11 +106,17 @@ echo			'<p class="label label-info"> Individual Attendance  </p>';
 echo		'</div>';
 		
 echo		'<div class = "col-md-4"> ';
-echo			'<p> Name: _______ </p>';
+echo			'<p> Name:';
+
+echo           " $firsName ";
+echo            "$lastName";
+echo        "</p>";
 echo		'</div>';
 		
 echo		'<div class = "col-md-4"> ';
-echo			'<p> Curriculum: _______ </p>';
+echo			'<p> Curriculum:';
+
+ echo         "$cidDB</p>";
 echo		'</div>';
 		
 echo 			'<table class="table">';
