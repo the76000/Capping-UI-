@@ -78,7 +78,7 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
  
  
  
- $_SESSION['classidreport'] = $_POST['class_selected_attended'];
+ $_SESSION['classidreport'] = $_POST['class_selected_attended']; //from classes attended form report-card
  
  $classidfromreport =  $_POST['class_selected_attended']; //working fine using the wrong $post value
  
@@ -105,7 +105,7 @@ $currname = $_SESSION['curr_name_report_card'] ;
 $classnamequery =  "SELECT class_subjects.class_subject FROM class_subjects 
 inner join curriculum_subjects on curriculum_subjects.c_subject = class_subjects.c_subject
 inner join classes_scheduled on classes_scheduled.c_subject = curriculum_subjects.c_subject
-where classes_scheduled.class_id =  '$classidfromreport'";
+where classes_scheduled.class_id =  '$classidfromreport'"; 
 
 
 
@@ -115,6 +115,11 @@ $classnamerow = pg_fetch_array($classnameresult, 0, PGSQL_ASSOC);
 	
 $classdisplayname = $classnamerow['class_subject'];	
 
+																
+//going to query class attendence table for matching pnum and classid, will show if class was attended for html
+$classattendedquery = " SELECT class_id FROM class_attendence where class_id = '$classidfromreport' and p_num = ' $participantnumber '";
+$classattendedresult = pg_query($classattendedquery) or die('Query failed: ' . pg_last_error());
+$classattendedrow = pg_fetch_array($classattendedresult, 0, PGSQL_ASSOC);
 
 
 
@@ -184,7 +189,7 @@ echo					'<div class="col-sm-5">';
 echo						'<div id="checkbox1">';
 
 //$_SESSION['submit_attended_yes'] 
-			if(($_SESSION['submit_attended_yes'])  == 1){
+			if(pg_num_rows($classattendedresult) > 0  ){
 				echo  '<h2>  CLASS WAS ATTENDED </h2>';
 			} 
 			else{
@@ -193,15 +198,15 @@ echo						'<div id="checkbox1">';
 			
 
 				echo						'<label>';
-				echo								'<input type="radio" value="submit_attended" name="radio1" >';
+				echo								'<input type="radio" value="submit_attended" name="radio" >';
 				echo								'Attended';
 				echo							'</label>';
 				echo						'<div id="checkbox2">';
 				echo							'<label>';
-				echo								'<input type="radio" value="submit_not_attended" name"radio1">';
+				echo								'<input type="radio" value="submit_not_attended" name="radio">';
 				echo								'Not attended';
 				echo							'</label>';
-				echo                          '</select>';
+			
 				echo						'</div>';
 					
 									

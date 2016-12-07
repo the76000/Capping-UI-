@@ -220,22 +220,14 @@ AND Curriculum_Subjects.C_Subject = Class_Subjects.C_Subject";
 $classesattendedresult = pg_query($classesattendedquery) or die('Query failed: ' . pg_last_error());
 $classesattendedrow = pg_fetch_array($classesattendedresult, 0, PGSQL_ASSOC);
 
-//waiting on the query from frank
+
+//gets the class id and class subject that a participant has not attended yet
+$classesnotattendedquery = "
 
 
-
-# Gets the name of all the classes a specific participant has already taken
-
-
-
-
-
-
-
-/*
-$classesnotattendedquery =
-"SELECT DISTINCT
-Classes_Scheduled.Class_ID
+SELECT DISTINCT
+Class_Subjects.C_Subject,
+Class_Subjects.Class_Subject
 
 FROM 
 Referrals,
@@ -250,45 +242,61 @@ AND Referrals.P_Num = Participants.P_Num
 AND Participants.CID = Curriculum.CID
 AND Curriculum.CID = Curriculum_Subjects.CID
 AND Curriculum_Subjects.C_Subject = Class_Subjects.C_Subject
-AND Curriculum_Subjects.C_Subject NOT IN (SELECT DISTINCT Curriculum_Subjects.C_Subject
+AND Curriculum_Subjects.C_Subject NOT IN (
+									
+									SELECT DISTINCT
+									Curriculum_Subjects.C_Subject
 
-										FROM 
-										Referrals,
-										Participants,
-										Class_Attendence,
-										Classes_Scheduled,
-										Curriculum_Subjects,
-										Class_Subjects
+									FROM 
+									Referrals,
+									Participants,
+									Class_Attendence,
+									Classes_Scheduled,
+									Curriculum_Subjects,
+									Class_Subjects
 
-										WHERE
-										Referrals.P_Num = '$participantnumber'
-										And Referrals.P_Num = Participants.P_Num
-										AND Participants.P_Num = Class_Attendence.P_Num
-										AND Class_Attendence.Class_ID = Classes_Scheduled.Class_ID
-										AND Classes_Scheduled.CID = Curriculum_Subjects.CID
-										AND Curriculum_Subjects.C_Subject = Class_Subjects.C_Subject)";
+									WHERE
+									
+									Referrals.P_Num = '$participantnumber'
+									And Referrals.P_Num = Participants.P_Num
+									AND Participants.P_Num = Class_Attendence.P_Num
+									AND Class_Attendence.Class_ID = Classes_Scheduled.Class_ID
+									AND Classes_Scheduled.C_Subject = Curriculum_Subjects.C_Subject
+									AND Curriculum_Subjects.C_Subject = Class_Subjects.C_Subject)
+
+ORDER BY Class_Subjects.C_Subject";
+
+
 
 
 $classesnotattendedresult = pg_query($classesnotattendedquery) or die('Query failed: ' . pg_last_error());
 $classesnotattendedrow = pg_fetch_array($classesnotattendedresult, 0, PGSQL_ASSOC);
 
-*/
+
+
+//waiting on the query from frank got it ^
+
+
+
+# Gets the name of all the classes a specific participant has already taken
 
 
 
 
-$attendedclassquery = "SELECT ca.* FROM class_attendence ca 
-inner join participants p on ca.p_num = p.p_num 
-where ca.p_num = '$participantnumber'";
-$attendedclassresult = pg_query($attendedclassquery) or die('Query failed: ' . pg_last_error());
-//$attendedclassrow = pg_fetch_array($attendedclassresult, null, PGSQL_ASSOC);		
+
+
+
+
+
+
+
 
 
 	
 	
 
 echo	'<div class = "container">';
-echo		'<div class = "jumbotron">';
+echo		'<div class = "jumbotron taller">';
 
 echo			'<form action = "report-card-class-selected.php" method="post" class="navbar-form">';
 echo				'<div class="input-group">';
@@ -303,7 +311,10 @@ echo                    " $currname ";
 echo                 '</label>';
 						
 echo					'</div>';
-echo					'<div class="col-md-4 input-lg">';
+
+echo			'</div>';
+
+echo					'<div class="col-md-6 input-lg">';
 echo					'<label>Classes Attended</label>';
 echo						'<select class="form-control" name="class_selected_attended">';
 
@@ -332,12 +343,43 @@ echo						"<option value='$attended_col_value_var'>   '$attended_col_value_var2'
 echo						'</select>  ';
 
 
-echo				'<button type="submit" name="submitClassAttended" class="btn btn-default ">Submit Class</button> ';   
+echo				'<button type="submit" name="submitClassAttended" class="btn btn-default ">Select Class</button> '; 
 
-if((isset($_POST['submitClassAttended'])) == 1){
-	
-	$_SESSION['submit_attended_yes'] = 1;
-}
+ echo			'</div>';
+
+
+echo					'<div class="col-md-4 input-lg">';
+echo					'<label>Classes NOT Attended</label>';
+echo						'<select class="form-control" name="class_selected_not_attended">';
+
+//$nameline = pg_fetch_array($classesnameresult, null, PGSQL_ASSOC);
+
+		//this is the best way to display multiple columns from a query that selects more than one column
+				while ($not_attended_line = pg_fetch_assoc($classesnotattendedresult) ){
+				
+							
+							
+							$not_attended_col_value_var = $not_attended_line['class_id'];
+							
+							$not_attended_col_value_var2 = $attended_line['class_subject'];
+						
+							
+							
+echo						"<option value='$not_attended_col_value_var'>   '$not_attended_col_value_var2'</option>"; 
+							
+								
+						
+						
+						
+						
+
+				}
+							
+echo						'</select>  ';
+
+
+echo				'<button type="submit" name="submitClassAttended" class="btn btn-default ">Select Class</button> ';   
+
 
 //if 
 
@@ -346,8 +388,6 @@ if((isset($_POST['submitClassAttended'])) == 1){
 */ 
 
 echo					'</div>';
-echo			'</div>';
-
 
 echo			'</form>';
 
