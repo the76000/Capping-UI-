@@ -52,13 +52,37 @@
 	
 	<?php
 	
+		
+	// Connecting, selecting database
+$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
+    or die('Could not connect: ' . pg_last_error());
 	
-	$pnum = $_POST['participant_num']; //from individual-attendance
+	session_start();
+	#checks if user is logged in
+	if (!isset($_SESSION["username"]) ){
+		header('Location: index.php');
+		echo "hello";
+	}
+	
+	echo "Username = " . $_SESSION["username"]; 
+	//for testing
+	
+	
+	
+	$pnum = $_POST['participant_num_attended']; //from individual-attendance
 	echo "$pnum";
 	
 	
-	//$participantinfoquery = "
 	
+	
+	$participantinfoquery = "
+	SELECT DISTINCT referrals.ref_f_name, referrals.ref_l_name, participants.cid 
+	FROM referrals, participants 
+	WHERE participants.p_num = '$pnum '";
+	
+	
+	$participantinforesult = pg_query($participantinfoquery) or die('Query failed: ' . pg_last_error());
+	$participantinforow = pg_fetch_array($participantinforesult, 0, PGSQL_ASSOC);
 	
 	
 	

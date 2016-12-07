@@ -73,20 +73,34 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
  
 
  
+ if(isset($_POST['submitClassNotAttended'])){
+	 echo"submitclassnotattended";
+	  $_SESSION['classidreport'] = $_POST['class_selected_not_attended']; //from classes attended form report-card
+ 
+ $classidfromreport =  $_POST['class_selected_not_attended']; //working fine using the wrong $post value
+ 
+	 
+	 
+ }
+
+ 
+ 
+  
+ if(isset($_POST['submitClassAttended'])){
+	 echo"submitclassattended";
+	 
+	  
+ $_SESSION['classidreport'] = $_POST['class_selected_attended']; //from classes attended form report-card
+ 
+ $classidfromreport =  $_POST['class_selected_attended']; //working fine using the wrong $post value
+	 
+ }
  
 
  
  
- 
- $_SESSION['classidreport'] = $_POST['class_selected_attended']; //from classes attended form report-card
- 
- $classidfromreport =  $_POST['class_selected_attended']; //working fine using the wrong $post value
- 
- 
- 
- 
  echo " $classidfromreport";
- 
+
 
  
 
@@ -159,7 +173,7 @@ echo					'<div class="col-md-4 input-lg">';
 
 					
 						
-echo						"<option value='$classidfromreport'> Class Picked:  '$classdisplayname'</option>"; //this needs to be a seperate php form so that the correct attendence value can be used
+echo						"<option value='$classidfromreport'> Class Picked:  '$classdisplayname'</option>"; 
 
 						
 
