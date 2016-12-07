@@ -50,7 +50,7 @@ session_start();
 		
 		$submitresult = pg_query($submitclasschange);
 		echo "class updated";
-			
+			echo " <a href='admin-tools.php'> Go back to admin tools </a>";
 	
 	
 	
