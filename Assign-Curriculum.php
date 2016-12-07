@@ -11,7 +11,7 @@
 	<link rel='stylesheet' media='screen and (min-width: 701px) and (max-width: 900px)' href='css/mobile.css' />
 	<link rel="stylesheet" href="CSS/style.css">
 
-	<title>CPCA Reset Password</title>
+	<title>CPCA Enroll Participant</title>
 </head>
 <body>
 <!-- Top left Logo -->
@@ -54,14 +54,36 @@
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
 		<div class="form-group">
+				<div class="input-group">
+					<input type="text" class="form-control input-lg" placeholder="first name" name="f_name" id="attendance-f_name" oninput="validateAlpha('attendance-f_name');">
+				</div>
+				<div class="input-group">
+					<input type="text" class="form-control input-lg" placeholder="last name" name="l_name" id="attendance-l_name" oninput="validateAlpha('attendance-l_name');">
+				</div>
 			<label for="sel1">Select A Curriculum:</label> 
 				<select class="form-control" id="sel1">
-					<option>1.   Women's In-House</option>
-					<option>2.   Spanish Speaking Women's In-House</option>
-					<option>3.   Men's DC Jail</option>
-					<option>4.   Cornerstone</option>
-					<option>5.   Men's In-House</option>
-					<option>6.   Meadow Run</option>
+					<?php
+						session_start();
+	
+						if (!isset($_SESSION["username"]) ){
+							header('Location: index.php');
+							echo "hello";
+						}
+					  
+					  
+						// Connecting, selecting database
+						$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
+							or die('Could not connect: ' . pg_last_error());
+
+						// Performing SQL query
+						$query = 'SELECT * FROM public.curriculum ORDER BY cid ASC ';
+						
+						$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+						
+					while($row = pg_fetch_array($result)){
+						echo "<option value='".$row['curriculum_name']."'>".$row['curriculum_name']."</option>";
+					}
+					?>
 				</select>
 		</div>
 	</div>
