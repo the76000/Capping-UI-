@@ -302,11 +302,12 @@ echo			'<p> <a href="#"> Click to see more </a> </p>';
 
 echo			'<p> <a href="#"> Link to Participant Intake Form </a> </p>';
 
-echo			'<p> <a href="#"> Link to Participant Referral Form </a> </p>';
+echo            "<form action = 'IntakeAppFilled.php'  method ='post'>";
 
+echo            "<p> Link to Participant Report Card click the number </p>";
+echo			"<input type = 'submit' name = 'participant_num_intake' value = ' $p_num ' />";
 
-
-
+echo            "</form>";
 
 
 /*
