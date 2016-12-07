@@ -12,7 +12,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 </head>
 <body>
 <!-- Php Functions -->
-<?php require 'FormAppPHPFunctions.php';?>
+<?php require 'ReferralAppHelper.php';?>
 
 
 <header id = "header"> <h1 style="font-weight:bold;"><img id = "titleImage" src="Images\CPCALogo.png"/> Parent Empowerment Referral Form </h1> </header>
@@ -22,6 +22,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
 <!-- About Applicant group -->
 <h4 style="text-align:center;"> Participant Information </h4>
+<h5 style="text-align:center;"><b> Please At Minimum Fill out your First Name, Last Name, and Date Of Birth </b></h5>
 <br>
 
 <label for="fName"> First Name: </label> 
@@ -140,18 +141,20 @@ This Web Application was developed to replace the paper copy of the Intake form 
 
 <label for="RefAgencyName"> Referring Party </label>
 <select name="RefAgencyName" id="RefAgencyName" class="form-control" style="margin-right:4%; width:265px;" onChange="enableRefAgencyOtherBox();">
-	<option value=""> 						-- select one --				</option>
-	<option value="cps"> 						CPS 							</option>	
-	<option value="dutchessCountySheriff">		Dutchess County Sheriff			</option>
-	<option value="family">						Family 							</option>	
-	<option value="friend">						Friend							</option>
-	<option value="self">						Self							</option>
-	<option value="lawyer">						Lawyer							</option>
-	<option value="police">						Local Police					</option>
-	<option value="statePolice">				State Police					</option>
-	<option value="localCourt">					Local Court 					</option>
-	<option value="stateCourt">					State Court						</option>
-	<option value="otherCourt">					Other Court						</option>
+	<option value=""> 						-- select one --					</option>
+	<option value="CPS"> 						CPS 							</option>	
+	<option value="DC Sherriff">				Dutchess County Sherriff		</option>
+	<option value="Family">						Family 							</option>	
+	<option value="Friend">						Friend							</option>
+	<option value="Self">						Self							</option>
+	<option value="Lawyer">						Lawyer							</option>
+	<option value="Local Police">				Local Police					</option>
+	<option value="New York State Police">		NYS Police						</option>
+	<option value="Family Court">				Family Court 					</option>
+	<option value="County Court">				County Court					</option>
+	<option value="Other Court">				Other Court						</option>
+	<option value="Other Police">				Other Police					</option>
+	<option value="other">						Other							</option>
 </select>
 
 <label for="RefAgencyNameOther" style="width:10%;"> If other, name here: </label>
@@ -209,8 +212,8 @@ This Web Application was developed to replace the paper copy of the Intake form 
 		<td> 
 			<select style="margin:3px;" name="hGender[]" id="hGender" class="form-control"> 
 				<option value="">-- select one --</option>
-				<option value="male"> Male </option>
-				<option value="female">Female </option>
+				<option value="m"> Male </option>
+				<option value="f">Female </option>
 			</select> 
 		</td>
 		<td> 
@@ -288,6 +291,16 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
 <br>
 <hr>
+
+<label for="chkBoxOptions" style="width:25%;text-align:center;"> Please Check all that apply to the referred Individual: </label>
+<br>
+<br>
+<?php  //php function call from ReferralAppHelper to build the check box.
+	chkBoxBuilder();
+?>
+<br>
+<hr>
+
 <!--- For Office Use Only -->
 <h4 style="text-align:center;"> For Office Use Only </h4>
 <br>
@@ -320,7 +333,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <br>
 
 <label for="staffPerson"> Staff Person: </label> 
-<input type="text" name= "staffPerson" maxlength="60" size="50" oninput="validateAlpha('staffPerson');" id="staffPerson" class="form-control"> 
+<input type="text" name= "staffPerson" maxlength="60" size="50" oninput="validateStaff('staffPerson');" id="staffPerson" class="form-control"> 
 
 <br>
 <br>

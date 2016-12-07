@@ -8,16 +8,13 @@ This Web Application was developed to replace the paper copy of the Intake form 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title> Parent Empowerment Intake Form </title> 
-
 </head>
 <body>
-
-<?php require 'FormAppPHPFunctions.php';?>
 
 
 <header id = "header"> <h1 style="font-weight:bold;"><img id = "titleImage" src="Images\CPCALogo.png"/> Parent Empowerment Intake Form </h1> </header>
 <div class="container-fluid" id= "container-fluid" style="text-align:left">
-
+<h5 style="text-align:center;"><b> Please At Minimum Fill out your First Name, Last Name, and Date Of Birth </b></h5>
 <form action="intakeInsertRecord.php" method="post" class="form-inline">
   <br>
   <!--Name for now, dont wanna change the intake form just yet. Can easily be altered in the future. -->
@@ -189,7 +186,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 
 <label for="ethnicity">Ethnicity:</label> 
 <select name="ethnicity" id="ethnicity" class="form-control" onChange="ifYes(ethnicity, ethOther);" style="margin-right:9%;">
-	<option>-- select one --</option>
+	<option value="">-- select one --</option>
 	<option value="Asian">Asian</option>
 	<option value="Caucasian">Caucasian</option>
 	<option value="Hispanaic">Hispanaic</option>
@@ -220,7 +217,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 	</tr>
 	<tr>
 		<td> 
-			<select style="margin:3px;" name="lLanguage" id="lLanguage" class="form-control">
+			<select style="margin:3px;" name="lLanguage[]" id="lLanguage" class="form-control">
 			 	<option value="">-- select one --</option>
 				<option value="Afrikanns">Afrikanns</option>
 				<option value="Albanian">Albanian</option>
@@ -332,28 +329,31 @@ This Web Application was developed to replace the paper copy of the Intake form 
 	<tr>
 		<th> First Name </th>
 		<th> Last Name </th>
-		<th> Middle Intial</th>
+		<th> MI</th>
 		<th> Sex </th>
 		<th> DOB </th>
 		<th> Race </th>
-		<th> Where do they live? </th>
+		<th>Street </th>
+		<th>City </th>
+		<th>State </th>
+		<th>Zipcode </th>
 		<th> Who has custody? </th>
 	</tr>
 	<tr>
-		<td> <input type="text" name= "iFName" maxlength="20" size="20" oninput="validateAlpha('iFName');" id="iFName" class="form-control" style="margin:3px;"> </td>
-		<td> <input type="text" name= "iSName" maxlength="20" size="20" oninput="validateAlpha('iSName');" id="iSName" class="form-control" style="margin:3px;"> </td>
-		<td> <input type="text" name= "iMName" maxlength="1" size="1" oninput="validateAlpha('iMName');" id="iMName" class="form-control" style="margin:3px;"> </td>
+		<td> <input type="text" name= "iFName[]" maxlength="20" size="10" oninput="validateAlpha('iFName');" id="iFName" class="form-control" style="margin:3px;"> </td>
+		<td> <input type="text" name= "iSName[]" maxlength="20" size="10" oninput="validateAlpha('iSName');" id="iSName" class="form-control" style="margin:3px;"> </td>
+		<td> <input type="text" name= "iMName[]" maxlength="1" size="1" oninput="validateAlpha('iMName');" id="iMName" class="form-control" style="margin:3px;"> </td>
 		<td> 
-			<select style="margin:3px;" name="iGender" id="iGender" class="form-control"> 
+			<select style="margin:3px;" name="iGender[]" id="iGender" class="form-control"> 
 				<option value="none">-- select one --</option>
-				<option value="male"> Male </option>
-				<option value="female">Female </option>
+				<option value="m"> Male </option>
+				<option value="f">Female </option>
 			</select> 
 		</td>
-		<td> <input type="text" name= "iDOB" maxlength="10" size="10" id="iDOB" class="form-control" onkeypress="isDate('iDOB',event);" onblur="isDateOffFocus('iDOB');" style="margin:3px;" placeholder="mm/dd/yyyy"> 
+		<td> <input type="text" name= "iDOB[]" maxlength="10" size="10" id="iDOB" class="form-control" onkeypress="isDate('iDOB',event);" onblur="isDateOffFocus('iDOB');" style="margin:3px;" placeholder="mm/dd/yyyy"> 
 		</td>
 		<td> 
-			<select style="margin:3px;" name="iRace" id="iRace" class="form-control">
+			<select style="margin:3px;" name="iRace[]" id="iRace" class="form-control">
 				<option value="none">-- select one --</option>
 				<option>Asian</option>
 				<option>Caucasian</option>
@@ -367,9 +367,71 @@ This Web Application was developed to replace the paper copy of the Intake form 
 			</select>
 		</td>
 		<td> 
-			<input type="text" size="20" maxlength="75" id="iWhere" class="form-control">
+			<input type="text" size="10" maxlength="30" name="iStreet[]" id="iStreet" class="form-control">
 		</td>
-		<td><input type="text" size="20" maxlength="75" id="iComment" class="form-control"><span class="glyphicon glyphicon-plus" onclick="intakeTableEvent();"></span><span class="glyphicon glyphicon-minus" onclick="removeRow(this,'intakeTable');"></span></td>
+		<td> 
+			<input type="text" size="10" maxlength="30" name="iCity[]" id="iCity" class="form-control" oninput="validateAlpha('iCity');">
+		</td>
+		<td>
+			<select name="iState[]" id="iState" class="form-control" style="margin-right:9%;" >
+			<option value="">-- select one --</option>
+			<option value="AL">Alabama</option>
+			<option value="AK">Alaska</option>
+			<option value="AZ">Arizona</option>
+			<option value="AR">Arkansas</option>
+			<option value="CA">California</option>
+			<option value="CO">Colorado</option>
+			<option value="CT">Connecticut</option>
+			<option value="DE">Delaware</option>
+			<option value="DC">District Of Columbia</option>
+			<option value="FL">Florida</option>
+			<option value="GA">Georgia</option>
+			<option value="HI">Hawaii</option>
+			<option value="ID">Idaho</option>
+			<option value="IL">Illinois</option>
+			<option value="IN">Indiana</option>
+			<option value="IA">Iowa</option>
+			<option value="KS">Kansas</option>
+			<option value="KY">Kentucky</option>
+			<option value="LA">Louisiana</option>
+			<option value="ME">Maine</option>
+			<option value="MD">Maryland</option>
+			<option value="MA">Massachusetts</option>
+			<option value="MI">Michigan</option>
+			<option value="MN">Minnesota</option>
+			<option value="MS">Mississippi</option>
+			<option value="MO">Missouri</option>
+			<option value="MT">Montana</option>
+			<option value="NE">Nebraska</option>
+			<option value="NV">Nevada</option>
+			<option value="NH">New Hampshire</option>
+			<option value="NJ">New Jersey</option>
+			<option value="NM">New Mexico</option>
+			<option value="NY">New York</option>
+			<option value="NC">North Carolina</option>
+			<option value="ND">North Dakota</option>
+			<option value="OH">Ohio</option>
+			<option value="OK">Oklahoma</option>
+			<option value="OR">Oregon</option>
+			<option value="PA">Pennsylvania</option>
+			<option value="RI">Rhode Island</option>
+			<option value="SC">South Carolina</option>
+			<option value="SD">South Dakota</option>
+			<option value="TN">Tennessee</option>
+			<option value="TX">Texas</option>
+			<option value="UT">Utah</option>
+			<option value="VT">Vermont</option>
+			<option value="VA">Virginia</option>
+			<option value="WA">Washington</option>
+			<option value="WV">West Virginia</option>
+			<option value="WI">Wisconsin</option>
+			<option value="WY">Wyoming</option>
+			</select>
+		</td>
+		<td> 
+			<input type="text" size="5" maxlength="5" name="iZipcode[]" id="iZipcode" class="form-control" oninput="isNumberKey('iZipcode');">
+		</td>
+		<td><input type="text" size="10" maxlength="50" name="iCustody[]" id="iCustody" class="form-control"><span class="glyphicon glyphicon-plus" oninput="validateStaff('iCustody');" onclick="intakeTableEvent();"></span><span class="glyphicon glyphicon-minus" onclick="removeRow(this,'intakeTable');"></span></td>
 	</tr>	
 </table>
 
@@ -701,9 +763,6 @@ This Web Application was developed to replace the paper copy of the Intake form 
 
 <hr/>
 <footer id="footer">
-<?php
-databaser();
-?>
 <br>
 <br>
 

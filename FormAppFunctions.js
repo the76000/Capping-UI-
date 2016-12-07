@@ -4,6 +4,12 @@ function validateAlpha(id){ //validates that what is added is ONLY alphabetical
     textInput = textInput.replace(/[^A-Za-z]/g, "");
     document.getElementById(id).value = textInput;
 }
+function validateStaff(id){ //validates special for staff
+    var textInput = document.getElementById(id).value;
+    textInput = textInput.replace(/[^A-Za-z\s]/g, "");
+    document.getElementById(id).value = textInput;
+}
+
 function isNumberKey(id){ // validates that what is added is ONLY a number
     var textInput = document.getElementById(id).value;
     textInput = textInput.replace(/[^0-9]/g, "");
@@ -191,7 +197,7 @@ function isEmailOffFocus(id){ //checks for valid email
  /************************************************************************** Referral App Specific Functions ****************************************************************************************/
 
 function enableRefAgencyOtherBox(){
-	if (document.getElementById("RefAgencyName").value === "Other") {
+	if (document.getElementById("RefAgencyName").value === "other") {
         document.getElementById("RefAgencyNameOther").disabled='';
     } else {
         document.getElementById("RefAgencyNameOther").disabled='true';
@@ -217,8 +223,8 @@ function enableRefAgencyOtherBox(){
 	 cell4.innerHTML = '<input type="text" name= "hDOB[]" maxlength="10" size="10" id="hDOB'+ currentRow +'" class="form-control" onkeypress="isDate(\'hDOB'+ currentRow +'\',event);" onblur="isDateOffFocus(\'hDOB'+ currentRow +'\');" style="margin:3px;" placeholder="mm/dd/yyyy">';
 	 cell5.innerHTML = '<select  style="margin:3px;" name="hGender[]" id="hGender" class="form-control">\
 	 						<option value="">-- select one --</option>\
-							<option value="male"> Male </option>\
-							<option value="female">Female </option>\
+							<option value="m"> Male </option>\
+							<option value="f">Female </option>\
 						</select> ';
 	 cell6.innerHTML = '<select style="margin:3px;" name="hRace[]" id="hRace" class="form-control">\
 							<option value="none">-- select one --</option>\
@@ -327,18 +333,21 @@ function isNumber(evt) {
 	 var cell6 = row.insertCell(5);
 	 var cell7 = row.insertCell(6);
 	 var cell8 = row.insertCell(7);
+	 var cell9 = row.insertCell(8);
+	 var cell10= row.insertCell(9);
+	 var cell11= row.insertCell(10); 
 	 
 	 
-	 cell1.innerHTML = '<input type="text" name= "iFName" maxlength="20" size="20" oninput="validateAlpha(\'iFName\');" id="iFName" class="form-control" style="margin:3px;">';
-	 cell2.innerHTML = '<input type="text" name= "iSName" maxlength="20" size="20" oninput="validateAlpha(\'iSName\');" id="iSName" class="form-control" style="margin:3px;">';
-	 cell3.innerHTML = '<input type="text" name= "iMName" maxlength="1" size="1" oninput="validateAlpha(\'iMName\');" id="iMName" class="form-control" style="margin:3px;">';
-	 cell5.innerHTML = '<input type="text" name= "iDOB" maxlength="10" size="10" id="iDOB'+ currentRow +'" class="form-control" onkeypress="isDate(\'iDOB'+ currentRow +'\',event);" onblur="isDateOffFocus(\'iDOB'+ currentRow +'\');" style="margin:3px;" placeholder="mm/dd/yyyy">';
-	 cell4.innerHTML = '<select  style="margin:3px;" name="iGender" id="iGender" class="form-control">\
+	 cell1.innerHTML = '<input type="text" name= "iFName[]" maxlength="20" size="10" oninput="validateAlpha(\'iFName\');" id="iFName" class="form-control" style="margin:3px;">';
+	 cell2.innerHTML = '<input type="text" name= "iSName[]" maxlength="20" size="10" oninput="validateAlpha(\'iSName\');" id="iSName" class="form-control" style="margin:3px;">';
+	 cell3.innerHTML = '<input type="text" name= "iMName[]" maxlength="1" size="1" oninput="validateAlpha(\'iMName\');" id="iMName" class="form-control" style="margin:3px;">';
+	 cell5.innerHTML = '<input type="text" name= "iDOB[]" maxlength="10" size="10" id="iDOB'+ currentRow +'" class="form-control" onkeypress="isDate(\'iDOB'+ currentRow +'\',event);" onblur="isDateOffFocus(\'iDOB'+ currentRow +'\');" style="margin:3px;" placeholder="mm/dd/yyyy">';
+	 cell4.innerHTML = '<select  style="margin:3px;" name="iGender[]" id="iGender" class="form-control">\
 	 						<option value="">-- select one --</option>\
-							<option value="male"> Male </option>\
-							<option value="female">Female </option>\
+							<option value="m"> Male </option>\
+							<option value="f">Female </option>\
 						</select> ';
-	 cell6.innerHTML = '<select style="margin:3px;" name="iRace" id="iRace" class="form-control">\
+	 cell6.innerHTML = '<select style="margin:3px;" name="iRace[]" id="iRace" class="form-control">\
 							<option value="none">-- select one --</option>\
 							<option>Asian</option>\
 							<option>Caucasian</option>\
@@ -350,17 +359,78 @@ function isNumber(evt) {
 							<option>Alaskan Native</option>\
 							<option>Other Race</option>\
 						</select>';
-	cell7.innerHTML = '<input type="text" size="20" maxlength="75" id="iWhere" class="form-control">';
-	cell8.innerHTML = '<input type="text" size="20" maxlength="75" id="iComment" class="form-control"><span class="glyphicon glyphicon-plus" onclick="intakeTableEvent();"></span><span class="glyphicon glyphicon-minus" onclick="removeRow(this,\'intakeTable\')"></span>';
+	cell7.innerHTML = '<input type="text" size="10" maxlength="30" name= "isStreet[]" id="iStreet" class="form-control">';
+	cell8.innerHTML = '<input type="text" size="10" maxlength="30" name="iCity[]" id="iCity" class="form-control" oninput="validateAlpha(\'iCity\');">';
+	cell9.innerHTML = '<select name="iState[]" id="iState" class="form-control" style="margin-right:9%;" >\
+			<option value="">-- select one --</option>\
+			<option value="AL">Alabama</option>\
+			<option value="AK">Alaska</option>\
+			<option value="AZ">Arizona</option>\
+			<option value="AR">Arkansas</option>\
+			<option value="CA">California</option>\
+			<option value="CO">Colorado</option>\
+			<option value="CT">Connecticut</option>\
+			<option value="DE">Delaware</option>\
+			<option value="DC">District Of Columbia</option>\
+			<option value="FL">Florida</option>\
+			<option value="GA">Georgia</option>\
+			<option value="HI">Hawaii</option>\
+			<option value="ID">Idaho</option>\
+			<option value="IL">Illinois</option>\
+			<option value="IN">Indiana</option>\
+			<option value="IA">Iowa</option>\
+			<option value="KS">Kansas</option>\
+			<option value="KY">Kentucky</option>\
+			<option value="LA">Louisiana</option>\
+			<option value="ME">Maine</option>\
+			<option value="MD">Maryland</option>\
+			<option value="MA">Massachusetts</option>\
+			<option value="MI">Michigan</option>\
+			<option value="MN">Minnesota</option>\
+			<option value="MS">Mississippi</option>\
+			<option value="MO">Missouri</option>\
+			<option value="MT">Montana</option>\
+			<option value="NE">Nebraska</option>\
+			<option value="NV">Nevada</option>\
+			<option value="NH">New Hampshire</option>\
+			<option value="NJ">New Jersey</option>\
+			<option value="NM">New Mexico</option>\
+			<option value="NY">New York</option>\
+			<option value="NC">North Carolina</option>\
+			<option value="ND">North Dakota</option>\
+			<option value="OH">Ohio</option>\
+			<option value="OK">Oklahoma</option>\
+			<option value="OR">Oregon</option>\
+			<option value="PA">Pennsylvania</option>\
+			<option value="RI">Rhode Island</option>\
+			<option value="SC">South Carolina</option>\
+			<option value="SD">South Dakota</option>\
+			<option value="TN">Tennessee</option>\
+			<option value="TX">Texas</option>\
+			<option value="UT">Utah</option>\
+			<option value="VT">Vermont</option>\
+			<option value="VA">Virginia</option>\
+			<option value="WA">Washington</option>\
+			<option value="WV">West Virginia</option>\
+			<option value="WI">Wisconsin</option>\
+			<option value="WY">Wyoming</option>\
+			</select>';
+ 	cell10.innerHTML = '<input type="text" size="5" maxlength="5" name="iZipcode[]" id="iZipcode" class="form-control" oninput="isNumberKey(\'iZipcode\');">';
+	cell11.innerHTML = '<input type="text" size="10" maxlength="50" name= "iCustody[]" id="iCustody" class="form-control"><span class="glyphicon glyphicon-plus" onclick="intakeTableEvent();"></span><span class="glyphicon glyphicon-minus" onclick="removeRow(this,\'intakeTable\')"></span>';
  }
-
   function languagesEvent(){
 	 var table = document.getElementById("languages");
 	 var currentRow = table.rows.length;
+	 
+	 if(currentRow >= 5){
+		 
+	 }
+	 else{
 	 var row = table.insertRow(currentRow);	 
 	 var cell1 = row.insertCell(0);
 
-	 cell1.innerHTML = '<select style="margin:3px;" name="lLanguage" id="lLanguage" class="form-control">\
+	 if(currentRow < 4){
+	 cell1.innerHTML = '<select style="margin:3px;" name="lLanguage[]" id="lLanguage" class="form-control">\
 			 	<option value="">-- select one --</option>\
 				<option value="Afrikanns">Afrikanns</option>\
 				<option value="Albanian">Albanian</option>\
@@ -436,4 +506,85 @@ function isNumber(evt) {
 				<option value="Xhosa">Xhosa</option>\
 			</select>\
 			<span class="glyphicon glyphicon-plus" onclick="languagesEvent();"></span><span class="glyphicon glyphicon-minus" onclick="removeRow(this,\'languages\')"></span>';
+	 }
+	 else{
+			 cell1.innerHTML = '<select style="margin:3px;" name="lLanguage[]" id="lLanguage" class="form-control">\
+			 	<option value="">-- select one --</option>\
+				<option value="Afrikanns">Afrikanns</option>\
+				<option value="Albanian">Albanian</option>\
+				<option value="Arabic">Arabic</option>\
+				<option value="Armenian">Armenian</option>\
+				<option value="Basque">Basque</option>\
+				<option value="Bengali">Bengali</option>\
+				<option value="Bulgarian">Bulgarian</option>\
+				<option value="Catalan">Catalan</option>\
+				<option value="Cambodian">Cambodian</option>\
+				<option value="Chinese (Mandarin)">Chinese (Mandarin)</option>\
+				<option value="Croation">Croation</option>\
+				<option value="Czech">Czech</option>\
+				<option value="Danish">Danish</option>\
+				<option value="Dutch">Dutch</option>\
+				<option value="English">English</option>\
+				<option value="Estonian">Estonian</option>\
+				<option value="Fiji">Fiji</option>\
+				<option value="Finnish">Finnish</option>\
+				<option value="French">French</option>\
+				<option value="Georgian">Georgian</option>\
+				<option value="German">German</option>\
+				<option value="Greek">Greek</option>\
+				<option value="Gujarati">Gujarati</option>\
+				<option value="Hebrew">Hebrew</option>\
+				<option value="Hindi">Hindi</option>\
+				<option value="Hungarian">Hungarian</option>\
+				<option value="Icelandic">Icelandic</option>\
+				<option value="Indonesian">Indonesian</option>\
+				<option value="Irish">Irish</option>\
+				<option value="Italian">Italian</option>\
+				<option value="Japanese">Japanese</option>\
+				<option value="Javanese">Javanese</option>\
+				<option value="Korean">Korean</option>\
+				<option value="Latin">Latin</option>\
+				<option value="Latvian">Latvian</option>\
+				<option value="Lithuanian">Lithuanian</option>\
+				<option value="Macedonian">Macedonian</option>\
+				<option value="Malay">Malay</option>\
+				<option value="Malayalam">Malayalam</option>\
+				<option value="Maltese">Maltese</option>\
+				<option value="Maori">Maori</option>\
+				<option value="Marathi">Marathi</option>\
+				<option value="Mongolian">Mongolian</option>\
+				<option value="Nepali">Nepali</option>\
+				<option value="Norwegian">Norwegian</option>\
+				<option value="Persian">Persian</option>\
+				<option value="Polish">Polish</option>\
+				<option value="Portuguese">Portuguese</option>\
+				<option value="Punjabi">Punjabi</option>\
+				<option value="Quechua">Quechua</option>\
+				<option value="Romanian">Romanian</option>\
+				<option value="Russian">Russian</option>\
+				<option value="Samoan">Samoan</option>\
+				<option value="Serbian">Serbian</option>\
+				<option value="Slovak">Slovak</option>\
+				<option value="Slovenian">Slovenian</option>\
+				<option value="Spanish">Spanish</option>\
+				<option value="Swahili">Swahili</option>\
+				<option value="Swedish ">Swedish </option>\
+				<option value="Tamil">Tamil</option>\
+				<option value="Tatar">Tatar</option>\
+				<option value="Telugu">Telugu</option>\
+				<option value="Thai">Thai</option>\
+				<option value="Tibetan">Tibetan</option>\
+				<option value="Tonga">Tonga</option>\
+				<option value="Turkish">Turkish</option>\
+				<option value="Ukranian">Ukranian</option>\
+				<option value="Urdu">Urdu</option>\
+				<option value="Uzbek">Uzbek</option>\
+				<option value="Vietnamese">Vietnamese</option>\
+				<option value="Welsh">Welsh</option>\
+				<option value="Xhosa">Xhosa</option>\
+			</select>\
+			<span class="glyphicon glyphicon-minus" onclick="removeRow(this,\'languages\')"></span>'; 
+	 }
+	 }
+ 
  }

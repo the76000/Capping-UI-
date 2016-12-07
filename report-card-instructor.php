@@ -131,8 +131,8 @@ AND Participants.P_Num = Class_Attendence.P_Num
 AND Class_Attendence.Class_ID = Classes_Scheduled.Class_ID
 AND Classes_Scheduled.C_Subject = Curriculum_Subjects.C_Subject
 AND Classes_Scheduled.EID = Employees.EID
-AND Curriculum_Subjects.C_Subject = Class_Subjects.C_Subject
-AND Employees.eid =  $eidfromreport";
+AND Curriculum_Subjects.C_Subject = Class_Subjects.C_Subject";
+//AND Employees.eid =  $eidfromreport
 
 
 $classesattendedresult = pg_query($classesattendedquery) or die('Query failed: ' . pg_last_error());
@@ -170,8 +170,8 @@ $classesnotattendedquery = "
 									AND Class_Attendence.Class_ID = Classes_Scheduled.Class_ID
 									AND Classes_Scheduled.C_Subject = Curriculum_Subjects.C_Subject
 									AND Classes_Scheduled.EID = Employees.EID
-									AND Curriculum_Subjects.C_Subject = Class_Subjects.C_Subject									
-									AND Employees.eid =  '$eidfromreport')
+									AND Curriculum_Subjects.C_Subject = Class_Subjects.C_Subject)							
+									
 
 ORDER BY Classes_Scheduled.Class_ID";
 
