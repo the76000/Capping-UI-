@@ -58,12 +58,8 @@
 			<div class = "jumbotron">
 						
 			<div class = "row admin-courses" style= "text-align: center;">
-			
-				<div class = "col-md-6">
-					<form class="navbar-form" role="search" action="admin-tools-course-selected.php" method="post">
-					<select class="form-control" name = "selected" id="curriculumName">
-					<?php
-						session_start();
+			<?php
+			session_start();
 	
 						if (!isset($_SESSION["username"]) ){
 							header('Location: index.php');
@@ -75,6 +71,12 @@
 						$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
 							or die('Could not connect: ' . pg_last_error());
 
+				echo '<h2> Pick a curriculum, location, and employee </h2>';
+				echo '<div class = "col-md-4">';
+				echo	'<form class="navbar-form" role="search" action="admin-tools-course-selected.php" method="post">';
+				echo	'<select class="form-control" name = "curr_selected" id="curriculumName">';
+					
+						
 						// Performing SQL query
 						$query = 'SELECT * FROM public.curriculum ORDER BY cid ASC ';
 						
@@ -83,13 +85,52 @@
 					while($row = pg_fetch_array($result)){
 						echo "<option value='".$row['curriculum_name']."'>".$row['curriculum_name']."</option>";
 					}
-					?>
-					</select> 
-					<input type="submit" value="Edit" id="edit" class="btn btn-default" style="width:20%; font-weight:bold;"></input>
-					<!--<p class="label label-info">Women's in-house</p>-->
-					</form>
-				</div>
-			</div>
+					
+					echo '</select> ';
+					echo '</div>';
+					
+					
+						echo '<div class = "col-md-4">';
+						echo	'<select class="form-control" name = "loc_selected" id="curriculumName">';
+					
+						
+						// Performing SQL query
+						$locquery = 'SELECT * FROM Locations order by Location_Name ASC';
+						
+						$locresult = pg_query($locquery) or die('Query failed: ' . pg_last_error());
+						
+					while($locrow = pg_fetch_array($locresult)){
+						echo "<option value='".$locrow['location_name']."'>".$locrow['location_name']."</option>";
+					}
+					
+					echo '</select> ';
+					echo '</div>';
+					
+					
+						echo '<div class = "col-md-4">';
+						echo	'<select class="form-control" name = "emp_selected" id="curriculumName">';
+					
+						
+						// Performing SQL query
+						$empquery = 'SELECT * FROM Employees order by E_L_Name ASC';
+						
+						$empresult = pg_query($empquery) or die('Query failed: ' . pg_last_error());
+						
+					while($emprow = pg_fetch_array($empresult)){
+						echo "<option value='".$emprow['eid']."'>".$emprow['e_f_name']."  ".$emprow['e_l_name']."</option>";
+					}
+					
+					echo '</select> ';
+					echo '</div>';
+					
+					
+					echo '</div>';
+					echo '<input type="submit" value="Edit" id="edit" class="btn btn-default" style="width:20%; font-weight:bold;"></input>';
+			
+			echo		'</form>';
+				
+			
+			?>
 			
 			<!--	<div class = "col-md-6">
 			
@@ -141,7 +182,7 @@
 			<hr> </hr>
 			
 			
-			<a href = "#"> Add a new course  </a>
+		
 				
 			
 			</div>
