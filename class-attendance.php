@@ -72,7 +72,7 @@
 						<div class="form-group">
 							<label for="sel1">Select A Class:</label> <!-- this is for the 28 indivual classes, not for the course/groups. data mismatch -->
 							<select class="form-control" id="sel1">
-								<option>1.   Devloping Empathy</option>
+								<option>1.   Developing Empathy</option>
 								<option>2.   Getting your needs met</option>
 								<option>3.   Recognizing & Understanding Feelings</option>
 								<option>4.   Problem Solving</option>

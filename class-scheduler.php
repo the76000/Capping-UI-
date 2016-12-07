@@ -96,14 +96,14 @@
 					<div class="col-sm-4">
 						<div class="form-group">
 							<label for="usr">Start Date:</label>
-							<input type="date" name="RCdate" id="dateIds"  class="form-control" id="usr">
+							<input type="date" name="RCdateS" id="dateIds"  class="form-control" id="usr">
 							<!-- date picker to force data normalcy ---->							
 						</div>
 					</div>
 					<div class="col-sm-4">
 						<div class="form-group">
 							<label for="usr">End Date:</label>
-							<input type="date" name="RCdate" id="dateIde"  class="form-control" id="usr">
+							<input type="date" name="RCdateE" id="dateIde"  class="form-control" id="usr">
 							<!-- date picker to force data normalcy ---->							
 						</div>
 					</div>
