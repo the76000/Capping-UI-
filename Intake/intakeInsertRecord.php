@@ -271,7 +271,7 @@ echo $familyClassesName, PHP_EOL;
 $conn_string = "host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin";
 $dbconn = pg_connect($conn_string);
 
-$sql = 'Select p_num from referrals where ref_f_Name = \'' .$fName. '\' and ref_l_Name = \'' .$lName. '\' and AGE = '.$AGE.' ';
+$sql = 'Select referrals.p_num from referrals where referrals.ref_f_Name = \'' .$fName. '\' and referrals.ref_l_Name = \'' .$lName. '\' and AGE = '.$AGE.' ';
 echo $sql;
 $result = pg_query($dbconn, $sql);
 

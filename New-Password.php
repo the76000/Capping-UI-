@@ -54,14 +54,14 @@
 <div class="form-group">
     <label for="inputPassword3" class="col-sm-4 control-label">Password</label>
     <div class="col-sm-8">
-      <input type="email" class="form-control" id="inputEmail3" placeholder="Login ID" name = "email">
+      <input type="email" class="form-control" id="inputEmail3" placeholder="Password" name = "email">
     </div>
   </div>
   
 <div class="form-group">
     <label for="inputPassword3" class="col-sm-4 control-label">Re-enter Password</label>
     <div class="col-sm-8">
-      <input type="email" class="form-control" id="inputEmail3" placeholder="Login ID" name = "email">
+      <input type="email" class="form-control" id="inputEmail3" placeholder="Password" name = "email">
     </div>
   </div>
   
