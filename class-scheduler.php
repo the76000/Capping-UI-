@@ -33,7 +33,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Add Class</a>
+				<a class="navbar-brand" href="#">Class Scheduler</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -52,7 +52,7 @@
 	<div class = "container">
 
 		<div class = "jumbotron">
-			<h3>Class Attendance Report</h3>
+			<h3>Add a Class</h3>
 			<form style="margin-left: 15px">
 				<div class="row">
 				<div class="col-sm-4">
