@@ -48,19 +48,10 @@
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav> <!-- end of navbar-->
-
-	<div class = "container">
-
-		<div class = "jumbotron">
-			<h3>Add a Class</h3>
-			<form style="margin-left: 15px">
-				<div class="row">
-				<div class="col-sm-4">
-						<div class="form-group">
-							<label for="sel1">Select A Curriculum:</label> <!-- this is for the 28 indivual classes, not for the course/groups. data mismatch -->
-							<select class="form-control" name = "selected" id="curriculumName">
-							<?php
-								session_start();
+	
+		<?php
+		
+		session_start();
 			
 								if (!isset($_SESSION["username"]) ){
 									header('Location: index.php');
@@ -71,6 +62,20 @@
 								// Connecting, selecting database
 								$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
 									or die('Could not connect: ' . pg_last_error());
+	
+
+	echo '<div class = "container">';
+	
+	echo 	'<div class = "jumbotron">';
+	echo		'<h3>Schedule a Class</h3>';
+	echo		'<form style="margin-left: 15px" action="class-schedule-curr.php" method="post">';
+	echo			'<div class="row">';
+	echo			'<div class="col-sm-4">';
+	echo					'<div class="form-group">';
+	echo						'<label for="sel1">Select A Curriculum:</label> <!-- this is for the 28 indivual classes, not for the course/groups. data mismatch -->';
+	echo						'<select class="form-control" name = "currselected" id="curriculumName">';
+						
+								
 
 								// Performing SQL query
 								$query = 'SELECT * FROM public.curriculum ORDER BY cid ASC ';
@@ -78,39 +83,18 @@
 								$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 								
 								while($row = pg_fetch_array($result)){
-									echo "<option value='".$row['curriculum_name']."'>".$row['curriculum_name']."</option>";
+									echo "<option value='".$row['cid']."'>".$row['curriculum_name']."</option>";
 								}
-							?>
-						</select>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="form-group">
-							<label for="usr">Class Name</label>
-							<input type="textbox" name="cName" id="cName" class="form-control" >
-							<!-- date picker to force data normalcy ---->							
-						</div>
-					</div>
-					</div>
-					<div class="row">
-					<div class="col-sm-4">
-						<div class="form-group">
-							<label for="usr">Start Date:</label>
-							<input type="date" name="RCdateS" id="dateIds"  class="form-control" id="usr">
-							<!-- date picker to force data normalcy ---->							
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="form-group">
-							<label for="usr">End Date:</label>
-							<input type="date" name="RCdateE" id="dateIde"  class="form-control" id="usr">
-							<!-- date picker to force data normalcy ---->							
-						</div>
-					</div>
-				</div>
+							
+				echo		'</select>';
+				echo		'</div>';
+				echo	'</div>';
+		
 
-				<button type="submit" class="btn btn-default ">Submit</button>    
-			</form>
+		echo		'<button type="submit" class="btn btn-default ">Submit</button>    ';
+		echo	'</form>';
+			
+			?>
 
 		</div>
 
