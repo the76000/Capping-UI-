@@ -305,6 +305,10 @@ echo			'<p> <a href="#"> Link to Participant Intake Form </a> </p>';
 echo			'<p> <a href="#"> Link to Participant Referral Form </a> </p>';
 
 
+
+
+
+
 /*
 
 ideas for linking to report card, make the link a form to send the cid and pnum thru post to report card
@@ -326,11 +330,14 @@ ideas for linking to report card, make the link a form to send the cid and pnum 
 
 */
 echo            "<form action = 'report-card.php'  method ='post'>";
-echo            "<form action = 'Assign-Curriculum.php'  method ='post'>";
+
 echo            "<p> Link to Participant Report Card click the number </p>";
 echo			"<input type = 'submit' name = 'participant_name' value = ' $p_num ' />";
 
 echo            "</form>";
+
+
+//echo            "<form action = 'Assign-Curriculum.php'  method ='post'>";
 		
 		
 		
