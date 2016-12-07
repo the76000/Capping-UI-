@@ -50,80 +50,87 @@
 	</nav> <!-- end of navbar-->
 	
 	
+	<?php
 	
 	
-	<div class = "container">	
-		<div class = "row">
+	$pnum = $_POST['participant_num'};
+	
+	
+	
+	
+echo 	'<div class = "container">	';
+echo		'<div class = "row">';
 		
 		
 		
-		<div class = "jumbotron">
-		<div class = "col-md-4"> 
-			<p class="label label-info"> Individual Attendance  </p>
+echo		'<div class = "jumbotron">';
+echo		'<div class = "col-md-4"> ';
+echo			'<p class="label label-info"> Individual Attendance  </p>';
 			
-		</div>
+echo		'</div>';
 		
-		<div class = "col-md-4"> 
-			<p> Name: _______ </p>
-		</div>
+echo		'<div class = "col-md-4"> ';
+echo			'<p> Name: _______ </p>';
+echo		'</div>';
 		
-		<div class = "col-md-4"> 
-			<p> Curriculum: _______ </p>
-		</div>
+echo		'<div class = "col-md-4"> ';
+echo			'<p> Curriculum: _______ </p>';
+echo		'</div>';
 		
-			<table class="table">
-    <thead>
-      <tr>
+echo 			'<table class="table">';
+echo    '<thead>';
+echo      '<tr>';
         
        
-        <th>Class</th>
-		<th>Attended?</th>
-		<th>Comments</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Class #1</td>
-        <td>Yes</td>
-        <td>None</td>
+echo        '<th>Class</th>';
+echo 		'<th>Attended?</th>';
+echo 		'<th>Comments</th>';
+echo      '</tr>';
+echo    '</thead>';
+echo    '<tbody>';
+echo     '<tr>';
+echo       '<td>Class #1</td>';
+echo        '<td>Yes</td>';
+echo        '<td>None</td>';
        
-      </tr>
-      <tr>
-        <td>Class #2</td>
-        <td>No</td>
-        <td>Participant gave no excuse, did not show</td>
+echo      '</tr>';
+echo     '<tr>';
+echo        '<td>Class #2</td>';
+echo        '<td>No</td>';
+echo        '<td>Participant gave no excuse, did not show</td>';
     
-      </tr>
-      <tr>
-        <td>CLass #3</td>
-        <td>Yes</td>
-        <td>None</td>
+echo     '</tr>';
+echo      '<tr>';
+echo        '<td>CLass #3</td>';
+echo        '<td>Yes</td>';
+echo        '<td>None</td>';
    
-      </tr>
-    </tbody>
-  </table>
+echo      '</tr>';
+echo    '</tbody>';
+echo  '</table>';
 		
 		
 		
-			</div>
+echo			'</div>';
 		
 
 		
 		
 			
-		<div class = "col-md-6"> 
+echo		'<div class = "col-md-6"> ';
 		
 		
 		
-		</div>
+echo		'</div>';
 	
 	
-	</div>
+echo	'</div>';
 		
 	
 	
-</div>		
+echo '</div>		';
 
+?>
 	
 	
 	
