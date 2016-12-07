@@ -77,9 +77,18 @@
 						//declaration
 						$curriculumName = $_POST['curr_selected'];
 						
+						
+						
 					    $locationName = $_POST['loc_selected'];
 						
 						$employeeEID = $_POST['emp_selected'];
+						
+						
+						$_SESSION['admin-course-curr'] = $curriculumName;
+						
+						$_SESSION['admin-course-loc'] = $locationName;
+						
+						$_SESSION['admin-coursee-eid'] = $employeeEID;
 					  
 					  
 						// Connecting, selecting database
@@ -102,7 +111,7 @@
 					
 						
 						// Performing SQL query
-						$uniqueclassquery = "SELECT DISTINCT Class_Subjects.Class_Subject, Classes_Scheduled.Class_ID, Class_Subjects.C_Subject
+						$uniqueclassquery = "SELECT DISTINCT Class_Subjects.Class_Subject, Classes_Scheduled.Class_ID, Classes_Scheduled.Date_Time_Schedules, Class_Subjects.C_Subject
 						FROM Class_Subjects, Curriculum_Subjects, Curriculum, Classes_Scheduled, Locations, Employees 
 						WHERE (Class_Subjects.C_Subject = Curriculum_Subjects.C_Subject) 
 						AND (Curriculum_Subjects.CID = Curriculum.CID) 
@@ -115,9 +124,9 @@
 						AND (Employees.EID = '$employeeEID ')		order by Class_Subjects.C_Subject ASC";
 						
 						$uniqueclassresult = pg_query($uniqueclassquery) or die('Query failed: ' . pg_last_error());
-					echo "<form action = '#' method='post'>";
+					echo "<form action = 'admin-tools-class-selected.php' method='post'>";
 					echo					'<label>Classes in the curriculum</label>';
-					echo      "<select>";
+					echo      "<select name = 'classidPicked'>";
 					while($uniqueclassrow = pg_fetch_array($uniqueclassresult)){
 						echo "<option value='".$uniqueclassrow['class_id']."'>".$uniqueclassrow['class_subject']."</option>";
 					}
@@ -142,80 +151,10 @@
 					
 				
 			echo  '</div>';
+			
+		
 
 
-			echo '<div class = "jumbotron">';
-
-
-				echo '<form class="form-horizontal">';
-					echo '<div class="form-group">';
-    				echo '<label for="curriculumTitle" class="col-sm-4 control-label">Change Curriculum Title </label>';
-   					echo	 '<div class="col-sm-8">';
-      				echo		'<input  class="form-control" id="curriculumTitle" placeholder="Title" oninput="validateAlphaWithSpace("curriculumTitle");">';
-    				echo	'</div>';
- 					 echo '</div>';
-
- 					echo  '<div class="form-group">';
-   					echo	 '<div class="col-sm-offset-2 col-sm-10">';
-      				echo		'<button type="submit" class="btn btn-default">Submit Change</button>';
-	  					
-    				echo	'</div>';
- 					echo  '</div>';
-
-
- 				echo	 '<div class="form-group">';
-    			echo	'<label for="curriculumTime" class="col-sm-4 control-label">Change Meeting time for all classes </label>';
-   				echo		 '<div class="col-sm-8">';
-      			echo			'<input  class="form-control" id="curriculumTime" placeholder="Time" oninput="validateAlphaWithSpace("curriculumTime");">';
-    			echo		'</div>';
- 				echo	 '</div>';
-
-
- 				echo	 '<div class="form-group">';
-   				echo		 '<div class="col-sm-offset-2 col-sm-10">';
-      			echo			'<button type="submit" class="btn btn-default">Submit Change</button>';
-	  			
-    			echo		'</div>';
- 				echo	' </div>';
-
- 				echo	  '<div class="form-group">';
-    			echo	'<label for="curriculumLocation" class="col-sm-4 control-label">Change Location for all classes </label>';
-   				echo		 '<div class="col-sm-8">';
-      			echo			'<input  class="form-control" id="curriculumLocation" placeholder="Time" oninput="validateAlphaWithSpace("curriculumLocation");">';
-    			echo		'</div>';
- 				echo	 '</div>';
-
-
- 				echo	 '<div class="form-group">';
-   				echo		 '<div class="col-sm-offset-2 col-sm-10">';
-      			echo			'<button type="submit" class="btn btn-default">Submit Change</button>';
-	  					
-    			echo		'</div>';
- 				echo	 '</div>';
-
- 				echo	 '<div class="form-group">';
-    			echo	'<label for="curriculumTeacher" class="col-sm-4 control-label">Change Teacher for all classes </label>';
-   				echo		 '<div class="col-sm-8">';
-      			echo			'<input  class="form-control" id="curriculumTeacher" placeholder="Time" oninput="validateAlphaWithSpace("curriculumTeacher");">';
-    			echo		'</div>';
- 				echo	 '</div>';
-
-
- 				echo	 '<div class="form-group">';
-   				echo		 '<div class="col-sm-offset-2 col-sm-10">';
-      			echo			'<button type="submit" class="btn btn-default">Submit Change</button>';
-	  			echo			'<!-- needs apache/php link to database -->';
-    			echo		'</div>';
- 				echo	 '</div>';
-
-
-echo					'<button type="submit" class="btn btn-default " id="adminChangeCourseButton">Submit All Changes</button>  ';
-
-echo				'</form>';
-
-
-
-echo			'</div>';
 		
 		
 		

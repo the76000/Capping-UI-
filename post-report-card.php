@@ -82,4 +82,4 @@ if (($_POST['radio']) == "submit_attended"){
 </body>
 
 
-</html
+</html>
