@@ -53,7 +53,11 @@
 	<?php
 	
 	
-	$pnum = $_POST['participant_num'};
+	$pnum = $_POST['participant_num']; //from individual-attendance
+	echo "$pnum";
+	
+	
+	//$participantinfoquery = "
 	
 	
 	
