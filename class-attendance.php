@@ -108,14 +108,14 @@
 					<div class="col-sm-4">
 						<div class="form-group">
 							<label for="usr">Start Date:</label>
-							<input type="date" name="RCdate" id="dateId"  class="form-control" id="usr">
+							<input type="date" name="startDate" id="startDateId"  class="form-control" onkeypress="isDate('startDateId',event);" onblur="isDateOffFocus('startDateId');" >
 							<!-- date picker to force data normalcy ---->							
 						</div>
 					</div>
 					<div class="col-sm-4">
 						<div class="form-group">
 							<label for="usr">End Date:</label>
-							<input type="date" name="RCdate" id="dateId"  class="form-control" id="usr">
+							<input type="date" name="endDate" id="endDateId"  class="form-control" oninput="isDate(endDateID);">
 							<!-- date picker to force data normalcy ---->							
 						</div>
 					</div>
@@ -127,5 +127,9 @@
 		</div>
 
 	</div>		
+	
+	<!-- JS Functions  -->
+<script src="intake/FormAppFunctions.js"></script>
+	
 </body>
 </html>
