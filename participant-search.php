@@ -85,7 +85,7 @@ echo "</table>\n";
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Particpant Search</a>
+      <a class="navbar-brand" href="#">Participant Search</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
