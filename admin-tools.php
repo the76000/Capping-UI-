@@ -65,6 +65,11 @@
 
 				<a href="#"><button class="btn btn-default course-launcher-links" type="submit"><b>Change Attendance Record</b></button></a>
 				
+				<a href="Change-Employee-Password.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Change Employee Password</b></button></a>
+				
+				<a href="Add-Employee.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Add an Employee</b></button></a>
+				
+				<a href="Remove-Employee.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Remove an Employee</b></button></a>
 			</div>
 			
 		
@@ -76,7 +81,7 @@
 	
 	
 	</div>
-	
+
 	
 	
 	
