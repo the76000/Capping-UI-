@@ -64,7 +64,7 @@ This Web Application was developed to replace the paper copy of the Intake form 
 
 <label for="state"> State: </label> 
 <select name="state" id="state" class="form-control" style="margin-right:9%;" >
-	<option value="">-- select one --</option>
+	<option selected disabled class="hideoption">Select One</option>
 	<option value="AL">Alabama</option>
 	<option value="AK">Alaska</option>
 	<option value="AZ">Arizona</option>

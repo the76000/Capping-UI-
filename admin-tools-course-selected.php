@@ -126,7 +126,8 @@
 						$uniqueclassresult = pg_query($uniqueclassquery) or die('Query failed: ' . pg_last_error());
 					echo "<form action = 'admin-tools-class-selected.php' method='post'>";
 					echo					'<label>Classes in the curriculum</label>';
-					echo      "<select name = 'classidPicked'>";
+					echo      "<select name = 'classidPicked'>
+					<option selected disabled class='hideoption'>Select One</option>";
 					while($uniqueclassrow = pg_fetch_array($uniqueclassresult)){
 						echo "<option value='".$uniqueclassrow['class_id']."'>".$uniqueclassrow['class_subject']."</option>";
 					}

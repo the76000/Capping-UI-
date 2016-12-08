@@ -70,6 +70,7 @@
 					<label>Select option</label>
 					<!--Per the template on lucid, this is supposed to be a drop down of different options, but I'm not sure what the options are supposed to be -->
 					<select id = "myList">
+					<option selected disabled class="hideoption">Select One</option>
 						<option value = "1">one</option>
 						<option value = "2">two</option>
 						<option value = "3">three</option>

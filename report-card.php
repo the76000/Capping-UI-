@@ -310,7 +310,8 @@ echo					'</div>';
 echo			'<form action = "report-card-instructor.php" method="post" class="navbar-form">';
 echo					'<div class="col-md-6 input-lg">';
 echo					'<label>Instructors</label>';
-echo						'<select class="form-control" name="Instructor_select">';
+echo						'<select class="form-control" name="Instructor_select">
+							<option selected disabled class="hideoption">Select One</option>';
 
 //$nameline = pg_fetch_array($classesnameresult, null, PGSQL_ASSOC);
 		//this is the best way to display multiple columns from a query that selects more than one column

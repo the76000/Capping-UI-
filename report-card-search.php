@@ -103,7 +103,8 @@ echo '<div class = "container">';
 echo	'<div class="form-group ">';
 echo			'<form action="report-card-search.php" method="post">';
 echo				  '<label for="sel1">Select A Curriculum:</label> <!-- this is for the 28 indivual classes, not for the course/groups. data mismatch -->';
-echo				  '<select name="CURRICULUM" class="form-control" id="sel1">';
+echo				  '<select name="CURRICULUM" class="form-control" id="sel1">
+						<option selected disabled class="hideoption">Select One</option>';
 				  
 				  
 					while ($line = pg_fetch_array($curr_result3, null, PGSQL_ASSOC)) { 

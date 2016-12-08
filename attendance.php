@@ -66,6 +66,7 @@
 					<div class="col-md-4 input-lg">
 						<label>Select Class</label>
 						<select class="form-control" >
+						<option selected disabled class="hideoption">Select One</option>
 							<option>1.   Women's In-House</option>
 								<option>2.   Spanish Speaking Women's In-House</option>
 								<option>3.   Men's DC Jail</option>
@@ -77,6 +78,7 @@
 					<div class="col-md-4 input-lg">
 						<label>Select Group</label>
 						<select class="form-control">
+						<option selected disabled class="hideoption">Select One</option>
 							<option>1.   Devloping Empathy</option>
 								<option>2.   Getting your needs met</option>
 								<option>3.   Recognizing & Understanding Feelings</option>

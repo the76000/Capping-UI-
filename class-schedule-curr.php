@@ -108,7 +108,8 @@
 				echo			'<label for="usr">Class Name</label>';
 				
 				
-				echo						'<select class="form-control" name = "class_selected" id="curriculumName">';
+				echo						'<select class="form-control" name = "class_selected" id="curriculumName">
+											<option selected disabled class="hideoption">Select One</option>';
 						
 								
 
@@ -134,7 +135,8 @@
 				echo	'<div class="col-sm-4">';
 				echo		'<div class="form-group">';
 				echo			'<label for="usr">Teacher</label>';
-				echo						'<select class="form-control" name = "teacher_selected" id="curriculumName">';
+				echo						'<select class="form-control" name = "teacher_selected" id="curriculumName">
+											<option selected disabled class="hideoption">Select One</option>';
 						
 								
 
@@ -153,7 +155,8 @@
 				echo	'<div class="col-sm-4">';
 				echo		'<div class="form-group">';
 				echo			'<label for="usr">Location</label>';
-				echo						'<select class="form-control" name = "location_selected" id="curriculumName">';
+				echo						'<select class="form-control" name = "location_selected" id="curriculumName">
+											<option selected disabled class="hideoption">Select One</option>';
 						
 								
 

@@ -141,6 +141,7 @@
 				</h1>
 			<label for="sel1">Select A Curriculum:</label> 
 				<select class="form-control" id="sel1" name="curriculum_select">
+				<option selected disabled class="hideoption">Select One</option>
 					<?php
 						
 

@@ -73,7 +73,8 @@
 	echo			'<div class="col-sm-4">';
 	echo					'<div class="form-group">';
 	echo						'<label for="sel1">Select A Curriculum:</label> <!-- this is for the 28 indivual classes, not for the course/groups. data mismatch -->';
-	echo						'<select class="form-control" name = "currselected" id="curriculumName">';
+	echo						'<select class="form-control" name = "currselected" id="curriculumName">
+								<option selected disabled class="hideoption">Select One</option>';
 						
 								
 
