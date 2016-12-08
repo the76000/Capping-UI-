@@ -13,11 +13,23 @@
 	<link rel="stylesheet" href="CSS/style.css">
 
 	<title> CPCA Report Card </title>
+	<?php
+		session_start();
+
+		if (!isset($_SESSION["username"]) ){
+			header('Location: index.php');
+			echo "hello";
+		}
+	  
+	  
+		// Connecting, selecting database
+		$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
+			or die('Could not connect: ' . pg_last_error());
+	?>	
 </head>
 
 
 <body>
-
 	<!-- Top left Logo -->
 	<div class="page-header">
 		<h1><a class="home-button" href="homepage.php">CPCA</a></h1>
@@ -58,48 +70,41 @@
 				<div class="col-sm-4">
 						<div class="form-group">
 							<label for="sel1">Select A Curriculum:</label> <!-- this is for the 28 indivual classes, not for the course/groups. data mismatch -->
-							<select class="form-control" id="sel1">
-								<option>1.   Women's In-House</option>
-								<option>2.   Spanish Speaking Women's In-House</option>
-								<option>3.   Men's DC Jail</option>
-								<option>4.   Cornerstone</option>
-								<option>5.   Men's In-House</option>
-								<option>6.   Meadow Run</option>
+							<select class="form-control" id="sel1" value="<?php$_POST['curriculumSelect']?>" name="curriculumSelect" disabled>												
 							</select>
 						</div>
 					</div>
 					<div class="col-sm-4">
 						<div class="form-group">
 							<label for="sel1">Select A Class:</label> <!-- this is for the 28 indivual classes, not for the course/groups. data mismatch -->
-							<select class="form-control" id="sel1">
-								<option>1.   Developing Empathy</option>
-								<option>2.   Getting your needs met</option>
-								<option>3.   Recognizing & Understanding Feelings</option>
-								<option>4.   Problem Solving</option>
-								<option>5.   Crticism, Confrontation Fair Fighting</option>
-								<option>6.   Handling Stress</option>
-								<option>7.   Undestranding Anger </option>
-								<option>8.   Effects of Drugs </option>
-								<option>9.   Communication: Listening </option>
-								<option>10.  Communication </option>
-								<option>11.  Children's Brain Dev </option>
-								<option>12.  Ages & Stages, Routine </option>
-								<option>13.  Appropriate Expectations </option>
-								<option>14.  A & S Young Children </option>
-								<option>15.  Ages & Stages, Adolescent </option>
-								<option>16.  Health & Nutrition </option>
-								<option>17.  Improving Self-Worth </option>
-								<option>18.  Developing Personal Power </option>
-								<option>19.  Children's Safety </option>
-								<option>20.  Child Abuse & Neglect I, II, & III </option>
-								<option>21.  Managing Behavior </option>
-								<option>22.  Relationships, Pers. Space </option>
-								<option>23.  Understanding Discipline </option>
-								<option>24.  Rewards/Punishment </option>
-								<option>25.  Using Praise </option>
-								<option>26.  Alt. to Physical Punishment</option>
-								<option>27.  Guest Speaker</option>
-								<option>28.  Guest Speaker</option>
+							<select class="form-control" id="sel1" name="classSelect">
+							<?php
+								session_start();
+	
+								if (!isset($_SESSION["username"]) ){
+									header('Location: index.php');
+									echo "hello";
+								}
+							  
+							  
+								// Connecting, selecting database
+								$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
+									or die('Could not connect: ' . pg_last_error());
+
+								echo $curriculum;
+								
+								// Performing SQL query
+								
+								$query = 'SELECT * FROM public.curriculum ORDER BY cid ASC ';
+								
+								$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+								
+								while($row = pg_fetch_array($result)){
+									echo "<option value='".$row['curriculum_name']."'>".$row['curriculum_name']."</option>";
+								}	
+							
+							?>
+								
 							</select>
 						</div>
 					</div>
@@ -130,6 +135,6 @@
 	
 	<!-- JS Functions  -->
 <script src="intake/FormAppFunctions.js"></script>
-	
+			
 </body>
 </html>
