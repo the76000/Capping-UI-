@@ -115,7 +115,7 @@
 					<div class="col-sm-4">
 						<div class="form-group">
 							<label for="usr">End Date:</label>
-							<input type="date" name="endDate" id="endDateId"  class="form-control" oninput="isDate(endDateID);">
+							<input type="date" name="endDate" id="endDateId"  class="form-control" onkeypress="isDate('startDateId',event);" onblur="isDateOffFocus('startDateId');">
 							<!-- date picker to force data normalcy ---->							
 						</div>
 					</div>
