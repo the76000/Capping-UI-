@@ -113,7 +113,10 @@ session_start();
 	
 //if ((isset($_POST['submit'])) == 1){ 
 
-			$l_name = pg_escape_string($_POST['l_name']); #last name entered on participant-search
+			
+			if(isset($_POST['l_name'])){
+				$l_name = pg_escape_string($_POST['l_name']); #last name entered on participant-search
+			}
 	
 	$f_name = pg_escape_string($_POST['f_name']); #first name entered on participant-search
 	
