@@ -215,7 +215,7 @@ echo  '</div>';
 echo  '<div class="form-group">';
 echo    '<label for="status3" class="col-sm-4 control-label">Status</label>';
 echo    '<div class="col-sm-8">';
-echo     ' <input type="status3" class="form-control" id="status33" placeholder="Status (well)" name = "status3">';
+echo     ' <input type="status3" class="form-control" id="status33" placeholder="Status (well)" name = "status">';
 echo    '</div>';
 echo ' </div>';
   

@@ -37,23 +37,21 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
 	
 	$pnum = $_POST['pnumSelect'];
 	
+	$cid= $_POST['cidSelect'];
+	
+	$sex = $_POST['sexSelect'];
+	
+	$race = $_POST['race'];
+	
+	$nubchild = $_POST['childnum'];
+	
+	$status =  $_POST['status'];
 	
 	
-	$email = $_POST['email'];
-	
-	$hphone = $_POST['homePhone'];
-	
-	$cphone = $_POST['cellPhone'];
-	
-	$password = $_POST['password'];
-	
-	$lvl = 'Employee';
-	
-	
-	$createemp = "INSERT INTO Employees (e_f_name,e_l_name,email,home_phone,cell_phone,permission_lvl,password) VALUES('$fname','$lname','$email','$hphone','$cphone','$lvl','$password')";
+	$createpart = "INSERT INTO Participants (p_num,cid,sex,race,number_of_children,status) VALUES('$pnum ','$cid','$sex','$race','$nubchild','$status')";
 		
-	$result = pg_query($createemp );
-	echo 'employee created';
+	$result = pg_query($createpart );
+	echo 'Participant created';
 			
 	
 	
