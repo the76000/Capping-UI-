@@ -65,12 +65,17 @@
 
 		<div class = "jumbotron">
 			<h3>Class Attendance Report</h3>
-			<form style="margin-left: 15px">
+			<form style="margin-left: 15px" action="class-attendance-submitted.php" method="post">
 				<div class="row">
 				<div class="col-sm-4">
 						<div class="form-group">
 							<label for="sel1">Select A Curriculum:</label> <!-- this is for the 28 indivual classes, not for the course/groups. data mismatch -->
-							<select class="form-control" id="sel1" value="<?php$_POST['curriculumSelect']?>" name="curriculumSelect" disabled>												
+							<select class="form-control" id="sel1" name="curriculumSelect" disabled>							
+								<?php 
+									if(isset($_POST['curriculumSelect'])){
+										echo "<option selected=`".$_POST['curriculumSelect']."`>".$_POST['curriculumSelect']."</option>";
+									}								
+								?>							
 							</select>
 						</div>
 					</div>
@@ -79,30 +84,31 @@
 							<label for="sel1">Select A Class:</label> <!-- this is for the 28 indivual classes, not for the course/groups. data mismatch -->
 							<select class="form-control" id="sel1" name="classSelect">
 							<?php
-								session_start();
-	
-								if (!isset($_SESSION["username"]) ){
-									header('Location: index.php');
-									echo "hello";
+								
+								$cname = $_POST['curriculumSelect'];
+								
+								$cidquery = "SELECT cid FROM public.curriculum WHERE curriculum_name = '".$cname."'";							
+								
+								$cidresult = pg_query($cidquery) or die('Query failed: ' . pg_last_error());
+								
+								$cid = pg_fetch_array($cidresult);
+								
+								$cid = $cid[0];
+								
+								$classnamequery = "SELECT class_subjects.* 
+								FROM class_subjects, curriculum_subjects, curriculum
+								WHERE class_subjects.c_subject = curriculum_subjects.c_subject
+								AND curriculum_subjects.cid = curriculum.cid
+								AND curriculum.cid = '$cid'
+								ORDER BY class_subjects.c_subject ASC ";
+								
+								$classnameresult = pg_query($classnamequery) or die('Query failed: ' . pg_last_error());
+								
+								while($classnamerow = pg_fetch_array($classnameresult)){
+									echo "<option value='".$classnamerow['c_subject']."'>".$classnamerow['class_subject']."</option>";
 								}
-							  
-							  
-								// Connecting, selecting database
-								$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
-									or die('Could not connect: ' . pg_last_error());
-
-								echo $curriculum;
 								
-								// Performing SQL query
 								
-								$query = 'SELECT * FROM public.curriculum ORDER BY cid ASC ';
-								
-								$result = pg_query($query) or die('Query failed: ' . pg_last_error());
-								
-								while($row = pg_fetch_array($result)){
-									echo "<option value='".$row['curriculum_name']."'>".$row['curriculum_name']."</option>";
-								}	
-							
 							?>
 								
 							</select>
@@ -110,20 +116,6 @@
 					</div>
 					</div>
 					<div class="row">
-					<div class="col-sm-4">
-						<div class="form-group">
-							<label for="usr">Start Date:</label>
-							<input type="date" name="startDate" id="startDateId"  class="form-control" onkeypress="isDate('startDateId',event);" onblur="isDateOffFocus('startDateId');" >
-							<!-- date picker to force data normalcy ---->							
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="form-group">
-							<label for="usr">End Date:</label>
-							<input type="date" name="endDate" id="endDateId"  class="form-control" onkeypress="isDate('startDateId',event);" onblur="isDateOffFocus('startDateId');">
-							<!-- date picker to force data normalcy ---->							
-						</div>
-					</div>
 				</div>
 
 				<button type="submit" class="btn btn-default ">Submit</button>    

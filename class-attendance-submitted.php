@@ -15,7 +15,7 @@
 	<title> CPCA Report Card </title>
 	<?php
 		session_start();
-		
+
 		if (!isset($_SESSION["username"]) ){
 			header('Location: index.php');
 			echo "hello";
@@ -25,12 +25,23 @@
 		// Connecting, selecting database
 		$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
 			or die('Could not connect: ' . pg_last_error());
-	?>
+			
+			$mainquery = "SELECT ref_f_name, ref_l_name, comments FROM public.class_attendence INNER JOIN public.referrals ON public.class_attendence.p_num = public.referrals.p_num WHERE class_id = '".$_POST['classSelect']."'";
+			
+			$mainresult = pg_query($mainquery) or die('Query failed: ' . pg_last_error());
+			
+			$result = pg_fetch_array($mainresult);
+			
+			foreach ($result as $test){
+				echo "$test </br>";
+			} 
+			
+			
+	?>	
 </head>
 
 
 <body>
-
 	<!-- Top left Logo -->
 	<div class="page-header">
 		<h1><a class="home-button" href="homepage.php">CPCA</a></h1>
@@ -66,36 +77,62 @@
 
 		<div class = "jumbotron">
 			<h3>Class Attendance Report</h3>
-			<form style="margin-left: 15px" action="class-attendance.php" method="post">
 				<div class="row">
 				<div class="col-sm-4">
 						<div class="form-group">
 							<label for="sel1">Select A Curriculum:</label> <!-- this is for the 28 indivual classes, not for the course/groups. data mismatch -->
-							<select class="form-control" id="sel1" name="curriculumSelect">
-								<option value="Please Select a class" selected></option>
-							<?php
-								echo "test";
-							// Performing SQL query
-							
-							$query = 'SELECT * FROM public.curriculum ORDER BY cid ASC ';
-							
-							$result = pg_query($query) or die('Query failed: ' . pg_last_error());
-							
-							while($row = pg_fetch_array($result)){
-								echo "<option value='".$row['curriculum_name']."'>".$row['curriculum_name']."</option>";
-							}
-							
-							?>
-								
+							<select class="form-control" id="sel1" name="curriculumSelect" disabled>							
+								<?php 
+									if(isset($_POST['curriculumSelect'])){
+										echo "<option selected=`".$_POST['curriculumSelect']."`>".$_POST['curriculumSelect']."</option>";
+									}								
+								?>							
 							</select>
 						</div>
 					</div>
 					<div class="col-sm-4">
 						<div class="form-group">
-							<button type="submit" class="btn btn-default ">Submit</button> 
+							<label for="sel1">Select A Class:</label> <!-- this is for the 28 indivual classes, not for the course/groups. data mismatch -->
+							<select class="form-control" id="sel1" name="classSelect">
+							<?php
+								
+								if(isset($_POST['classSelect'])){
+										echo "<option selected=`".$_POST['classSelect']."`>".$_POST['classSelect']."</option>";
+									}								
+								
+							?>
+								
+							</select>
 						</div>
 					</div>
-			</form>
+				</div>  
+				
+				<div class="row">
+				
+					<table border="1px">
+						<tr>
+							<td> First Name </td>
+							<td> Last Name </td>
+							<td> Comments </td>
+						</tr>
+						<?php
+						
+							$mainquery = "SELECT ref_f_name, ref_l_name, comments FROM public.class_attendence INNER JOIN public.referrals ON public.class_attendence.p_num = public.referrals.p_num WHERE class_id = '".$_POST['classSelect']."'";
+			
+							$mainresult = pg_query($mainquery) or die('Query failed: ' . pg_last_error());
+							
+							while($row = pg_fetch_array($mainresult)){
+							echo "<tr><td>".$row['ref_f_name']."</td><td>".$row['ref_l_name']."</td><td>".$row['comments']."</td></tr>";
+							}
+							
+							
+						?>
+					
+					</table>
+				
+				</div>
+					
+					
 
 		</div>
 
