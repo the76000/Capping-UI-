@@ -52,7 +52,6 @@
 	<div  class="text-center">
 		<a href="individual-attendance.php" type="button" class="btn btn-default btn-lg">Individual Attendance</a>
 		<a href="class-attendance-curriculum.php" type="button" class="btn btn-default btn-lg">Class Attendance</a>
-		<a href="#" type="button" class="btn btn-default btn-lg">Location Attendance</a>
 	</div>
 	
 
