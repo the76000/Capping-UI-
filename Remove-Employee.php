@@ -55,48 +55,92 @@
 <div class="jumbotron login_panel">
 <div class= "login_wrapper">
 
-<!-- this launches another php file --->
-  <form class="form-horizontal" action="includes/users.php" method="post">
+
+<?php
+
+session_start();
+	
+	if (!isset($_SESSION["username"]) ){
+		header('Location: index.php');
+		echo "hello";
+	}
   
-  <div class="form-group">
-    <label for="inputFirstName3" class="col-sm-4 control-label">First Name</label>
-    <div class="col-sm-8">
-      <input type="firstname" class="form-control" id="inputFirstName3" placeholder="First Name" name = "First Name">
-    </div>
-  </div>
   
-    <div class="form-group">
-    <label for="inputLastName3" class="col-sm-4 control-label">Last Name</label>
-    <div class="col-sm-8">
-      <input type="lastname" class="form-control" id="inputLastName3" placeholder="Last Name" name = "Last Name">
-    </div>
-  </div>
+  // Connecting, selecting database
+$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
+    or die('Could not connect: ' . pg_last_error());
+	
+	
+	
+	$employeequery = "
+	SELECT * FROM Employees";
+	$employeeresult = pg_query($employeequery) or die('Query failed: ' . pg_last_error());
+	
+	
+	
+	
+	
+	
+
+
+
+
+echo '<!-- this launches another php file --->';
+echo  '<form class="form-horizontal" action="post-remove-employee.php" method="post">';
   
-  <div class="form-group">
-    <label for="inputLoginID3" class="col-sm-4 control-label">Login ID</label>
-    <div class="col-sm-8">
-      <input type="loginid" class="form-control" id="inputLoginID3" placeholder="Login ID" name = "LoginID">
-    </div>
-  </div>
+echo  '<div class="form-group">';
+echo   '<label for="eid3" class="col-sm-4 control-label">Employee</label>';
+echo    '<div class="col-sm-8">';
+
+echo      '<select class="form-control" name="eidSelect">';
+
+echo							'<option selected disabled class="hideoption">Select One</option>';
+
+//$nameline = pg_fetch_array($classesnameresult, null, PGSQL_ASSOC);
+		//this is the best way to display multiple columns from a query that selects more than one column
+				while ($employee_line = pg_fetch_assoc($employeeresult ) ){
+				
+							
+							$employee_col_value_var = $employee_line['eid'];
+							
+							$employee_col_value_var2 = $employee_line['e_f_name'];
+							
+							$employee_col_value_var3 = $employee_line['e_l_name'];
+						
+							
+							
+echo						"<option value='$employee_col_value_var'>   '$employee_col_value_var2'   '$employee_col_value_var3'</option>"; 
+							
+								
+						
+						
+						
+						
+
+				}
+							
+echo						'</select>  ';
+
+
+echo    '</div>';
+echo  '</div>';
   
-  <div class="form-group">
-    <label for="inputLoginID3" class="col-sm-4 control-label">Re-enter Login ID</label>
-    <div class="col-sm-8">
-      <input type="loginid" class="form-control" id="inputLoginID3" placeholder="Login ID" name = "LoginID">
-    </div>
-  </div>
+
   
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Remove this Employee</button>
-	  <!-- needs apache/php link to database -->
-	  <!-- Need to add an alert that says "ARE YOU SURE YOU WANT TO DELETE THIS EMPLOYEE FROM THE DATABASE?" y/n prompt -->
-    </div>
-  </div>
+echo  '<div class="form-group">';
+echo    '<div class="col-sm-offset-2 col-sm-10">';
+echo     ' <button type="submit" class="btn btn-default">Remove this Employee</button>';
+echo	  '<!-- needs apache/php link to database -->';
+echo	  '<!-- Need to add an alert that says "ARE YOU SURE YOU WANT TO DELETE THIS EMPLOYEE FROM THE DATABASE? nah " y/n prompt -->';
+echo    '</div>';
+echo  '</div>';
   
-</form> <!-- end of login form -->
-</div> <!-- end of login wrapper -->
-</div> <!-- end of jumbotron login -->
+echo '</form> <!-- end of login form -->';
+echo '</div> <!-- end of login wrapper -->';
+echo '</div> <!-- end of jumbotron login -->';
+
+
+?>
 </div>	
 </body>
 </html>
