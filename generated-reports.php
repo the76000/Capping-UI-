@@ -51,51 +51,66 @@
 	
 	<div class = "row">		
 		
-		<div class="col-md-4">	
-		
-			<div class="input-group">
-				<input type="text" class="form-control input-lg" placeholder="first name" name="f_name" id="srch-f_name1" oninput="validateAlpha('srch-f_name1');">
-			</div >
+		<form action="class-attendance.php" method="post">
+			<div class="col-md-4">	
 			
-			<div class="input-group">
-				<input type="text" class="form-control input-lg" placeholder="last name" name="l_name" id="srch-l_name1" oninput="validateAlpha('srch-l_name1');">
-			</div>
+				<div class="input-group">
+					<input type="text" class="form-control input-lg" placeholder="first name" name="f_name1" id="srch-f_name1" oninput="validateAlpha('srch-f_name1');">
+				</div >
+				
+				<div class="input-group">
+					<input type="text" class="form-control input-lg" placeholder="last name" name="l_name1" id="srch-l_name1" oninput="validateAlpha('srch-l_name1');">
+				</div>
 
-			<select multiple class="form-control" id="reportSelect1">
-				<option>Attendance</option>
-				<option>Birthday</option>
-				<option>Courses to complete</option>
-			</select>		
-		</div>
-		<div class="col-md-4">	
-			<div class="input-group">
-				<input type="text" class="form-control input-lg" placeholder="first name" name="f_name" id="srch-f_name2" oninput="validateAlpha('srch-f_name2');">
-			</div >
-			
-			<div class="input-group">
-				<input type="text" class="form-control input-lg" placeholder="last name" name="l_name" id="srch-l_name2" oninput="validateAlpha('srch-l_name2');">
+				<select multiple class="form-control" id="reportSelect1">
+					<option>Attendance</option>
+					<option>Birthday</option>
+					<option>Courses to complete</option>
+				</select>
+				<div class="form-group">
+					<button type="submit" class="btn btn-default ">Submit</button> 
+				</div>
 			</div>
-			<select multiple class="form-control" id="reportSelect2">
-				<option>Attendance</option>
-				<option>Birthday</option>
-				<option>Courses to complete</option>
-			</select>		
-		</div>	
-		<div class="col-md-4">	
-			<div class="input-group">
-				<input type="text" class="form-control input-lg" placeholder="first name" name="f_name" id="srch-f_name3" oninput="validateAlpha('srch-f_name3');">
-			</div >
-			
-			<div class="input-group">
-				<input type="text" class="form-control input-lg" placeholder="last name" name="l_name" id="srch-l_name3" oninput="validateAlpha('srch-l_name3');">
+		</form>
+		<form action="class-attendance.php" method="post">
+			<div class="col-md-4">	
+				<div class="input-group">
+					<input type="text" class="form-control input-lg" placeholder="first name" name="f_name2" id="srch-f_name2" oninput="validateAlpha('srch-f_name2');">
+				</div >
+				
+				<div class="input-group">
+					<input type="text" class="form-control input-lg" placeholder="last name" name="l_name2" id="srch-l_name2" oninput="validateAlpha('srch-l_name2');">
+				</div>
+				<select multiple class="form-control" id="reportSelect2">
+					<option>Attendance</option>
+					<option>Birthday</option>
+					<option>Courses to complete</option>
+				</select>	
+				<div class="form-group">
+					<button type="submit" class="btn btn-default ">Submit</button> 
+				</div>
+			</div>	
+		</form>
+		<form action="class-attendance.php" method="post">
+			<div class="col-md-4">	
+				<div class="input-group">
+					<input type="text" class="form-control input-lg" placeholder="first name" name="f_name3" id="srch-f_name3" oninput="validateAlpha('srch-f_name3');">
+				</div >
+				
+				<div class="input-group">
+					<input type="text" class="form-control input-lg" placeholder="last name" name="l_name3" id="srch-l_name3" oninput="validateAlpha('srch-l_name3');">
+				</div>
+				<select multiple class="form-control" id="reportSelect3">
+					<option>Attendance</option>
+					<option>Birthday</option>
+					<option>Courses to complete</option>
+				</select>
+				
+				<div class="form-group">
+					<button type="submit" class="btn btn-default ">Submit</button> 
+				</div>		
 			</div>
-			<select multiple class="form-control" id="reportSelect3">
-				<option>Attendance</option>
-				<option>Birthday</option>
-				<option>Courses to complete</option>
-			</select>		
-		
-		</div>
+		</form>
 	
 	
 	
