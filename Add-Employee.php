@@ -56,55 +56,97 @@
 <div class="jumbotron login_panel">
 <div class= "login_wrapper">
 
-<!-- this launches another php file --->
-  <form class="form-horizontal" action="includes/users.php" method="post">
+
+
+<?php
+	
+session_start();
+	
+	if (!isset($_SESSION["username"]) ){
+		header('Location: index.php');
+		echo "hello";
+	}
   
-  <div class="form-group">
-    <label for="inputFirstName3" class="col-sm-4 control-label">First Name</label>
-    <div class="col-sm-8">
-      <input type="firstname" class="form-control" id="inputFirstName3" placeholder="First Name" name = "First Name">
-    </div>
-  </div>
   
-    <div class="form-group">
-    <label for="inputLastName3" class="col-sm-4 control-label">Last Name</label>
-    <div class="col-sm-8">
-      <input type="lastname" class="form-control" id="inputLastName3" placeholder="Last Name" name = "Last Name">
-    </div>
-  </div>
+  // Connecting, selecting database
+$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
+    or die('Could not connect: ' . pg_last_error());
+
+
+
+
+
+
+echo '<!-- this launches another php file --->';
+echo  '<form class="form-horizontal" action="post-add-employee.php" method="post">';
   
-  <div class="form-group">
-    <label for="inputLoginID3" class="col-sm-4 control-label">Login ID</label>
-    <div class="col-sm-8">
-      <input type="loginid" class="form-control" id="inputLoginID3" placeholder="Login ID" name = "LoginID">
-    </div>
-  </div>
+echo  '<div class="form-group">';
+echo    '<label for="inputFirstName3" class="col-sm-4 control-label">First Name</label>';
+echo    '<div class="col-sm-8">';
+echo      '<input type="firstname" class="form-control" id="inputFirstName3" placeholder="First Name" name = "first_name">';
+echo   ' </div>';
+echo  '</div>';
   
-  <div class="form-group">
-    <label for="inputPassword3" class="col-sm-4 control-label">Password</label>
-    <div class="col-sm-8">
-      <input type="password" class="form-control" id="inputPassword3" placeholder="Password" name = "password">
-    </div>
-  </div>
+echo   ' <div class="form-group">';
+echo    '<label for="inputLastName3" class="col-sm-4 control-label">Last Name</label>';
+echo    '<div class="col-sm-8">';
+echo     ' <input type="lastname" class="form-control" id="inputLastName3" placeholder="Last Name" name = "last_name">';
+echo    '</div>';
+echo  '</div>';
   
-  <div class="form-group">
-    <label for="inputPassword3" class="col-sm-4 control-label">Re-enter Password</label>
-    <div class="col-sm-8">
-      <input type="password" class="form-control" id="inputPassword3" placeholder="Password" name = "password">
-    </div>
-  </div>
+echo  '<div class="form-group">';
+echo   '<label for="emailID3" class="col-sm-4 control-label">Email </label>';
+echo    '<div class="col-sm-8">';
+echo     '<input type="email" class="form-control" id="emailID3" placeholder="Email" name = "email">';
+echo    '</div>';
+echo  '</div>';
+
+echo  '<div class="form-group">';
+echo   '<label for="homePhoneID3" class="col-sm-4 control-label">Home Phone </label>';
+echo    '<div class="col-sm-8">';
+echo     '<input type="homePhone" class="form-control" id="homePhoneID3" placeholder="Home Phone" name = "homePhone">';
+echo    '</div>';
+echo  '</div>';
+
+echo  '<div class="form-group">';
+echo   '<label for="cellPhoneID3" class="col-sm-4 control-label">Cell Phone </label>';
+echo    '<div class="col-sm-8">';
+echo     '<input type="cellPhone" class="form-control" id="cellPhoneID3" placeholder="Cell Phone" name = "cellPhone">';
+echo    '</div>';
+echo  '</div>';
+
   
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Submit</button>
-	  <!-- needs apache/php link to database -->
-	  <!-- Need to add an alert that says "The information added is correct?" y/n prompt -->
-    </div>
-  </div>
+echo  '<div class="form-group">';
+echo    '<label for="inputPassword3" class="col-sm-4 control-label">Password</label>';
+echo    '<div class="col-sm-8">';
+echo     ' <input type="password" class="form-control" id="inputPassword3" placeholder="Password" name = "password">';
+echo    '</div>';
+echo ' </div>';
   
-</form> <!-- end of login form -->
-</div> <!-- end of login wrapper -->
-</div> <!-- end of jumbotron login -->
+  
+  /* leave this commented out unless a password check feature is actually implemented
+echo  '<div class="form-group">';
+echo    '<label for="inputPassword3" class="col-sm-4 control-label">Re-enter Password</label>';
+echo    '<div class="col-sm-8">';
+echo      '<input type="password" class="form-control" id="inputPassword3" placeholder="Password" name = "password">';
+echo    '</div>';
+echo  '</div>';
+
+*/
+  
+echo  '<div class="form-group">';
+echo    '<div class="col-sm-offset-2 col-sm-10">';
+echo      '<button type="submit" class="btn btn-default">Submit</button>';
+echo	  '<!-- needs apache/php link to database -->';
+echo	  '<!-- Need to add an alert that says "The information added is correct?" y/n prompt  nah fuck that -->';
+echo   ' </div>';
+echo  '</div>';
+  
+echo '</form> <!-- end of login form -->';
+echo '</div> <!-- end of login wrapper -->';
+echo '</div> <!-- end of jumbotron login -->';
+
+?>
 </div>
 </body>
 </html>
