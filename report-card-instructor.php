@@ -90,7 +90,7 @@ $participantfname = $_SESSION['report-card-fname'];
  
  $eidfromreport =  $_POST['Instructor_select']; //working fine using the wrong $post value
  
- //with the class id from report-card(classidreport), we now need the class name
+
 $empnamequery =  "SELECT * FROM employees where eid = '$eidfromreport '";
 
 
@@ -290,11 +290,28 @@ echo						'<select class="form-control" name="class_selected_not_attended">';
 							
 							$not_attended_col_value_var = $not_attended_line['class_id'];
 							
+							
+							$classnotattendednamequery = " 
+							SELECT Class_Subjects.Class_Subject 
+							FROM Class_Subjects, Curriculum_Subjects, Classes_Scheduled
+							WHERE Class_Subjects.C_Subject = Curriculum_Subjects.C_Subject
+							AND Curriculum_Subjects.C_Subject = Classes_Scheduled.C_Subject
+							AND Classes_Scheduled.Class_ID = '$not_attended_col_value_var'";
+							
+							
+							$classesnotattendednameresult = pg_query($classnotattendednamequery) or die('Query failed: ' . pg_last_error());
+							$classesnotattendednamerow = pg_fetch_array($classesnotattendednameresult, 0, PGSQL_ASSOC);
+							
+							
+							$classnotattendedname = $classesnotattendednamerow['class_subject'];
+							
+							
+							
 							//$not_attended_col_value_var2 = $classesnotattendedsubjectrow['class_subject'];
 						
 							
 							
-echo						"<option value='$not_attended_col_value_var'>   '$not_attended_col_value_var'</option>"; //not displaying actual name, just class id
+echo						"<option value='$not_attended_col_value_var'>   '$classnotattendedname'</option>"; //not displaying actual name, just class id
 							
 								
 						
