@@ -33,7 +33,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Admin Tools</a>
+				<a class="navbar-brand" href="#">Employee Portal</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -57,15 +57,13 @@
 
 			<div class = "row">
 
-				<a href="admin-tools-course.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Change a Curriculum/Schedule</button></a>
+				<a href="Add-Employee.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Add An Employee</button></a>
 
-				<a href="class-scheduler.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Schedule a Class</b></button></a>
+				<a href="Remove-Employee.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Remove An Employee</b></button></a>
 
-				<a href="#"><button class="btn btn-default course-launcher-links" type="submit"><b>Change Attendance Record</b></button></a>
+				<a href="Employee-New-Password.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Change Employee Password</b></button></a>
 				
-				<a href="participant-add.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Enter a Participant Into the System</b></button></a>
 				
-				<a href="employee-portal.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Add/Delete/Update Employee</b></button></a>
 		
 			</div>
 			
@@ -89,14 +87,5 @@
 
 
 </html>
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	

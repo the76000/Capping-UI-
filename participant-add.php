@@ -34,7 +34,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Add an Employee</a>
+				<a class="navbar-brand" href="#">Add a Participant</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -52,7 +52,7 @@
 <!-- So I hear you hired a new employee. Congratz! Well this is where the magic happens, and by magic I mean HTML. Cause this is the language I know.... -->	
 
 <div class = "container">
-<h3><center>ADD AN EMPLOYEE</center></h3>
+<h3><center>ADD A PARTICIPANT (PARTICIPANT MUST HAVE FILLED OUT AN INTAKE AND REFERRAL FORM AND SUBMITTED)</center></h3>
 <div class="jumbotron login_panel">
 <div class= "login_wrapper">
 
@@ -68,9 +68,19 @@ session_start();
 	}
   
   
-  // Connecting, selecting database
-$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
+	// Connecting, selecting database
+	$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
     or die('Could not connect: ' . pg_last_error());
+	
+	
+	$refquery = "
+	SELECT * FROM referrals";
+	$refresult = pg_query($refquery) or die('Query failed: ' . pg_last_error());
+	
+	
+	$curquery = "
+	SELECT * FROM curriculum";
+	$curresult = pg_query($curquery) or die('Query failed: ' . pg_last_error());
 
 
 
@@ -78,48 +88,134 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
 
 
 echo '<!-- this launches another php file --->';
-echo  '<form class="form-horizontal" action="post-add-employee.php" method="post">';
+echo  '<form class="form-horizontal" action="post-participant-add.php" method="post">';
   
 echo  '<div class="form-group">';
-echo    '<label for="inputFirstName3" class="col-sm-4 control-label">First Name</label>';
+echo    '<label for="inputFirstName3" class="col-sm-4 control-label">Participant</label>';
 echo    '<div class="col-sm-8">';
-echo      '<input type="firstname" class="form-control" id="inputFirstName3" placeholder="First Name" name = "first_name">';
+
+
+echo      '<select class="form-control" name="pnumSelect">';
+
+echo							'<option selected disabled class="hideoption">Select One</option>';
+
+//$nameline = pg_fetch_array($classesnameresult, null, PGSQL_ASSOC);
+		//this is the best way to display multiple columns from a query that selects more than one column
+				while ($participant_line = pg_fetch_assoc($refresult ) ){
+				
+							
+							$participant_col_value_var = $participant_line['p_num'];
+							
+							$participant_col_value_var2 = $participant_line['ref_f_name'];
+							
+							$participant_col_value_var3 = $participant_line['ref_l_name'];
+							
+							$participant_col_value_var4 = $participant_line['dob'];
+						
+							
+							
+echo						"<option value='$participant_col_value_var'>   '$participant_col_value_var2'   '$participant_col_value_var3' '$participant_col_value_var4'</option>"; 
+							
+								
+						
+						
+						
+						
+
+				}
+							
+echo						'</select>  ';
+
+
+
+
+
+
+
+
+
 echo   ' </div>';
 echo  '</div>';
   
 echo   ' <div class="form-group">';
-echo    '<label for="inputLastName3" class="col-sm-4 control-label">Last Name</label>';
+echo    '<label for="Curriculum3" class="col-sm-4 control-label">Curriculum</label>';
 echo    '<div class="col-sm-8">';
-echo     ' <input type="lastname" class="form-control" id="inputLastName3" placeholder="Last Name" name = "last_name">';
+
+echo      '<select class="form-control" name="cidSelect">';
+
+echo							'<option selected disabled class="hideoption">Select One</option>';
+
+//$nameline = pg_fetch_array($classesnameresult, null, PGSQL_ASSOC);
+		//this is the best way to display multiple columns from a query that selects more than one column
+				while ($cur_line = pg_fetch_assoc($curresult ) ){
+				
+							
+							$cur_col_value_var = $cur_line['cid'];
+							
+							$cur_col_value_var2 = $cur_line['curriculum_name'];
+							
+						
+						
+							
+							
+echo						"<option value='$cur_col_value_var'>   '$cur_col_value_var2'  </option>"; 
+							
+								
+						
+						
+						
+						
+
+				}
+							
+echo						'</select>  ';
+
+
+
+
 echo    '</div>';
 echo  '</div>';
   
 echo  '<div class="form-group">';
-echo   '<label for="emailID3" class="col-sm-4 control-label">Email </label>';
+echo   '<label for="sex3" class="col-sm-4 control-label">Gender </label>';
 echo    '<div class="col-sm-8">';
-echo     '<input type="email" class="form-control" id="emailID3" placeholder="Email" name = "email">';
+
+
+echo      '<select class="form-control" name="sexSelect">';
+
+echo							'<option selected disabled class="hideoption">Select One</option>';
+
+
+echo              '<option value="M">   Male </option>';
+echo              '<option value="F">   Female </option>';
+echo              '<option value=" ">   Undisclosed </option>';
+
+echo						'</select>  ';
+
+
+
 echo    '</div>';
 echo  '</div>';
 
 echo  '<div class="form-group">';
-echo   '<label for="homePhoneID3" class="col-sm-4 control-label">Home Phone </label>';
+echo   '<label for="raceID3" class="col-sm-4 control-label">Ethnicity </label>';
 echo    '<div class="col-sm-8">';
-echo     '<input type="homePhone" class="form-control" id="homePhoneID3" placeholder="Home Phone (No Dashes)" name = "homePhone">';
+echo     '<input type="race" class="form-control" id="raceID3" placeholder="Ethnicity" name = "race">';
 echo    '</div>';
 echo  '</div>';
 
 echo  '<div class="form-group">';
-echo   '<label for="cellPhoneID3" class="col-sm-4 control-label">Cell Phone </label>';
+echo   '<label for="childnumID3" class="col-sm-4 control-label">Number of Children </label>';
 echo    '<div class="col-sm-8">';
-echo     '<input type="cellPhone" class="form-control" id="cellPhoneID3" placeholder="Cell Phone (No Dashes)" name = "cellPhone">';
+echo     '<input type="childnum" class="form-control" id="childnumID3" placeholder="Number of Childern (in digits)" name = "childnum">';
 echo    '</div>';
 echo  '</div>';
 
   
 echo  '<div class="form-group">';
-echo    '<label for="inputPassword3" class="col-sm-4 control-label">Password</label>';
+echo    '<label for="status3" class="col-sm-4 control-label">Status</label>';
 echo    '<div class="col-sm-8">';
-echo     ' <input type="password" class="form-control" id="inputPassword3" placeholder="Password" name = "password">';
+echo     ' <input type="status3" class="form-control" id="status33" placeholder="Status (well)" name = "status3">';
 echo    '</div>';
 echo ' </div>';
   
