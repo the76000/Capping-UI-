@@ -71,9 +71,9 @@
 								
 								
 	echo '<div class = "container">';
+	echo		'<h3>Schedule a Class</h3>';
 	
 	echo 	'<div class = "jumbotron">';
-	echo		'<h3>Schedule a Class</h3>';
 
 	echo			'<div class="row">';
 	echo			'<div class="col-sm-4">';
@@ -89,20 +89,35 @@
 								$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 								
 								while($row = pg_fetch_array($result)){
-									$currname = $row['curriculum_name'];
+									$currname = $row['curriculum_name'];							
+									echo '<label for="sel1">Curriculum Selected: '.$currname.'</label>'; 
+									echo '<!-- this is for the 28 indivual classes, not for the course/groups. data mismatch -->';
+								}			
+				echo		'</div></div>';
+				echo		'<form style="margin-left: 15px"  action="class-schedule-post.php" method="post" >';
+				
+				echo	'</div>';
+				echo	'<div class="row">';
+				echo	'<div class="col-sm-4">';
+				echo		'<div class="form-group">';
+				echo			'<label for="usr">Teacher</label>';
+				echo						'<select class="form-control" name = "teacher_selected" id="curriculumName">
+											<option selected disabled class="hideoption">Select One</option>';
+						
 								
-									
-							echo						'<label for="sel1">Curriculum Selected:';
-							echo "$currname";
-							
-							echo'</label> <!-- this is for the 28 indivual classes, not for the course/groups. data mismatch -->';
+
+								// Performing SQL query
+								$teachernamequery = "SELECT * FROM Employees ORDER BY e_f_name ASC";
 								
+								$teachernameresult = pg_query($teachernamequery) or die('Query failed: ' . pg_last_error());
+								
+								while($teachernamerow = pg_fetch_array($teachernameresult)){
+									echo "<option value='".$teachernamerow['eid']."'>".$teachernamerow['e_f_name']."   ".$teachernamerow['e_l_name']."</option>";
 								}
 							
-			
+				echo		'</select>';						
 				echo		'</div>';
 				echo	'</div>';
-					echo		'<form style="margin-left: 15px"  action="class-schedule-post.php" method="post" >';
 				echo 	'<div class="col-sm-4">';
 				echo		'<div class="form-group">';
 				echo			'<label for="usr">Class Name</label>';
@@ -130,28 +145,9 @@
 				echo		'</select>';						
 				echo		'</div>';
 				echo	'</div>';
-				echo	'</div>';
+				echo '</div>';			
+				
 				echo	'<div class="row">';
-				echo	'<div class="col-sm-4">';
-				echo		'<div class="form-group">';
-				echo			'<label for="usr">Teacher</label>';
-				echo						'<select class="form-control" name = "teacher_selected" id="curriculumName">
-											<option selected disabled class="hideoption">Select One</option>';
-						
-								
-
-								// Performing SQL query
-								$teachernamequery = "SELECT * FROM Employees ORDER BY e_f_name ASC";
-								
-								$teachernameresult = pg_query($teachernamequery) or die('Query failed: ' . pg_last_error());
-								
-								while($teachernamerow = pg_fetch_array($teachernameresult)){
-									echo "<option value='".$teachernamerow['eid']."'>".$teachernamerow['e_f_name']."   ".$teachernamerow['e_l_name']."</option>";
-								}
-							
-				echo		'</select>';						
-				echo		'</div>';
-				echo	'</div>';
 				echo	'<div class="col-sm-4">';
 				echo		'<div class="form-group">';
 				echo			'<label for="usr">Location</label>';
@@ -172,25 +168,22 @@
 				echo		'</select>';			
 				echo		'</div>';
 				echo	'</div>';
-				echo '</div>';
-				
-				
-					echo	'<div class="col-sm-4">';
+				echo	'<div class="col-sm-4">';
 				echo		'<div class="form-group">';
 				echo			'<label for="usr">Time</label>';
 				echo			'<input  name="currTime" class="form-control" id="curriculumTime" placeholder="yyyy-mm-dd 00:00:00" oninput="validateAlphaWithSpace("curriculumTime");">';
     			
 				echo		'</div>';
 				echo	'</div>';
-				echo '</div>';
+				echo	'</div>';
 
-		echo		'<button type="submit" class="btn btn-default ">Submit</button>    ';
-		echo	'</form>';
 			
 			?>
 
+		<br><button type="submit" class="btn btn-default ">Submit</button>
+		</form>
 		</div>
-
+	</div>
 	</div>		
 </body>
 </html>

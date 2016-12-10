@@ -35,6 +35,9 @@
 		
 	}
 	
+	
+	echo ' User has been logged off ';
+	
 
   ?>
   
