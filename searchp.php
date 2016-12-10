@@ -21,6 +21,70 @@
 
 <body>
 
+
+ <!-- Top left Logo -->
+	<div class="page-header">
+  <h1><a class="home-button" href="homepage.php">CPCA</a></h1>
+	</div>
+	
+	<nav class="navbar navbar-default CPCA_navbar">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Participant Search</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+     
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="admin-tools.php">Admin Tools</a></li>
+					<li><a href="attendance-reports.php">Reports</a></li>
+					<li><a href="participant-search.php">Search</a></li>
+					<li><a href="index.php">Log out</a></li>   
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav> <!-- end of navbar-->
+
+<div class = "row search">
+
+
+	<!-- launches a different php file -->
+	<form class="navbar-form" role="search" action="searchp.php" method="post" >
+			<div class="input-group">
+				<input type="text" class="form-control input-lg" placeholder="first name" name="f_name" id="srch-f_name" oninput="validateAlpha('srch-f_name');">
+				<div class="input-group-btn ">
+			
+			<div class="input-group">
+				<input type="text" class="form-control input-lg" placeholder="last name" name="l_name" id="srch-l_name" oninput="validateAlpha('srch-l_name');">
+				<div class="input-group-btn ">
+				<!--
+			<div class="input-group">
+				<input type="text" class="form-control input-lg" placeholder="participant number(optional)" name="p_num" id="srch-p_num" oninput="isNumberKey('srch-p_num');">
+				<div class="input-group-btn ">
+				-->
+			
+					<button class="btn btn-lg" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+				</div>
+				<!-- CERTAINLY needs a link to the database for search capabilities -->
+			</div>
+			</form>
+
+			
+</div>	<!-- end of row search -->		
+
+</div>
+
+</div>
+
+
 <?php
 session_start();
 	#checks if user is logged in
@@ -110,21 +174,31 @@ session_start();
 	}else{	
 
 */	
+
+
+	echo '<div class= " row">';
 	//if only first name is given
 	if($f_name != null && $l_name == null){
 		$ref_f_query = "Select * from referrals where ref_f_name = '$f_name'";
 	
 		$ref_f_results = pg_query($ref_f_query) or die('Query failed: ' . pg_last_error());
 	
-
+		$num_rows = pg_num_rows($ref_f_results) ;
+		
+		if($num_rows == 0 ){
+			
+			echo ' <p> There are no participants in the system with that first name. </p>';
+			
+		}
+		else{
 	
 		$ref_f_row = pg_fetch_array($ref_f_results, 0, PGSQL_ASSOC);
 		// if number of rows is more than one
 	
-		$num_rows = pg_num_rows($ref_f_results) ;
+		
 	
-		echo "this is number of results";
-		echo "$num_rows";
+		echo "This is number of participants with that first name: ";
+		echo " $num_rows";
 		
 	
 
@@ -171,7 +245,7 @@ session_start();
 		
 	
 	
-	
+		}
 	
 	}
 	
@@ -184,13 +258,16 @@ session_start();
 		$ref_l_results = pg_query($ref_l_query) or die('Query failed: ' . pg_last_error());
 	
 
-	
-		$ref_l_row = pg_fetch_array($ref_l_results, 0, PGSQL_ASSOC);
-		// if number of rows is more than one
-	
 		$num_rows = pg_num_rows($ref_l_results) ;
+		
+		if($num_rows == 0 ){
+			
+			echo ' <p> There are no participants in the system with that last name. </p>';
+			
+		}
+		else{
 	
-		echo "this is number of results";
+		echo "This is number of results: ";
 		echo "$num_rows";
 		
 	
@@ -238,7 +315,7 @@ session_start();
 		
 	
 	
-	
+		}
 	
 	}
 	
@@ -249,13 +326,16 @@ session_start();
 		$ref_b_results = pg_query($ref_b_query) or die('Query failed: ' . pg_last_error());
 	
 
-	
-		$ref_b_row = pg_fetch_array($ref_b_results, 0, PGSQL_ASSOC);
-		// if number of rows is more than one
-	
 		$num_rows = pg_num_rows($ref_b_results) ;
+		
+		if($num_rows == 0 ){
+			
+			echo ' <p> There are no participants in the system with that exact first name and last name. </p>';
+			
+		}
+		else{
 	
-		echo "this is number of results";
+		echo "This is number of results: ";
 		echo "$num_rows";
 		
 	
@@ -302,7 +382,7 @@ session_start();
 			
 		
 	
-	
+		}
 	
 	
 	}
@@ -373,7 +453,12 @@ if ($_GET['add'] == 'clicked'){
 
 
 }	
-*/			
+*/		
+
+
+
+
+echo ' </div>';	
 	
 	
 								
@@ -383,64 +468,7 @@ if ($_GET['add'] == 'clicked'){
 	
 	
   
-   <!-- Top left Logo -->
-	<div class="page-header">
-  <h1><a class="home-button" href="homepage.php">CPCA</a></h1>
-	</div>
-	
-	<nav class="navbar navbar-default CPCA_navbar">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Participant Search</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-     
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="admin-tools.php">Admin Tools</a></li>
-					<li><a href="attendance-reports.php">Reports</a></li>
-					<li><a href="participant-search.php">Search</a></li>
-					<li><a href="index.php">Log out</a></li>   
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav> <!-- end of navbar-->
-
-<div class = "row search">
-
-
-	<!-- launches a different php file -->
-	<form class="navbar-form" role="search" action="searchp.php" method="post" >
-			<div class="input-group">
-				<input type="text" class="form-control input-lg" placeholder="first name" name="f_name" id="srch-f_name" oninput="validateAlpha('srch-f_name');">
-				<div class="input-group-btn ">
-			
-			<div class="input-group">
-				<input type="text" class="form-control input-lg" placeholder="last name" name="l_name" id="srch-l_name" oninput="validateAlpha('srch-l_name');">
-				<div class="input-group-btn ">
-				<!--
-			<div class="input-group">
-				<input type="text" class="form-control input-lg" placeholder="participant number(optional)" name="p_num" id="srch-p_num" oninput="isNumberKey('srch-p_num');">
-				<div class="input-group-btn ">
-				-->
-			
-					<button class="btn btn-lg" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-				</div>
-				<!-- CERTAINLY needs a link to the database for search capabilities -->
-			</div>
-			</form>
-
-			
-</div>	<!-- end of row search -->		
-
+  
 
 
 

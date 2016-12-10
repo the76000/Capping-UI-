@@ -35,16 +35,7 @@ $result = pg_query($query) or die('Query failed: ' . pg_last_error());
 
 
 
-#returns referral info for testing
-echo "<table>\n";
-while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
-    echo "\t<tr>\n";
-    foreach ($line as $col_value) {
-        echo "\t\t<td>$col_value</td>\n";
-    }
-    echo "\t</tr>\n";
-}
-echo "</table>\n";
+
   
   session_start();
 	#checks if user is logged in
