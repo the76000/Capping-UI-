@@ -63,117 +63,86 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
 		header('Location: index.php');
 		echo "hello";
 	}
-	
-	echo "Username = " . $_SESSION["username"]; 
-	//for testing
-	
-	
-	
-	$pnum = $_POST['participant_num']; //from individual-attendance
-	echo "$pnum";
-	
-	
-	
-	
-	$participantinfoquery = "
-	SELECT DISTINCT referrals.ref_f_name, referrals.ref_l_name, participants.cid 
-	FROM referrals, participants 
-	
-	WHERE referrals.p_num = '$pnum '
-	AND referrals.p_num = participants.p_num";
-	
-	
-	$participantinforesult = pg_query($participantinfoquery) or die('Query failed: ' . pg_last_error());
-	$participantinforow = pg_fetch_array($participantinforesult, 0, PGSQL_ASSOC);
-	
-	$firsName = $participantinforow['ref_f_name'];
-	
-	$lastName = $participantinforow['ref_l_name'];
-	
-	$cidDB = $participantinforow['cid'];
-	
-	
-	
-echo 	'<div class = "container">	';
-echo		'<div class = "row">';
-		
-		
-		
-echo		'<div class = "jumbotron">';
-echo		'<div class = "col-md-4"> ';
-echo			'<p class="label label-info"> Individual Attendance  </p>';
-			
-echo		'</div>';
-		
-echo		'<div class = "col-md-4"> ';
-echo			'<p> Name:';
-
-echo           " $firsName ";
-echo            "$lastName";
-echo        "</p>";
-echo		'</div>';
-		
-echo		'<div class = "col-md-4"> ';
-echo			'<p> Curriculum:';
-
- echo         "$cidDB</p>";
-echo		'</div>';
-		
-echo 			'<table class="table">';
-echo    '<thead>';
-echo      '<tr>';
-        
-       
-echo        '<th>Class</th>';
-echo 		'<th>Attended?</th>';
-echo 		'<th>Comments</th>';
-echo      '</tr>';
-echo    '</thead>';
-echo    '<tbody>';
-echo     '<tr>';
-echo       '<td>Class #1</td>';
-echo        '<td>Yes</td>';
-echo        '<td>None</td>';
-       
-echo      '</tr>';
-echo     '<tr>';
-echo        '<td>Class #2</td>';
-echo        '<td>No</td>';
-echo        '<td>Participant gave no excuse, did not show</td>';
-    
-echo     '</tr>';
-echo      '<tr>';
-echo        '<td>CLass #3</td>';
-echo        '<td>Yes</td>';
-echo        '<td>None</td>';
-   
-echo      '</tr>';
-echo    '</tbody>';
-echo  '</table>';
-		
-		
-		
-echo			'</div>';
-		
-
-		
-		
-			
-echo		'<div class = "col-md-6"> ';
-		
-		
-		
-echo		'</div>';
-	
-	
-echo	'</div>';
-		
-	
-	
-echo '</div>		';
-
 ?>
 	
+	
+ 	<div class = "container">
+		<div class = "row">
+		
+		
+		
+		<div class = "jumbotron">
+		<div class = "col-md-4"> 
+			<p class="label label-info"> Individual Attendance  </p>
+			
+		</div>
+		
+		<div class = "col-md-4">
+			<p> Name:
+
+           "firsName"
+            "lastName"
+        </p>
+		</div>
+		
+		<div class = "col-md-4">
+			<p> Curriculum:
+
+         cidDB</p>
+		</div>
+		
+ 			<table class="table">
+    <thead>
+      <tr>
+        
+       
+        <th>Class</th>
+ 		<th>Attended?</th>
+ 		<th>Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+     <tr>
+       <td>Class #1</td>
+        <td>Yes</td>
+        <td>None</td>
+       
+      </tr>
+     <tr>
+        <td>Class #2</td>
+        <td>No</td>
+        <td>Participant gave no excuse, did not show</td>
+    
+     </tr>
+      <tr>
+        <td>CLass #3</td>
+        <td>Yes</td>
+        <td>None</td
+   
+      </tr>
+    </tbody>
+  </table>
+		
+		
+		
+			</div>
+		
+
+		
+		
+			
+		<div class = "col-md-6">
+		
+		
+		
+		</div>
+	
+	
+	</div>
+		
+	
+	
+ </div>
 	
 	
 	

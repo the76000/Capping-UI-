@@ -63,9 +63,25 @@
 				</div>
 
 				<select multiple class="form-control" id="reportSelect1">
-					<option>Attendance</option>
-					<option>Birthday</option>
+					<option>Age</option>
+					<option>Curriculum</option>
+					<option>Courses completed</option>
+					<option>Course comments</option>
 					<option>Courses to complete</option>
+					<option>Has consent form</option>
+					<option></option>
+					<option></option>
+					<option></option>
+					<option></option>
+					<option></option>
+					<option></option>
+					<option></option>
+					<option></option>
+					<option></option>
+					<option></option>
+					<option></option>
+					<option></option>
+					<option></option>
 				</select>
 				<div class="form-group">
 					<button type="submit" class="btn btn-default ">Submit</button> 
