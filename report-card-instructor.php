@@ -192,19 +192,6 @@ $classesnotattendedrow = pg_fetch_array($classesnotattendedresult, 0, PGSQL_ASSO
 
 
 # Gets the name of all the classes a specific participant has already taken
-
-
-
-
-
-
-
-
-
-
-
-
-	
 	
 
 echo	'<div class = "container">';
@@ -217,31 +204,22 @@ echo				'</div>';
 echo				'<div class="row" id="attendanceRow">';
 
 echo					'<div class="col-md-4 input-lg">';
-echo					'<label>Curriculum Name:';
-echo                    " $currname ";
-
-echo                 '</label>';
-						
+echo					'<label>Curriculum Name: '.$currname.'</label>';						
 echo					'</div>';
 
 echo			'<form action = "report-card-instructor.php" method="post" class="navbar-form">';
 echo					'<div class="col-md-6 input-lg">';
 echo					'<label>Instructors</label>';
 echo						"<option value=' $eidfromreport '> Instructor Picked:   $empdisplayfname    $empdisplaylname</option>"; 
-
-
-
-
+echo			'</div>';
  echo			'</div>';
- 
  echo			'</form>';
 
-echo			'</div>';
 
-
+echo				'<div class="row" id="attendanceRow">';
+echo					'<div class="col-md-4 input-lg">';
 echo			'<form action = "report-card-class-selected.php" method="post" class="navbar-form">';
-echo					'<div class="col-md-6 input-lg">';
-echo					'<label>Classes Attended</label>';
+echo					'<label>Classes Attended</label><br>';
 echo						'<select class="form-control" name="class_selected_attended">';
 
 //$nameline = pg_fetch_array($classesnameresult, null, PGSQL_ASSOC);
@@ -269,15 +247,15 @@ echo						"<option value='$attended_col_value_var'>   '$attended_col_value_var2'
 echo						'</select>  ';
 
 
-echo				'<button type="submit" name="submitClassAttended" class="btn btn-default ">Select Class</button> '; 
+echo				'<br><button type="submit" name="submitClassAttended" class="btn btn-default ">Select Class</button> '; 
 
- echo			'</div>';
  
  echo			'</form>';
+ echo			'</div>';
 
 
+echo					'<div class="col-md-6 input-lg">';
 echo			'<form action = "report-card-class-selected.php" method="post" class="navbar-form">';
-echo					'<div class="col-md-4 input-lg">';
 echo					'<label>Classes NOT Attended</label>';
 echo						'<select class="form-control" name="class_selected_not_attended">';
 
@@ -324,18 +302,17 @@ echo						"<option value='$not_attended_col_value_var'>   '$classnotattendedname
 echo						'</select>  ';
 
 
-echo				'<button type="submit" name="submitClassNotAttended" class="btn btn-default ">Select Class</button> ';   
+echo				'<br><button type="submit" name="submitClassNotAttended" class="btn btn-default ">Select Class</button> ';   
 
 
-//if 
-
+ echo			'</form>';
+echo					'</div>';
 /*
 <td><input type="radio" name="id" value="<?php echo $row['id']; ?>" <?php if($row['selected'] == 1) echo "checked"; ?> /></td>
 */ 
+ echo			'</div>';
 
-echo					'</div>';
-
- echo			'</form>';
+echo			'</div>';
 
 
 
