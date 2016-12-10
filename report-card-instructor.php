@@ -204,13 +204,12 @@ echo				'</div>';
 echo				'<div class="row" id="attendanceRow">';
 
 echo					'<div class="col-md-4 input-lg">';
-echo					'<label>Curriculum Name: '.$currname.'</label>';						
+echo					'<label>Curriculum Name: <br>'.$currname.'</label>';						
 echo					'</div>';
 
 echo			'<form action = "report-card-instructor.php" method="post" class="navbar-form">';
 echo					'<div class="col-md-6 input-lg">';
-echo					'<label>Instructors</label>';
-echo						"<option value=' $eidfromreport '> Instructor Picked:   $empdisplayfname    $empdisplaylname</option>"; 
+echo					'<label>Instructor Chosen: <br>'.$empdisplayfname.' '.$empdisplaylname.'</label>'; 
 echo			'</div>';
  echo			'</div>';
  echo			'</form>';
@@ -295,7 +294,7 @@ echo						"<option value='$not_attended_col_value_var'>   '$classnotattendedname
 						
 						
 						
-						
+							
 
 				}
 							
