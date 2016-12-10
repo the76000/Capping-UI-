@@ -65,7 +65,7 @@
 	<div class = "container">
 
 		<div class = "jumbotron">
-			<h3>Class Attendance Report</h3>
+			<h3>Class Attendance Report</h3><br>
 			<form style="margin-left: 15px" action="class-attendance.php" method="post">
 				<div class="row">
 				<div class="col-sm-4">
@@ -92,7 +92,7 @@
 					</div>
 					<div class="col-sm-4">
 						<div class="form-group">
-							<button type="submit" class="btn btn-default ">Submit</button> 
+							<br><button type="submit" class="btn btn-default ">Submit</button> 
 						</div>
 					</div>
 			</form>
