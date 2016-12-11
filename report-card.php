@@ -218,8 +218,14 @@ AND Curriculum_Subjects.C_Subject = Class_Subjects.C_Subject";
 
 
 $classesattendedresult = pg_query($classesattendedquery) or die('Query failed: ' . pg_last_error());
-$classesattendedrow = pg_fetch_array($classesattendedresult, 0, PGSQL_ASSOC);
 
+
+if (pg_numrows($classesattendedresult) == 0){
+	
+}
+else{
+$classesattendedrow = pg_fetch_array($classesattendedresult, 0, PGSQL_ASSOC);
+}
 
 //gets the class id and class subject that a participant has not attended yet
 $classesnotattendedquery = "

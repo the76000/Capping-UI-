@@ -53,16 +53,6 @@
 
 <div class = "row search">
 
-	<form class="navbar-form" role="search" action="report-card-searchp.php" method="post" >
-			<div class="input-group">
-				<input type="text" class="form-control input-lg" placeholder="Search" name="p_num" id="srch-term" oninput="validateAlpha('srch-term');">
-				<div class="input-group-btn ">
-					<button class="btn btn-lg" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-				</div>
-				<!-- CERTAINLY needs a link to the database for search capabilities -->
-			</div>
-			</form>
-
 			
 </div>	<!-- end of row search -->		
 
@@ -228,9 +218,11 @@ echo 				'<table class = "table">';
 							 
 							#echo "<option name = 'participant_selected' value = '$pnumvalue'> Go to report card  </option>";
 							echo "<label>";
-							echo "Click the number to go to the report card";
+							
 							echo "</label>";
-							echo "<input type = 'submit' name = 'participant_name'  value = '$pnumvalue'/>";
+											
+							echo 		"<button type = 'submit' name = 'participant_name' value = ' $pnumvalue  '>  Click Here To Go To Report Card </button>";
+
 							echo "</form>";
 							// send the pnum selected thru POST
 							
