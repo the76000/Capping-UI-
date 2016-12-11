@@ -1,13 +1,17 @@
 <html>
 <body>
 <?php
+
+error_reporting(E_ALL ^ E_WARNING);
+$conn_string = "host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin";
+
 if(empty($_POST["fName"]) || empty($_POST["lName"]) ||  empty($_POST["DOB"])){
-	echo 'Please make sure you fill out your first name, last name, and date of birth correctly. Please hit the browser\'s back button to conintue.';
+	echo 'Please make sure you fill out your first name, last name, and date of birth correctly. Please hit the browser\'s back button to continue.';
 }
 else{
-$fName = $_POST["fName"];
-$mName = $_POST["mName"];
-$lName = $_POST["lName"];
+$fName = strtolower($_POST["fName"]);
+$mName = strtolower($_POST["mName"]);
+$lName = strtolower($_POST["lName"]);
 
 $Street = $_POST["street"];
 $City = $_POST["city"];
@@ -130,9 +134,9 @@ else{
 }
 $Issues_Related_to_Abuse = $_POST["childhoodAbuse"];
 
-$Emergency_Contact_F_Name = $_POST["efName"];
-$Emergency_Contact_L_Name = $_POST["elName"];
-$Emergency_Contact_Relation = $_POST["eRelationship"];
+$Emergency_Contact_F_Name = strtolower($_POST["efName"]);
+$Emergency_Contact_L_Name = strtolower($_POST["elName"]);
+$Emergency_Contact_Relation = strtolower($_POST["eRelationship"]);
 if(empty($_POST["emergencyContactPhone"])){
 	$Emergency_Contact_Number = '0000000000';
 }
@@ -220,23 +224,23 @@ else{
 $If_Oth_Members_in_Parent = isset($_POST["familyClassesName"]);
 
 //variables for childrens intak table 
-$Ch_F_Name = $_POST["iFName"];
-$Ch_L_Name = $_POST["iSName"];
-$Ch_Age = $_POST["iMName"];
-$Ch_M_Initial = $_POST["iGender"];
-$Ch_Sex = $_POST["iDOB"];
-$Ch_Race = $_POST["iRace"];
-$Ch_Address_Street = $_POST["iSName"];
-$Ch_Address_City =
-$Ch_Address_State =
-$Ch_Address_Zipcode =
-$Custody =
+$Ch_F_Name = isset($_POST["iFName"]);
+$Ch_L_Name = isset($_POST["iSName"]);
+$Ch_M_Initial = isset($_POST["iMName"]);
+$Ch_Sex = isset($_POST["iGender"]);
+$Ch_DOB = $_POST["iDOB"];
+
+$Ch_Race = isset($_POST["iRace"]);
+$Ch_Address_Street = isset($_POST["iStreet"]);
+$Ch_Address_City = isset($_POST["iCity"]);
+$Ch_Address_State = isset($_POST["iState"]);
+$Ch_Address_Zipcode = isset($_POST["iZipcode"]);
+$Custody = isset($_POST["iCustody"]);
 
 
 
 
 //builds connection to database
-$conn_string = "host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin";
 $dbconn = pg_connect($conn_string);
 
 //querry to check and see if there is a p num for this person
@@ -252,15 +256,27 @@ if(empty($result)){
 }
 else{
 $P_Num = pg_fetch_row($result, 0)[0];
+//echo $P_Num;
 }
 //if no p num build a referral for this person
-if(empty($P_NUM)){
+if(empty($P_Num)){
 	$sql1 = 'INSERT INTO Referrals (Ref_F_Name, Ref_L_Name, Ref_MI_Name, Ref_Street, Ref_City, Ref_State, Ref_Zip, Ref_Home_Phone, Ref_Cell_Phone, Reasons_For_Referral, Referring_Agency, Ref_Date, Contact_Person_F_Name, Contact_Person_L_Name, Contact_Person_Number, Contact_Person_Email, Additional_Info_Specific_Needs, Date_of_fst_Contact, Means_of_Contact, Date_of_Int_Meeting, Time_of_Int_Meeting, Location, Staff_Person, Comments, DOB, AGE) VALUES (\''.$fName.'\', \''.$lName.'\', \''.$mName.'\',\'\' ,\'\',\'\',\'00000\',\'0000000000\',\'0000000000\', \' \', \'\', NULL, \'\', \'\', \'0000000000\', \'\', \' \', NULL, \'\', NULL, \'12:00AM\', \'\', \'\', \' \', \''.$DOB.'\', '.$AGE.');';
-	echo $sql1;
+	//echo $sql1;
 	$result1 = pg_query($dbconn, $sql1);
 	
 	$result = pg_query($dbconn, $sql);
 	$P_Num = pg_fetch_row($result, 0)[0];
+
+// creates an instance in the participant table	
+$CID = '1';
+$Sex = '';
+$Number_Of_Children = '0';
+$Status = '';
+
+$sql5 = 'INSERT INTO Participants (P_Num, CID, Sex, Race, Number_Of_Children, Status)
+			VALUES (\''.$P_Num.'\', \''.$CID.'\',\''.$Sex.'\',\''.$Ethnicity.'\','.$Number_Of_Children.',\''.$Status.'\');'; 
+
+$result5 = pg_query($dbconn, $sql5);
 	}
 
 // Build querry to insert Intake info
@@ -274,59 +290,66 @@ $sql2 = 'INSERT INTO Participant_Intake(P_Num, Age, Num_People_in_Home, Relation
        If_Convicted_Explain, Prison_or_Jail_Record, If_Prison_or_Jail_when_what, Parole_or_Probation, If_Parole_Probation_Why,
         Other_Members_in_Parenting, If_Oth_Members_in_Parent)
 	VALUES('.$P_Num.','.$AGE.','.$Num_People_in_Home.',\''.$Relation_to_Household.'\',\''.$Daytime_Phone.'\',\''.$Daytime_Msg.'\',\''.$Evening_Phone.'\',\''.$DOB.'\',\''.$Occupation.'\', \''.$Religion.'\',\''.$Ethnicity.'\',\''.$Languages.'\',\''.$Handicapping_cond.'\',\''.$Last_Year_of_School.'\', \''.$Drug_Alcohol_Issue.'\',\''.$Drug_if_Yes_Comment.'\',\''.$Length_Sep_From_Child.'\',\''.$Length_Sep_From_Oth_Parent.'\',\''.$Status_Relation_Oth_Parent.'\',\''.$Parent_Together_Status.'\',\''.$Involved_W_CPS.'\' , \''.$If_Yes_Prev_Involved_W_CPS.'\',\''.$Mandated.'\',\''.$If_Mandated_By_Who.'\',\''.$If_Mandated_Why.'\',\''.$If_Not_Mandated_Why.'\',\''.$Safety_To_Participate_Needs.'\',\''.$Behaviors_to_Stop_Part.'\',\''.$Other_Parenting_Classes.'\',\''.$Other_Parenting_Long_Ago.'\',\''.$Victim_of_Abuse.'\',\''.$If_Yes_Form_of_Abuse.'\',\''.$Therapy.'\',\''.$Issues_Related_to_Abuse.'\',\''.$Emergency_Contact_F_Name.'\',\''.$Emergency_Contact_L_Name.'\',\''.$Emergency_Contact_Relation.'\',\''.$Emergency_Contact_Number.'\',\''.$What_Like_Learn.'\',\''.$Domestic_Violence.'\',\''.$Discussed_W_Someone.'\',\''.$History_of_Violence.'\',\''.$Nuclear_Family_Violence.'\',\''.$Orders_of_Protection.'\',\''.$If_Orders_of_Prot_Explain.'\',\''.$Arrested_for_Crime.'\',\''.$Convicted_for_Crime.'\',\''.$If_Convicted_Explain.'\',\''.$Prison_or_Jail_Record.'\',\''.$If_Prison_or_Jail_when_what.'\',\''.$Parole_or_Probation.'\',\''.$If_Parole_Probation_Why.'\',\''.$Other_Members_in_Parenting.'\',\''.$If_Oth_Members_in_Parent.'\');';
-echo $sql2;
+//echo $sql2;
+echo 'All info added Successfully under PID ' . $P_Num;
 $result2 = pg_query($dbconn, $sql2);
 
 
 //Build querry to insert into intk_children table
 
-if(empty($H_F_NAME)){
+
+if(empty($Ch_F_Name)){
 	
 }
 else{
-$H_Count = count($H_F_NAME);
+$H_Count = count($Ch_F_Name);
 	
-	if($H_Count == 1 && empty($H_F_NAME[0]) && empty($H_L_NAME[0]) && empty($H_DOB[0]) ){
+	if($H_Count == 1 && empty($Ch_F_Name[0]) && empty($Ch_L_Name[0]) && empty($Ch_DOB[0]) ){
 		
 	}
 	else{
 
 
 
-	$sql2 = 'INSERT INTO Ref_Household_Info (P_Num, H_F_Name, H_L_Name, H_Date, H_MI_Name, H_Sex, H_Race, H_Comment, H_Relation)
+	$sql2 = 'INSERT INTO Intk_Children(P_Num, Ch_F_Name, Ch_L_Name, Ch_Age, Ch_M_Initial, Ch_Sex, Ch_Race, Ch_Address_Street, Ch_Address_City, Ch_Address_State, Ch_Address_Zipcode, Custody)
 			VALUES';
 
 
 
 	for($a = 0; $a< $H_Count; $a++ ){
 		//check to see if any values were submitted empty
-		if(empty($H_F_NAME[$a])){
-			$H_F_NAME[$a] = 'NoInfoSub';
+		if(empty($Ch_F_Name[$a])){
+			$Ch_F_Name[$a] = 'NoInfoSub';
 		}
-		if(empty($H_L_NAME[$a])){
-			$H_L_NAME[$a] = 'NoInfoSub';
+		if(empty($Ch_L_Name[$a])){
+			$Ch_L_Name[$a] = 'NoInfoSub';
 		}
 	
-		if(empty($H_DOB[$a])){
-			$H_DOB[$a] = '1111-11-11'; //designated to capture as much info as possible with out breaking the database
+		if(empty($Ch_DOB[$a])){
+			$Ch_DOB[$a] = '1111-11-11'; //designated to capture as much info as possible with out breaking the database
+			$Ch_AGE = (date('Y') - date('Y',strtotime($Ch_DOB[$a])));
 		}
 		else{
-			$H_DOB[$a] = date("Y-m-d", strtotime( $H_DOB[$a]));
+			$Ch_DOB[$a] = date("Y-m-d", strtotime( $Ch_DOB[$a]));
+			$Ch_AGE = (date('Y') - date('Y',strtotime($Ch_DOB[$a])));
 		}
 		
 		//build sql
 		if($a != ($H_Count -1) ){
-		$sql2 = $sql2 . '('.$P_Num.', \''.$H_F_NAME[$a].'\', \''.$H_L_NAME[$a].'\' , \''.$H_DOB[$a].'\', \''.$H_MI_NAME[$a].'\', \''.$H_Sex[$a].'\', \''.$H_Race[$a].'\', \''.$H_Comment[$a].'\' , \''.$H_Relation[$a].'\'),';
+		$sql2 = $sql2 . '('.$P_Num.', \''.$Ch_F_Name[$a].'\', \''.$Ch_L_Name[$a].'\' , \''.$Ch_AGE.'\', \''.$Ch_M_Initial[$a].'\', \''.$Ch_Sex[$a].'\', \''.$Ch_Race[$a].'\', \''.$Ch_Address_Street[$a].'\' , \''.$Ch_Address_City[$a].'\', \''.$Ch_Address_State[$a].'\', \''.$Ch_Address_Zipcode[$a].'\', \''.$Custody[$a].'\'),';
 		}
 		else{
-		$sql2 = $sql2 . '('.$P_Num.', \''.$H_F_NAME[$a].'\', \''.$H_L_NAME[$a].'\' , \''.$H_DOB[$a].'\', \''.$H_MI_NAME[$a].'\', \''.$H_Sex[$a].'\', \''.$H_Race[$a].'\', \''.$H_Comment[$a].'\' , \''.$H_Relation[$a].'\');';	
+		$sql2 = $sql2 . '('.$P_Num.', \''.$Ch_F_Name[$a].'\', \''.$Ch_L_Name[$a].'\' , \''.$Ch_AGE.'\', \''.$Ch_M_Initial[$a].'\', \''.$Ch_Sex[$a].'\', \''.$Ch_Race[$a].'\', \''.$Ch_Address_Street[$a].'\' , \''.$Ch_Address_City[$a].'\', \''.$Ch_Address_State[$a].'\', \''.$Ch_Address_Zipcode[$a].'\', \''.$Custody[$a].'\');';	
 		}
 	}
 	
+	//echo $sql2;
 	$result2 = pg_query($dbconn, $sql2);
 	
 	}
 }
+
+
 
 }
  ?>

@@ -4,14 +4,16 @@
 <?php 
 //variables for the querry from the ReferalApp
 
+$conn_string = "host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin";
+
 if(empty($_POST["fName"]) || empty($_POST["lName"]) ||  empty($_POST["DOB"])){
 	echo 'Please make sure you fill out your first name, last name, and date of birth correctly. Please hit the browser\'s back button to conintue.';
 }
 else{
 
-$Ref_F_Name	= $_POST["fName"];
-$Ref_L_Name = $_POST["lName"];
-$Ref_MI_Name = $_POST["mName"];
+$Ref_F_Name	= strtolower($_POST["fName"]);
+$Ref_L_Name = strtolower($_POST["lName"]);
+$Ref_MI_Name = strtolower($_POST["mName"]);
 
 $Ref_Street = $_POST["street"];
 $Ref_City = $_POST["city"];
@@ -98,9 +100,9 @@ $DOB = date("Y-m-d", strtotime($_POST["DOB"]));
 
 // These Variables are for the Ref House Hold Info
 
-$H_F_NAME = $_POST["hFName"];
-$H_L_NAME = $_POST["hSName"];
-$H_MI_NAME = $_POST["hMName"];
+$H_F_NAME = strtolower(isset($_POST["hFName"]));
+$H_L_NAME = strtolower(isset($_POST["hSName"]));
+$H_MI_NAME = strtolower(isset($_POST["hMName"]));
 $H_DOB = $_POST["hDOB"];
 $H_Sex = $_POST["hGender"];
 $H_Race = $_POST["hRace"];
@@ -117,7 +119,7 @@ $Relation = $_POST["OthRelation"];
 
 // Variables for Reference variables to ref_ind_conditions
 
-$Condition_Key = isSet($_POST["chkBoxOptions"]);
+$Condition_Key = isset($_POST["chkBoxOptions"]);
 
 
 
@@ -125,7 +127,7 @@ $Condition_Key = isSet($_POST["chkBoxOptions"]);
 $AGE = (date('Y') - date('Y',strtotime($DOB)));
 
 //database insert statement for the referrals table 
-$conn_string = "host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin";
+
 $dbconn = pg_connect($conn_string);
 
 $sql = 'INSERT INTO Referrals (Ref_F_Name, Ref_L_Name, Ref_MI_Name, Ref_Street, Ref_City, Ref_State, Ref_Zip, Ref_Home_Phone, Ref_Cell_Phone, Reasons_For_Referral, Referring_Agency, Ref_Date, Contact_Person_F_Name, Contact_Person_L_Name, Contact_Person_Number, Contact_Person_Email, Additional_Info_Specific_Needs,  Date_of_fst_Contact, Means_of_Contact, Date_of_Int_Meeting, Time_of_Int_Meeting, Location, Staff_Person, Comments, DOB, AGE)
@@ -133,7 +135,9 @@ $sql = 'INSERT INTO Referrals (Ref_F_Name, Ref_L_Name, Ref_MI_Name, Ref_Street, 
 
 $result = pg_query($dbconn, $sql);
 
-echo $sql;
+//.echo $sql;
+
+
 // get the P Num of the referral just inserted 
 $sql1 = 'Select p_num from referrals where ref_f_Name = \'' .$Ref_F_Name. '\' and ref_l_Name = \'' .$Ref_L_Name. '\' and AGE = '.$AGE.' ';
 $result1 = pg_query($dbconn, $sql1);
@@ -144,7 +148,18 @@ if (!$result) {
 }
 
 $P_Num = pg_fetch_row($result1, 0)[0];
+$CID = '1';
+$Sex = '';
+$Race = '';
+$Number_Of_Children = '0';
+$Status = '';
 
+
+// Insert a record into the participant table
+$sql5 = 'INSERT INTO Participants (P_Num, CID, Sex, Race, Number_Of_Children, Status)
+			VALUES (\''.$P_Num.'\', \''.$CID.'\',\''.$Sex.'\',\''.$Race.'\','.$Number_Of_Children.',\''.$Status.'\');'; 
+
+$result5 = pg_query($dbconn, $sql5);
 
 
 //Insert the household Values into a table 

@@ -1,7 +1,7 @@
  <?php
 function databaser(){
 
-$conn_string = "host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin";
+$conn_string = "host=localhost port=5432 dbname=PepDB user=postgres password=password";
 $dbconn = pg_connect($conn_string);
 
 $sql = 'Select p_num from referrals';
