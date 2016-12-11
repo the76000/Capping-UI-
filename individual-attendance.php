@@ -96,8 +96,8 @@
 					$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
 						or die('Could not connect: ' . pg_last_error());
 						
-					$_POST['f_name'];
-					$_PSOT['l_name'];
+					$firstname = $_POST['f_name'];
+					$lastname = $_POST['l_name'];
 				?>
 			</div>
 			</form>

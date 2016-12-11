@@ -61,8 +61,9 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
 	#checks if user is logged in
 	if (!isset($_SESSION["username"]) ){
 		header('Location: index.php');
-		echo "hello";
 	}
+	
+	
 ?>
 	
 	
@@ -78,48 +79,59 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
 		</div>
 		
 		<div class = "col-md-4">
-			<p> Name:
-
-           "firsName"
-            "lastName"
-        </p>
+			
+				<?php
+					echo "<p>Name: ".$_POST['f_name']." ".$_POST['l_name']." </p>"
+				?>
+			
 		</div>
 		
 		<div class = "col-md-4">
-			<p> Curriculum:
-
-         cidDB</p>
+			<?php
+				$pnumquery = "SELECT curriculum_name, curriculum.cid
+							  FROM public.referrals
+							  INNER JOIN public.participants ON public.referrals.p_num = public.participants.p_num
+							  INNER JOIN public.curriculum ON public.curriculum.cid = public.participants.cid
+							  WHERE ref_f_name = '".$_POST['f_name']."' AND ref_l_name = '".$_POST['l_name']."'";
+				
+				$result = pg_query($pnumquery) or die('Query failed: ' . pg_last_error());
+				
+				$p_num = pg_fetch_array($result);
+				
+				echo "<p>Curriculum: ".$p_num['curriculum_name']." </p>"
+			?>
 		</div>
 		
  			<table class="table">
     <thead>
-      <tr>
-        
-       
+      <tr>      
         <th>Class</th>
  		<th>Attended?</th>
  		<th>Comments</th>
       </tr>
     </thead>
     <tbody>
-     <tr>
-       <td>Class #1</td>
-        <td>Yes</td>
-        <td>None</td>
-       
-      </tr>
-     <tr>
-        <td>Class #2</td>
-        <td>No</td>
-        <td>Participant gave no excuse, did not show</td>
-    
-     </tr>
-      <tr>
-        <td>CLass #3</td>
-        <td>Yes</td>
-        <td>None</td
-   
-      </tr>
+		<?php
+			
+			$cid = $p_num['cid'];
+			
+			$curriculumquery = "SELECT curriculum_name FROM curriculum";	
+			
+			$classquery =  "SELECT class_subjects.* 
+							FROM class_subjects, curriculum_subjects, curriculum
+							WHERE class_subjects.c_subject = curriculum_subjects.c_subject
+							AND curriculum_subjects.cid = curriculum.cid
+							AND curriculum.cid = '$cid'
+							ORDER BY class_subjects.c_subject ASC";
+							
+			$result = pg_query($classquery) or die('Query failed: ' . pg_last_error());
+			
+						
+			while($row = pg_fetch_array($result)){
+				echo "<tr><td style='float:left;'>".$row['class_subject']."</td></tr>";
+			}
+		
+		?>
     </tbody>
   </table>
 		

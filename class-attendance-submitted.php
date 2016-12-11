@@ -32,9 +32,7 @@
 			
 			$result = pg_fetch_array($mainresult);
 			
-			foreach ($result as $test){
-				echo "$test </br>";
-			} 
+			
 			
 			
 	?>	
