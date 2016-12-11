@@ -67,7 +67,9 @@
 				
 				<a href="employee-portal.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Add/Delete/Update Employee</b></button></a>
 				
-				<a href="curriculum-add.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Add a new curriculum</b></button></a>
+				<a href="curriculum-add.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Add A New Curriculum</b></button></a>
+				
+				<a href="subject-add.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Add A Class Subject</b></button></a>
 		
 			</div>
 			
