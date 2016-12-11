@@ -98,6 +98,13 @@
 						
 					$firstname = $_POST['f_name'];
 					$lastname = $_POST['l_name'];
+					
+					$query = "SELECT p_num FROM referrals WHERE ref_f_name = '$firstname' AND ref_l_name = '$lastname'";
+					
+					$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+					
+					$p_num = $_POST['$result[0]'];
+					
 				?>
 			</div>
 			</form>

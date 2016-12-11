@@ -61,8 +61,7 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
 	#checks if user is logged in
 	if (!isset($_SESSION["username"]) ){
 		header('Location: index.php');
-	}
-	
+	}	
 	
 ?>
 	
@@ -112,23 +111,97 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
     </thead>
     <tbody>
 		<?php
+			$firstname = $_POST['f_name'];
+			$lastname = $_POST['l_name'];
+					
+			$query = "SELECT p_num FROM referrals WHERE ref_f_name = '$firstname' AND ref_l_name = '$lastname'";
+					
+			$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+					
+			$p_num = pg_fetch_array($result);
+			$p_num = $p_num['p_num'];
 			
-			$cid = $p_num['cid'];
-			
-			$curriculumquery = "SELECT curriculum_name FROM curriculum";	
-			
-			$classquery =  "SELECT class_subjects.* 
-							FROM class_subjects, curriculum_subjects, curriculum
-							WHERE class_subjects.c_subject = curriculum_subjects.c_subject
-							AND curriculum_subjects.cid = curriculum.cid
-							AND curriculum.cid = '$cid'
-							ORDER BY class_subjects.c_subject ASC";
+			$attendedquery = "SELECT DISTINCT
+							  Class_Subjects.C_Subject,
+							  Class_Subjects.Class_Subject,
+							  Class_Attendence.Participant_Comment
+
+							  FROM
+							  Referrals,
+							  Participants,
+							  Class_Attendence,
+							  Classes_Scheduled,
+							  Curriculum_Subjects,
+							  Class_subjects 
+							  
+							  WHERE
+							  Referrals.P_Num = '$p_num'
+							  AND Referrals.P_num = participants.p_num
+							  AND participants.p_num = class_Attendence.p_num
+							  AND class_Attendence.class_id = classes_scheduled.class_id
+						 	  AND Classes_scheduled.c_subject = curriculum_subjects.c_subject
+							  AND curriculum_subjects.c_subject = class_subjects.c_subject
+
+							  ORDER BY class_subjects.c_subject";
 							
-			$result = pg_query($classquery) or die('Query failed: ' . pg_last_error());
+			$result1 = pg_query($attendedquery) or die('Query failed: ' . pg_last_error());
 			
 						
-			while($row = pg_fetch_array($result)){
-				echo "<tr><td style='float:left;'>".$row['class_subject']."</td></tr>";
+			while($row = pg_fetch_array($result1)){
+				echo "<tr>";
+				echo "<td style='float:left;'>".$row['class_subject']."</td>";
+				echo "<td style='float:left;'>Yes</td>";
+				echo "<td style='float:left;'>".$row['participant_comment']."</td>";				
+				echo "</tr>";
+			}
+			
+			$notattendedquery = "SELECT DISTINCT
+								 Class_Subjects.C_Subject,
+								 Class_Subjects.Class_Subject
+
+								 FROM 
+								 Referrals,
+								 Participants,
+								 Curriculum,
+								 Curriculum_Subjects,
+								 Class_Subjects
+
+								 WHERE
+								 Referrals.P_Num = '$p_num'
+								 AND Referrals.P_Num = Participants.P_Num
+								 AND Participants.CID = Curriculum.CID
+								 AND Curriculum.CID = Curriculum_Subjects.CID
+								 AND Curriculum_Subjects.C_Subject = Class_Subjects.C_Subject
+								 AND Curriculum_Subjects.C_Subject NOT IN 
+								 (SELECT DISTINCT
+								  Curriculum_Subjects.C_Subject
+
+								  FROM 
+								  Referrals,
+								  Participants,
+								  Class_Attendence,
+								  Classes_Scheduled,
+								  Curriculum_Subjects,
+								  Class_Subjects
+
+								  WHERE
+								  Referrals.P_Num = '$p_num'
+								  AND Referrals.P_Num = Participants.P_Num
+								  AND Participants.P_Num = Class_Attendence.P_Num
+								  AND Class_Attendence.Class_ID = Classes_Scheduled.Class_ID
+								  AND Classes_Scheduled.C_Subject = Curriculum_Subjects.C_Subject
+								  AND Curriculum_Subjects.C_Subject = Class_Subjects.C_Subject)
+								  
+								  ORDER BY Class_Subjects.C_Subject";
+			
+			$result2 = pg_query($notattendedquery) or die('Query failed: ' . pg_last_error());
+			
+						
+			while($row = pg_fetch_array($result2)){
+				echo "<tr>";
+				echo "<td style='float:left;'>".$row['class_subject']."</td>";
+				echo "<td style='float:left;'>No</td>";				
+				echo "</tr>";
 			}
 		
 		?>
