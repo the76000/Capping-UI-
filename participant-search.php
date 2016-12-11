@@ -86,7 +86,7 @@ $result = pg_query($query) or die('Query failed: ' . pg_last_error());
         <li><a href="admin-tools.php">Admin Tools</a></li>
 					<li><a href="attendance-reports.php">Reports</a></li>
 					<li><a href="participant-search.php">Search</a></li>
-					<li><a href="index.php">Log out</a></li>   
+					<li><a href="log-out.php">Log out</a></li>    
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

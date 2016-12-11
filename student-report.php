@@ -43,7 +43,7 @@
 					<li><a href="admin-tools-course.html">Courses</a></li>
 					<li><a href="attendance-reports.html">Reports</a></li>
 					<li><a href="participant-search.html">Search</a></li>
-					<li><a href="index.html">Log out</a></li>
+					<li><a href="log-out.php">Log out</a></li>   
 				</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
