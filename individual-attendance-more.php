@@ -150,7 +150,7 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
 			while($row = pg_fetch_array($result1)){
 				echo "<tr>";
 				echo "<td style='float:left;'>".$row['class_subject']."</td>";
-				echo "<td style='float:left;'>Yes</td>";
+				echo "<td>Yes</td>";
 				echo "<td style='float:left;'>".$row['participant_comment']."</td>";				
 				echo "</tr>";
 			}
@@ -200,7 +200,7 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
 			while($row = pg_fetch_array($result2)){
 				echo "<tr>";
 				echo "<td style='float:left;'>".$row['class_subject']."</td>";
-				echo "<td style='float:left;'>No</td>";				
+				echo "<td>No</td>";				
 				echo "</tr>";
 			}
 		
