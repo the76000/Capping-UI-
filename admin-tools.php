@@ -66,6 +66,8 @@
 				<a href="participant-add.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Enter a Participant Into the System</b></button></a>
 				
 				<a href="employee-portal.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Add/Delete/Update Employee</b></button></a>
+				
+				<a href="curriculum-add.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Add a new curriculum</b></button></a>
 		
 			</div>
 			

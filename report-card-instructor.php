@@ -221,6 +221,8 @@ echo			'<form action = "report-card-class-selected.php" method="post" class="nav
 echo					'<label>Classes Attended</label><br>';
 echo						'<select class="form-control" name="class_selected_attended">';
 
+echo                    '<option selected disabled class="hideoption">Select One</option>';
+
 //$nameline = pg_fetch_array($classesnameresult, null, PGSQL_ASSOC);
 		//this is the best way to display multiple columns from a query that selects more than one column
 				while ($attended_line = pg_fetch_assoc($classesattendedresult) ){
@@ -257,6 +259,9 @@ echo					'<div class="col-md-6 input-lg">';
 echo			'<form action = "report-card-class-selected.php" method="post" class="navbar-form">';
 echo					'<label>Classes NOT Attended</label>';
 echo						'<select class="form-control" name="class_selected_not_attended">';
+
+
+echo               '<option selected disabled class="hideoption">Select One</option>';
 
 //$nameline = pg_fetch_array($classesnameresult, null, PGSQL_ASSOC);
 
