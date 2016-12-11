@@ -233,7 +233,9 @@ session_start();
 		echo "$f_col_value ";
 		echo "$l_col_value ";
 		echo "$dob_col_value";
-		echo "<input type = 'submit' name = 'participant_num'  value = ' $p_col_value  '/>";
+		//echo "<input type = 'submit' name = 'participant_num'  value = ' $p_col_value  '/>";
+		
+		echo "<button type = 'submit' name = 'participant_num' value = ' $p_col_value  '>  Click Here For Full Results    </button>";
 		//echo  "<a href='participant-search-results.php?add=clicked'>$f_col_value   $l_col_value $p_col_value </a>";
 		echo "</form>";
 		
@@ -303,8 +305,7 @@ session_start();
 		echo "$f_col_value ";
 		echo "$l_col_value ";
 		echo "$dob_col_value";
-		echo "<input type = 'submit' name = 'participant_num'  value = ' $p_col_value  '/>";
-		//echo  "<a href='participant-search-results.php?add=clicked'>$f_col_value   $l_col_value $p_col_value </a>";
+		echo "<button type = 'submit' name = 'participant_num' value = ' $p_col_value  '>  Click Here For Full Results    </button>";
 		echo "</form>";
 		
 		
@@ -371,8 +372,7 @@ session_start();
 		echo "$f_col_value ";
 		echo "$l_col_value ";
 		echo "$dob_col_value";
-		echo "<input type = 'submit' name = 'participant_num'  value = ' $p_col_value  '/>";
-		//echo  "<a href='participant-search-results.php?add=clicked'>$f_col_value   $l_col_value $p_col_value </a>";
+		echo "<button type = 'submit' name = 'participant_num' value = ' $p_col_value  '>  Click Here For Full Results    </button>";
 		echo "</form>";
 		
 		

@@ -112,6 +112,22 @@
 	
 	$cidDB = $row['cid'];
 	
+	
+	$currnamequery = "
+	SELECT curriculum_name 
+	FROM curriculum
+	WHERE cid = '$cidDB'";
+	
+	$currnameresults = pg_query($currnamequery) or die('Query failed: ' . pg_last_error());
+	
+	$currnamerow = pg_fetch_array($currnameresults, 0, PGSQL_ASSOC);
+	
+	$currname = $currnamerow['curriculum_name'];
+	
+	
+	
+	
+	
 	$_SESSION['report_card_curr'] = $cidDB; //for report card
 	
 	//echo " $p_numDB ";
@@ -170,6 +186,89 @@ $cur_results = pg_query($cur_query) or die('Query failed: ' . pg_last_error());
 	
 	$num_of_classes_not_attended= pg_num_rows($cur_results) - $num_of_classes_attended ;
 	
+	
+	
+	
+	
+	// class attendence numbers
+	
+	$classesattendedquery = "
+SELECT DISTINCT
+Classes_Scheduled.Class_ID,
+Class_Subjects.Class_Subject
+
+FROM 
+Referrals,
+Participants,
+Class_Attendence,
+Classes_Scheduled,
+Curriculum_Subjects,
+Class_Subjects,
+Employees
+
+WHERE
+
+Referrals.P_Num = '$p_numDB'
+And Referrals.P_Num = Participants.P_Num
+AND Participants.P_Num = Class_Attendence.P_Num
+AND Class_Attendence.Class_ID = Classes_Scheduled.Class_ID
+AND Classes_Scheduled.C_Subject = Curriculum_Subjects.C_Subject
+AND Classes_Scheduled.EID = Employees.EID
+AND Curriculum_Subjects.C_Subject = Class_Subjects.C_Subject";
+//AND Employees.eid =  $eidfromreport
+
+
+$classesattendedresult = pg_query($classesattendedquery) or die('Query failed: ' . pg_last_error());
+$classesattendedrow = pg_fetch_array($classesattendedresult, 0, PGSQL_ASSOC);
+
+
+$newnumclassatten = pg_num_rows($classesattendedresult);
+
+
+//gets the class id and class subject that a participant has not attended yet
+$classesnotattendedquery = "
+
+                 SELECT DISTINCT
+				Classes_Scheduled.Class_ID
+				
+
+				FROM 
+				Classes_Scheduled
+				WHERE
+				Classes_Scheduled.Class_ID NOT IN (
+									-- Gets the id and names of all the classes a specific participant has already taken
+									SELECT DISTINCT
+									Classes_Scheduled.Class_ID
+
+									FROM 
+									Referrals,
+									Participants,
+									Class_Attendence,
+									Classes_Scheduled,
+									Curriculum_Subjects,
+									Class_Subjects,
+									Employees
+
+									WHERE
+									Referrals.P_Num = '$p_numDB'
+									And Referrals.P_Num = Participants.P_Num
+									AND Participants.P_Num = Class_Attendence.P_Num
+									AND Class_Attendence.Class_ID = Classes_Scheduled.Class_ID
+									AND Classes_Scheduled.C_Subject = Curriculum_Subjects.C_Subject
+									AND Classes_Scheduled.EID = Employees.EID
+									AND Curriculum_Subjects.C_Subject = Class_Subjects.C_Subject)							
+									
+
+ORDER BY Classes_Scheduled.Class_ID";
+
+
+
+
+$classesnotattendedresult = pg_query($classesnotattendedquery) or die('Query failed: ' . pg_last_error());
+$classesnotattendedrow = pg_fetch_array($classesnotattendedresult, 0, PGSQL_ASSOC);
+
+
+$newnumclassnotatten = pg_num_rows($classesnotattendedresult);
   
   
   
@@ -218,7 +317,7 @@ echo			'</div>';
 			
 echo			'<div class = "col-md-4">';
 echo			'<p class="label label-info">';
-echo             "$cidDB ";
+echo             "$currname ";
 echo            '</p>'; 
 echo			'</div>';
 echo			'</div>';
@@ -250,7 +349,7 @@ echo				'</div>';
 echo				'<div class = "col-md-2">';
 echo				'<p>';
 
- echo               "$num_of_classes_attended";
+ echo               "$newnumclassatten ";
  
  echo             '</p>';
 echo				'</div>';
@@ -269,7 +368,7 @@ echo				'</div>';
 echo				'<div class = "col-md-2">';
 echo				'<p>';
 
- echo               "$num_of_classes_not_attended";
+ echo               "$newnumclassnotatten";
  echo              '</p>';
  
 echo				'</div>';
@@ -292,20 +391,16 @@ echo		'<div class = "col-md-4">';
 		
 echo		'<div class = "jumbotron">';
 			
-echo			'<p> User created on : 01/01/2016 </p>';
-		
-echo			'<p> Notes from instructors: </p>';
-			
-echo			'<p> <a href="#"> Gwen 02/01/2016 </a> </p>';
-			
-echo			'<p> <a href="#"> Click to see more </a> </p>';
 
-echo			'<p> <a href="#"> Link to Participant Intake Form </a> </p>';
+
+
 
 echo            "<form action = 'IntakeAppFilled.php'  method ='post'>";
 
-echo            "<p> Link to Participant Report Card click the number </p>";
-echo			"<input type = 'submit' name = 'participant_num_intake' value = ' $p_num ' />";
+echo            "<p> Link to Intake Packet (under construction) </p>";
+
+
+echo 		"<button type = 'submit' name = 'participant_num_intake' value = ' $p_num   '>  Click Here For Intake Packet   </button>";
 
 echo            "</form>";
 
@@ -333,7 +428,9 @@ ideas for linking to report card, make the link a form to send the cid and pnum 
 echo            "<form action = 'report-card.php'  method ='post'>";
 
 echo            "<p> Link to Participant Report Card click the number </p>";
-echo			"<input type = 'submit' name = 'participant_name' value = ' $p_num ' />";
+
+
+echo 		"<button type = 'submit' name = 'participant_name' value = ' $p_num   '>  Click Here For Report card  </button>";
 
 echo            "</form>";
 
@@ -341,7 +438,9 @@ echo            "</form>";
 echo            "<form action = 'Assign-Curriculum.php'  method ='post'>";
 
 echo            "<p> Assign Curriculum </p>";
-echo			"<input type = 'submit' name = 'participant_num_assign' value = ' $p_num ' />";
+
+
+echo 		"<button type = 'submit' name = 'participant_num_assign' value = ' $p_num   '>  Click Here To Change/Assign Curriuclum  </button>";
 
 echo            "</form>";
 
