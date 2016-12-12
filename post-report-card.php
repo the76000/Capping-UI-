@@ -33,6 +33,8 @@ session_start();
 	
     $classidfromreport = $_SESSION['classidreport']; //this is the class id from the select class(attended classes) should change all classidreport variables to classidattendeD???
 	
+	$comment = $_POST['attencomment'];
+	
 	
 	
 	
@@ -52,7 +54,7 @@ if (($_POST['radio']) == "submit_attended"){
 	
 		
 		
-		$submitattendance = "INSERT INTO class_attendence (eid,class_id,p_num,participant_comment) VALUES('$eidattendence', '$classidfromreport','$pnum', 'THIS IS A TEST FROM REPORT CARD HI')";
+		$submitattendance = "INSERT INTO class_attendence (eid,class_id,p_num,participant_comment) VALUES('$eidattendence', '$classidfromreport','$pnum', '$comment')";
 		
 		$result = pg_query($submitattendance);
 		echo "Attendence was submmited";

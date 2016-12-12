@@ -74,7 +74,7 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
 
  
  if(isset($_POST['submitClassNotAttended'])){
-	 echo"submitclassnotattended";
+	// echo"submitclassnotattended";
 	  $_SESSION['classidreport'] = $_POST['class_selected_not_attended']; //from classes attended form report-card
  
  $classidfromreport =  $_POST['class_selected_not_attended']; //working fine using the wrong $post value
@@ -87,7 +87,7 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
  
   
  if(isset($_POST['submitClassAttended'])){
-	 echo"submitclassattended";
+	 //echo"submitclassattended";
 	 
 	  
  $_SESSION['classidreport'] = $_POST['class_selected_attended']; //from classes attended form report-card
@@ -99,7 +99,7 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
 
  
  
- echo " $classidfromreport";
+ //echo " $classidfromreport";
 
 
  
@@ -227,7 +227,7 @@ echo						'<div id="checkbox1">';
 echo					'<!--<div class="col-sm-3">-->';
 echo					'<label style="text-align:left">';
 echo						'Instructor Comments';
-echo						'<textarea rows="10" cols="50"></textarea>	';					
+echo						'<textarea rows="10" cols="50" name = "attencomment"></textarea>	';					
 echo					'</label>';
 echo						'<!-- this needs to become an input -->';
 echo					'</div>';
