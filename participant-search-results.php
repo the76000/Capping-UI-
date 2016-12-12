@@ -79,7 +79,7 @@
 	
 	$_SESSION['searchp_num'] = $p_num; //for report card
 	
-	echo "$p_num";
+
 	
 	$query = "Select r.*, p.* from referrals r inner join participants p  on p.p_num = r.p_num  where r.p_num = '$p_num' ";
 	
@@ -100,7 +100,7 @@
 	
 	$l_nameDB = $row['ref_l_name'];
 	
-	echo "$l_nameDB";
+
 	
 	$f_nameDB = $row['ref_f_name'];
 	
@@ -111,6 +111,11 @@
 	
 	
 	$cidDB = $row['cid'];
+	
+	
+	$cellnum = $row['ref_cell_phone'];
+	
+	$homenum = $row['ref_home_phone'];
 	
 	
 	$currnamequery = "
@@ -149,10 +154,10 @@ $c_a_results = pg_query($c_a_query) or die('Query failed: ' . pg_last_error());
 	
 	$p_numDB = $c_a_row['p_num']; // set variable correct row and column of db
 	
-	echo "$p_numDB";
+	
 	
 	$class_idDB = $c_a_row['class_id'];
-	echo "$class_idDB";
+	
 	
 	$participant_commentDB = $c_a_row['participant_comment'];
 	
@@ -390,6 +395,37 @@ echo		'</div>';
 echo		'<div class = "col-md-4">';
 		
 echo		'<div class = "jumbotron">';
+
+
+echo			'<div class = "row search-results">';
+echo			'<div class = "col-md-4">';
+echo			'<p> Cell Phone # </p>';
+
+
+			
+
+echo			'<p class="label label-info">';
+echo             "$cellnum";
+echo            '</p>'; 
+echo			'</div>';
+echo			'</div>';
+
+
+echo			'<div class = "row search-results">';
+echo			'<div class = "col-md-4">';
+echo			'<p> Home Phone # </p>';
+
+
+			
+
+echo			'<p class="label label-info">';
+echo             "$homenum";
+echo            '</p>'; 
+echo			'</div>';
+echo			'</div>';
+			
+			
+echo			'<hr> </hr>';
 			
 
 
