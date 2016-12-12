@@ -20,6 +20,7 @@
 <body>
 
 	<!-- Top left Logo -->
+	<center><div class="error" id="errorID" style="display:none"></div></center>
 	<div class="page-header">
 		<h1><a class="home-button" href="homepage.php">CPCA</a></h1>
 	</div>
@@ -52,7 +53,8 @@
 <!-- So I hear you hired a new employee. Congratz! Well this is where the magic happens, and by magic I mean HTML. Cause this is the language I know.... -->	
 
 <div class = "container">
-<h3><center>ADD A PARTICIPANT (PARTICIPANT MUST HAVE FILLED OUT AN INTAKE AND REFERRAL FORM AND SUBMITTED)</center></h3>
+<h3><center>Add A Participant</center></h3>
+<h4><center>(Participant must have filled out and submitted an intake and referral form)</center></h4>
 <div class="jumbotron login_panel">
 <div class= "login_wrapper">
 
@@ -64,7 +66,6 @@ session_start();
 	
 	if (!isset($_SESSION["username"]) ){
 		header('Location: index.php');
-		echo "hello";
 	}
   
   
@@ -81,24 +82,24 @@ session_start();
 	$curquery = "
 	SELECT * FROM curriculum";
 	$curresult = pg_query($curquery) or die('Query failed: ' . pg_last_error());
+?>
 
 
 
 
 
-
-echo '<!-- this launches another php file --->';
-echo  '<form class="form-horizontal" action="post-participant-add.php" method="post">';
+ <!-- this launches another php file --->
+  <form class="form-horizontal" action="post-participant-add.php" method="post" onsubmit="return validateInput()">
   
-echo  '<div class="form-group">';
-echo    '<label for="inputFirstName3" class="col-sm-4 control-label">Participant</label>';
-echo    '<div class="col-sm-8">';
+  <div class="form-group">
+    <label for="inputFirstName3" class="col-sm-4 control-label">Participant</label>
+    <div class="col-sm-8">
 
 
-echo      '<select class="form-control" name="pnumSelect">';
+      <select class="form-control" name="pnumSelect" id="pnumSelect">
 
-echo							'<option selected disabled class="hideoption">Select One</option>';
-
+							'<option selected disabled class="hideoption">Select One</option>
+<?php
 //$nameline = pg_fetch_array($classesnameresult, null, PGSQL_ASSOC);
 		//this is the best way to display multiple columns from a query that selects more than one column
 				while ($participant_line = pg_fetch_assoc($refresult ) ){
@@ -114,7 +115,7 @@ echo							'<option selected disabled class="hideoption">Select One</option>';
 						
 							
 							
-echo						"<option value='$participant_col_value_var'>   '$participant_col_value_var2'   '$participant_col_value_var3' '$participant_col_value_var4'</option>"; 
+echo						"<option value='$participant_col_value_var'>   $participant_col_value_var2   $participant_col_value_var3 $participant_col_value_var4</option>"; 
 							
 								
 						
@@ -123,8 +124,9 @@ echo						"<option value='$participant_col_value_var'>   '$participant_col_value
 						
 
 				}
+?>
 							
-echo						'</select>  ';
+						</select>
 
 
 
@@ -134,21 +136,21 @@ echo						'</select>  ';
 
 
 
-echo   ' </div>';
-echo  '</div>';
+    </div>
+  </div>
   
-echo   ' <div class="form-group">';
-echo    '<label for="Curriculum3" class="col-sm-4 control-label">Curriculum</label>';
-echo    '<div class="col-sm-8">';
+    <div class="form-group">
+    <label for="Curriculum3" class="col-sm-4 control-label">Curriculum</label>
+    <div class="col-sm-8">
 
-echo      '<select class="form-control" name="cidSelect">';
+      <select class="form-control" name="cidSelect" id="cidSelect">
 
-echo							'<option selected disabled class="hideoption">Select One</option>';
-
+							<option selected disabled class="hideoption">Select One</option>
+<?php
 //$nameline = pg_fetch_array($classesnameresult, null, PGSQL_ASSOC);
 		//this is the best way to display multiple columns from a query that selects more than one column
 				while ($cur_line = pg_fetch_assoc($curresult ) ){
-				
+					if($cur_line['curriculum_name'] != "No Curriculum"){
 							
 							$cur_col_value_var = $cur_line['cid'];
 							
@@ -158,91 +160,132 @@ echo							'<option selected disabled class="hideoption">Select One</option>';
 						
 							
 							
-echo						"<option value='$cur_col_value_var'>   '$cur_col_value_var2'  </option>"; 
+echo						"<option value='$cur_col_value_var'>   $cur_col_value_var2  </option>"; 
 							
 								
 						
 						
 						
 						
-
+					}
 				}
-							
-echo						'</select>  ';
-
-
-
-
-echo    '</div>';
-echo  '</div>';
-  
-echo  '<div class="form-group">';
-echo   '<label for="sex3" class="col-sm-4 control-label">Gender </label>';
-echo    '<div class="col-sm-8">';
-
-
-echo      '<select class="form-control" name="sexSelect">';
-
-echo							'<option selected disabled class="hideoption">Select One</option>';
-
-
-echo              '<option value="M">   Male </option>';
-echo              '<option value="F">   Female </option>';
-echo              '<option value=" ">   Undisclosed </option>';
-
-echo						'</select>  ';
-
-
-
-echo    '</div>';
-echo  '</div>';
-
-echo  '<div class="form-group">';
-echo   '<label for="raceID3" class="col-sm-4 control-label">Ethnicity </label>';
-echo    '<div class="col-sm-8">';
-echo     '<input type="race" class="form-control" id="raceID3" placeholder="Ethnicity" name = "race">';
-echo    '</div>';
-echo  '</div>';
-
-echo  '<div class="form-group">';
-echo   '<label for="childnumID3" class="col-sm-4 control-label">Number of Children </label>';
-echo    '<div class="col-sm-8">';
-echo     '<input type="childnum" class="form-control" id="childnumID3" placeholder="Number of Childern (in digits)" name = "childnum">';
-echo    '</div>';
-echo  '</div>';
-
-  
-echo  '<div class="form-group">';
-echo    '<label for="status3" class="col-sm-4 control-label">Status</label>';
-echo    '<div class="col-sm-8">';
-echo     ' <input type="status3" class="form-control" id="status33" placeholder="Status (well)" name = "status">';
-echo    '</div>';
-echo ' </div>';
-  
-  
-  /* leave this commented out unless a password check feature is actually implemented
-echo  '<div class="form-group">';
-echo    '<label for="inputPassword3" class="col-sm-4 control-label">Re-enter Password</label>';
-echo    '<div class="col-sm-8">';
-echo      '<input type="password" class="form-control" id="inputPassword3" placeholder="Password" name = "password">';
-echo    '</div>';
-echo  '</div>';
-
-*/
-  
-echo  '<div class="form-group">';
-echo    '<div class="col-sm-offset-2 col-sm-10">';
-echo      '<button type="submit" class="btn btn-default">Submit</button>';
-echo	  '<!-- needs apache/php link to database -->';
-echo	  '<!-- Need to add an alert that says "The information added is correct?" y/n prompt  nah fuck that -->';
-echo   ' </div>';
-echo  '</div>';
-  
-echo '</form> <!-- end of login form -->';
-echo '</div> <!-- end of login wrapper -->';
-echo '</div> <!-- end of jumbotron login -->';
-
 ?>
+							
+						</select>
+
+
+
+
+    </div>
+  </div>
+  
+  <div class="form-group">
+   <label for="sex3" class="col-sm-4 control-label">Gender </label>
+    <div class="col-sm-8">
+
+
+      <select class="form-control" name="sexSelect" id="sexSelect">
+
+							<option selected disabled class="hideoption">Select One</option>
+
+
+              <option value="M">   Male </option>
+              <option value="F">   Female </option>
+              <option value=" ">   Undisclosed </option>
+
+						</select>  
+
+
+
+    </div>
+  </div>
+
+  <div class="form-group">
+   <label for="raceID3" class="col-sm-4 control-label">Ethnicity </label>
+    <div class="col-sm-8">
+     <input type="race" class="form-control" id="raceID3" placeholder="Ethnicity" name = "race">
+    </div>
+  </div>
+
+  <div class="form-group">
+   <label for="childnumID3" class="col-sm-4 control-label">Number of Children </label>
+    <div class="col-sm-8">
+     <input type="childnum" class="form-control" id="childnumID3" placeholder="Number of Childern (in digits)" name = "childnum">
+    </div>
+  </div>
+
+  
+  <div class="form-group">
+    <label for="status3" class="col-sm-4 control-label">Status</label>
+    <div class="col-sm-8">
+      <input type="status3" class="form-control" id="statusID3" placeholder="Status (well)" name = "status">
+    </div>
+  </div>
+  
+  
+  <!-- leave this commented out unless a password check feature is actually implemented
+  '<div class="form-group">';
+    '<label for="inputPassword3" class="col-sm-4 control-label">Re-enter Password</label>';
+    '<div class="col-sm-8">';
+      '<input type="password" class="form-control" id="inputPassword3" placeholder="Password" name = "password">';
+    '</div>';
+  '</div>';
+
+-->
+  
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Submit</button>
+	  <!-- needs apache/php link to database -->
+	  <!-- Need to add an alert that says "The information added is correct?" y/n prompt  nah fuck that -->
+    </div>
+  </div>
+  
+ </form> <!-- end of login form -->
+ </div> <!-- end of login wrapper -->
+ </div> <!-- end of jumbotron login -->
+
+<script type="text/javascript">
+	function validateInput(){
+		document.getElementById("errorID").value = ""
+		document.getElementById("errorID").style.display = "none";
+		debugger;
+		if(document.getElementById("pnumSelect").value == "Select One"){
+			document.getElementById("errorID").innerHTML = "Please select a participant";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		if(document.getElementById("cidSelect").value == "Select One"){
+			document.getElementById("errorID").innerHTML = "Please select a curriculum";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		if(document.getElementById("sexSelect").value == "Select One"){
+			document.getElementById("errorID").innerHTML = "Please select a sex";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		if(document.getElementById("raceID3").value == ""){
+			document.getElementById("errorID").innerHTML = "Please enter a race";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		if(document.getElementById("childnumID3").value == ""){
+			document.getElementById("errorID").innerHTML = "Please enter number of children";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		if(document.getElementById("statusID3").value == ""){
+			document.getElementById("errorID").innerHTML = "Please enter status";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		
+		//If we got here then everything is as it should be
+		return true; 
+		
+	}
+</script>
 </div>
 </body>
 </html>

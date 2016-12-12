@@ -1,4 +1,16 @@
-
+/*for error bar*/
+.error{
+	font-size: 20px;
+	font-style: italic;
+	color: red;
+	border-color:red;
+	border-style:double;
+	background-color: #ffe6e6;
+	padding-bottom: 15px;
+	padding-top: 15px;
+	width: 95%;
+	
+}
 /* for login page */
 
 /* Styling for the navbar on all pages */
