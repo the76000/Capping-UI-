@@ -183,7 +183,7 @@
 
  				echo	 '<div class="form-group">';
    				echo		 '<div class="col-sm-offset-2 col-sm-10">';
-      			echo			'<button type="submit" class="btn btn-default">Submit Change</button>';
+      		
 	  			
     			echo		'</div>';
  				echo	' </div>';
@@ -209,7 +209,7 @@
 
  				echo	 '<div class="form-group">';
    				echo		 '<div class="col-sm-offset-2 col-sm-10">';
-      			echo			'<button type="submit" class="btn btn-default">Submit Change</button>';
+      	
 	  					
     			echo		'</div>';
  				echo	 '</div>';
@@ -236,7 +236,7 @@
 
  				echo	 '<div class="form-group">';
    				echo		 '<div class="col-sm-offset-2 col-sm-10">';
-      			echo			'<button type="submit" class="btn btn-default">Submit Change</button>';
+      		
 	  			echo			'<!-- needs apache/php link to database -->';
     			echo		'</div>';
  				echo	 '</div>';

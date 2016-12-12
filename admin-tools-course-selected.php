@@ -129,7 +129,7 @@
 					echo      "<select name = 'classidPicked'>
 					<option selected disabled class='hideoption'>Select One</option>";
 					while($uniqueclassrow = pg_fetch_array($uniqueclassresult)){
-						echo "<option value='".$uniqueclassrow['class_id']."'>".$uniqueclassrow['class_subject']."</option>";
+						echo "<option value='".$uniqueclassrow['class_id']."'>".$uniqueclassrow['class_subject']." ".$uniqueclassrow['date_time_schedules']."</option>";
 					}
 					
 					

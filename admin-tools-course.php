@@ -74,8 +74,8 @@
 				echo '<h2> Pick a curriculum, location, and employee </h2>';
 				echo '<div class = "col-md-4">';
 				echo	'<form class="navbar-form" role="search" action="admin-tools-course-selected.php" method="post">';
-				echo	'<select class="form-control" name = "curr_selected" id="curriculumName">
-						<option selected disabled class="hideoption">Select One</option>';
+				echo	'<select class="form-control" name = "curr_selected" id="curriculumName">';
+					
 					
 						
 						// Performing SQL query

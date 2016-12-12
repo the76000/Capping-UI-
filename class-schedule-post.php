@@ -33,6 +33,8 @@ session_start();
 		
 		$result = pg_query($scheduleclass);
 		echo "Class Was Scheduled";
+		
+		echo "<a href='homepage.php'> Go Back To The Homepage </a>
 	
 	
 ?>
