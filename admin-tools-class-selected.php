@@ -19,6 +19,7 @@
 <body>
 
 	<!-- Top left Logo -->
+	<center><div class="error" id="errorID" style="display:none"></div></center>
 	<div class="page-header">
 		<h1><a class="home-button" href="homepage.php">CPCA</a></h1>
 	</div>
@@ -164,7 +165,7 @@
 			echo '<div class = "jumbotron">';
 
 
-				echo "<form action = 'admin-tools-course-post.php' method='post'>";
+				echo "<form onsubmit='return validateInput()' action = 'admin-tools-course-post.php' method='post'>";
 				
 
 
@@ -174,7 +175,7 @@
 				
 				echo ')</label>';
    				echo		 '<div class="col-sm-8">';
-      			echo			'<input  name="currTime" class="form-control" id="curriculumTime" placeholder="yyyy-mm-dd 00:00:00" oninput="validateAlphaWithSpace("curriculumTime");">';
+      			echo			'<input  name="currTime" class="form-control" id="curriculumTime" placeholder="yyyy-mm-dd 00:00:00">';
     			echo		'</div>';
  				echo	 '</div>';
 				
@@ -194,7 +195,8 @@
 			
 				echo    ') </label>';
    				echo		 '<div class="col-sm-4">';
-					echo      "<select name = 'lidPicked'>";
+					echo      "<select class='form-control' name = 'lidPicked' id = 'lidPicked' >";
+					echo 	  "<option selected disabled class='hideoption'>Select One</option>";
 				$locquery = "SELECT * FROM Locations";
 				$locresult = pg_query($locquery) or die('Query failed: ' . pg_last_error());
 				while($locrow = pg_fetch_array($locresult)){
@@ -222,7 +224,8 @@
 				echo '</label>';
    				echo		 '<div class="col-sm-4">';
       			
-				echo      "<select name = 'eidPicked'>";
+				echo      "<select class='form-control' name = 'eidPicked' id='eidPicked'>";
+				echo 	  "<option selected disabled class='hideoption'>Select One</option>";
 				$allempquery = "SELECT * FROM Employees";
 				$allempresult = pg_query($allempquery) or die('Query failed: ' . pg_last_error());
 				while($allemprow = pg_fetch_array($allempresult)){
@@ -243,8 +246,6 @@
 
 
 echo					'<button type="submit" class="btn btn-default " id="adminChangeCourseButton">Submit All Changes</button>  ';
-
-echo             '<p> *Clicking any of these buttons will update everything written in the field to the db* </p>';
 
 echo				'</form>';
 
@@ -268,6 +269,33 @@ echo	'</div>';
 	
 <!-- JS Functions  -->
 <script src="intake/FormAppFunctions.js"></script>
+
+<script type="text/javascript">
+	function validateInput(){
+		document.getElementById("errorID").value = ""
+		document.getElementById("errorID").style.display = "none";
+		debugger;
+		if(document.getElementById("curriculumTime").value == ""){
+			document.getElementById("errorID").innerHTML = "Please enter a time";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		if(document.getElementById("lidPicked").value == "Select One"){
+			document.getElementById("errorID").innerHTML = "Please select a location";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		if(document.getElementById("eidPicked").value == "Select One"){
+			document.getElementById("errorID").innerHTML = "Please select an instructor";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		
+		//If we got here then everything is as it should be
+		return true; 
+		
+	}
+</script>
 	
 </body>
 

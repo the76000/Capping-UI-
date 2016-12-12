@@ -244,12 +244,14 @@ echo						"<option value='$cur_col_value_var'>   $cur_col_value_var2  </option>"
  </form> <!-- end of login form -->
  </div> <!-- end of login wrapper -->
  </div> <!-- end of jumbotron login -->
+ 
+<script src="intake/FormAppFunctions.js"></script>
 
 <script type="text/javascript">
 	function validateInput(){
 		document.getElementById("errorID").value = ""
 		document.getElementById("errorID").style.display = "none";
-		debugger;
+		
 		if(document.getElementById("pnumSelect").value == "Select One"){
 			document.getElementById("errorID").innerHTML = "Please select a participant";
 			document.getElementById("errorID").style.display = "block";
