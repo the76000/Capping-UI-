@@ -70,7 +70,7 @@
 		
 	
 	<!-- launches a different php file -->
-	<form class="navbar-form" role="search" action="individual-attendance-more.php" method="post" >
+	<form class="navbar-form" role="search" action="individual-attendance-post.php" method="post" >
 			<div class="input-group">
 				<input type="text" class="form-control input-lg" placeholder="first name" name="f_name" id="srch-f_name" oninput="validateAlpha('srch-f_name');">
 				<div class="input-group-btn ">

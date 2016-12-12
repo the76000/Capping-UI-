@@ -63,6 +63,10 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
 		header('Location: index.php');
 	}	
 	
+	$p_num = $_POST['participant_num'];
+	
+	
+	
 ?>
 	
 	
@@ -80,24 +84,29 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
 		<div class = "col-md-4">
 			
 				<?php
-					echo "<p>Name: ".$_POST['f_name']." ".$_POST['l_name']." </p>"
+					$namequery = "SELECT ref_f_name, ref_l_name FROM referrals WHERE p_num ='$p_num'";
+	
+					$nameresult = pg_query($namequery) or die('Query failed: ' . pg_last_error());
+					
+					while($row = pg_fetch_array($nameresult)){
+						echo "<p>Name: ".$row['ref_f_name']." ".$row['ref_l_name']." </p>";
+					}
+					
+					
 				?>
 			
 		</div>
 		
 		<div class = "col-md-4">
 			<?php
-				$pnumquery = "SELECT curriculum_name, curriculum.cid
-							  FROM public.referrals
-							  INNER JOIN public.participants ON public.referrals.p_num = public.participants.p_num
-							  INNER JOIN public.curriculum ON public.curriculum.cid = public.participants.cid
-							  WHERE ref_f_name = '".$_POST['f_name']."' AND ref_l_name = '".$_POST['l_name']."'";
+				$curriculumquery = "SELECT curriculum_name FROM participants INNER JOIN curriculum ON participants.cid = curriculum.cid WHERE p_num = '$p_num'";
 				
-				$result = pg_query($pnumquery) or die('Query failed: ' . pg_last_error());
+				$curriculumresult = pg_query($curriculumquery) or die('Query failed: ' . pg_last_error());
 				
-				$p_num = pg_fetch_array($result);
+				while($row = pg_fetch_array($curriculumresult)){
+					echo "<p>Curriculum: ".$row['curriculum_name']." </p>";
+				}
 				
-				echo "<p>Curriculum: ".$p_num['curriculum_name']." </p>"
 			?>
 		</div>
 		
@@ -110,17 +119,7 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
       </tr>
     </thead>
     <tbody>
-		<?php
-			$firstname = $_POST['f_name'];
-			$lastname = $_POST['l_name'];
-					
-			$query = "SELECT p_num FROM referrals WHERE ref_f_name = '$firstname' AND ref_l_name = '$lastname'";
-					
-			$result = pg_query($query) or die('Query failed: ' . pg_last_error());
-					
-			$p_num = pg_fetch_array($result);
-			$p_num = $p_num['p_num'];
-			
+		<?php			
 			$attendedquery = "SELECT DISTINCT
 							  Class_Subjects.C_Subject,
 							  Class_Subjects.Class_Subject,
