@@ -84,7 +84,11 @@
 						$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 						
 					while($row = pg_fetch_array($result)){
-						echo "<option value='".$row['curriculum_name']."'>".$row['curriculum_name']."</option>";
+						//Obviously we don't want them modifying no curriculum
+						if($row['curriculum_name'] != "No Curriculum"){
+							echo "<option value='".$row['curriculum_name']."'>".$row['curriculum_name']."</option>";
+						}
+						
 					}
 					
 					echo '</select> ';

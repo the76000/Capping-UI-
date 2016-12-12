@@ -1,9 +1,9 @@
 add-employee
-admin-tools
+*done* admin-tools
 admin-tools-class-selected
-admin-tools-course
+*done* admin-tools-course
 admin-tools-course-post
-admin-tools-course-selected
+*done* admin-tools-course-selected
 assign-curriculum
 attendance-reports
 change-employee-password

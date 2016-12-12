@@ -124,25 +124,35 @@
 						AND (Employees.EID = '$employeeEID ')		order by Class_Subjects.C_Subject ASC";
 						
 						$uniqueclassresult = pg_query($uniqueclassquery) or die('Query failed: ' . pg_last_error());
-					echo "<form action = 'admin-tools-class-selected.php' method='post'>";
-					echo					'<label>Classes in the curriculum</label>';
-					echo      "<select name = 'classidPicked'>
-					<option selected disabled class='hideoption'>Select One</option>";
-					while($uniqueclassrow = pg_fetch_array($uniqueclassresult)){
-						echo "<option value='".$uniqueclassrow['class_id']."'>".$uniqueclassrow['class_subject']." ".$uniqueclassrow['date_time_schedules']."</option>";
-					}
+						
+						$uniqueclassrow = pg_fetch_array($uniqueclassresult);
+						
+						if(empty($uniqueclassrow)){
+							
+							echo "<h2>There are no classes scheduled.</h2>";
+							echo "<a href='class-scheduler.php'>Schedule a class</a>";
+							
+						} else {
+							echo "<form action = 'admin-tools-class-selected.php' method='post'>";
+							echo					'<label>Classes in the curriculum</label>';
+							echo      "<select name = 'classidPicked'>";
+							while($uniqueclassrow = pg_fetch_array($uniqueclassresult)){
+								echo "<option value='".$uniqueclassrow['class_id']."'>".$uniqueclassrow['class_subject']." ".$uniqueclassrow['date_time_schedules']."</option>";
+							}
+							
+							
+							
+							
+							
+							
+							echo "</select> ";
+							
+							
+							echo '<input type="submit" name =  "classPick" value="Choose Class" id="edit" class="btn btn-default" style="width:20%; font-weight:bold;"></input>';
 					
+							echo		'</form>';
+						}
 					
-					
-					
-					
-					
-					echo "</select> ";
-					
-					
-					echo '<input type="submit" name =  "classPick" value="Choose Class" id="edit" class="btn btn-default" style="width:20%; font-weight:bold;"></input>';
-			
-			echo		'</form>';
 					
 					
 					
