@@ -19,6 +19,7 @@
 <body>
 
 	<!-- Top left Logo -->
+	<center><div class="error" id="errorID" style="display:none"></div></center>
 	<div class="page-header">
 		<h1><a class="home-button" href="homepage.php">CPCA</a></h1>
 	</div>
@@ -133,9 +134,10 @@
 							echo "<a href='class-scheduler.php'>Schedule a class</a>";
 							
 						} else {
-							echo "<form action = 'admin-tools-class-selected.php' method='post'>";
+							echo "<form onsubmit='return validateInput()' action = 'admin-tools-class-selected.php' method='post'>";
 							echo					'<label>Classes in the curriculum</label>';
-							echo      "<select name = 'classidPicked'>";
+							echo      "<select  name = 'classidPicked' id='classidPicked'>";
+							echo 		'<option selected disabled class="hideoption">Select One</option>';
 							while($uniqueclassrow = pg_fetch_array($uniqueclassresult)){
 								echo "<option value='".$uniqueclassrow['class_id']."'>".$uniqueclassrow['class_subject']." ".$uniqueclassrow['date_time_schedules']."</option>";
 							}
@@ -183,6 +185,22 @@ echo	'</div>';
 	
 <!-- JS Functions  -->
 <script src="intake/FormAppFunctions.js"></script>
+<script type="text/javascript">
+function validateInput(){
+	document.getElementById("errorID").value = ""
+	document.getElementById("errorID").style.display = "none";
+	
+	if(document.getElementById("classidPicked").value == "Select One"){
+		document.getElementById("errorID").innerHTML = "Please select a curriculum";
+		document.getElementById("errorID").style.display = "block";
+		return false;
+	}
+	
+	//If we got here then everything is as it should be
+	return true; 
+	
+}
+</script>
 	
 </body>
 

@@ -19,6 +19,7 @@
 <body>
 
 	<!-- Top left Logo -->
+	<center><div class="error" id="errorID" style="display:none"></div></center>
 	<div class="page-header">
 		<h1><a class="home-button" href="homepage.php">CPCA</a></h1>
 	</div>
@@ -73,8 +74,9 @@
 
 				echo '<h2> Pick a curriculum, location, and employee </h2>';
 				echo '<div class = "col-md-4">';
-				echo	'<form class="navbar-form" role="search" action="admin-tools-course-selected.php" method="post">';
+				echo	'<form onsubmit="return validateInput()" class="navbar-form" role="search" action="admin-tools-course-selected.php" method="post">';
 				echo	'<select class="form-control" name = "curr_selected" id="curriculumName">';
+				echo '<option selected disabled class="hideoption">Select One</option>';
 					
 					
 						
@@ -96,7 +98,8 @@
 					
 					
 						echo '<div class = "col-md-4">';
-						echo	'<select class="form-control" name = "loc_selected" id="curriculumName">';
+						echo	'<select class="form-control" name = "loc_selected" id="curriculumLocation">';
+						echo '<option selected disabled class="hideoption">Select One</option>';
 					
 						
 						// Performing SQL query
@@ -113,7 +116,8 @@
 					
 					
 						echo '<div class = "col-md-4">';
-						echo	'<select class="form-control" name = "emp_selected" id="curriculumName">';
+						echo	'<select class="form-control" name = "emp_selected" id="curriculumInstructor">';
+						echo '<option selected disabled class="hideoption">Select One</option>';
 					
 						
 						// Performing SQL query
@@ -204,7 +208,32 @@
 	
 	
 	
+<script type="text/javascript">
+function validateInput(){
+	document.getElementById("errorID").value = ""
+	document.getElementById("errorID").style.display = "none";
 	
+	if(document.getElementById("curriculumName").value == "Select One"){
+		document.getElementById("errorID").innerHTML = "Please select a curriculum";
+		document.getElementById("errorID").style.display = "block";
+		return false;
+	}
+	if(document.getElementById("curriculumLocation").value == "Select One"){
+		document.getElementById("errorID").innerHTML = "Please select a location";
+		document.getElementById("errorID").style.display = "block";
+		return false;
+	}
+	if(document.getElementById("curriculumInstructor").value == "Select One"){
+		document.getElementById("errorID").innerHTML = "Please select an instructor";
+		document.getElementById("errorID").style.display = "block";
+		return false;
+	}
+	
+	//If we got here then everything is as it should be
+	return true; 
+	
+}
+</script>
 	
 
 	
