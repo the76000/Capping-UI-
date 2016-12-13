@@ -30,6 +30,7 @@
 
 <body>
 	<!-- Top left Logo -->
+	<center><div class="error" id="errorID" style="display:none"></div></center>
 	<div class="page-header">
 		<h1><a class="home-button" href="homepage.php">CPCA</a></h1>
 	</div>
@@ -64,12 +65,12 @@
 
 		<div class = "jumbotron">
 			<h3>Class Attendance Report</h3>
-			<form style="margin-left: 15px" action="class-attendance-submitted.php" method="post">
+			<form onsubmit="return validateInput()" style="margin-left: 15px" action="class-attendance-submitted.php" method="post">
 				<div class="row">
 				<div class="col-sm-4">
 						<div class="form-group">
-							<label for="sel1">Select A Curriculum:</label> <!-- this is for the 28 indivual classes, not for the course/groups. data mismatch -->
-							<select class="form-control" id="sel1" name="curriculumSelect" disabled>							
+							<label for="sel1">Select A Curriculum:</label> 
+							<select class="form-control" id="sel1" name="curriculumSelect" readonly>							
 								<?php 
 									if(isset($_POST['curriculumSelect'])){
 										echo "<option selected=`".$_POST['curriculumSelect']."`>".$_POST['curriculumSelect']."</option>";
@@ -80,8 +81,9 @@
 					</div>
 					<div class="col-sm-4">
 						<div class="form-group">
-							<label for="sel1">Select A Class:</label> <!-- this is for the 28 indivual classes, not for the course/groups. data mismatch -->
-							<select class="form-control" id="sel1" name="classSelect">
+							<label for="sel1">Select A Class:</label> 
+							<select class="form-control" id="classSelect" name="classSelect">
+							<option selected disabled class="hideoption">Select One</option>
 							<?php
 								
 								$cname = $_POST['curriculumSelect'];
@@ -126,6 +128,22 @@
 	
 	<!-- JS Functions  -->
 <script src="intake/FormAppFunctions.js"></script>
+<script type="text/javascript">
+	function validateInput(){
+		document.getElementById("errorID").value = ""
+		document.getElementById("errorID").style.display = "none";
+		
+		if(document.getElementById("classSelect").value == "Select One"){
+			document.getElementById("errorID").innerHTML = "Please select a class";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		
+		//If we got here then everything is as it should be
+		return true; 
+		
+	}
+</script>
 			
 </body>
 </html>
