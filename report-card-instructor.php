@@ -202,7 +202,7 @@ $classesnotattendedrow = pg_fetch_array($classesnotattendedresult, 0, PGSQL_ASSO
 
 echo	'<div class = "container">';
 echo		'<div class = "jumbotron taller">';
-
+echo		'<center><div class="error" id="errorID" style="display:none"></div></center>';
 
 echo				'<div class="input-group">';
 echo					"<h1>  $participantfname    $participantlname              </h1>";
@@ -213,19 +213,17 @@ echo					'<div class="col-md-4 input-lg">';
 echo					'<label>Curriculum Name: <br>'.$currname.'</label>';						
 echo					'</div>';
 
-echo			'<form action = "report-card-instructor.php" method="post" class="navbar-form">';
 echo					'<div class="col-md-6 input-lg">';
 echo					'<label>Instructor Chosen: <br>'.$empdisplayfname.' '.$empdisplaylname.'</label>'; 
 echo			'</div>';
  echo			'</div>';
- echo			'</form>';
 
 
 echo				'<div class="row" id="attendanceRow">';
 echo					'<div class="col-md-4 input-lg">';
-echo			'<form action = "report-card-class-selected.php" method="post" class="navbar-form">';
+echo			'<form onsubmit="return validateInput1()" action = "report-card-class-selected.php" method="post" class="navbar-form">';
 echo					'<label>Classes Attended</label><br>';
-echo						'<select class="form-control" name="class_selected_attended">';
+echo						'<select class="form-control" name="class_selected_attended" id="attendedId">';
 
 echo                    '<option selected disabled class="hideoption">Select One</option>';
 
@@ -262,9 +260,9 @@ echo				'<br><button type="submit" name="submitClassAttended" class="btn btn-def
 
 
 echo					'<div class="col-md-6 input-lg">';
-echo			'<form action = "report-card-class-selected.php" method="post" class="navbar-form">';
+echo			'<form onsubmit="return validateInput2()" action = "report-card-class-selected.php" method="post" class="navbar-form">';
 echo					'<label>Classes NOT Attended</label>';
-echo						'<select class="form-control" name="class_selected_not_attended">';
+echo						'<select class="form-control" name="class_selected_not_attended" id="notAttendedId">';
 
 
 echo               '<option selected disabled class="hideoption">Select One</option>';
@@ -346,6 +344,36 @@ echo			'</div>';
 
 ?>
 
+<script type="text/javascript">
+	function validateInput1(){
+		document.getElementById("errorID").value = ""
+		document.getElementById("errorID").style.display = "none";
+		
+		if(document.getElementById("attendedId").value == "Select One"){
+			document.getElementById("errorID").innerHTML = "Please select a class attended";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		
+		//If we got here then everything is as it should be
+		return true; 
+		
+	}
+	function validateInput2(){
+		document.getElementById("errorID").value = ""
+		document.getElementById("errorID").style.display = "none";
+		
+		if(document.getElementById("notAttendedId").value == "Select One"){
+			document.getElementById("errorID").innerHTML = "Please select a class not attended";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		
+		//If we got here then everything is as it should be
+		return true; 
+		
+	}
+</script>
 
 </body>
 </html>

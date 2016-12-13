@@ -72,11 +72,11 @@
 	<!-- launches a different php file -->
 	<form class="navbar-form" role="search" action="individual-attendance-more.php" method="post" >
 			<div class="input-group">
-				<input type="text" class="form-control input-lg" placeholder="first name" name="f_name" id="srch-f_name" oninput="validateAlpha('srch-f_name');">
+				<input type="text" class="form-control input-lg" placeholder="first name" name="f_name" id="srch-f_name" readonly>
 				<div class="input-group-btn ">
 			
 			<div class="input-group">
-				<input type="text" class="form-control input-lg" placeholder="last name" name="l_name" id="srch-l_name" oninput="validateAlpha('srch-l_name');">
+				<input type="text" class="form-control input-lg" placeholder="last name" name="l_name" id="srch-l_name" readonly>
 				<div class="input-group-btn ">
 			
 					<button class="btn btn-lg" type="submit"><i class="glyphicon glyphicon-search"></i></button>

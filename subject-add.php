@@ -54,6 +54,7 @@
 <div class = "container">
 <h3><center>Create A New Class Subject</center></h3>
 <div class="jumbotron login_panel">
+<center><div class="error" id="errorID" style="display:none"></div></center>
 <div class= "login_wrapper">
 
 
@@ -84,7 +85,7 @@ session_start();
 
 
 echo '<!-- this launches another php file --->';
-echo  '<form class="form-horizontal" action="post-subject-add.php" method="post">';
+echo  '<form onsubmit="return validateInput()" class="form-horizontal" action="post-subject-add.php" method="post">';
   
 
   
@@ -106,7 +107,7 @@ echo  '<div class="form-group">';
 echo   '<label for="raceID3" class="col-sm-4 control-label">Curriculum Select </label>';
 echo    '<div class="col-sm-8">';
 
-echo      '<select class="form-control" name="cidSelect">';
+echo      '<select class="form-control" name="cidSelect" id="cidSelect">';
 
 echo							'<option selected disabled class="hideoption">Select One</option>';
 
@@ -123,7 +124,7 @@ echo							'<option selected disabled class="hideoption">Select One</option>';
 						
 							
 							
-echo						"<option value='$cur_col_value_var'>   '$cur_col_value_var2'  </option>"; 
+echo						"<option value='$cur_col_value_var'>   $cur_col_value_var2  </option>"; 
 							
 								
 						
@@ -168,5 +169,28 @@ echo '</div> <!-- end of jumbotron login -->';
 
 ?>
 </div>
+
+<script type="text/javascript">
+	function validateInput(){
+		document.getElementById("errorID").value = ""
+		document.getElementById("errorID").style.display = "none";
+		
+		if(document.getElementById("classnameID3").value == ""){
+			document.getElementById("errorID").innerHTML = "Please enter a class name";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		if(document.getElementById("cidSelect").value == "Select One"){
+			document.getElementById("errorID").innerHTML = "Please select a curriculum";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		
+		//If we got here then everything is as it should be
+		return true; 
+		
+	}
+</script>
+
 </body>
 </html>

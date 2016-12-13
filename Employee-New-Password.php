@@ -18,9 +18,9 @@
 
 <?php
 	# username maristcappinggroup@gmail.com Password: Algozinesquad2016
-    $to = $LoginID
-	$subject = "CPCA Email Change"
-	$message = 
+    $to = $LoginID;
+	$subject = "CPCA Email Change";
+	$message;
     # Connect to Postgres server and the database
     require( 'includes/connect.php' ) ;
 	

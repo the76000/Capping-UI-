@@ -53,6 +53,7 @@
 <div class = "container">
 <h3><center>REMOVE AN EMPLOYEE</center></h3>
 <div class="jumbotron login_panel">
+<center><div class="error" id="errorID" style="display:none"></div></center>
 <div class= "login_wrapper">
 
 
@@ -86,13 +87,13 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
 
 
 echo '<!-- this launches another php file --->';
-echo  '<form class="form-horizontal" action="post-remove-employee.php" method="post">';
+echo  '<form onsubmit="return validateInput()" class="form-horizontal" action="post-remove-employee.php" method="post">';
   
 echo  '<div class="form-group">';
 echo   '<label for="eid3" class="col-sm-4 control-label">Employee</label>';
 echo    '<div class="col-sm-8">';
 
-echo      '<select class="form-control" name="eidSelect">';
+echo      '<select class="form-control" name="eidSelect" id="eidSelect">';
 
 echo							'<option selected disabled class="hideoption">Select One</option>';
 
@@ -117,7 +118,7 @@ echo						"<option value='$employee_col_value_var'>   '$employee_col_value_var2'
 						
 						
 
-				}
+				}					
 							
 echo						'</select>  ';
 
@@ -130,8 +131,6 @@ echo  '</div>';
 echo  '<div class="form-group">';
 echo    '<div class="col-sm-offset-2 col-sm-10">';
 echo     ' <button type="submit" class="btn btn-default">Remove this Employee</button>';
-echo	  '<!-- needs apache/php link to database -->';
-echo	  '<!-- Need to add an alert that says "ARE YOU SURE YOU WANT TO DELETE THIS EMPLOYEE FROM THE DATABASE? nah " y/n prompt -->';
 echo    '</div>';
 echo  '</div>';
   
@@ -141,6 +140,25 @@ echo '</div> <!-- end of jumbotron login -->';
 
 
 ?>
+
+<script type="text/javascript">
+	function validateInput(){
+		document.getElementById("errorID").value = ""
+		document.getElementById("errorID").style.display = "none";
+		
+		if(document.getElementById("eidSelect").value == "Select One"){
+			document.getElementById("errorID").innerHTML = "Please select an employee";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		
+		
+		//If we got here then everything is as it should be
+		return true; 
+		
+	}
+</script>						
+	
 </div>	
 </body>
 </html>

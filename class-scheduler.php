@@ -67,8 +67,9 @@
 	echo '<div class = "container">';
 	
 	echo 	'<div class = "jumbotron">';
+	echo	'<center><div class="error" id="errorID" style="display:none"></div></center>';
 	echo		'<h3>Schedule a Class</h3>';
-	echo		'<form style="margin-left: 15px" action="class-schedule-curr.php" method="post">';
+	echo		'<form style="margin-left: 15px" action="class-schedule-curr.php" method="post" onsubmit="return validateInput()">';
 	echo			'<div class="row">';
 	echo			'<div class="col-sm-4">';
 	echo					'<div class="form-group">';
@@ -84,7 +85,10 @@
 								$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 								
 								while($row = pg_fetch_array($result)){
-									echo "<option value='".$row['cid']."'>".$row['curriculum_name']."</option>";
+									if($row['curriculum_name'] != "No Curriculum"){
+										echo "<option value='".$row['cid']."'>".$row['curriculum_name']."</option>";
+									}
+									
 								}
 							
 				echo		'</select>';
@@ -99,6 +103,24 @@
 
 		</div>
 
-	</div>		
+	</div>	
+	
+<script type="text/javascript">
+	function validateInput(){
+		document.getElementById("errorID").value = ""
+		document.getElementById("errorID").style.display = "none";
+		
+		if(document.getElementById("curriculumName").value == "Select One"){
+			document.getElementById("errorID").innerHTML = "Please select a curriculum";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		
+		//If we got here then everything is as it should be
+		return true; 
+		
+	}
+</script>
+	
 </body>
 </html>

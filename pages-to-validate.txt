@@ -13,18 +13,16 @@ done		N/A		change-employee-password
 done		N/A		class-attendance
 done		N/A		class-attendance-curriculum
 N/A		N/A		class-attendance-submitted
-				classes-completed-more
-				class-schedule-curr
-				class-schedule-post
-				class-scheduler
-				curriculum-add
-				employee-new-password
+done		N/A		class-schedule-curr
+done		N/A		class-schedule-post
+done		N/A		class-scheduler
+done				curriculum-add
+DOES NOT WORK			employee-new-password
 				employee-portal
 				index
 				individual-attendance
 				individual-attendance-more
 				log-out
-				missed-class-more
 done 				participant-add
 				participant-search
 				participant-search-results

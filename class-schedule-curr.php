@@ -74,7 +74,7 @@
 	echo		'<h3>Schedule a Class</h3>';
 	
 	echo 	'<div class = "jumbotron">';
-
+	echo	'<center><div class="error" id="errorID" style="display:none"></div></center>';
 	echo			'<div class="row">';
 	echo			'<div class="col-sm-4">';
 	echo					'<div class="form-group">';
@@ -94,14 +94,14 @@
 									echo '<!-- this is for the 28 indivual classes, not for the course/groups. data mismatch -->';
 								}			
 				echo		'</div></div>';
-				echo		'<form style="margin-left: 15px"  action="class-schedule-post.php" method="post" >';
+				echo		'<form style="margin-left: 15px"  action="class-schedule-post.php" method="post" onsubmit="return validateInput()">';
 				
 				echo	'</div>';
 				echo	'<div class="row">';
 				echo	'<div class="col-sm-4">';
 				echo		'<div class="form-group">';
 				echo			'<label for="usr">Teacher</label>';
-				echo						'<select class="form-control" name = "teacher_selected" id="curriculumName">
+				echo						'<select class="form-control" name = "teacher_selected" id="teacherName">
 											<option selected disabled class="hideoption">Select One</option>';
 						
 								
@@ -123,7 +123,7 @@
 				echo			'<label for="usr">Class Name</label>';
 				
 				
-				echo						'<select class="form-control" name = "class_selected" id="curriculumName">
+				echo						'<select class="form-control" name = "class_selected" id="className">
 											<option selected disabled class="hideoption">Select One</option>';
 						
 								
@@ -151,7 +151,7 @@
 				echo	'<div class="col-sm-4">';
 				echo		'<div class="form-group">';
 				echo			'<label for="usr">Location</label>';
-				echo						'<select class="form-control" name = "location_selected" id="curriculumName">
+				echo						'<select class="form-control" name = "location_selected" id="locationName">
 											<option selected disabled class="hideoption">Select One</option>';
 						
 								
@@ -171,7 +171,7 @@
 				echo	'<div class="col-sm-4">';
 				echo		'<div class="form-group">';
 				echo			'<label for="usr">Time</label>';
-				echo			'<input  name="currTime" class="form-control" id="curriculumTime" placeholder="yyyy-mm-dd 00:00:00" oninput="validateAlphaWithSpace("curriculumTime");">';
+				echo			'<input  name="currTime" class="form-control" id="curriculumTime" placeholder="yyyy-mm-dd 00:00:00">';
     			
 				echo		'</div>';
 				echo	'</div>';
@@ -185,6 +185,37 @@
 		</div>
 	</div>
 	</div>		
+	<script type="text/javascript">
+	function validateInput(){
+		document.getElementById("errorID").value = ""
+		document.getElementById("errorID").style.display = "none";
+		
+		if(document.getElementById("teacherName").value == "Select One"){
+			document.getElementById("errorID").innerHTML = "Please select an instructor";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		if(document.getElementById("className").value == "Select One"){
+			document.getElementById("errorID").innerHTML = "Please select a class";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		if(document.getElementById("locationName").value == "Select One"){
+			document.getElementById("errorID").innerHTML = "Please select a location";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		if(document.getElementById("curriculumTime").value == ""){
+			document.getElementById("errorID").innerHTML = "Please enter a time";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		
+		//If we got here then everything is as it should be
+		return true; 
+		
+	}
+</script>
 </body>
 </html>
 									

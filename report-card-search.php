@@ -51,6 +51,8 @@
   </div><!-- /.container-fluid -->
 </nav> <!-- end of navbar-->
 
+<center><div class="error" id="errorID" style="display:none"></div></center>
+
 <div class = "row search">
 
 			
@@ -91,20 +93,22 @@ $result = pg_query($query) or die('Query failed: ' . pg_last_error());
 echo '<div class = "container">';
 
 echo	'<div class="form-group ">';
-echo			'<form action="report-card-search.php" method="post">';
+echo			'<form onsubmit="return validateInput()" action="report-card-search.php" method="post">';
 echo				  '<label for="sel1">Select A Curriculum:</label> <!-- this is for the 28 indivual classes, not for the course/groups. data mismatch -->';
 echo				  '<select name="CURRICULUM" class="form-control" id="sel1">
 						<option selected disabled class="hideoption">Select One</option>';
 				  
 				  
 					while ($line = pg_fetch_array($curr_result3, null, PGSQL_ASSOC)) { 
-						
-						foreach ($line as $col_value) { //iterate through all the curriculum and display them
-							echo "<option value= '$col_value'>";
-							echo "$col_value";
-						}
-							echo "</option>";
+						if($line['curriculum_name'] != "No Curriculum"){
+							foreach ($line as $col_value) { //iterate through all the curriculum and display them
+								echo "<option value= '$col_value'>";
+								echo "$col_value";
 							}
+								echo "</option>";
+						}
+						
+					}
 							
 							
 					
@@ -117,22 +121,15 @@ echo				'</form>';
 
 
 if ((isset($_POST['submit'])) == 1){ //if the submit button for curriculum is clicked
-	echo "test";
 	$value_select = $_POST['CURRICULUM']; //get the curriculum picked by the user
 	
 	$_SESSION['curr_name'] = $value_select;
-	echo "$value_select";
 
 
 
 
 	$curr_picked = $value_select; //assign curriculum to curr_picked
   
-  
-	
-	echo "Username = " . $_SESSION["username"]; 
-	//for testing
-	
  
  $curr_query = 'SELECT curriculum_name FROM curriculum';
  $curr_result = pg_query($curr_query) or die('Query failed: ' . pg_last_error());
@@ -148,7 +145,6 @@ if ((isset($_POST['submit'])) == 1){ //if the submit button for curriculum is cl
   
   $_SESSION['report_card_curr'] = $cidDB ; //used in report-card to confrim curriculum
  
- echo "$cidDB";
   $pvaluequery = "SELECT p.p_num FROM participants p 
   inner join curriculum c on c.cid = p.cid 
   inner join referrals r on r.p_num =p.p_num 
@@ -252,6 +248,22 @@ echo 				'<table class = "table">';
 
 <!-- JS Functions  -->
 <script src="intake/FormAppFunctions.js"></script>
+<script type="text/javascript">
+	function validateInput(){
+		document.getElementById("errorID").value = ""
+		document.getElementById("errorID").style.display = "none";
+		
+		if(document.getElementById("sel1").value == "Select One"){
+			document.getElementById("errorID").innerHTML = "Please select a participant";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		
+		//If we got here then everything is as it should be
+		return true; 
+		
+	}
+</script>	
 		
   </body>
 </html>

@@ -54,7 +54,7 @@
 <div class = "container">
 <h3><center>Create A New Curriculum</center></h3>
 <div class="jumbotron login_panel">
-<div class= "login_wrapper">
+<center><div class="error" id="errorID" style="display:none"></div></center>
 
 
 
@@ -79,7 +79,7 @@ session_start();
 
 
 echo '<!-- this launches another php file --->';
-echo  '<form class="form-horizontal" action="post-curriculum-add.php" method="post">';
+echo  '<form onsubmit="return validateInput()" class="form-horizontal" action="post-curriculum-add.php" method="post">';
   
 
   
@@ -127,8 +127,6 @@ echo  '</div>';
 echo  '<div class="form-group">';
 echo    '<div class="col-sm-offset-2 col-sm-10">';
 echo      '<button type="submit" class="btn btn-default">Submit</button>';
-echo	  '<!-- needs apache/php link to database -->';
-echo	  '<!-- Need to add an alert that says "The information added is correct?" y/n prompt  nah fuck that -->';
 echo   ' </div>';
 echo  '</div>';
   
@@ -138,5 +136,32 @@ echo '</div> <!-- end of jumbotron login -->';
 
 ?>
 </div>
+<script type="text/javascript">
+	function validateInput(){
+		document.getElementById("errorID").value = ""
+		document.getElementById("errorID").style.display = "none";
+		
+		if(document.getElementById("currnameID3").value == ""){
+			document.getElementById("errorID").innerHTML = "Please enter a curriculum name";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		if(document.getElementById("numcompID3").value == ""){
+			document.getElementById("errorID").innerHTML = "Please enter number of classes to complete";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		if(document.getElementById("numtotID3").value == ""){
+			document.getElementById("errorID").innerHTML = "Please enter total number of classes";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		
+		
+		//If we got here then everything is as it should be
+		return true; 
+		
+	}
+</script>
 </body>
 </html>

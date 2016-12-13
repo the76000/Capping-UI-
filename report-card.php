@@ -298,7 +298,7 @@ $employeesrow = pg_fetch_array($employeesresult, 0, PGSQL_ASSOC);
 
 echo	'<div class = "container">';
 echo		'<div class = "jumbotron taller">';
-
+echo		'<center><div class="error" id="errorID" style="display:none"></div></center>';
 
 echo				'<div class="input-group">';
 echo					"<h1>  $participantfname    $participantlname              </h1>";
@@ -313,10 +313,10 @@ echo                 '</label>';
 						
 echo					'</div>';
 
-echo			'<form action = "report-card-instructor.php" method="post" class="navbar-form">';
+echo			'<form onsubmit="return validateInput()" action = "report-card-instructor.php" method="post" class="navbar-form">';
 echo					'<div class="col-md-6 input-lg">';
 echo					'<label>Instructors</label>';
-echo						'<select class="form-control" name="Instructor_select">
+echo						'<select class="form-control" name="Instructor_select" id="instructorSelect">
 							<option selected disabled class="hideoption">Select One</option>';
 
 //$nameline = pg_fetch_array($classesnameresult, null, PGSQL_ASSOC);
@@ -378,6 +378,22 @@ echo			'</div>';
 
 ?>
 
+<script type="text/javascript">
+	function validateInput(){
+		document.getElementById("errorID").value = ""
+		document.getElementById("errorID").style.display = "none";
+		
+		if(document.getElementById("instructorSelect").value == "Select One"){
+			document.getElementById("errorID").innerHTML = "Please select an instructor";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		
+		//If we got here then everything is as it should be
+		return true; 
+		
+	}
+</script>	
 
 </body>
 </html>
