@@ -16,7 +16,6 @@
 </head>
 <body>
 <!-- Top left Logo -->
-	<center><div class="error" id="errorID" style="display:none"></div></center>
 	<div class="page-header">
 		<h1><a class="home-button" href="homepage.php">CPCA</a></h1>
 	</div>
@@ -48,6 +47,7 @@
 	</nav> <!-- end of navbar-->
 <div class = "container">
 <div class="jumbotron login_panel">
+<center><div class="error" id="errorID" style="display:none"></div></center>
 <div class= "login_wrapper">
 <!-- css div's for jumbotron work best --> 
 <!-- I never wanted a problem with lining up a dropdown.... i'm sad -->

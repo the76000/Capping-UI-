@@ -31,7 +31,6 @@
 <body>
 
 	<!-- Top left Logo -->
-	<center><div class="error" id="errorID" style="display:none"></div></center>
 	<div class="page-header">
 		<h1><a class="home-button" href="homepage.php">CPCA</a></h1>
 	</div>
@@ -65,6 +64,7 @@
 	<div class = "container">
 
 		<div class = "jumbotron">
+		<center><div class="error" id="errorID" style="display:none;"></div></center>
 			<h3>Class Attendance Report</h3><br>
 			<form onsubmit="return validateInput()" style="margin-left: 15px" action="class-attendance.php" method="post">
 				<div class="row">

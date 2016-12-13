@@ -1,42 +1,45 @@
-add-employee
-*done* admin-tools
-*done* admin-tools-class-selected
-admin-tools-course
-admin-tools-course-post
-admin-tools-course-selected
-assign-curriculum
-attendance-reports
-change-employee-password
-class-attendance
-class-attendance-curriculum
-class-attendance-submitted
-classes-completed
-class-schedule-curr
-class-schedule-post
-class-scheduler
-curriculum-add
-employee-new-password
-employee-portal
-index
-individual-attendance
-individual-attendance-more
-log-out
-missed-class-more
-*done* participant-add
-participant-search
-participant-search-results
-post-add-employee
-post-curriculum-add
-post-participant-add
-post-remove-employee
-post-report-card
-post-subject-add
-remove-employee
-report-card
-report-card-class-selected
-report-card-instructor
-report-card-search
-reset-password
-searchp
-student-report
-subject-add
+error handling	validation	file
+-------------------------------------
+		
+done                            add-employee
+done				admin-tools
+done 				admin-tools-class-selected
+done 				admin-tools-course
+done 				admin-tools-course-post
+done 				admin-tools-course-selected
+done		N/A		assign-curriculum
+N/A		N/A		attendance-reports
+done		N/A		change-employee-password
+done		N/A		class-attendance
+done		N/A		class-attendance-curriculum
+N/A		N/A		class-attendance-submitted
+				classes-completed-more
+				class-schedule-curr
+				class-schedule-post
+				class-scheduler
+				curriculum-add
+				employee-new-password
+				employee-portal
+				index
+				individual-attendance
+				individual-attendance-more
+				log-out
+				missed-class-more
+done 				participant-add
+				participant-search
+				participant-search-results
+				post-add-employee
+				post-curriculum-add
+				post-participant-add
+				post-remove-employee
+				post-report-card
+				post-subject-add
+				remove-employee
+				report-card
+				report-card-class-selected
+				report-card-instructor
+				report-card-search
+				reset-password
+				searchp
+				student-report
+				subject-add

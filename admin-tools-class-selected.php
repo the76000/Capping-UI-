@@ -19,7 +19,6 @@
 <body>
 
 	<!-- Top left Logo -->
-	<center><div class="error" id="errorID" style="display:none"></div></center>
 	<div class="page-header">
 		<h1><a class="home-button" href="homepage.php">CPCA</a></h1>
 	</div>
@@ -163,6 +162,7 @@
 
 
 			echo '<div class = "jumbotron">';
+			echo '<center><div class="error" id="errorID" style="display:none"></div></center>';
 
 
 				echo "<form onsubmit='return validateInput()' action = 'admin-tools-course-post.php' method='post'>";

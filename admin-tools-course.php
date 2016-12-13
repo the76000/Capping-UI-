@@ -19,7 +19,6 @@
 <body>
 
 	<!-- Top left Logo -->
-	<center><div class="error" id="errorID" style="display:none"></div></center>
 	<div class="page-header">
 		<h1><a class="home-button" href="homepage.php">CPCA</a></h1>
 	</div>
@@ -57,7 +56,7 @@
 		<div class = "container">
 			<h1> Curriculum Edit </h1>
 			<div class = "jumbotron">
-						
+				<center><div class="error" id="errorID" style="display:none"></div></center>
 			<div class = "row admin-courses" style= "text-align: center;">
 			<?php
 			session_start();

@@ -20,7 +20,6 @@
 <body>
 
 	<!-- Top left Logo -->
-	<center><div class="error" id="errorID" style="display:none"></div></center>
 	<div class="page-header">
 		<h1><a class="home-button" href="homepage.php">CPCA</a></h1>
 	</div>
@@ -55,6 +54,7 @@
 <div class = "container">
 <h3><center>ADD AN EMPLOYEE</center></h3>
 <div class="jumbotron login_panel">
+	<center><div class="error" id="errorID" style="display:none"></div></center>
 <div class= "login_wrapper">
 
 
