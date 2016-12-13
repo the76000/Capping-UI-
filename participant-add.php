@@ -98,7 +98,7 @@ session_start();
 
       <select class="form-control" name="pnumSelect" id="pnumSelect">
 
-							'<option selected disabled class="hideoption">Select One</option>
+							<option selected disabled class="hideoption">Select One</option>
 <?php
 //$nameline = pg_fetch_array($classesnameresult, null, PGSQL_ASSOC);
 		//this is the best way to display multiple columns from a query that selects more than one column

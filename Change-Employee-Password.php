@@ -20,6 +20,7 @@
 <body>
 
 	<!-- Top left Logo -->
+	<center><div class="error" id="errorID" style="display:none"></div></center>
 	<div class="page-header">
 		<h1><a class="home-button" href="homepage.php">CPCA</a></h1>
 	</div>
@@ -56,7 +57,10 @@
 <div class="jumbotron login_panel">
 <div class= "login_wrapper">
 <!-- this launches another php file --->
-  <form class="form-horizontal" action="includes/users.php" method="post">
+  <form onsubmit="return validateInput()" class="form-horizontal" action="includes/users.php" method="post">
+  
+  <!-- put a password field and hide it to avoid pre-populating the password field -->
+  <input type="password" style="display:none">
   
   <div class="form-group">
     <label for="inputLoginID3" class="col-sm-4 control-label">Login ID</label>
@@ -68,14 +72,14 @@
  <div class="form-group">
     <label for="inputPassword3" class="col-sm-4 control-label">New Password</label>
     <div class="col-sm-8">
-      <input type="password" class="form-control" id="inputPassword3" placeholder="Password" name = "password">
+      <input type="password" class="form-control" id="inputPassword1" placeholder="Password" name = "password">
     </div>
   </div>
   
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-4 control-label">Re-enter New Password</label>
     <div class="col-sm-8">
-      <input type="password" class="form-control" id="inputPassword3" placeholder="Password" name = "password">
+      <input type="password" class="form-control" id="inputPassword2" placeholder="Password" name = "password">
     </div>
   </div>
   
@@ -91,5 +95,33 @@
 </div> <!-- end of login wrapper -->
 </div> <!-- end of jumbotron login -->
 </div>	
+
+<script type="text/javascript">
+	function validateInput(){
+		document.getElementById("errorID").value = ""
+		document.getElementById("errorID").style.display = "none";
+		
+		if(document.getElementById("inputLoginID3").value == ""){
+			document.getElementById("errorID").innerHTML = "Please enter the username";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		if(document.getElementById("inputPassword1").value == ""){
+			document.getElementById("errorID").innerHTML = "Please enter the new password";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		if(document.getElementById("inputPassword2").value == ""){
+			document.getElementById("errorID").innerHTML = "Please re-enter the password";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		
+		//If we got here then everything is as it should be
+		return true; 
+		
+	}
+</script>
+
 </body>
 </html>

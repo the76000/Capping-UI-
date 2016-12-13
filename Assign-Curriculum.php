@@ -16,6 +16,7 @@
 </head>
 <body>
 <!-- Top left Logo -->
+	<center><div class="error" id="errorID" style="display:none"></div></center>
 	<div class="page-header">
 		<h1><a class="home-button" href="homepage.php">CPCA</a></h1>
 	</div>
@@ -51,7 +52,7 @@
 <!-- css div's for jumbotron work best --> 
 <!-- I never wanted a problem with lining up a dropdown.... i'm sad -->
 <!-- this launches another php file --->
-  <form class="form-horizontal" action="Assign-Curriculum.php" method="post">
+  <form onsubmit="return validateInput()" class="form-horizontal" action="Assign-Curriculum.php" method="post">
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
 		<div class="form-group">
@@ -171,6 +172,24 @@
   </form>
  </div>
 </div>
+
+<script type="text/javascript">
+	function validateInput(){
+		document.getElementById("errorID").value = ""
+		document.getElementById("errorID").style.display = "none";
+		
+		if(document.getElementById("sel1").value == "Select One"){
+			document.getElementById("errorID").innerHTML = "Please select a curriculum";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		
+		//If we got here then everything is as it should be
+		return true; 
+		
+	}
+</script>
+
 </body>
 </html>
 

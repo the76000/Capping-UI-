@@ -28,10 +28,7 @@
 	#check to see if the browser session has logged in.
 	if (!isset($_SESSION["username"]) ){
 		header('Location: index.php');
-		echo "hello";
 	}
-	
-	echo "Username = " . $_SESSION["username"]; 
 	//for testing
   ?>
   

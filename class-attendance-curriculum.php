@@ -18,7 +18,6 @@
 		
 		if (!isset($_SESSION["username"]) ){
 			header('Location: index.php');
-			echo "hello";
 		}
 	  
 	  
@@ -32,6 +31,7 @@
 <body>
 
 	<!-- Top left Logo -->
+	<center><div class="error" id="errorID" style="display:none"></div></center>
 	<div class="page-header">
 		<h1><a class="home-button" href="homepage.php">CPCA</a></h1>
 	</div>
@@ -66,15 +66,14 @@
 
 		<div class = "jumbotron">
 			<h3>Class Attendance Report</h3><br>
-			<form style="margin-left: 15px" action="class-attendance.php" method="post">
+			<form onsubmit="return validateInput()" style="margin-left: 15px" action="class-attendance.php" method="post">
 				<div class="row">
 				<div class="col-sm-4">
 						<div class="form-group">
 							<label for="sel1">Select A Curriculum:</label> <!-- this is for the 28 indivual classes, not for the course/groups. data mismatch -->
 							<select class="form-control" id="sel1" name="curriculumSelect">
-								<option value="Please Select a class" selected></option>
+							<option selected disabled class="hideoption">Select One</option>
 							<?php
-								echo "test";
 							// Performing SQL query
 							
 							$query = 'SELECT * FROM public.curriculum ORDER BY cid ASC ';
@@ -82,7 +81,9 @@
 							$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 							
 							while($row = pg_fetch_array($result)){
-								echo "<option value='".$row['curriculum_name']."'>".$row['curriculum_name']."</option>";
+								if($row['curriculum_name'] != "No Curriculum"){
+									echo "<option value='".$row['curriculum_name']."'>".$row['curriculum_name']."</option>";
+								}								
 							}
 							
 							?>
@@ -103,6 +104,22 @@
 	
 	<!-- JS Functions  -->
 <script src="intake/FormAppFunctions.js"></script>
+<script type="text/javascript">
+	function validateInput(){
+		document.getElementById("errorID").value = ""
+		document.getElementById("errorID").style.display = "none";
+		
+		if(document.getElementById("sel1").value == "Select One"){
+			document.getElementById("errorID").innerHTML = "Please select a curriculum";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		
+		//If we got here then everything is as it should be
+		return true; 
+		
+	}
+</script>
 			
 </body>
 </html>
