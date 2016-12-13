@@ -93,10 +93,14 @@
 							<label for="sel1">Select A Class:</label> <!-- this is for the 28 indivual classes, not for the course/groups. data mismatch -->
 							<select class="form-control" id="sel1" name="classSelect" disabled>
 							<?php
+							
+								$cnamequery = "SELECT class_subject FROM class_subjects WHERE c_subject = '".$_POST['classSelect']."'";
 								
-								if(isset($_POST['classSelect'])){
-										echo "<option selected=`".$_POST['classSelect']."`>".$_POST['classSelect']."</option>";
-									}								
+								$mainresult = pg_query($cnamequery) or die('Query failed: ' . pg_last_error());
+							
+								while($row = pg_fetch_array($mainresult)){
+									echo "<option selected=`".$row['class_subject']."`>".$row['class_subject']."</option>";
+								}						
 								
 							?>
 								
