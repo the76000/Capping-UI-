@@ -112,7 +112,8 @@ $empdisplaylname = $empnamerow['e_l_name'];
 $classesattendedquery = "
 SELECT DISTINCT
 Classes_Scheduled.Class_ID,
-Class_Subjects.Class_Subject
+Class_Subjects.Class_Subject,
+Classes_Scheduled.Date_Time_Schedules
 
 FROM 
 Referrals,
@@ -146,41 +147,45 @@ $classesattendedrow = pg_fetch_array($classesattendedresult, 0, PGSQL_ASSOC);
 
 
 //gets the class id and class subject that a participant has not attended yet
-$classesnotattendedquery = "
+$classesnotattendedquery = "SELECT DISTINCT
+								 Class_Subjects.C_Subject,
+								 Class_Subjects.Class_Subject
+								
 
-                 SELECT DISTINCT
-				Classes_Scheduled.Class_ID
-				
+								 FROM 
+								 Referrals,
+								 Participants,
+								 Curriculum,
+								 Curriculum_Subjects,
+								 Class_Subjects
 
-				FROM 
-				Classes_Scheduled
-				WHERE
-				Classes_Scheduled.Class_ID NOT IN (
-									-- Gets the id and names of all the classes a specific participant has already taken
-									SELECT DISTINCT
-									Classes_Scheduled.Class_ID
+								 WHERE
+								 Referrals.P_Num = '$participantnumber'
+								 AND Referrals.P_Num = Participants.P_Num
+								 AND Participants.CID = Curriculum.CID
+								 AND Curriculum.CID = Curriculum_Subjects.CID
+								 AND Curriculum_Subjects.C_Subject = Class_Subjects.C_Subject
+								 AND Curriculum_Subjects.C_Subject NOT IN 
+								 (SELECT DISTINCT
+								  Curriculum_Subjects.C_Subject
 
-									FROM 
-									Referrals,
-									Participants,
-									Class_Attendence,
-									Classes_Scheduled,
-									Curriculum_Subjects,
-									Class_Subjects,
-									Employees
+								  FROM 
+								  Referrals,
+								  Participants,
+								  Class_Attendence,
+								  Classes_Scheduled,
+								  Curriculum_Subjects,
+								  Class_Subjects
 
-									WHERE
-									Referrals.P_Num = '$participantnumber'
-									And Referrals.P_Num = Participants.P_Num
-									AND Participants.P_Num = Class_Attendence.P_Num
-									AND Class_Attendence.Class_ID = Classes_Scheduled.Class_ID
-									AND Classes_Scheduled.C_Subject = Curriculum_Subjects.C_Subject
-									AND Classes_Scheduled.EID = Employees.EID
-									AND Curriculum_Subjects.C_Subject = Class_Subjects.C_Subject)							
-									
-
-ORDER BY Classes_Scheduled.Class_ID";
-
+								  WHERE
+								  Referrals.P_Num = '$participantnumber'
+								  AND Referrals.P_Num = Participants.P_Num
+								  AND Participants.P_Num = Class_Attendence.P_Num
+								  AND Class_Attendence.Class_ID = Classes_Scheduled.Class_ID
+								  AND Classes_Scheduled.C_Subject = Curriculum_Subjects.C_Subject
+								  AND Curriculum_Subjects.C_Subject = Class_Subjects.C_Subject)
+								  
+								  ORDER BY Class_Subjects.C_Subject";
 
 
 
@@ -237,9 +242,9 @@ echo                    '<option selected disabled class="hideoption">Select One
 							
 							$attended_col_value_var2 = $attended_line['class_subject'];
 						
+							$attended_col_value_var3 = $attended_line['date_time_schedules'];
 							
-							
-echo						"<option value='$attended_col_value_var'>   '$attended_col_value_var2'</option>"; 
+echo						"<option value='$attended_col_value_var'>   '$attended_col_value_var2'  '$attended_col_value_var3'</option>"; 
 							
 								
 						
@@ -277,19 +282,10 @@ echo               '<option selected disabled class="hideoption">Select One</opt
 							$not_attended_col_value_var = $not_attended_line['class_id'];
 							
 							
-							$classnotattendednamequery = " 
-							SELECT Class_Subjects.Class_Subject 
-							FROM Class_Subjects, Curriculum_Subjects, Classes_Scheduled
-							WHERE Class_Subjects.C_Subject = Curriculum_Subjects.C_Subject
-							AND Curriculum_Subjects.C_Subject = Classes_Scheduled.C_Subject
-							AND Classes_Scheduled.Class_ID = '$not_attended_col_value_var'";
 							
 							
-							$classesnotattendednameresult = pg_query($classnotattendednamequery) or die('Query failed: ' . pg_last_error());
-							$classesnotattendednamerow = pg_fetch_array($classesnotattendednameresult, 0, PGSQL_ASSOC);
 							
-							
-							$classnotattendedname = $classesnotattendednamerow['class_subject'];
+							$classnotattendedname = $not_attended_line['class_subject'];
 							
 							
 							

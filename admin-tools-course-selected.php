@@ -127,9 +127,9 @@
 						
 						$uniqueclassresult = pg_query($uniqueclassquery) or die('Query failed: ' . pg_last_error());
 						
-						$uniqueclassrow = pg_fetch_array($uniqueclassresult);
+						//$uniqueclassrow = pg_fetch_array($uniqueclassresult);
 						
-						if(empty($uniqueclassrow)){
+						if(pg_num_rows($uniqueclassresult) == 0){
 							
 							echo "<h2>There are no classes scheduled.</h2>";
 							echo "<a href='class-scheduler.php'>Schedule a class</a>";
