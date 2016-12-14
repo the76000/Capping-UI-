@@ -68,12 +68,6 @@
 	<div class = "row homepage-row-1"> <!-- row one -->
 		
 		
-		<!-- display CPCA logo -->
-		<div class ="logo col-md-4">
-			<img src="Images/logo.png" alt="Logo" style="height:200px;width:300px;">
-		</div>
-		
-		
 		<!-- display launcher links -->
 		<div class = "col-md-8">
 		
@@ -123,75 +117,20 @@
 	
 	
 	
-	
+	<!-- This used to be curriculum buttons. Stage two implementation -->
 	</div> <!-- end of row one -->
-	
-	
-	<div class = "row"> <!-- row two -->
-		
-		
-	
-		
-		<!-- display launcher links -->
-		<div class = "col-md-8">
-		
-			<div class = "jumbotron courses-launcher">
-			
-			<div class = "row">
-			<h3> Courses </h2>
-			</div>
-			
-			
-			<div class = "row homepage-links">
-				<div class = "col-md-6">
-					<button class="btn btn-default course-launcher-links" type="submit"><a href="#">Women's In-House</a></button>
-				</div>													<!-- will need to link up to the database -->
-				<div class = "col-md-6">
-					<button class="btn btn-default course-launcher-links" type="submit"><a href="#">Cornerstone</a></button>
-				</div>
-			
-			</div>
-			
-			<div class = "row homepage-links">
-				<div class = "col-md-6">
-					<button class="btn btn-default course-launcher-links" type="submit"><a href="#">Spanish Speaking Women In-House</a></button>
-				</div>
-				<div class = "col-md-6">
-					<button class="btn btn-default course-launcher-links" type="submit"><a href="#">Men's In-house</a></button>
-				</div>
-				
-			</div>
-			
-			<div class = "row homepage-links">
-				<div class = "col-md-6">
-					<button class="btn btn-default course-launcher-links" type="submit"><a href="#">Men's DC Jail</a></button>
-				</div>
-				<div class = "col-md-6">
-					<button class="btn btn-default course-launcher-links" type="submit"><a href="#">Meadow Run</a></button>
-				</div>
-				
-			</div>
-			
-			</div> <!-- end of jumbotron -->
-		
-		</div> <!-- end of right column -->
-		
-		<div class = "col-md-4">
-		
-		
-		
-		</div>
-		
-	
-	
-	
-	
-	
-	</div> <!-- end of row two -->
-	
+
 	<!-- JS Functions  -->
 	<script src="intake/FormAppFunctions.js"></script>
 	
+	<!-- display CPCA logo -->
+			<p>
+			<center><img src="Images/logo.png" alt="Logo" style="height:200px;width:300px;"></br>
+			35 Van Wagner Road</br>
+			Poughkeepsie, New York 12603</br>
+			(845) 454-0595</br>
+			</center>
+			</p>
 	
 	  </body>
 </html>
