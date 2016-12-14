@@ -100,7 +100,7 @@
 
 		/* On hover jumbotron button styling */
 		.jumbotron button:hover{
-			color: white;
+			color: white !important;
 			font-weight: 700;
 			-webkit-transition-duration: 0.4s;
 	    	transition-duration: 0.4s;
@@ -271,6 +271,7 @@
 		text-decoration: none !important;
 		color: #333 !important;
 	}
+	
 
 	.course-launcher-links button{
 		border-color: #3c948b;
@@ -323,3 +324,26 @@
 	margin-top: 10px;
 	margin-right: 20px;
 }
+
+.form-group label{
+	float:left;
+	
+}
+
+#curriculumName{
+	margin-top: -8px;
+}
+
+#class-scheduler-submit{
+	margin-bottom: -100px;
+}
+
+#class-submit-button{
+	margin-top: 23px; 
+}
+
+
+
+
+
+
