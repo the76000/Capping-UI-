@@ -514,8 +514,5 @@ echo		'</div>';
 echo 	'</div>';
 ?>
 
-<!-- JS Functions  -->
-<script src="intake/FormAppFunctions.js"></script>
-
   </body>
 </html>

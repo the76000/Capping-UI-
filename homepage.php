@@ -187,11 +187,7 @@
 	
 	
 	
-	</div> <!-- end of row two -->
-	
-	<!-- JS Functions  -->
-	<script src="intake/FormAppFunctions.js"></script>
-	
+	</div> <!-- end of row two -->	
 	
 	  </body>
 </html>

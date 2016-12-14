@@ -376,8 +376,6 @@ echo			'</div>';
 	}
 </script>
 
-<!-- JS Functions  -->
-<script src="intake/FormAppFunctions.js"></script>
 
 </body>
 </html>
