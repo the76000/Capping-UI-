@@ -75,9 +75,29 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
  
  if(isset($_POST['submitClassNotAttended'])){
 	// echo"submitclassnotattended";
-	  $_SESSION['classidreport'] = $_POST['class_selected_not_attended']; //from classes attended form report-card
+	 $_SESSION['classidreport'] = $_POST['class_selected_not_attended']; //from classes attended form report-card
  
- $classidfromreport =  $_POST['class_selected_not_attended']; //working fine using the wrong $post value
+	$classidfromreport =  $_POST['class_selected_not_attended']; //working fine using the wrong $post value
+		
+		
+		
+	$participantfname =  $_SESSION['report-card-fname']; //part first name
+
+
+	$participantlname = $_SESSION['report-card-lname']; //part last name
+
+
+
+	$currname = $_SESSION['curr_name_report_card'] ;
+	
+	
+	$classdisplayname = $classidfromreport;
+		
+		
+		//going to query class attendence table for matching pnum and classid, will show if class was attended for html
+$classattendedquery = " SELECT class_id FROM class_attendence where class_id = '$classidfromreport' and p_num = ' $participantnumber '";
+$classattendedresult = pg_query($classattendedquery) or die('Query failed: ' . pg_last_error());
+$classattendedrow = pg_fetch_array($classattendedresult, 0, PGSQL_ASSOC);
  
 	 
 	 
@@ -94,7 +114,7 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
  
  $classidfromreport =  $_POST['class_selected_attended']; //working fine using the wrong $post value
 	 
- }
+ 
  
 
  
@@ -143,7 +163,7 @@ $classattendedrow = pg_fetch_array($classattendedresult, 0, PGSQL_ASSOC);
 
 //$attendedclassquery = "SELECT ca.class_id from class_attendence ca inner join classes_scheduled csch on ca.class_id = csch.class_id inner join curriculum_subjects curr_sub on csch.cid = curr_sub.cid inner join class_subjects c_sub on c_sub.c_subject = curr_sub.c_subject where c_sub.class_subject = '$class_selected' and ca.p_num = '$participantnumber' ";
 
-		
+ }	
 
 
 	

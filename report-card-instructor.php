@@ -279,7 +279,7 @@ echo               '<option selected disabled class="hideoption">Select One</opt
 				
 							
 							
-							$not_attended_col_value_var = $not_attended_line['class_id'];
+							//$not_attended_col_value_var = $not_attended_line['class_id'];
 							
 							
 							
@@ -293,7 +293,7 @@ echo               '<option selected disabled class="hideoption">Select One</opt
 						
 							
 							
-echo						"<option value='$not_attended_col_value_var'>   '$classnotattendedname'</option>"; //not displaying actual name, just class id
+echo						"<option value='$classnotattendedname '>   '$classnotattendedname'</option>"; //not displaying actual name, just class id
 							
 								
 						
