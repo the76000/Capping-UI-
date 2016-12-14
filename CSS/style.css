@@ -355,3 +355,12 @@
 	margin-top: 10px;
 	margin-left: 95px;
 }
+
+#not-attended-dropdown{
+	margin-left: 20px;
+	margin-right: -20px;
+}
+
+#select-class-button{
+	margin-top: 20px;
+}

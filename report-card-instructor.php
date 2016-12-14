@@ -272,7 +272,7 @@ echo				'<br><button type="submit" name="submitClassAttended" class="btn btn-def
 echo					'<div class="col-md-6 input-lg">';
 echo			'<form onsubmit="return validateInput2()" action = "report-card-class-selected.php" method="post" class="navbar-form">';
 echo					'<label>Classes NOT Attended</label>';
-echo						'<select class="form-control" name="class_selected_not_attended" id="notAttendedId">';
+echo						'<select id="not-attended-dropdown" class="form-control" name="class_selected_not_attended" id="notAttendedId">';
 
 
 echo               '<option selected disabled class="hideoption">Select One</option>';
@@ -311,7 +311,7 @@ echo						"<option value='$classnotattendedname'>   '$classnotattendedname'</opt
 echo						'</select>  ';
 
 
-echo				'<br><button type="submit" name="submitClassNotAttended" class="btn btn-default ">Select Class</button> ';   
+echo				'<br><button type="submit" name="submitClassNotAttended" id="select-class-button" class="btn btn-default ">Select Class</button> ';   
 
 
  echo			'</form>';
