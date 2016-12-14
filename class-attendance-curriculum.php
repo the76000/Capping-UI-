@@ -21,9 +21,8 @@
 		}
 	  
 	  
-		// Connecting, selecting database
-		$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
-			or die('Could not connect: ' . pg_last_error());
+		 # Connect to Postgres server and the database
+    require( 'includes/connect.php' ) ;
 	?>
 </head>
 

@@ -21,11 +21,9 @@
   <?php
   
   # Connect to Postgres server and the database
-    require( 'includes/connect.php' ) ;
+    include ( 'includes/connect.php' ) ;
 	
-	// Connecting, selecting database
-$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
-    or die('Could not connect: ' . pg_last_error());
+
 
 // Performing SQL query
 $query = 'SELECT referrals.ref_f_name, referrals.ref_l_name, participants.* FROM referrals inner join participants on participants.p_num = referrals.p_num';

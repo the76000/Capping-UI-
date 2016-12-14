@@ -22,9 +22,8 @@
 		}
 	  
 	  
-		// Connecting, selecting database
-		$dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin")
-			or die('Could not connect: ' . pg_last_error());
+		 # Connect to Postgres server and the database
+		require( 'includes/connect.php' ) ;
 			
 			$mainquery = "SELECT ref_f_name, ref_l_name, comments FROM public.class_attendence INNER JOIN public.referrals ON public.class_attendence.p_num = public.referrals.p_num WHERE class_id = '".$_POST['classSelect']."'";
 			
