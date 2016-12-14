@@ -45,7 +45,7 @@ session_start();
 	echo 'Location created';
 			
 	
-	
+	echo "<a href='homepage.php'> Go Back To The Homepage </a>";
 	
 	
 	

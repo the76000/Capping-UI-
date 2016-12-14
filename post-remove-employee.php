@@ -44,7 +44,7 @@ session_start();
 	$result = pg_query($deleteemp );
 	echo 'employee deleted';
 			
-	
+	echo "<a href='homepage.php'> Go Back To The Homepage </a>";
 	
 	
 	

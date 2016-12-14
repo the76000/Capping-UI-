@@ -64,7 +64,7 @@ session_start();
 	
 	echo 'class created';
 			
-	
+	echo "<a href='homepage.php'> Go Back To The Homepage </a>";
 	
 	
 	

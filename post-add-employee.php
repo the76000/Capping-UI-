@@ -53,6 +53,8 @@ session_start();
 		
 	$result = pg_query($createemp );
 	echo 'employee created';
+	
+	echo "<a href='homepage.php'> Go Back To The Homepage </a>";
 			
 	
 	

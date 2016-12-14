@@ -35,7 +35,7 @@ session_start();
 	
 	$comment = $_POST['attencomment'];
 	
-	
+	echo "<a href='homepage.php'> Go Back To The Homepage </a>";
 	
 	
 	

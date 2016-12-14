@@ -53,7 +53,7 @@ session_start();
 	echo 'Participant created';
 			
 	
-	
+	echo "<a href='homepage.php'> Go Back To The Homepage </a>";
 	
 	
 	
