@@ -35,7 +35,7 @@
 		
 	}
 	
-	
+	echo '<div class="logout-placeholder-div col-md-12"<h3>You have been logged out</h3></div>';
 	echo '<div class="placement-div col-md-4"></div> <div class="logout-div col-md-6"> <a href="index.php"><button id="logout-button" class="btn btn-default launcher-links" type="submit"> Back to Login: </button></a></div>';
 	
 

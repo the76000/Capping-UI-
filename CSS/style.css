@@ -14,6 +14,14 @@
 	
 }
 /* for login page */
+.page-header h1{
+	letter-spacing: 5px;
+	text-decoration: none !important;
+	color: #3c948b;
+	font-weight: 700;
+	padding-left: 20px;
+	
+}
 
 /* Styling for the navbar on all pages */
 .CPCA_navbar{
@@ -288,14 +296,22 @@
 	margin-right: 700px;
 }
 
+/* col-md-12 placement div on logout page*/
+.logout-placeholder-div{
+	text-align: center;
+	margin-top: 100px;
+}
+
 /* contains logout button in log-out.php*/
 .logout-div{
 	margin: 0 auto;
-	margin-top: 100px;
+	margin-top: 20px;
+	margin-left: -10px;
 }
 
 	/* Log-out.php styling */
 	#logout-button{
+		text-align: center;
 		margin: 0 auto;
 		border-color: #3c948b;
 		font-weight: 900;
