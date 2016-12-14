@@ -36,12 +36,19 @@
 	}
 	
 	
-	echo ' User has been logged off ';
+	echo '<div class="placement-div col-md-4"></div> <div class="logout-div col-md-6"> <a href="index.php"><button id="logout-button" class="btn btn-default launcher-links" type="submit"> Back to Login: </button></a></div>';
 	
 
   ?>
   
-  
+  <!-- display CPCA logo -->
+			<p>
+			<center><img src="Images/logo.png" alt="Logo" style="height:200px;width:300px;"></br>
+			35 Van Wagner Road</br>
+			Poughkeepsie, New York 12603</br>
+			(845) 454-0595</br>
+			</center>
+			</p>
   
   
   </body>

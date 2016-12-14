@@ -288,6 +288,19 @@
 	margin-right: 700px;
 }
 
+/* contains logout button in log-out.php*/
+.logout-div{
+	margin: 0 auto;
+	margin-top: 100px;
+}
+
+	/* Log-out.php styling */
+	#logout-button{
+		margin: 0 auto;
+		border-color: #3c948b;
+		font-weight: 900;
+	}
+
 /* Row that holds tool options */
 .row{
 	text-align: center;
@@ -298,8 +311,9 @@
 	text-align: center;
 }
 
-.participant-result-names a{
+.participant-result-names{
 	font-weight: 700;
+	margin-top: 200px;
 	text-decoration: none !important;
 	color: #333 !important;
 }
