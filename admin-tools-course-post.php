@@ -57,8 +57,6 @@ session_start();
 	?>
 	
 	
-<!-- JS Functions  -->
-<script src="intake/FormAppFunctions.js"></script>
 	
 	
 	</body>
