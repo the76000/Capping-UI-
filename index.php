@@ -88,7 +88,7 @@
     <div class="col-sm-offset-2 col-sm-10">
       <div class="checkbox">
         <label>
-          <a href="Reset-Password.php">Forgot your password?</a>
+          <a id="forgot-password" href="Reset-Password.php">Forgot your password?</a>
         </label>
       </div>
     </div>

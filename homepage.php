@@ -67,9 +67,9 @@
 
 	<div class = "row homepage-row-1"> <!-- row one -->
 		
-		
+		<div class = "placeholder-div col-md-2"></div>
 		<!-- display launcher links -->
-		<div class = "col-md-8">
+		<div class = " col-md-8">
 		
 			<div class = "jumbotron launcher">
 			

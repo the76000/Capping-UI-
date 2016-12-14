@@ -82,6 +82,7 @@
 	background-color: transparent;
 }
 
+
 /* Styling for jumpotron div that contains the reports, searches, admin tools,*/
 /* and intake packets*/
 .jumbotron{
@@ -218,6 +219,8 @@
 }
 
 
+
+
 /* Buttons within the course container div */
 .course-launcher-links{
 
@@ -270,11 +273,15 @@
 	.course-launcher-links a{
 		font-weight: 700;
 		text-decoration: none !important;
-		color: #333 !important;
+		color: #333;
 	}
 
 	.course-launcher-links button{
 		border-color: #3c948b;
+	}
+
+	.course-launcher-links:hover{
+		color: white !important
 	}
 
 #adminChangeCourseButton{
@@ -330,6 +337,8 @@
 	
 }
 
+/* These from here on are bug fixes */
+
 /* Curriculum name dropdown, admin-tools.php */
 #curriculumName{
 	margin-top: -8px;
@@ -351,7 +360,13 @@
 	margin-top: 11px;
 }
 
+/* Report-card-instructor.php margining for select class button*/
 #submit-instructor-report-card{
 	margin-top: 10px;
 	margin-left: 95px;
+}
+
+/* Centering of forgot password on index.php */
+#forgot-password{
+	margin-left: 65px;
 }
