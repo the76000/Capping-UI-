@@ -77,9 +77,9 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
 	// echo"submitclassnotattended";
 	 $_SESSION['classidreport'] = $_POST['class_selected_not_attended']; //from classes attended form report-card
  
-	$classidfromreport =  $_POST['class_selected_not_attended']; //working fine using the wrong $post value
-		
-		
+	$classidfromreport =  $_POST['class_selected_not_attended']; //THIS IS PULLING THE CLASS NAME FROM SUBJECTS NOT A CLASS ID!!!!!!!!!
+	
+
 		
 	$participantfname =  $_SESSION['report-card-fname']; //part first name
 
@@ -95,10 +95,28 @@ $dbconn = pg_connect("host=10.10.7.195 port=5432 dbname=cappingdb user=postgres 
 		
 		
 		//going to query class attendence table for matching pnum and classid, will show if class was attended for html
-$classattendedquery = " SELECT class_id FROM class_attendence where class_id = '$classidfromreport' and p_num = ' $participantnumber '";
+$classattendedquery = " SELECT class_attendence.class_id 
+FROM class_attendence, class_subjects, curriculum_subjects, classes_scheduled 
+WHERE class_subjects.c_subject = curriculum_subjects.c_subject
+AND curriculum_subjects.c_subject = classes_scheduled.c_subject
+AND classes_scheduled.class_id = class_attendence.class_id
+AND class_subjects.class_subject = '$classidfromreport'
+AND class_attendence.p_num = '$participantnumber'";
 $classattendedresult = pg_query($classattendedquery) or die('Query failed: ' . pg_last_error());
 $classattendedrow = pg_fetch_array($classattendedresult, 0, PGSQL_ASSOC);
- 
+
+
+
+
+$isclassScheduled = " SELECT Classes_Scheduled.Class_ID 
+FROM Classes_Scheduled, Curriculum_Subjects, Class_Subjects
+WHERE Class_Subjects.C_Subject = Curriculum_Subjects.C_Subject
+AND Curriculum_Subjects.C_Subject = Classes_Scheduled.C_Subject
+AND Class_Subjects.Class_Subject = '$classidfromreport'";
+$isclassScheduledresult = pg_query($isclassScheduled) or die('Query failed: ' . pg_last_error());
+$isclassScheduledrow = pg_fetch_array($isclassScheduledresult, 0, PGSQL_ASSOC);
+
+
 	 
 	 
  }
@@ -223,14 +241,16 @@ echo					'<div class="col-sm-5">';
 echo						'<div id="checkbox1">';
 
 //$_SESSION['submit_attended_yes'] 
+
+
+
+
 			if(pg_num_rows($classattendedresult) > 0  ){
 				echo  '<h2>  CLASS WAS ATTENDED </h2>';
-			} 
-			else{
-				echo  '<h2>  CLASS WAS NOT ATTENDED </h2>';
-			}
-			
-
+				
+				
+				
+				
 				echo						'<label>';
 				echo								'<input type="radio" value="submit_attended" name="radio" >';
 				echo								'Attended';
@@ -242,6 +262,13 @@ echo						'<div id="checkbox1">';
 				echo							'</label>';
 			
 				echo						'</div>';
+				
+				echo  '<div>';
+				
+				echo			'<label for="usr">Time</label>';
+				echo			'<input  name="currTime" class="form-control" id="curriculumTime" placeholder="yyyy-mm-dd 00:00:00">';
+				
+				echo '</div>';
 					
 									
 echo					'<!--<div class="col-sm-3">-->';
@@ -261,6 +288,71 @@ echo				'<button type="submit" name="submitAttendance" class="btn btn-default ">
 echo           '</form>';
 
 echo 	'</div>';
+
+
+
+
+			} 
+			
+			elseif((pg_num_rows($classattendedresult) == 0) && (pg_num_rows($isclassScheduledresult) > 0) ){
+				echo  '<h2>  CLASS WAS NOT ATTENDED </h2>';
+			
+			
+
+				echo						'<label>';
+				echo								'<input type="radio" value="submit_attended" name="radio" >';
+				echo								'Attended';
+				echo							'</label>';
+				echo						'<div id="checkbox2">';
+				echo							'<label>';
+				echo								'<input type="radio" value="submit_not_attended" name="radio">';
+				echo								'Not attended';
+				echo							'</label>';
+			
+				echo						'</div>';
+				
+				echo  '<div>';
+				
+				echo			'<label for="usr">Time</label>';
+				echo			'<input  name="currTime" class="form-control" id="curriculumTime" placeholder="yyyy-mm-dd 00:00:00">';
+				
+				echo '</div>';
+					
+									
+echo					'<!--<div class="col-sm-3">-->';
+echo					'<label style="text-align:left">';
+echo						'Instructor Comments';
+echo						'<textarea rows="10" cols="50" name = "attencomment"></textarea>	';					
+echo					'</label>';
+echo						'<!-- this needs to become an input -->';
+echo					'</div>';
+echo					'<!--</div>-->';
+
+
+
+echo		'</div>';
+echo				'</div>';
+echo				'<button type="submit" name="submitAttendance" class="btn btn-default ">Submit</button> ';   
+echo           '</form>';
+
+echo 	'</div>';
+
+
+			}  
+			elseif( (pg_num_rows($isclassScheduledresult) == 0) && (pg_num_rows($classattendedresult) == 0)  ){
+				
+				echo  '<h2>  CLASS WAS NOT SCHEDULED/HAS NOT OCCURED YET</h2>';
+				
+				
+				
+				
+			}
+			
+			else{
+				
+				
+				echo '<h2>  Error check your fields/ contact database admin</h2>';
+			}
 
 
 //if form is submitted(attended clicked, insert record into db

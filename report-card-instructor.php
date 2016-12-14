@@ -293,7 +293,7 @@ echo               '<option selected disabled class="hideoption">Select One</opt
 						
 							
 							
-echo						"<option value='$classnotattendedname '>   '$classnotattendedname'</option>"; //not displaying actual name, just class id
+echo						"<option value='$classnotattendedname'>   '$classnotattendedname'</option>"; //not displaying actual name, just class id
 							
 								
 						
