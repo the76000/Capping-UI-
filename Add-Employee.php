@@ -83,33 +83,33 @@ echo     '<input style="display:none" type="email">';
 echo  '<div class="form-group">';
 echo    '<label for="inputFirstName3" class="col-sm-4 control-label">First Name</label>';
 echo    '<div class="col-sm-8">';
-echo      '<input type="firstname" class="form-control" id="inputFirstName3" placeholder="First Name" name = "first_name">';
+echo      '<input type="firstname" class="form-control" id="inputFirstName3" placeholder="First Name" name = "first_name" oninput="validateAlpha(`inputFirstName3`);">';
 echo   ' </div>';
 echo  '</div>';
   
 echo   ' <div class="form-group">';
 echo    '<label for="inputLastName3" class="col-sm-4 control-label">Last Name</label>';
 echo    '<div class="col-sm-8">';
-echo     ' <input type="lastname" class="form-control" id="inputLastName3" placeholder="Last Name" name = "last_name">';
+echo     ' <input type="lastname" class="form-control" id="inputLastName3" placeholder="Last Name" name = "last_name" oninput="validateAlpha(`inputLastName3`);">';
 echo    '</div>';
 echo  '</div>';
   
 echo  '<div class="form-group">';
 echo   '<label for="emailID3" class="col-sm-4 control-label">Email </label>';
 echo    '<div class="col-sm-8">';
-echo     '<input type="text" class="form-control" id="emailID3" placeholder="Email" value="" name = "email">';
+echo     '<input type="text" class="form-control" id="emailID3" placeholder="Email" value="" name = "email" oninput="isEmailOffFocus(`emailID3`);">';
 echo    '</div>';
 echo  '</div>';
 echo  '<div class="form-group">';
 echo   '<label for="homePhoneID3" class="col-sm-4 control-label">Home Phone </label>';
 echo    '<div class="col-sm-8">';
-echo     '<input type="homePhone" class="form-control" id="homePhoneID3" placeholder="Home Phone (No Dashes)" name = "homePhone">';
+echo     '<input type="homePhone" class="form-control" id="homePhoneID3" placeholder="Home Phone (No Dashes)" name = "homePhone" oninput="isNumberKey(`homePhoneID3`);">';
 echo    '</div>';
 echo  '</div>';
 echo  '<div class="form-group">';
 echo   '<label for="cellPhoneID3" class="col-sm-4 control-label">Cell Phone </label>';
 echo    '<div class="col-sm-8">';
-echo     '<input type="cellPhone" class="form-control" id="cellPhoneID3" placeholder="Cell Phone (No Dashes)" name = "cellPhone">';
+echo     '<input type="cellPhone" class="form-control" id="cellPhoneID3" placeholder="Cell Phone (No Dashes)" name = "cellPhone" oninput="isNumberKey(`cellPhoneID3`);">';
 echo    '</div>';
 echo  '</div>';
   

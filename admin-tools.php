@@ -84,13 +84,6 @@
 	</div>
 
 	
-	
-<!-- JS Functions  -->
-<script src="intake/FormAppFunctions.js"></script>
-	
-	
-
-	
 </body>
 
 
