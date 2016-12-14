@@ -95,7 +95,7 @@
 				echo	'</div>';
 		
 
-		echo		'<button type="submit" class="btn btn-default ">Submit</button>    ';
+		echo		'<button type="submit" id="class-submit-button" class="btn btn-default ">Submit</button>    ';
 		echo	'</form>';
 			
 			?>

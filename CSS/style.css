@@ -323,3 +323,20 @@
 	margin-top: 10px;
 	margin-right: 20px;
 }
+
+.form-group label{
+	float:left;
+	
+}
+
+#curriculumName{
+	margin-top: -8px;
+}
+
+#class-scheduler-submit{
+	margin-bottom: -100px;
+}
+
+#class-submit-button{
+	margin-top: 23px; 
+}
