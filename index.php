@@ -99,6 +99,8 @@
 </div> <!-- end of jumbotron login -->
 </div>
 	
+	<!-- JS Functions  -->
+	<script src="FormAppFunctions.js"></script>
   
   </body>
 </html>

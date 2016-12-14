@@ -356,15 +356,13 @@ echo 	'</div>';
 
 
 //if form is submitted(attended clicked, insert record into db
-
-	
-
-
-					
+		
 
 
 ?>
 
+<!-- JS Functions  -->
+<script src="intake/FormAppFunctions.js"></script>
 
 </body>
 </html>

@@ -81,5 +81,9 @@ oninput="isEmailOffFocus('ID_Name');"
   </div>
   </div>
  </div>
+ 
+<!-- JS Functions  -->
+<script src="intake/FormAppFunctions.js"></script>
+ 
 </body>  
 </html>
