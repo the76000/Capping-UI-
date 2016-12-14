@@ -108,7 +108,7 @@ $classattendedrow = pg_fetch_array($classattendedresult, 0, PGSQL_ASSOC);
 
 
 
-$isclassScheduled = " SELECT Classes_Scheduled.Class_ID 
+$isclassScheduled = " SELECT Classes_Scheduled.Class_ID, Classes_Scheduled.Date_Time_Schedules 
 FROM Classes_Scheduled, Curriculum_Subjects, Class_Subjects
 WHERE Class_Subjects.C_Subject = Curriculum_Subjects.C_Subject
 AND Curriculum_Subjects.C_Subject = Classes_Scheduled.C_Subject
@@ -117,7 +117,7 @@ $isclassScheduledresult = pg_query($isclassScheduled) or die('Query failed: ' . 
 $isclassScheduledrow = pg_fetch_array($isclassScheduledresult, 0, PGSQL_ASSOC);
 
 
-	 
+$time = $isclassScheduledrow['date_time_schedules'];	 
 	 
  }
 
@@ -266,7 +266,7 @@ echo						'<div id="checkbox1">';
 				echo  '<div>';
 				
 				echo			'<label for="usr">Time</label>';
-				echo			'<input  name="currTime" class="form-control" id="curriculumTime" placeholder="yyyy-mm-dd 00:00:00">';
+				echo			$time;
 				
 				echo '</div>';
 					
@@ -314,7 +314,7 @@ echo 	'</div>';
 				echo  '<div>';
 				
 				echo			'<label for="usr">Time</label>';
-				echo			'<input  name="currTime" class="form-control" id="curriculumTime" placeholder="yyyy-mm-dd 00:00:00">';
+				echo			$time;
 				
 				echo '</div>';
 					
