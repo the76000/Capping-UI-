@@ -96,6 +96,9 @@
 </div> <!-- end of jumbotron login -->
 </div>	
 
+<!-- JS Functions  -->
+<script src="intake/FormAppFunctions.js"></script>
+
 <script type="text/javascript">
 	function validateInput(){
 		document.getElementById("errorID").value = ""
