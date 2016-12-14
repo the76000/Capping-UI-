@@ -205,6 +205,7 @@
 	padding-bottom:5%;
 
 
+
 }
 
 /* container div for the course options */
@@ -329,14 +330,28 @@
 	
 }
 
+/* Curriculum name dropdown, admin-tools.php */
 #curriculumName{
 	margin-top: -8px;
 }
 
-#class-scheduler-submit{
-	margin-bottom: -100px;
-}
-
+/* Submit button in class-scheduler.php*/
 #class-submit-button{
 	margin-top: 23px; 
+}
+
+/* Two Homepage buttons in jumbolaunchr */
+.top-homepage-buttons{
+	margin-left: 132px;
+
+}
+
+/* Curriculum name label in report-card.php*/
+#curriculumName-report-card{
+	margin-top: 11px;
+}
+
+#submit-instructor-report-card{
+	margin-top: 10px;
+	margin-left: 95px;
 }

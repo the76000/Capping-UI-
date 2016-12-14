@@ -80,16 +80,20 @@
 			<div class = "jumbotron launcher">
 			
 			
-			<div class = "row homepage-links">
-				<div class = "col-md-4">
-					<a href="participant-search.php"><button class="btn btn-default launcher-links" type="submit"> Participant Search</button></a>
-				</div>
-			
-				<div class = "col-md-4">
-					<a href=" report-card-search.php "><button class="btn btn-default launcher-links" type="submit">Report Cards</button></a>
-				</div>
+				<div class = "row homepage-links">
+					<div class = " col-md-4">
+						<a href="participant-search.php"><button class="btn btn-default launcher-links" type="submit"> Participant Search</button></a>
+					</div>
 				
-			</div>
+					<div class = "col-md-4">
+						<a href=" report-card-search.php "><button class="btn btn-default launcher-links" type="submit">Report Cards</button></a>
+					</div>
+
+					<div class = " col-md-4">
+						<a href="class-attendance-curriculum.php"><button class="btn btn-default launcher-links" type="submit"> Class Attendance </button></a>
+					</div>
+					
+				</div>
 			
 			<div class = "row homepage-links">
 			

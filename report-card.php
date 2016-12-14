@@ -310,7 +310,7 @@ echo				'</div>';
 echo				'<div class="row" id="attendanceRow">';
 
 echo					'<div class="col-md-4 input-lg">';
-echo					'<label>Curriculum Name:';
+echo					'<label id="curriculumName-report-card">Curriculum Name:';
 echo                    " $currname ";
 
 echo                 '</label>';
@@ -349,7 +349,7 @@ echo						"<option value='$employee_col_value_var'>   '$employee_col_value_var2'
 echo						'</select>  ';
 
 
-echo				'<button type="submit" name="submitInstructor" class="btn btn-default ">Submit Instructor</button> '; 
+echo				'<button type="submit" name="submitInstructor" id="submit-instructor-report-card" class="btn btn-default ">Submit Instructor</button> '; 
 
  echo			'</div>';
  
