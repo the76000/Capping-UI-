@@ -149,10 +149,15 @@
 
 
 $c_a_results = pg_query($c_a_query) or die('Query failed: ' . pg_last_error());
+
+if(pg_num_rows($c_a_results) == 0){
+	
+	
+}else{
 	
 	$c_a_row = pg_fetch_array($c_a_results, 0, PGSQL_ASSOC); // create array of result 
-	
-	$p_numDB = $c_a_row['p_num']; // set variable correct row and column of db
+
+	//$p_numDB = $c_a_row['p_num']; // set variable correct row and column of db
 	
 	
 	
@@ -160,6 +165,8 @@ $c_a_results = pg_query($c_a_query) or die('Query failed: ' . pg_last_error());
 	
 	
 	$participant_commentDB = $c_a_row['participant_comment'];
+	
+}
 	
 	if  (pg_num_rows($c_a_results) == 0){
 		$num_of_classes_attended = pg_num_rows($c_a_results) ;
@@ -224,11 +231,19 @@ AND Curriculum_Subjects.C_Subject = Class_Subjects.C_Subject";
 
 
 $classesattendedresult = pg_query($classesattendedquery) or die('Query failed: ' . pg_last_error());
+
+
+
+if(pg_num_rows($classesattendedresult) == 0){
+	$newnumclassatten = 0;
+	
+}else{
+	
 $classesattendedrow = pg_fetch_array($classesattendedresult, 0, PGSQL_ASSOC);
 
 
 $newnumclassatten = pg_num_rows($classesattendedresult);
-
+}
 
 //gets the class id and class subject that a participant has not attended yet
 $classesnotattendedquery = "
@@ -270,11 +285,17 @@ ORDER BY Classes_Scheduled.Class_ID";
 
 
 $classesnotattendedresult = pg_query($classesnotattendedquery) or die('Query failed: ' . pg_last_error());
+
+
+if(pg_num_rows($classesnotattendedresult) == 0){
+	$newnumclassnotatten = 0;
+	
+}else{
 $classesnotattendedrow = pg_fetch_array($classesnotattendedresult, 0, PGSQL_ASSOC);
 
 
 $newnumclassnotatten = pg_num_rows($classesnotattendedresult);
-  
+}
   
   
   

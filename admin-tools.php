@@ -68,6 +68,8 @@
 				<a href="curriculum-add.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Add A New Curriculum</b></button></a>
 				
 				<a href="subject-add.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Add A Class Subject</b></button></a>
+				
+				<a href="location-add.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Add A Location</b></button></a>
 		
 			</div>
 			

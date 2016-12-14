@@ -29,7 +29,7 @@ session_start();
 	
 	$pnum = $_SESSION['pnumreportcard'];
 	
-	$classpicked = $_SESSION['report_card_class_selected'];
+	//$classpicked = $_SESSION['report_card_class_selected'];
 	
     $classidfromreport = $_SESSION['classidreport']; //this is the class id from the select class(attended classes) should change all classidreport variables to classidattendeD???
 	

@@ -265,8 +265,7 @@ echo						'<div id="checkbox1">';
 				
 				echo  '<div>';
 				
-				echo			'<label for="usr">Time</label>';
-				echo			$time;
+				
 				
 				echo '</div>';
 					
