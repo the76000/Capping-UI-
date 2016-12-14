@@ -103,8 +103,14 @@ AND classes_scheduled.class_id = class_attendence.class_id
 AND class_subjects.class_subject = '$classidfromreport'
 AND class_attendence.p_num = '$participantnumber'";
 $classattendedresult = pg_query($classattendedquery) or die('Query failed: ' . pg_last_error());
-$classattendedrow = pg_fetch_array($classattendedresult, 0, PGSQL_ASSOC);
 
+
+if(pg_num_rows($classattendedresult) == 0){
+	
+	
+}else{
+$classattendedrow = pg_fetch_array($classattendedresult, 0, PGSQL_ASSOC);
+}
 
 
 
@@ -114,10 +120,17 @@ WHERE Class_Subjects.C_Subject = Curriculum_Subjects.C_Subject
 AND Curriculum_Subjects.C_Subject = Classes_Scheduled.C_Subject
 AND Class_Subjects.Class_Subject = '$classidfromreport'";
 $isclassScheduledresult = pg_query($isclassScheduled) or die('Query failed: ' . pg_last_error());
+
+if(pg_num_rows($isclassScheduledresult) == 0){
+	
+	
+}else{
 $isclassScheduledrow = pg_fetch_array($isclassScheduledresult, 0, PGSQL_ASSOC);
 
 
-$time = $isclassScheduledrow['date_time_schedules'];	 
+$time = $isclassScheduledrow['date_time_schedules'];	
+
+} 
 	 
  }
 

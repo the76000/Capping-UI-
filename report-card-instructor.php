@@ -189,10 +189,16 @@ $classesnotattendedquery = "SELECT DISTINCT
 
 
 $classesnotattendedresult = pg_query($classesnotattendedquery) or die('Query failed: ' . pg_last_error());
+
+
+if(pg_num_rows($classesnotattendedresult) == 0){
+	
+	
+}else{
 $classesnotattendedrow = pg_fetch_array($classesnotattendedresult, 0, PGSQL_ASSOC);
 
 //$classesnotattendedrow['class_id'];
-
+}
 
 
  

@@ -264,8 +264,13 @@ ORDER BY Classes_Scheduled.Class_ID";
 
 
 $classesnotattendedresult = pg_query($classesnotattendedquery) or die('Query failed: ' . pg_last_error());
-$classesnotattendedrow = pg_fetch_array($classesnotattendedresult, 0, PGSQL_ASSOC);
 
+if(pg_num_rows($classesnotattendedresult) == 0){
+	
+	
+}else{
+$classesnotattendedrow = pg_fetch_array($classesnotattendedresult, 0, PGSQL_ASSOC);
+}
 //$classesnotattendedrow['class_id'];
 
 
