@@ -1,7 +1,7 @@
  <?php
 function chkBoxBuilder(){
 
-$conn_string = "host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin";
+$conn_string = "host=localhost port=5432 dbname=parentempowerment user=postgres password=CPCA2016";
 $dbconn = pg_connect($conn_string);
 
 $sql = 'Select * from Reference_Conditions';

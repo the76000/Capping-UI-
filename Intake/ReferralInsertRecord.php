@@ -4,7 +4,7 @@
 <?php 
 //variables for the querry from the ReferalApp
 
-$conn_string = "host=10.10.7.195 port=5432 dbname=cappingdb user=postgres password=admin";
+$conn_string = "host=localhost port=5432 dbname=parentempowerment user=postgres password=CPCA2016";
 
 if(empty($_POST["fName"]) || empty($_POST["lName"]) ||  empty($_POST["DOB"])){
 	echo 'Please make sure you fill out your first name, last name, and date of birth correctly. Please hit the browser\'s back button to conintue.';
