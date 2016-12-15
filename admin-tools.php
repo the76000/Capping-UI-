@@ -63,13 +63,47 @@
 				
 				<a href="participant-add.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Enter a Participant Into the System</b></button></a>
 				
-				<a href="employee-portal.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Add/Delete/Update Employee</b></button></a>
+				<a href="employee-portal.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Add/Update Employee</b></button></a>
 				
 				<a href="curriculum-add.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Add A New Curriculum</b></button></a>
 				
 				<a href="subject-add.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Add A Class Subject</b></button></a>
 				
 				<a href="location-add.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Add A Location</b></button></a>
+				
+				<?php
+				
+				session_start();
+	
+				if (!isset($_SESSION["username"]) ){
+					header('Location: index.php');
+					echo "hello";
+				}
+	
+				# Connect to Postgres server and the database
+				require( 'includes/connect.php' ) ;
+				
+				if($_SESSION["level"] == 'Admin'){
+					
+					echo '<a href="participant-remove.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Remove a Participant</b></button></a>';
+				
+					
+					
+					
+				}
+				else{
+					
+					echo "<p> you are not admin </p>";
+				}
+				
+				
+				
+				
+				
+				
+				?>
+				
+				
 		
 			</div>
 			

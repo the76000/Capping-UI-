@@ -59,8 +59,6 @@
 
 				<a href="Add-Employee.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Add An Employee</button></a>
 
-				<a href="Remove-Employee.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Remove An Employee</b></button></a>
-
 				<a href="Employee-New-Password.php"><button class="btn btn-default course-launcher-links" type="submit"><b>Change Employee Password</b></button></a>
 				
 				

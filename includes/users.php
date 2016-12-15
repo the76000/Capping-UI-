@@ -31,6 +31,7 @@
 			header('Location: /homepage.php');
 			session_start();
 			$_SESSION["username"] = $email; //create a session user to check on all other pages if the user has logged in.
+			$_SESSION["level"] = $userStatus;
 		}else{
 			echo "<h1>Error: User not found.</h1>";
 			
