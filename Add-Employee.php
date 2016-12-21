@@ -97,7 +97,8 @@ echo  '</div>';
 echo  '<div class="form-group">';
 echo   '<label for="emailID3" class="col-sm-4 control-label">Email </label>';
 echo    '<div class="col-sm-8">';
-echo     '<input type="text" class="form-control" id="emailID3" placeholder="Email" value="" name = "email" oninput="isEmailOffFocus(`emailID3`);">';
+																										#validation is not working correctly for emailoninput="isEmailOffFocus(`emailID3`)
+echo     '<input type="text" class="form-control" id="emailID3" placeholder="Email" value="" name = "email" ;">';
 echo    '</div>';
 echo  '</div>';
 echo  '<div class="form-group">';
