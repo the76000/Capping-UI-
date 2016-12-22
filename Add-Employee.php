@@ -97,8 +97,8 @@ echo  '</div>';
 echo  '<div class="form-group">';
 echo   '<label for="emailID3" class="col-sm-4 control-label">Email </label>';
 echo    '<div class="col-sm-8">';
-																										#validation is not working correctly for emailoninput="isEmailOffFocus(`emailID3`)
-echo     '<input type="text" class="form-control" id="emailID3" placeholder="Email" value="" name = "email" ;">';
+																										#validation is not working correctly for email
+echo     '<input type="text" class="form-control" id="emailID3" placeholder="Email" value="" name = "email" onblur="isEmailOffFocus(`emailID3`) ;">';
 echo    '</div>';
 echo  '</div>';
 echo  '<div class="form-group">';
@@ -188,8 +188,11 @@ echo '</div> <!-- end of jumbotron login -->';
 		
 		//If we got here then everything is as it should be
 		return true; 
-		
 	}
+
+		
+	
+	
 </script>
 
 </body>
