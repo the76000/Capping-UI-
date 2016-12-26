@@ -12,7 +12,8 @@
 	<link rel='stylesheet' media='screen and (min-width: 701px) and (max-width: 900px)' href='css/mobile.css' />
 	<link rel="stylesheet" href="CSS/style.css">
 
-	<title> CPCA attendance </title>
+	<title> CPCA Indiv Attendance </title>
+
 </head>
 
 
@@ -33,7 +34,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Attendance Reports</a>
+				<a class="navbar-brand" href="#">Individual Attendance</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -43,87 +44,223 @@
 					<li><a href="admin-tools.php">Admin Tools</a></li>
 					<li><a href="attendance-reports.php">Reports</a></li>
 					<li><a href="participant-search.php">Search</a></li>
-					<li><a href="log-out.php">Log out</a></li>    
+					<li><a href="log-out.php">Log out</a></li>   
 				</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav> <!-- end of navbar-->
-	
-	
-	
-	
+
 	<div class = "container">
-	
-	
-	<div class = "jumbotron">
-	<div class = "row search">
-		
-		<div class = "col-md-4" style="padding-top: 15px;"> 
-			<p class="label label-info"> Individual Attendance  </p>
-		</div>
-		
-		<!-- i have no idea why this looks wonky, need to come back to thise 
-		//Added a 15px padding as a fix.  Looks fine, shouldn't have issues.  If there's any other solution feel free to change it -Kevin
-		-->
-		
-		<div class = "col-md-8">
-		
-	
-	<!-- launches a different php file -->
-	<form class="navbar-form" role="search" action="individual-attendance-post.php" method="post" >
-			<div class="input-group">
-				<input type="text" class="form-control input-lg" placeholder="first name" name="f_name" id="srch-f_name" oninput="validateAlpha('srch-f_name');">
-				<div class="input-group-btn ">
-			
-			<div class="input-group">
-				<input type="text" class="form-control input-lg" placeholder="last name" name="l_name" id="srch-l_name" oninput="validateAlpha('srch-l_name');">
-				<div class="input-group-btn ">
-			
-					<button class="btn btn-lg" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-				</div>
-				<!-- CERTAINLY needs a link to the database for search capabilities -->
-				
+
+		<div class = "jumbotron">
+		<center><div class="error" id="errorID" style="display:none;"></div></center>
+			<h3>Individual Attendance Report</h3><br>
+			<!-- <form onsubmit="return validateInput()" style="margin-left: 15px" action="class-attendance.php" method="post"> -->
 				<?php
-					session_start();
-					
-					if (!isset($_SESSION["username"]) ){
-						header('Location: index.php');
-						echo "hello";
-					}
+	
+session_start();
+	
+	if (!isset($_SESSION["username"]) ){
+		header('Location: index.php');
+		echo "hello";
+	}
+  
+  
+   # Connect to Postgres server and the database
+    require( 'includes/connect.php' ) ;
+
+// Performing SQL query
+$query = 'SELECT * FROM participants';
+$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+
+// Printing results in HTML
+
+
+ $curr_query3 = 'SELECT curriculum_name FROM curriculum'; //get all curriculum in the system
+ $curr_result3 = pg_query($curr_query3) or die('Query failed: ' . pg_last_error());
+
+
+  
+  
+  
+  
+
+echo '<div class = "container">';
+
+echo	'<div class="form-group ">';
+echo			'<form onsubmit="return validateInput()" action="individual-attendance.php" method="post">';
+echo				  '<label for="sel1">Select A Curriculum:</label> <!-- this is for the 28 indivual classes, not for the course/groups. data mismatch -->';
+echo				  '<select name="CURRICULUM" class="form-control" id="sel1">
+						<option selected disabled class="hideoption">Select One</option>';
 				  
 				  
-					 # Connect to Postgres server and the database
-					require( 'includes/connect.php' ) ;
+					while ($line = pg_fetch_array($curr_result3, null, PGSQL_ASSOC)) { 
+						if($line['curriculum_name'] != "No Curriculum"){
+							foreach ($line as $col_value) { //iterate through all the curriculum and display them
+								echo "<option value= '$col_value'>";
+								echo "$col_value";
+							}
+								echo "</option>";
+						}
 						
-					$firstname = $_POST['f_name'];
-					$lastname = $_POST['l_name'];
+					}
+							
+							
 					
-					$query = "SELECT p_num FROM referrals WHERE ref_f_name = '$firstname' AND ref_l_name = '$lastname'";
 					
-					$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 					
-					$p_num = $_POST['$result[0]'];
+echo				  '</select>';
+echo				'<button class="btn btn-lg" type="submit" name="submit"> Submit </button>';
+echo				'</div>';
+echo				'</form>';
+
+
+if ((isset($_POST['submit'])) == 1){ //if the submit button for curriculum is clicked
+	$value_select = $_POST['CURRICULUM']; //get the curriculum picked by the user
+	
+	$_SESSION['curr_name'] = $value_select;
+
+
+
+
+	$curr_picked = $value_select; //assign curriculum to curr_picked
+  
+ 
+ $curr_query = 'SELECT curriculum_name FROM curriculum';
+ $curr_result = pg_query($curr_query) or die('Query failed: ' . pg_last_error());
+ //$row = pg_fetch_array($result, null, PGSQL_ASSOC);
+ 
+
+ 
+ $curr_query2 = "SELECT CID FROM curriculum where curriculum_name = '$curr_picked'"; //get the cid that equals the name of the curriculum picked
+ $curr_result2 = pg_query($curr_query2) or die('Query failed: ' . pg_last_error());
+ $curr2_row = pg_fetch_array($curr_result2, 0, PGSQL_ASSOC);
+ 
+  $cidDB = $curr2_row['cid']; //the cid of the curriculum
+  
+  $_SESSION['report_card_curr'] = $cidDB ; //used in report-card to confrim curriculum
+ 
+  $pvaluequery = "SELECT p.p_num FROM participants p 
+  inner join curriculum c on c.cid = p.cid 
+  inner join referrals r on r.p_num =p.p_num 
+  where p.cid = '$cidDB' "; //gets all the pnums assigned to the curriculum picked
+ $pvalueresult = pg_query($pvaluequery) or die('Query failed: ' . pg_last_error());
+ $pvaluerow = pg_fetch_array($pvalueresult , 0, PGSQL_ASSOC);
+ 
+ 
+ 
+ $part_query = "SELECT r.ref_f_name FROM referrals r 
+ inner join participants p on p.p_num = r.p_num 
+ inner join curriculum c on c.cid = p.cid 
+ where c.cid = '$cidDB'"; //gets all the first names of those enrolles
+ $part_result = pg_query($part_query) or die('Query failed: ' . pg_last_error());
+ $part_row = pg_fetch_array($part_result, 0, PGSQL_ASSOC);
+ 
+ //$part_query = 'SELECT r.ref_f_name FROM referrals r inner join participants p on p.p_num = r.p_num inner join curriculum c on c.cid = p.pid where c.cid = "$cidDB"';
+ 
+ 
+ $part_query2 = "SELECT p.cid FROM participants p 
+ inner join curriculum c on c.cid = p.cid 
+ inner join referrals r on r.p_num =p.p_num 
+ where p.cid = '$cidDB' "; //this is for testing
+ $part_result2 = pg_query($part_query2) or die('Query failed: ' . pg_last_error());
+ $part_row2 = pg_fetch_array($part_result2 , 0, PGSQL_ASSOC);
+ 
+  $part_query3 = "SELECT r.ref_l_name FROM referrals r 
+  inner join participants p on p.p_num = r.p_num 
+  inner join curriculum c on c.cid = p.cid 
+  where c.cid = '$cidDB'"; //gets the last name of those enrolled
+ $part_result3 = pg_query($part_query3) or die('Query failed: ' . pg_last_error());
+ $part_row3 = pg_fetch_array($part_result3, 0, PGSQL_ASSOC);
+
+// $num_of_classes = pg_num_rows($c_a_results) - 1
+ 
+ while (($line = pg_fetch_array($part_result, null, PGSQL_ASSOC)) and ($line2  = pg_fetch_array($part_result2, null, PGSQL_ASSOC)) and ($line3  = pg_fetch_array($part_result3, null, PGSQL_ASSOC)) and  ($line4  = pg_fetch_array($pvalueresult, null, PGSQL_ASSOC))                   ) {
 					
-				?>
-			</div>
-			</form>
-		</div>
-	
-	</div>
-	
-	</div>
-	
-	
-	</div>
-	
+					
+echo 				'<table class = "table">';
+						echo "<thead>";
+						echo "<tr>";
+						echo "<th> First Name </th>";
+						echo "<th> Last Name </th>";
+						echo "<th> CID </th>";
+						
+						
+
+						foreach ($line as $fnamevalue ) { //display all of the arrays
+						
+							foreach ($line2 as $cidvalue){
+								
+								foreach ($line3 as $lnamevalue){
+									foreach ($line4 as $pnumvalue){
+							
+							echo "<tr>";
+							echo "<td>";
+							echo "$fnamevalue";
+							echo "</td>";
+							echo "<td>";
+							echo "$lnamevalue";
+							echo "</td>";
+							echo "<td>";
+							echo "$cidvalue";
+							echo "</td>";
+							echo "<td>";
+							echo "<form action = 'individual-attendance-more.php' method='post'>";
+							 
+							#echo "<option name = 'participant_selected' value = '$pnumvalue'> Go to report card  </option>";
+							echo "<label>";
+							
+							echo "</label>";
+											
+							echo 		"<button type = 'submit' name = 'participant_num' value = ' $pnumvalue  '> Go to Attendance Record </button>";
+
+							echo "</form>";
+							// send the pnum selected thru POST
+							
+							#$_SESSION['report_card_part'] = $_POST['participant_name'];
+							
+							echo "</td>";
+							
+							echo "</tr>";
+									}
+								}
+							}
+						}
+							echo "</table>";
+							}
+							
+							
+ 
+ 
+ 
+}
+  
+
+
+
+
+?>
+
+	</div>		
 	
 	<!-- JS Functions  -->
 <script src="intake/FormAppFunctions.js"></script>
-	
-	
-	
-	
-	
-	
-	</body>
+<script type="text/javascript">
+	function validateInput(){
+		document.getElementById("errorID").value = ""
+		document.getElementById("errorID").style.display = "none";
+		
+		if(document.getElementById("sel1").value == "Select One"){
+			document.getElementById("errorID").innerHTML = "Please select a curriculum";
+			document.getElementById("errorID").style.display = "block";
+			return false;
+		}
+		
+		//If we got here then everything is as it should be
+		return true; 
+		
+	}
+</script>
+			
+</body>
 </html>
