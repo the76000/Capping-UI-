@@ -65,9 +65,7 @@
 					<h2> Curriculum Name:  <?php echo $_POST['curr_selected'];?> </h2>
 					
 					</div>
-					<div class = "col-md-2">
-					<h2> Location Name:  <?php echo $_POST['loc_selected'];?> </h2>
-					</div>
+					
 					<?php
 					session_start();
 	
@@ -81,14 +79,14 @@
 						
 						
 						
-					    $locationName = $_POST['loc_selected'];
+					
 						
 						$employeeEID = $_POST['emp_selected'];
 						
 						
 						$_SESSION['admin-course-curr'] = $curriculumName;
 						
-						$_SESSION['admin-course-loc'] = $locationName;
+				
 						
 						$_SESSION['admin-coursee-eid'] = $employeeEID;
 					  
@@ -121,7 +119,6 @@
 						AND (Classes_Scheduled.EID = Employees.EID)
 						AND (Classes_Scheduled.Location_ID = Locations.Location_ID)
 						AND (Classes_Scheduled.C_Subject = Curriculum_Subjects.C_Subject)
-						AND (Locations.Location_Name =  '$locationName')
 						AND (Employees.EID = '$employeeEID ')		order by Class_Subjects.C_Subject ASC";
 						
 						$uniqueclassresult = pg_query($uniqueclassquery) or die('Query failed: ' . pg_last_error());

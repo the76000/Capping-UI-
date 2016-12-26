@@ -70,7 +70,7 @@
 						 # Connect to Postgres server and the database
 						require( 'includes/connect.php' ) ;
 
-				echo '<h2> Pick a curriculum, location, and employee </h2>';
+				echo '<h2> Pick a Curriculum and an Employee </h2>';
 				echo '<div class = "col-md-4">';
 				echo	'<form onsubmit="return validateInput()" class="navbar-form" role="search" action="admin-tools-course-selected.php" method="post">';
 				echo	'<select class="form-control" name = "curr_selected" id="curriculumName">';
@@ -95,22 +95,6 @@
 					echo '</div>';
 					
 					
-						echo '<div class = "col-md-4">';
-						echo	'<select class="form-control" name = "loc_selected" id="curriculumLocation">';
-						echo '<option selected disabled class="hideoption">Select One</option>';
-					
-						
-						// Performing SQL query
-						$locquery = 'SELECT * FROM Locations order by Location_Name ASC';
-						
-						$locresult = pg_query($locquery) or die('Query failed: ' . pg_last_error());
-						
-					while($locrow = pg_fetch_array($locresult)){
-						echo "<option value='".$locrow['location_name']."'>".$locrow['location_name']."</option>";
-					}
-					
-					echo '</select> ';
-					echo '</div>';
 					
 					
 						echo '<div class = "col-md-4">';

@@ -148,24 +148,7 @@
 				
 				echo	'<div class="row">';
 				echo	'<div class="col-sm-4">';
-				echo		'<div class="form-group">';
-				echo			'<label for="usr">Location</label>';
-				echo						'<select class="form-control" name = "location_selected" id="locationName">
-											<option selected disabled class="hideoption">Select One</option>';
-						
-								
-
-								// Performing SQL query
-								$locnamequery = "SELECT * FROM locations ORDER BY location_name ASC";
-								
-								$locnameresult = pg_query($locnamequery) or die('Query failed: ' . pg_last_error());
-								
-								while($locnamerow = pg_fetch_array($locnameresult)){
-									echo "<option value='".$locnamerow ['location_id']."'>".$locnamerow ['location_name']." </option>";
-								}
-							
-				echo		'</select>';			
-				echo		'</div>';
+			
 				echo	'</div>';
 				echo	'<div class="col-sm-4">';
 				echo		'<div class="form-group">';

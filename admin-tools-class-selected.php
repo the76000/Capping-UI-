@@ -82,11 +82,7 @@
 					echo '</h2>';
 					
 					echo '</div>';
-					echo '<div class = "col-md-2">';
-					echo ' <h2> Location Name:';  
-					echo " $locationName ";
-					echo '</h2>';
-					echo '</div>';
+				
 				
 						
 						
@@ -188,24 +184,7 @@
     			echo		'</div>';
  				echo	' </div>';
 
- 				echo	  '<div class="form-group">';
-    			echo	'<label for="curriculumLocation" class="col-sm-4 control-label">Change Location (Current Location: ';
-				echo    " $locationName "; //change this to query
-			
-				echo    ') </label>';
-   				echo		 '<div class="col-sm-4">';
-					echo      "<select class='form-control' name = 'lidPicked' id = 'lidPicked' >";
-					echo 	  "<option selected disabled class='hideoption'>Select One</option>";
-				$locquery = "SELECT * FROM Locations";
-				$locresult = pg_query($locquery) or die('Query failed: ' . pg_last_error());
-				while($locrow = pg_fetch_array($locresult)){
-						echo "<option value='".$locrow['location_id']."'>".$locrow['location_name']." </option>";
-					}
-					
-					echo "</select> ";	
-				
-				echo		'</div>';
- 				echo	 '</div>';
+ 			
 
 
  				echo	 '<div class="form-group">';

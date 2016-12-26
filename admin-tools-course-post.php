@@ -21,7 +21,7 @@ session_start();
 	
 	$eid = $_POST['eidPicked'];
 	
-	$lid = $_POST['lidPicked'];
+	$lid = 1; //dummy value
 	
 	
 	$class_id = $_SESSION['classid_tools']; //not editing

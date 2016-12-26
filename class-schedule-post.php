@@ -21,7 +21,7 @@ session_start();
 	
 	$c_subject = $_POST['class_selected'];   
 	
-	$location_id =$_POST['location_selected'];
+	$location_id = 1; //dummy value, location id is no longer neccesary
 	
 	$eid = $_POST['teacher_selected'];
 
