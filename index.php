@@ -1,3 +1,19 @@
+
+<!-- STATE OF THIS PAGE !-->
+<!--
+This page is pretty self explanatory
+This is the landing page of the website, it has login and password fields,
+thats pretty much it.
+Like most pages, it uses our includes/connect.php file to connect to the database.
+The login is handled by the includes/users.php
+In the state it is currently in, there is no security on the login
+This will take you to homepage.php
+
+Outstanding issues(outside of security) none AFAIK
+
+ -Colin Ferris 4/27/17
+ !-->
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>

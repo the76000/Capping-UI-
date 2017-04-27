@@ -1,3 +1,27 @@
+<!-- STATE OF THIS PAGE !-->
+<!--
+This is a fairly critical part of the site.
+Users should be able to easily look up users in the system. 
+The searching is pretty rudimentary, you have to spell the names exactly like 
+it is stored in the database, it will not find a closest match or anything like that.
+It is caps sensitive, so searching for john smith will return no results if the value
+in the database is John Smith. You can search for everyone named John, or everyone with the
+last name Smith. For disambiguation, the D.O.B is listed after the full name.
+This page works in conjuction with participant-search.php
+
+
+Outstanding issues(outside of security):
+Caps sensitive search is not intuitive, and suggesting a close match 
+for a misspelling could be useful.
+Adding a middle name to the search could be useful, but nothing
+is really broken on this page. It could be rewritten to be less of a mess,
+but outside of that works ok.
+
+ -Colin Ferris 4/27/17
+ !-->
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -178,13 +202,15 @@ session_start();
 	echo '<div class= " row">';
 	//if only first name is given
 	if($f_name != null && $l_name == null){
-		$ref_f_query = "Select * from referrals where ref_f_name = '$f_name'";
-	
+		$ref_f_query = "Select * from referrals where ref_f_name = '$f_name'"; //names are not stored in the participant table or intake table, but in the referrals table.
+		//where entry in the table equals the value entered
+		
+		
 		$ref_f_results = pg_query($ref_f_query) or die('Query failed: ' . pg_last_error());
 	
 		$num_rows = pg_num_rows($ref_f_results) ;
 		
-		if($num_rows == 0 ){
+		if($num_rows == 0 ){ //if there are no results from the query
 			
 			echo ' <p> There are no participants in the system with that first name. </p>';
 			
@@ -215,7 +241,7 @@ session_start();
 		
 		//$p_numDB = $ref_row['p_num'];
 		
-		
+			//for displaying results
 			$f_col_value = $f_line['ref_f_name'];
 			
 			$l_col_value = $f_line['ref_l_name'];
@@ -228,7 +254,7 @@ session_start();
 	
 		
 		
-		echo "<form action = 'participant-search-results.php' method='post'>";
+		echo "<form action = 'participant-search-results.php' method='post'>"; //link to take to the results page
 		echo "$f_col_value ";
 		echo "$l_col_value ";
 		echo "$dob_col_value";
@@ -251,7 +277,7 @@ session_start();
 	}
 	
 	//if only last name is given
-	
+	//same boilerplate code as first name above
 	if($f_name == null && $l_name != null){
 		
 		$ref_l_query = "Select * from referrals where ref_l_name = '$l_name'";
@@ -320,6 +346,7 @@ session_start();
 	}
 	
 	//if both first and last name are entered
+	//same boilerplate code as first name above
 	if($f_name != null && $l_name != null){
 		$ref_b_query = "Select * from referrals where ref_l_name = '$l_name' and ref_f_name = '$f_name'";
 	

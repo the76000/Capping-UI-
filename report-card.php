@@ -81,7 +81,7 @@ $participantlname = $_SESSION['report-card-lname'];
 $participantfname = $_SESSION['report-card-fname']; 
 
 
- $participantnumber = $_SESSION['report-card-pnum'] ;
+ $participantnumber = $_SESSION['searchp_num'] ;
  
  $cidSession = $_SESSION['report_card_curr'] ;
  

@@ -1,3 +1,26 @@
+<!-- STATE OF THIS PAGE !-->
+<!--
+This is a fairly critical part of the site.
+Users should be able to easily look up users in the system. 
+The searching is pretty rudimentary, you have to spell the names exactly like 
+it is stored in the database, it will not find a closest match or anything like that.
+It is caps sensitive, so searching for john smith will return no results if the value
+in the database is John Smith. You can search for everyone named John, or everyone with the
+last name Smith. For disambiguation, the D.O.B is listed after the full name.
+This page works in conjuction with searchp.php
+
+
+Outstanding issues(outside of security):
+Caps sensitive search is not intuitive, and suggesting a close match 
+for a misspelling could be useful.
+Adding a middle name to the search could be useful, but nothing
+is really broken on this page. It could be rewritten to be less of a mess,
+but outside of that works ok.
+
+ -Colin Ferris 4/27/17
+ !-->
+
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>

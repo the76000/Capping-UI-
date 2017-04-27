@@ -1,3 +1,15 @@
+<!-- STATE OF THIS PAGE !-->
+<!--
+After logging in from index.php, this is the page you get directed to.
+This should have all of the links to get to any part of the site.
+
+
+Outstanding issues(outside of security) none AFAIK
+
+ -Colin Ferris 4/27/17
+ !-->
+
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>

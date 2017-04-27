@@ -1,3 +1,20 @@
+<!-- STATE OF THIS PAGE !-->
+<!--
+After searching for a participant and clicking on the link,
+you are directed here. The goal for this page was to quickly display some critical info 
+on a participant. It also provides links to report card and curriculum assignment. The link
+to the intake packet was never finished, as the php for that was a nightmare because of the sheer
+amount of fields involved.
+
+Outstanding issues(outside of security):
+Linking to the intake packet is a pretty big issues that
+needs to be completed, but this page is in good shape
+
+ -Colin Ferris 4/27/17
+ !-->
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -75,36 +92,36 @@
 	
 	//$f_name = $_SESSION['f_name'];
 	
-	$p_num =$_POST['participant_num'];
+	$p_num =$_POST['participant_num']; //from the search
 	
 	$_SESSION['searchp_num'] = $p_num; //for report card
 	
 
 	
-	$query = "Select r.*, p.* from referrals r inner join participants p  on p.p_num = r.p_num  where r.p_num = '$p_num' ";
+	$query = "Select r.*, p.* from referrals r inner join participants p  on p.p_num = r.p_num  where r.p_num = '$p_num' "; //get info on the particiapnt that has been selected
 	
 	$results = pg_query($query) or die('Query failed: ' . pg_last_error());
 	
 	$row = pg_fetch_array($results, 0, PGSQL_ASSOC);
 	
-	$ref_p_num = $row['p_num'];
+	$ref_p_num = $row['p_num']; 
 	
 	
 	
 	
 	
 	
-	$p_numDB = $row['p_num'];
+	$p_numDB = $row['p_num'];//pnum from the query
 	
-	$raceDB = $row['race'];
+	$raceDB = $row['race']; //race field from the query
 	
-	$l_nameDB = $row['ref_l_name'];
+	$l_nameDB = $row['ref_l_name']; //last name field from the query
 	
 
 	
-	$f_nameDB = $row['ref_f_name'];
+	$f_nameDB = $row['ref_f_name']; //first name field from the query
 	
-	$dobDB = $row['dob'];
+	$dobDB = $row['dob']; // date of birth
 	
 	
 	
@@ -127,7 +144,7 @@
 	
 	$currnamerow = pg_fetch_array($currnameresults, 0, PGSQL_ASSOC);
 	
-	$currname = $currnamerow['curriculum_name'];
+	$currname = $currnamerow['curriculum_name']; //get the name of the curriculum the participant is enrolled in
 	
 	
 	
@@ -140,9 +157,12 @@
 	
 	
 	
+//Pretty sure none of this is being used 
+//|
+//|
+//V	
 	
-	
- $c_a_query = "Select * from class_attendence where p_num = '$p_numDB'"; // query for all info related to searched participant
+ $c_a_query = "Select * from class_attendence where p_num = '$p_numDB'"; // query for all info related to searched participant in class attendence
 
 //$c_a_query = "Select * from class_attendence ";
 
@@ -161,10 +181,10 @@ if(pg_num_rows($c_a_results) == 0){
 	
 	
 	
-	$class_idDB = $c_a_row['class_id'];
+	$class_idDB = $c_a_row['class_id']; //this isnt being used AFAIK
 	
 	
-	$participant_commentDB = $c_a_row['participant_comment'];
+	$participant_commentDB = $c_a_row['participant_comment']; //this isnt being used AFAIK
 	
 }
 	
@@ -199,9 +219,13 @@ $cur_results = pg_query($cur_query) or die('Query failed: ' . pg_last_error());
 	$num_of_classes_not_attended= pg_num_rows($cur_results) - $num_of_classes_attended ;
 	
 	
+//^
+//|
+//|	
+//Pretty sure none of this is being used 	
 	
 	
-	
+	//THIS IS ACTUALLY BEING USED
 	// class attendence numbers
 	
 	$classesattendedquery = "
@@ -303,7 +327,7 @@ $newnumclassnotatten = pg_num_rows($classesnotattendedresult);
 
 
 echo	'<div class="container">';
-echo		'<!--- ALL OF THIS INFORMATION IS PLACEHOLDER THIS ALL NEEDS TO COME FROM THE DATABASE!!!! -->';
+
 		
 echo		'<div class = "col-md-8">';
 		
