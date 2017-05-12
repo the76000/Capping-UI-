@@ -1,3 +1,18 @@
+<!-- STATE OF THIS PAGE !-->
+<!--
+Coming from the report cards link on the homepage, this page is supposed to link all of the avaible curriculums, and then 
+when selected display all of the participants enrolled in that curriculum. Functionality is pretty good for this.
+There is an outstanding issue with this which I thought was fine before. Currently clicking on click here to go to report card is
+broken, but this same functionality is present in other areas of the system, so it isnt a big deal
+
+Outstanding issues(outside of security):
+CLICK HERE TO GO TO REPORT CARD does not send the information for report-card.php
+to display info and run queries.
+
+ -Colin Ferris 4/27/17
+ !-->
+
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>

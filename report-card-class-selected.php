@@ -1,3 +1,15 @@
+<!-- STATE OF THIS PAGE !-->
+<!--
+Coming from report-card.php, this page shows the same relevant info from report card.php, and allows
+the user to change the value of the attendance record and add comments
+
+Outstanding issues(outside of security):
+Page needs general testing, the ui could be cleaner.
+
+ -Colin Ferris 5/11/17
+ !-->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

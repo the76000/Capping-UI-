@@ -1,3 +1,15 @@
+<!-- STATE OF THIS PAGE !-->
+<!--
+This is the class attendance report page(s). In this part select a curriculum and then it redirects you to class-attendance.php
+
+Outstanding issues(outside of security):
+none afaik
+
+ -Colin Ferris 5/11/17
+ !-->
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,13 +87,13 @@
 							<?php
 							// Performing SQL query
 							
-							$query = 'SELECT * FROM public.curriculum ORDER BY cid ASC ';
+							$query = 'SELECT * FROM public.curriculum ORDER BY cid ASC '; //get all of the available curriculums
 							
 							$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 							
 							while($row = pg_fetch_array($result)){
 								if($row['curriculum_name'] != "No Curriculum"){
-									echo "<option value='".$row['curriculum_name']."'>".$row['curriculum_name']."</option>";
+									echo "<option value='".$row['curriculum_name']."'>".$row['curriculum_name']."</option>"; //list them as options to be POST
 								}								
 							}
 							

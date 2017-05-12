@@ -1,3 +1,16 @@
+<!-- STATE OF THIS PAGE !-->
+<!--
+From class-scheduler.php, we now have to flesh out the class we are scheduling with a teacher/employee, class name, and
+a time. 
+
+
+Outstanding issues(outside of security):
+Time is currently in a yyyy-mm-dd format, not sure if the input forces this format
+
+ -Colin Ferris 5/11/17
+ !-->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

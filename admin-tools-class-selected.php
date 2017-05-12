@@ -1,3 +1,17 @@
+<!-- STATE OF THIS PAGE !-->
+<!--
+From admin-tools-course-selected.php, we can change the time and the teacher for the class selected
+
+
+Outstanding issues(outside of security):
+Time is currently in a yyyy-mm-dd format, not sure if the input forces this format
+
+ -Colin Ferris 5/11/17
+ !-->
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

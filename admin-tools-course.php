@@ -1,3 +1,15 @@
+<!-- STATE OF THIS PAGE !-->
+<!--
+Clicking change a curriculum/schedule from admin-tools takes you here. Select the curriculum you want to edit and 
+the employee you want to edit. 
+
+Outstanding issues(outside of security):
+none afaik
+
+ -Colin Ferris 5/11/17
+ !-->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

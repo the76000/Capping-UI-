@@ -1,3 +1,13 @@
+<!-- STATE OF THIS PAGE !-->
+<!--
+After class-attendance-curriculum.php and class-attendance.php, we finally can output the participants that attended the selected class
+
+Outstanding issues(outside of security):
+none afaik
+
+ -Colin Ferris 5/11/17
+ !-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

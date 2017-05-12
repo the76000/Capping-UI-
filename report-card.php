@@ -1,3 +1,16 @@
+<!-- STATE OF THIS PAGE !-->
+<!--
+The logic behind this page may not be clear, but this is page is to take attendance. I would consider renaming this page
+accordingly, because it may not make sense UX wise. This page should display the particiapnt, the curriculum, and the classes they 
+have attended or not attended. You selected a class, and then go to report-card-class-selected.php
+
+Outstanding issues(outside of security):
+Some potential UX issues and bugs, none of this is tested. 
+I could see having two select class buttons being a problem, consider being reworked.
+It could also lead to bugs
+ -Colin Ferris 5/11/17
+ !-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,6 +95,8 @@ $participantfname = $_SESSION['report-card-fname'];
 
 
  $participantnumber = $_SESSION['searchp_num'] ;
+ 
+ $_SESSION['report-card-pnum'] = $participantnumber;
  
  $cidSession = $_SESSION['report_card_curr'] ;
  

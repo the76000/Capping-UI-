@@ -1,3 +1,15 @@
+<!-- STATE OF THIS PAGE !-->
+<!--
+We selected a curriculum and an employee from admin tools course. It will then show if this employee and curriculum has
+any classes scheduled. If it doesnt it will ask you if you want to schedule a class
+
+Outstanding issues(outside of security):
+UX wise this might not be clear that this section is a class scheduler/editor.
+
+ -Colin Ferris 5/11/17
+ !-->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

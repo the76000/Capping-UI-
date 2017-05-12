@@ -1,3 +1,14 @@
+<!-- STATE OF THIS PAGE !-->
+<!--
+From admin-tools-course-selected, if no class was scheduled, it will direct you here. To schedule a class, select a curriculum from this page.
+
+
+Outstanding issues(outside of security):
+UX wise this might not be clear that this section is a class scheduler/editor.
+
+ -Colin Ferris 5/11/17
+ !-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

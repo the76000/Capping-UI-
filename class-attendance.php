@@ -1,3 +1,14 @@
+<!-- STATE OF THIS PAGE !-->
+<!--
+Coming from class-attendance-curriculum.php, this page has you select as class from the curriculum selected
+
+Outstanding issues(outside of security):
+none afaik
+
+ -Colin Ferris 5/11/17
+ !-->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

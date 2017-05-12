@@ -1,3 +1,16 @@
+<!-- STATE OF THIS PAGE !-->
+<!--
+This page is just links to adminstative tools. I am not aware if some users of this site 
+would have higher access than others, but if that turns out to be true, make sure normal users cant use this.
+
+
+Outstanding issues(outside of security):
+none afaik
+
+ -Colin Ferris 5/11/17
+ !-->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
