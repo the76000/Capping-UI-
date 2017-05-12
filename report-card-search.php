@@ -217,6 +217,7 @@ echo 				'<table class = "table">';
 							echo "</label>";
 											
 							echo 		"<button type = 'submit' name = 'participant_name' value = ' $pnumvalue  '>  Click Here To Go To Report Card </button>";
+							
 
 							echo "</form>";
 							// send the pnum selected thru POST

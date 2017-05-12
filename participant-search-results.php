@@ -117,9 +117,13 @@ needs to be completed, but this page is in good shape
 	
 	$l_nameDB = $row['ref_l_name']; //last name field from the query
 	
+	$_SESSION['report-card-lname'] = $l_nameDB; //for report card
+	
 
 	
 	$f_nameDB = $row['ref_f_name']; //first name field from the query
+	
+	$_SESSION['report-card-fname'] = $f_nameDB; //for report card
 	
 	$dobDB = $row['dob']; // date of birth
 	
@@ -146,7 +150,7 @@ needs to be completed, but this page is in good shape
 	
 	$currname = $currnamerow['curriculum_name']; //get the name of the curriculum the participant is enrolled in
 	
-	
+	$_SESSION['curr_name_report_card'] = $currname; //for report card
 	
 	
 	
