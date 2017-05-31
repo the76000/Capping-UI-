@@ -23,6 +23,11 @@ Oh right testing, make sure you do a lot of testing.
 Make a test plan, make cases, comb through this system with fine tooth comb 
 and make sure things do what they are suppose to do.
 
+Also make sure when you are cleaning things up with secruity. This application
+was built with the thought that it would never be a public facing website,
+only to be used for intranet purposes. So if that changes, do things like sanitize inputs and data
+to prevent things like SQL injections, make sure only people cleared for sensitive information can see certain pages, etc.
+
 Anyway, I have taken the liberty during my last year here to provide some
 clairvoyance into things that might have to change and some doucmentation on the pages.
 
