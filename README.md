@@ -5,7 +5,7 @@ If you are reading this, you are most likely the class working on this project.
 Congratulations, first of all, if you are in Professor Algozine's class,
 you are very lucky to have such a great professor.
 
-Next thing is, you are in for a lot of work.
+Next thing is, get ready to work
 
 This project, as im sure you know by now, is to create a web reporting system for the local CPCA
 They have no online system and currently do everything by hand.
@@ -28,13 +28,6 @@ clairvoyance into things that might have to change and some doucmentation on the
 
 Most of the pages have a comment at the first line explaining the basic funcitonality, and 
 possible bugs or errors that might be present.
-
-You will notice that every comment has a comment about disregarding secruity aspects, well I will talk about them here.
-
-We did not build any security into this project. My go to excuse is that this was designed as an intranet site,
-so secruity was not considered. But if that changes, secruity needs to be in place on the front and back end of this system.
-Database side im clueless, but im sure that needs to be encrpyted. Front end has no input sanitiation for the most part
-to project from SQL injection and things like that. So consider fixing that.
 
 I would also consider redisgning these pages from a UX/UI perspective. I am not a designer, i picked the colors randomly from a color 
 wheel, I am not a hip cool developer, so please change those things. But the UX could be changed up, because even people on my team
